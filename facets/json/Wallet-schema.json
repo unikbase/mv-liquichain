@@ -1,0 +1,101 @@
+{
+    "storages": ["SQL"],
+    "default": "Wallet",
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "id": "Wallet",
+    "title": "Wallet",
+    "type": "object",
+    "properties": {
+        "accountHash": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "liquichain account address",
+            "readOnly": true,
+            "versionable": false,
+            "id": "CE_Wallet_accountHash",
+            "title": "Wallet.accountHash",
+            "type": "string",
+            "maxLength": 128
+        },
+        "application": {
+            "storages": ["SQL"],
+            "nullable": false,
+            "description": "Application",
+            "readOnly": true,
+            "versionable": false,
+            "id": "CE_Wallet_application",
+            "title": "Wallet.application",
+            "$ref": "#/definitions/LiquichainApp"
+        },
+        "balance": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "balance",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Wallet_balance",
+            "title": "Wallet.balance",
+            "type": "string",
+            "maxLength": 255
+        },
+        "hexHash": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "Hash in hexa (no \"0x\" prefix)",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Wallet_hexHash",
+            "title": "Wallet.hexHash",
+            "type": "string",
+            "maxLength": 40
+        },
+        "name": {
+            "storages": ["SQL"],
+            "nullable": false,
+            "minLength": 1,
+            "description": "Name",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Wallet_name",
+            "title": "Wallet.name",
+            "type": "string",
+            "maxLength": 255
+        },
+        "publicInfo": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "public Info json",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Wallet_publicInfo",
+            "title": "Wallet.publicInfo",
+            "type": "string"
+        },
+        "applicationInstanceUUID": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "Application instance UUID",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Wallet_applicationInstanceUUID",
+            "title": "Wallet.applicationInstanceUUID",
+            "type": "string",
+            "maxLength": 50
+        },
+        "publicKey": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "public key",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Wallet_publicKey",
+            "title": "Wallet.publicKey",
+            "type": "string",
+            "maxLength": 255
+        }
+    },
+    "required": [
+        "application",
+        "name"
+    ]
+}
