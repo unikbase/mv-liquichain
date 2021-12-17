@@ -1,0 +1,203 @@
+{
+    "storages": ["SQL"],
+    "default": "Transaction",
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "id": "Transaction",
+    "title": "Transaction",
+    "type": "object",
+    "properties": {
+        "blockHash": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "block hash",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Transaction_blockHash",
+            "title": "Transaction.blockHash",
+            "type": "string",
+            "maxLength": 64
+        },
+        "data": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "data",
+            "readOnly": true,
+            "versionable": false,
+            "id": "CE_Transaction_data",
+            "title": "Transaction.data",
+            "type": "string",
+            "maxLength": 1000
+        },
+        "nodeSignature": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "node signature",
+            "readOnly": true,
+            "versionable": false,
+            "id": "CE_Transaction_nodeSignature",
+            "title": "Transaction.nodeSignature",
+            "type": "string",
+            "maxLength": 255
+        },
+        "fromHexHash": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "Origin account",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Transaction_fromHexHash",
+            "title": "Transaction.fromHexHash",
+            "type": "string",
+            "maxLength": 40
+        },
+        "transactionIndex": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "transaction index",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Transaction_transactionIndex",
+            "title": "Transaction.transactionIndex",
+            "type": "integer",
+            "minimum": 0
+        },
+        "creationDate": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "format": "date-time",
+            "description": "creation Date",
+            "readOnly": true,
+            "versionable": false,
+            "id": "CE_Transaction_creationDate",
+            "title": "Transaction.creationDate",
+            "type": "string"
+        },
+        "nonce": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "Nonce",
+            "readOnly": true,
+            "versionable": false,
+            "id": "CE_Transaction_nonce",
+            "title": "Transaction.nonce",
+            "type": "string",
+            "maxLength": 255
+        },
+        "gasLimit": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "gas limit",
+            "readOnly": true,
+            "versionable": false,
+            "id": "CE_Transaction_gasLimit",
+            "title": "Transaction.gasLimit",
+            "type": "string",
+            "maxLength": 255
+        },
+        "r": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "R",
+            "readOnly": true,
+            "versionable": false,
+            "id": "CE_Transaction_r",
+            "title": "Transaction.r",
+            "type": "string",
+            "maxLength": 64
+        },
+        "toHexHash": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "Destination account",
+            "readOnly": true,
+            "versionable": false,
+            "id": "CE_Transaction_toHexHash",
+            "title": "Transaction.toHexHash",
+            "type": "string",
+            "maxLength": 40
+        },
+        "s": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "S",
+            "readOnly": true,
+            "versionable": false,
+            "id": "CE_Transaction_s",
+            "title": "Transaction.s",
+            "type": "string",
+            "maxLength": 64
+        },
+        "v": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "V",
+            "readOnly": true,
+            "versionable": false,
+            "id": "CE_Transaction_v",
+            "title": "Transaction.v",
+            "type": "string",
+            "maxLength": 2
+        },
+        "blockNumber": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "block number",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Transaction_blockNumber",
+            "title": "Transaction.blockNumber",
+            "type": "string",
+            "maxLength": 16
+        },
+        "hexHash": {
+            "storages": ["SQL"],
+            "nullable": false,
+            "minLength": 1,
+            "description": "Hash in hexa (no \"0x\" prefix)",
+            "readOnly": true,
+            "versionable": false,
+            "id": "CE_Transaction_hexHash",
+            "title": "Transaction.hexHash",
+            "type": "string",
+            "maxLength": 500
+        },
+        "signedHash": {
+            "storages": ["SQL"],
+            "nullable": false,
+            "minLength": 1,
+            "description": "signed hash",
+            "readOnly": true,
+            "versionable": false,
+            "id": "CE_Transaction_signedHash",
+            "title": "Transaction.signedHash",
+            "type": "string",
+            "maxLength": 500
+        },
+        "value": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "value",
+            "readOnly": true,
+            "versionable": false,
+            "id": "CE_Transaction_value",
+            "title": "Transaction.value",
+            "type": "string",
+            "maxLength": 255
+        },
+        "gasPrice": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "gas price",
+            "readOnly": true,
+            "versionable": false,
+            "id": "CE_Transaction_gasPrice",
+            "title": "Transaction.gasPrice",
+            "type": "string",
+            "maxLength": 255
+        }
+    },
+    "required": [
+        "hexHash",
+        "signedHash"
+    ]
+}
