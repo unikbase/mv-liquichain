@@ -25,7 +25,7 @@
             "versionable": false,
             "id": "CE_TorrentAnnounce_wallet",
             "title": "TorrentAnnounce.wallet",
-            "$ref": "#/definitions/Wallet"
+            "$ref": "./Wallet"
         },
         "ip": {
             "storages": ["SQL"],
@@ -123,7 +123,7 @@
             "versionable": false,
             "id": "CE_TorrentAnnounce_application",
             "title": "TorrentAnnounce.application",
-            "$ref": "#/definitions/LiquichainApp"
+            "$ref": "./LiquichainApp"
         },
         "left": {
             "storages": ["SQL"],

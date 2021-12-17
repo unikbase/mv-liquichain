@@ -25,7 +25,7 @@
             "versionable": false,
             "id": "CE_Wallet_application",
             "title": "Wallet.application",
-            "$ref": "#/definitions/LiquichainApp"
+            "$ref": "./LiquichainApp"
         },
         "balance": {
             "storages": ["SQL"],
