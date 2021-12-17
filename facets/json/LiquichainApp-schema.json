@@ -1,0 +1,126 @@
+{
+    "storages": ["SQL"],
+    "default": "Application",
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "id": "LiquichainApp",
+    "title": "Application",
+    "type": "object",
+    "properties": {
+        "upgradeRules": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "Upgrade script code",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_LiquichainApp_upgradeRules",
+            "title": "LiquichainApp.upgradeRules",
+            "type": "string",
+            "maxLength": 255
+        },
+        "hexCode": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "code in hexa as returned by get code (no \"0x\")",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_LiquichainApp_hexCode",
+            "title": "LiquichainApp.hexCode",
+            "type": "string",
+            "maxLength": 255
+        },
+        "previousHash": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "hash of previous version",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_LiquichainApp_previousHash",
+            "title": "LiquichainApp.previousHash",
+            "type": "string",
+            "maxLength": 40
+        },
+        "name": {
+            "storages": ["SQL"],
+            "nullable": false,
+            "minLength": 1,
+            "description": "Name",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_LiquichainApp_name",
+            "title": "LiquichainApp.name",
+            "type": "string",
+            "maxLength": 255
+        },
+        "description": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "description",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_LiquichainApp_description",
+            "title": "LiquichainApp.description",
+            "type": "string",
+            "maxLength": 1000
+        },
+        "registrationRules": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "Registration script code",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_LiquichainApp_registrationRules",
+            "title": "LiquichainApp.registrationRules",
+            "type": "string",
+            "maxLength": 255
+        },
+        "iconUrl": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "Icon url",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_LiquichainApp_iconUrl",
+            "title": "LiquichainApp.iconUrl",
+            "type": "string",
+            "maxLength": 1000
+        },
+        "creationDate": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "format": "date-time",
+            "description": "Creation date",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_LiquichainApp_creationDate",
+            "title": "LiquichainApp.creationDate",
+            "type": "string"
+        },
+        "version": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "version",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_LiquichainApp_version",
+            "title": "LiquichainApp.version",
+            "type": "string",
+            "maxLength": 50
+        },
+        "shortCode": {
+            "storages": ["SQL"],
+            "nullable": false,
+            "minLength": 1,
+            "description": "Short code",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_LiquichainApp_shortCode",
+            "title": "LiquichainApp.shortCode",
+            "type": "string",
+            "maxLength": 5
+        }
+    },
+    "required": [
+        "name",
+        "shortCode"
+    ]
+}
