@@ -17,16 +17,6 @@
             "type": "string",
             "maxLength": 40
         },
-        "wallet": {
-            "storages": ["SQL"],
-            "nullable": true,
-            "description": "wallet",
-            "readOnly": false,
-            "versionable": false,
-            "id": "CE_TorrentAnnounce_wallet",
-            "title": "TorrentAnnounce.wallet",
-            "$ref": "#/definitions/Wallet"
-        },
         "ip": {
             "storages": ["SQL"],
             "nullable": true,
