@@ -240,43 +240,10 @@ public class TorrentAnnounceScript extends Script {
     }
     log.info("found wallet {}", wallet);
 
-    LiquichainApp app = null;
-    Object cat = null;
-    try {
-      if (outputJson) {
-        result = "{\"error\":\"cannot find info_hash app\"}";
-      } else {
-        result = "d14:failure reason26:cannot find info_hash app.e";
-      }
-      app = crossStorageApi.find(defaultRepo, LiquichainApp.class).by("hexCode", info_hash).getResult();
-      log.info("found app {}", app.getName());
-    } catch (Exception e) {
-      // if the hash is not an app it could be a liquimart category
-      // TODO: this processing should be generic and registered by user apps
-      try {
-        // retrieve the liquimart app
-        app = crossStorageApi.find(defaultRepo, LiquichainApp.class).by("name", "Liquimart").getResult();
-        log.info("found app {}", app);
-        if (outputJson) {
-          result = "{\"error\":\"cannot find info_hash category\"}";
-        } else {
-          result = "d14:failure reason26:cannot find info_hash cat.e";
-        }
-        cat = crossStorageApi.find(defaultRepo, Class.forName("org.meveo.model.customEntities.LiquimartProductCategory")).by("hash", info_hash).getResult();
-        //log.info("found category {}", cat.getName());
-      } catch (Exception ex) {
-        throw new BusinessException(result);
-      }
-    }
-
     // retrieve ongoing announce
     TorrentAnnounce announce = null;
-    CrossStorageRequest<TorrentAnnounce> csreq = crossStorageApi.find(defaultRepo, TorrentAnnounce.class).by("peerId",
-        peer_id);
-    if (cat != null) {
-      csreq.by("infoHash", info_hash);
-    }
-    List<TorrentAnnounce> announces = csreq.by("application", app).by("status", "ONGOING").getResults();
+    List<TorrentAnnounce> announces = crossStorageApi.find(defaultRepo, TorrentAnnounce.class).by("peerId",
+    peer_id).by("infoHash", info_hash).by("status", "ONGOING").getResults();
 
     // events can be started,update,stopped,completed
     // TODO: if announce is too old then it should be closed and a new on created
@@ -287,7 +254,6 @@ public class TorrentAnnounceScript extends Script {
     } else if (!"stopped".equals(event)) {
       announce = new TorrentAnnounce();
       announce.setPeerId(peer_id);
-      announce.setApplication(app);
       announce.setInfoHash(info_hash);
       announce.setAnounceDate(Instant.now());
       announce.setWallet(wallet);
@@ -333,50 +299,7 @@ public class TorrentAnnounceScript extends Script {
       announce.setStatus("ONGOING");
     }
     try {
-      log.info("cet code = {}", announce.getClass().getSimpleName());
-      // CustomEntityInstance cei = CEIUtils.pojoToCei(announce);
-      TorrentAnnounce pojo = announce;
-      Map<String, Object> pojoAsMap;
-      if (pojo instanceof Map) {
-        pojoAsMap = (Map<String, Object>) pojo;
-      } else {
-        // Transform POJO into Map
-        Map<String, Object> values = new HashMap<>();
-        Stream.of(pojo.getClass().getMethods())
-            .filter(m -> m.getName().startsWith("get") | m.getName().startsWith("is"))
-            .filter(m -> m.getParameterCount() == 0).forEach(m -> {
-              var key = getFieldForGetter(pojo.getClass(), m);
-              try {
-                if (key != null) {
-                  var value = m.invoke(pojo);
-                  values.put(key, value);
-                }
-              } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-                throw new RuntimeException(e);
-              }
-            });
-
-        pojoAsMap = new HashMap<>();
-        values.entrySet().stream().forEach(e -> {
-          if (e.getValue() != null && e.getValue().getClass().getAnnotation(Entity.class) != null) {
-            pojoAsMap.put(e.getKey(), getIdValue(e.getValue()));
-          } else {
-            pojoAsMap.put(e.getKey(), e.getValue());
-          }
-        });
-      }
-
-      log.info("pojoAsMap = {}", pojoAsMap);
-      // JacksonUtil.convert(pojo, GenericTypeReferences.MAP_STRING_OBJECT);
-      CustomEntityInstance cei = new CustomEntityInstance();
-      cei.setUuid((String) pojoAsMap.get("uuid"));
-      cei.setCetCode(pojo.getClass().getSimpleName());
-      CustomFieldValues customFieldValues = new CustomFieldValues();
-      pojoAsMap.forEach(customFieldValues::setValue);
-      cei.setCfValues(customFieldValues);
-
-      log.info("announceCEI = {}", cei);
-      String uuid = crossStorageApi.createOrUpdate(defaultRepo, cei);
+      String uuid = crossStorageApi.createOrUpdate(defaultRepo, announce);
       log.info("announce instance {} created / updated", uuid);
 
       try {
@@ -386,10 +309,7 @@ public class TorrentAnnounceScript extends Script {
           result = "d14:failure reason18:cannot find peers.e";
         }
         CrossStorageRequest<TorrentAnnounce> csreqlist =crossStorageApi.find(defaultRepo, TorrentAnnounce.class).by("status", "ONGOING")
-        .by("application", app);
-        if(cat!=null){
-          csreqlist.by("infoHash", info_hash);
-        }
+        .by("infoHash", info_hash);
         List<TorrentAnnounce> peers = csreqlist.getResults();
         if (peers.size() > 0) {
           if (outputJson) {
