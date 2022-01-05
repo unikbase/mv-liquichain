@@ -109,6 +109,7 @@ public class TorrentAnnounceScript extends Script {
     url = value;
   }
 
+  @Deprecated
   public void setWallet_id(String value) {
     wallet_id = value;
   }
@@ -223,9 +224,7 @@ public class TorrentAnnounceScript extends Script {
     if ((info_hash.length() != 40) || (peer_id.length() != 40)) {
       parseQueryString(req.getQueryString());
     }
-    if (wallet_id == null || (wallet_id.length() != 40)) {
-      wallet_id = peer_id;
-    }
+    wallet_id = peer_id;
     // lookup wallet with id walletId
     Wallet wallet = null;
     try {
@@ -256,7 +255,6 @@ public class TorrentAnnounceScript extends Script {
       announce.setPeerId(peer_id);
       announce.setInfoHash(info_hash);
       announce.setAnounceDate(Instant.now());
-      announce.setWallet(wallet);
     } else {
       if (outputJson) {
         result = "{\"error\":\"cannot find announce to close\"}";

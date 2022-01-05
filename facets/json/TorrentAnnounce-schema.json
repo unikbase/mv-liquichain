@@ -17,16 +17,6 @@
             "type": "string",
             "maxLength": 40
         },
-        "wallet": {
-            "storages": ["SQL"],
-            "nullable": true,
-            "description": "wallet",
-            "readOnly": false,
-            "versionable": false,
-            "id": "CE_TorrentAnnounce_wallet",
-            "title": "TorrentAnnounce.wallet",
-            "$ref": "./Wallet"
-        },
         "ip": {
             "storages": ["SQL"],
             "nullable": true,
@@ -114,16 +104,6 @@
             "id": "CE_TorrentAnnounce_lastAnnounceDate",
             "title": "TorrentAnnounce.lastAnnounceDate",
             "type": "string"
-        },
-        "application": {
-            "storages": ["SQL"],
-            "nullable": true,
-            "description": "Application",
-            "readOnly": false,
-            "versionable": false,
-            "id": "CE_TorrentAnnounce_application",
-            "title": "TorrentAnnounce.application",
-            "$ref": "./LiquichainApp"
         },
         "left": {
             "storages": ["SQL"],

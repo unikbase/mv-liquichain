@@ -3,9 +3,7 @@ package org.meveo.model.customEntities;
 import org.meveo.model.CustomEntity;
 import java.util.List;
 import org.meveo.model.persistence.DBStorageType;
-import org.meveo.model.customEntities.Wallet;
 import java.time.Instant;
-import org.meveo.model.customEntities.LiquichainApp;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class TorrentAnnounce implements CustomEntity {
@@ -24,8 +22,6 @@ public class TorrentAnnounce implements CustomEntity {
 
     private String peerId;
 
-    private Wallet wallet;
-
     private String ip;
 
     private Double latitude;
@@ -41,8 +37,6 @@ public class TorrentAnnounce implements CustomEntity {
     private Instant anounceDate;
 
     private Instant lastAnnounceDate;
-
-    private LiquichainApp application;
 
     private Long left;
 
@@ -77,14 +71,6 @@ public class TorrentAnnounce implements CustomEntity {
 
     public void setPeerId(String peerId) {
         this.peerId = peerId;
-    }
-
-    public Wallet getWallet() {
-        return wallet;
-    }
-
-    public void setWallet(Wallet wallet) {
-        this.wallet = wallet;
     }
 
     public String getIp() {
@@ -149,14 +135,6 @@ public class TorrentAnnounce implements CustomEntity {
 
     public void setLastAnnounceDate(Instant lastAnnounceDate) {
         this.lastAnnounceDate = lastAnnounceDate;
-    }
-
-    public LiquichainApp getApplication() {
-        return application;
-    }
-
-    public void setApplication(LiquichainApp application) {
-        this.application = application;
     }
 
     public Long getLeft() {
