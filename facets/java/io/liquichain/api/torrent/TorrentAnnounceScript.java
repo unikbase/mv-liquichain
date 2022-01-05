@@ -59,7 +59,7 @@ public class TorrentAnnounceScript extends Script {
             * Math.sin(lonDistance / 2) * Math.sin(lonDistance / 2);
     double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     double distance = R * c * 1000; // convert to meters
-
+    log.info("dist {},{},{},{}:{}",lat1, lon1, lat2, lon2,distance);
     return distance;
   }
 
@@ -74,7 +74,9 @@ public class TorrentAnnounceScript extends Script {
 
     @Override
     public int compare(TorrentAnnounce o1, TorrentAnnounce o2) {
-        return (int)Math.round(distance(lat, lon,o2.getLatitude(),o2.getLongitude())-distance(lat, lon,o1.getLatitude(),o1.getLongitude()));
+      int distance = (int)Math.round(distance(lat, lon,o1.getLatitude(),o1.getLongitude())-distance(lat, lon,o2.getLatitude(),o2.getLongitude()));
+      log.info("compare {},{}:{}",o1.getPeerId(), o2.getPeerId(),distance);
+      return distance;
     }
   }
 
