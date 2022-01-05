@@ -94,11 +94,11 @@ public class BlockForgerScript extends Script {
     public Block getLastBlock(){
         Block result = null;
         try{
-            log.info("query : "+customTableService.getQuery("block", lastBlockPC));
+            //log.info("query : "+customTableService.getQuery("block", lastBlockPC));
         List<Map<String, Object>> res = crossStorageService.find(defaultRepo, cetCache.getCustomEntityTemplate("Block"), lastBlockPC);
         if(res.size()>0){
             result = CEIUtils.deserialize(res.get(0), Block.class);
-            log.info("lastBlock number:{}",result.getBlockNumber());
+            //log.info("lastBlock number:{}",result.getBlockNumber());
         }
         } catch(Exception e){
           log.error("getLastBlock:{}",e);
@@ -110,7 +110,7 @@ public class BlockForgerScript extends Script {
     public void execute(Map<String, Object> parameters) throws BusinessException {
       //log.info("execute forging");
       if(parentBlock==null){
-      	log.info("retreive last block from chain");
+      	//log.info("retreive last block from chain");
         parentBlock = getLastBlock();
       }
       if(isForging.getAndSet(true)){
@@ -118,7 +118,7 @@ public class BlockForgerScript extends Script {
          return;
       } 
       if(currentTransactions.size()==0){
-        log.info("no transaction to forge");
+       // log.info("no transaction to forge");
         isForging.set(false);
         return;
       } else {
