@@ -28,8 +28,6 @@ public class Wallet implements CustomEntity {
 
     private String balance;
 
-    private String hexHash;
-
     @JsonProperty(required = true)
     private String name;
 
@@ -78,14 +76,6 @@ public class Wallet implements CustomEntity {
 
     public void setBalance(String balance) {
         this.balance = balance;
-    }
-
-    public String getHexHash() {
-        return hexHash;
-    }
-
-    public void setHexHash(String hexHash) {
-        this.hexHash = hexHash;
     }
 
     public String getName() {
