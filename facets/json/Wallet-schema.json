@@ -25,7 +25,7 @@
             "versionable": false,
             "id": "CE_Wallet_application",
             "title": "Wallet.application",
-            "$ref": "./LiquichainApp"
+            "$ref": "#/definitions/LiquichainApp"
         },
         "balance": {
             "storages": ["SQL"],
@@ -37,17 +37,6 @@
             "title": "Wallet.balance",
             "type": "string",
             "maxLength": 255
-        },
-        "hexHash": {
-            "storages": ["SQL"],
-            "nullable": true,
-            "description": "Hash in hexa (no \"0x\" prefix)",
-            "readOnly": false,
-            "versionable": false,
-            "id": "CE_Wallet_hexHash",
-            "title": "Wallet.hexHash",
-            "type": "string",
-            "maxLength": 40
         },
         "name": {
             "storages": ["SQL"],
