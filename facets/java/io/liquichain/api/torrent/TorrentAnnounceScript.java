@@ -270,13 +270,11 @@ public class TorrentAnnounceScript extends Script {
     // lookup wallet with id walletId
     Wallet wallet = null;
     try {
-      /*
       if (outputJson) {
         result = "{\"error\":\"cannot find wallet\"}";
       } else {
         result = "d14:failure reason27:cannot find wallet.e";
       }
-      */
       wallet = crossStorageApi.find(defaultRepo, Wallet.class).by("hexHash", wallet_id).getResult();
     } catch (Exception e) {
       throw new BusinessException(result);
