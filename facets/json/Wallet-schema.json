@@ -25,7 +25,7 @@
             "versionable": false,
             "id": "CE_Wallet_application",
             "title": "Wallet.application",
-            "$ref": "./LiquichainApp"
+            "$ref": "#/definitions/LiquichainApp"
         },
         "balance": {
             "storages": ["SQL"],
@@ -37,17 +37,6 @@
             "title": "Wallet.balance",
             "type": "string",
             "maxLength": 255
-        },
-        "hexHash": {
-            "storages": ["SQL"],
-            "nullable": true,
-            "description": "Hash in hexa (no \"0x\" prefix)",
-            "readOnly": false,
-            "versionable": false,
-            "id": "CE_Wallet_hexHash",
-            "title": "Wallet.hexHash",
-            "type": "string",
-            "maxLength": 40
         },
         "name": {
             "storages": ["SQL"],
@@ -92,6 +81,22 @@
             "title": "Wallet.publicKey",
             "type": "string",
             "maxLength": 255
+        },
+        "groupPurchases": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "uniqueItems": true,
+            "description": "Group purchases",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Wallet_groupPurchases",
+            "title": "Wallet.groupPurchases",
+            "type": "array",
+            "items": {
+                "id": "CE_Wallet_groupPurchases_item",
+                "title": "Wallet.groupPurchases item",
+                "$ref": "#/definitions/GroupPurchase"
+            }
         }
     },
     "required": [

@@ -94,11 +94,11 @@ public class BlockForgerScript extends Script {
     public Block getLastBlock(){
         Block result = null;
         try{
-            log.info("query : "+customTableService.getQuery("block", lastBlockPC));
+            //log.info("query : "+customTableService.getQuery("block", lastBlockPC));
         List<Map<String, Object>> res = crossStorageService.find(defaultRepo, cetCache.getCustomEntityTemplate("Block"), lastBlockPC);
         if(res.size()>0){
             result = CEIUtils.deserialize(res.get(0), Block.class);
-            log.info("lastBlock number:{}",result.getBlockNumber());
+            //log.info("lastBlock number:{}",result.getBlockNumber());
         }
         } catch(Exception e){
           log.error("getLastBlock:{}",e);
@@ -110,7 +110,7 @@ public class BlockForgerScript extends Script {
     public void execute(Map<String, Object> parameters) throws BusinessException {
       //log.info("execute forging");
       if(parentBlock==null){
-      	log.info("retreive last block from chain");
+      	//log.info("retreive last block from chain");
         parentBlock = getLastBlock();
       }
       if(isForging.getAndSet(true)){
@@ -118,7 +118,7 @@ public class BlockForgerScript extends Script {
          return;
       } 
       if(currentTransactions.size()==0){
-        log.info("no transaction to forge");
+       // log.info("no transaction to forge");
         isForging.set(false);
         return;
       } else {
@@ -134,8 +134,8 @@ public class BlockForgerScript extends Script {
           log.info(" transaction date : {}",t.getCreationDate());
           if(!wallets.containsKey(t.getFromHexHash())){
             try{
-            	Wallet originWallet = crossStorageApi.find(defaultRepo, Wallet.class).by("hexHash", t.getFromHexHash()).getResult();
-                log.info("add originWallet:{} {} to map",originWallet.getHexHash(),originWallet.getBalance());
+            	Wallet originWallet = crossStorageApi.find(defaultRepo,t.getFromHexHash(), Wallet.class);
+                log.info("add originWallet:{} {} to map",originWallet.getUuid(),originWallet.getBalance());
                 wallets.put(t.getFromHexHash(),originWallet);
             } catch(Exception e){
               log.info(" cannot find origin wallet, set blockNumber to INVALID");
@@ -155,7 +155,7 @@ public class BlockForgerScript extends Script {
           	if(new BigInteger(originWallet.getBalance()).compareTo(transacValue)>=0){
                 originWallet.setBalance(""+new BigInteger(originWallet.getBalance()).add(transacValue.negate()));
                 try{
-            		Wallet destinationWallet = crossStorageApi.find(defaultRepo, Wallet.class).by("hexHash", t.getToHexHash()).getResult();
+            		Wallet destinationWallet = crossStorageApi.find(defaultRepo,t.getToHexHash(), Wallet.class);
           			log.info("destinationWallet 0x{} old balance:{}",t.getToHexHash(),destinationWallet.getBalance());
                     destinationWallet.setBalance(""+new BigInteger(destinationWallet.getBalance()).add(transacValue));
           			crossStorageApi.createOrUpdate(defaultRepo, destinationWallet);

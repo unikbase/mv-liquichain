@@ -10,7 +10,10 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.stream.Stream;
+import java.util.Comparator;
+import java.util.Collections;
 import java.time.Instant;
+import java.time.Duration;
 import org.meveo.service.script.Script;
 import org.meveo.admin.exception.BusinessException;
 import org.meveo.api.rest.technicalservice.impl.EndpointRequest;
@@ -37,6 +40,45 @@ import javax.enterprise.context.ApplicationScoped;
 public class TorrentAnnounceScript extends Script {
 
   private static final Logger log = LoggerFactory.getLogger(TorrentAnnounceScript.class);
+
+  /**
+   * Calculate distance between two points in latitude and longitude.
+   * Uses Haversine method as its base.
+   * 
+   * lat1, lon1 Start point lat2, lon2 End point 
+   * @returns Distance in Meters
+   */
+  public static double distance(double lat1, double lon1, double lat2, double lon2) {
+
+    final int R = 6371; // Radius of the earth
+
+    double latDistance = Math.toRadians(lat2 - lat1);
+    double lonDistance = Math.toRadians(lon2 - lon1);
+    double a = Math.sin(latDistance / 2) * Math.sin(latDistance / 2)
+            + Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2))
+            * Math.sin(lonDistance / 2) * Math.sin(lonDistance / 2);
+    double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    double distance = R * c * 1000; // convert to meters
+    log.info("dist {},{},{},{}:{}",lat1, lon1, lat2, lon2,distance);
+    return distance;
+  }
+
+  private class DistanceComparator implements Comparator<TorrentAnnounce> {
+
+    double lat, lon;
+
+    public DistanceComparator(double lat, double lon){
+      this.lat=lat;
+      this.lon=lon;
+    }
+
+    @Override
+    public int compare(TorrentAnnounce o1, TorrentAnnounce o2) {
+      int distance = (int)Math.round(distance(lat, lon,o1.getLatitude(),o1.getLongitude())-distance(lat, lon,o2.getLatitude(),o2.getLongitude()));
+      log.info("compare {},{}:{}",o1.getPeerId(), o2.getPeerId(),distance);
+      return distance;
+    }
+  }
 
   private String peer_id;
   private String info_hash;
@@ -265,6 +307,7 @@ public class TorrentAnnounceScript extends Script {
     }
     announce.setLastAnnounceDate(Instant.now());
     announce.setIp(req.getRemoteAddr());
+    boolean coordinateSet=true;
     try {
       if (!Strings.isEmpty(port)) {
         announce.setPort(Long.parseLong(port));
@@ -283,9 +326,19 @@ public class TorrentAnnounceScript extends Script {
       }
       if (!Strings.isEmpty(latitude)) {
         announce.setLatitude(Double.parseDouble(latitude));
+        if(announce.getLatitude()==0.0){
+          coordinateSet=false;
+        }
+      } else {
+        coordinateSet=false;
       }
       if (!Strings.isEmpty(longitude)) {
         announce.setLongitude(Double.parseDouble(longitude));
+        if(announce.getLongitude()==0.0){
+          coordinateSet=false;
+        }
+      } else {
+        coordinateSet=false;
       }
     } catch (Exception e) {
       e.printStackTrace();
@@ -309,6 +362,21 @@ public class TorrentAnnounceScript extends Script {
         CrossStorageRequest<TorrentAnnounce> csreqlist =crossStorageApi.find(defaultRepo, TorrentAnnounce.class).by("status", "ONGOING")
         .by("infoHash", info_hash);
         List<TorrentAnnounce> peers = csreqlist.getResults();
+        List<TorrentAnnounce> peersToDelete = new ArrayList<>();
+        for (TorrentAnnounce peer : peers) {
+          if(Duration.between(peer.getLastAnnounceDate(),Instant.now()).compareTo( Duration.ofMinutes( 10 ) )> 0){
+            peersToDelete.add(peer);
+          }
+        }
+        peers.removeAll(peersToDelete);
+        if(coordinateSet){
+          //order peers by increasing distance if the current announce has coordinates
+          DistanceComparator comp = new DistanceComparator(announce.getLatitude(),announce.getLongitude());
+          Collections.sort(peers,comp);
+        } else {
+          //else order peers by most recent first
+          peers.sort((TorrentAnnounce p1, TorrentAnnounce p2) -> p1.getLastAnnounceDate().compareTo(p2.getLastAnnounceDate()));
+        }
         if (peers.size() > 0) {
           if (outputJson) {
             result = "{\"interval\":900,\n\"peers\":[";
@@ -342,12 +410,22 @@ public class TorrentAnnounceScript extends Script {
             result += "e";
           }
         }
+        if (peersToDelete.size() > 0) {
+          for(TorrentAnnounce peer : peersToDelete){
+            try{
+              crossStorageApi.remove(defaultRepo,  peer.getUuid(),TorrentAnnounce.class);
+            } catch(Exception e){
+              e.printStackTrace();
+            }
+          }
+        }
       } catch (Exception e) {
         throw new BusinessException(result);
       }
     } catch (Exception ex) {
       throw new BusinessException(ex);
     }
+    
   }
 
 }
