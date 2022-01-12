@@ -81,6 +81,22 @@
             "title": "Wallet.publicKey",
             "type": "string",
             "maxLength": 255
+        },
+        "groupPurchases": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "uniqueItems": true,
+            "description": "Group purchases",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Wallet_groupPurchases",
+            "title": "Wallet.groupPurchases",
+            "type": "array",
+            "items": {
+                "id": "CE_Wallet_groupPurchases_item",
+                "title": "Wallet.groupPurchases item",
+                "$ref": "#/definitions/GroupPurchase"
+            }
         }
     },
     "required": [
