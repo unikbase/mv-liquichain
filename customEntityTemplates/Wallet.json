@@ -33,8 +33,8 @@
     "summary" : true,
     "audited" : false,
     "persisted" : true,
-    "filter" : true,
-    "unique" : false
+    "unique" : false,
+    "filter" : true
   }, {
     "code" : "application",
     "description" : "Application",
@@ -59,8 +59,8 @@
     "summary" : true,
     "audited" : false,
     "persisted" : true,
-    "filter" : true,
-    "unique" : false
+    "unique" : false,
+    "filter" : true
   }, {
     "code" : "balance",
     "description" : "balance",
@@ -85,8 +85,8 @@
     "summary" : true,
     "audited" : false,
     "persisted" : true,
-    "filter" : false,
-    "unique" : false
+    "unique" : false,
+    "filter" : false
   }, {
     "code" : "name",
     "description" : "Name",
@@ -111,8 +111,8 @@
     "summary" : true,
     "audited" : false,
     "persisted" : true,
-    "filter" : true,
-    "unique" : false
+    "unique" : false,
+    "filter" : true
   }, {
     "code" : "publicInfo",
     "description" : "public Info json",
@@ -136,8 +136,8 @@
     "summary" : false,
     "audited" : false,
     "persisted" : true,
-    "filter" : false,
-    "unique" : false
+    "unique" : false,
+    "filter" : false
   }, {
     "code" : "applicationInstanceUUID",
     "description" : "Application instance UUID",
@@ -162,8 +162,8 @@
     "summary" : true,
     "audited" : false,
     "persisted" : true,
-    "filter" : true,
-    "unique" : false
+    "unique" : false,
+    "filter" : true
   }, {
     "code" : "publicKey",
     "description" : "public key",
@@ -188,8 +188,34 @@
     "summary" : false,
     "audited" : false,
     "persisted" : true,
-    "filter" : false,
-    "unique" : false
+    "unique" : false,
+    "filter" : false
+  }, {
+    "code" : "groupPurchases",
+    "description" : "Group purchases",
+    "fieldType" : "ENTITY",
+    "accountLevel" : "CE_Wallet",
+    "appliesTo" : "CE_Wallet",
+    "useInheritedAsDefaultValue" : false,
+    "storageType" : "LIST",
+    "valueRequired" : false,
+    "versionable" : false,
+    "triggerEndPeriodEvent" : false,
+    "entityClazz" : "org.meveo.model.customEntities.CustomEntityTemplate - GroupPurchase",
+    "allowEdit" : true,
+    "hideOnNew" : false,
+    "contentTypes" : [ ],
+    "fileExtensions" : [ ],
+    "saveOnExplorer" : false,
+    "guiPosition" : "tab:Wallet:0;field:7",
+    "identifier" : false,
+    "storages" : [ "SQL" ],
+    "samples" : [ ],
+    "summary" : false,
+    "audited" : false,
+    "persisted" : true,
+    "unique" : false,
+    "filter" : false
   } ],
   "actions" : [ ]
 }
