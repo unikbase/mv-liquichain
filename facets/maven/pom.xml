@@ -36,7 +36,7 @@
     </repository>
     <repository>
       <id>meveo-repo</id>
-      <url>https://dev.telecelplay.io//maven</url>
+      <url>https://dev.telecelplay.io/meveo/maven</url>
     </repository>
     <repository>
       <snapshots>
