@@ -5,8 +5,6 @@ import java.util.List;
 import org.meveo.model.persistence.DBStorageType;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.meveo.model.customEntities.LiquichainApp;
-import org.meveo.model.customEntities.PurchaseOrder;
-import java.util.ArrayList;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class Wallet implements CustomEntity {
@@ -38,8 +36,6 @@ public class Wallet implements CustomEntity {
     private String applicationInstanceUUID;
 
     private String publicKey;
-
-    private List<PurchaseOrder> groupPurchases = new ArrayList<>();
 
     @Override()
     public String getUuid() {
@@ -112,14 +108,6 @@ public class Wallet implements CustomEntity {
 
     public void setPublicKey(String publicKey) {
         this.publicKey = publicKey;
-    }
-
-    public List<PurchaseOrder> getGroupPurchases() {
-        return groupPurchases;
-    }
-
-    public void setGroupPurchases(List<PurchaseOrder> groupPurchases) {
-        this.groupPurchases = groupPurchases;
     }
 
     @Override()
