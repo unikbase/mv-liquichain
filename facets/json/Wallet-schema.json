@@ -95,7 +95,7 @@
             "items": {
                 "id": "CE_Wallet_groupPurchases_item",
                 "title": "Wallet.groupPurchases item",
-                "$ref": "#/definitions/GroupPurchase"
+                "$ref": "#/definitions/PurchaseOrder"
             }
         }
     },
