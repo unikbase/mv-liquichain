@@ -33,8 +33,8 @@
     "summary" : true,
     "audited" : false,
     "persisted" : true,
-    "unique" : false,
-    "filter" : true
+    "filter" : true,
+    "unique" : false
   }, {
     "code" : "application",
     "description" : "Application",
@@ -59,8 +59,8 @@
     "summary" : true,
     "audited" : false,
     "persisted" : true,
-    "unique" : false,
-    "filter" : true
+    "filter" : true,
+    "unique" : false
   }, {
     "code" : "balance",
     "description" : "balance",
@@ -85,8 +85,8 @@
     "summary" : true,
     "audited" : false,
     "persisted" : true,
-    "unique" : false,
-    "filter" : false
+    "filter" : false,
+    "unique" : false
   }, {
     "code" : "name",
     "description" : "Name",
@@ -111,8 +111,8 @@
     "summary" : true,
     "audited" : false,
     "persisted" : true,
-    "unique" : false,
-    "filter" : true
+    "filter" : true,
+    "unique" : false
   }, {
     "code" : "publicInfo",
     "description" : "public Info json",
@@ -136,8 +136,8 @@
     "summary" : false,
     "audited" : false,
     "persisted" : true,
-    "unique" : false,
-    "filter" : false
+    "filter" : false,
+    "unique" : false
   }, {
     "code" : "applicationInstanceUUID",
     "description" : "Application instance UUID",
@@ -162,8 +162,8 @@
     "summary" : true,
     "audited" : false,
     "persisted" : true,
-    "unique" : false,
-    "filter" : true
+    "filter" : true,
+    "unique" : false
   }, {
     "code" : "publicKey",
     "description" : "public key",
@@ -188,8 +188,8 @@
     "summary" : false,
     "audited" : false,
     "persisted" : true,
-    "unique" : false,
-    "filter" : false
+    "filter" : false,
+    "unique" : false
   }, {
     "code" : "groupPurchases",
     "description" : "Group purchases",
@@ -201,7 +201,7 @@
     "valueRequired" : false,
     "versionable" : false,
     "triggerEndPeriodEvent" : false,
-    "entityClazz" : "org.meveo.model.customEntities.CustomEntityTemplate - GroupPurchase",
+    "entityClazz" : "org.meveo.model.customEntities.CustomEntityTemplate - PurchaseOrder",
     "allowEdit" : true,
     "hideOnNew" : false,
     "contentTypes" : [ ],
@@ -214,8 +214,8 @@
     "summary" : false,
     "audited" : false,
     "persisted" : true,
-    "unique" : false,
-    "filter" : false
+    "filter" : false,
+    "unique" : false
   } ],
   "actions" : [ ]
 }
