@@ -171,7 +171,7 @@
             "id": "CE_Transaction_signedHash",
             "title": "Transaction.signedHash",
             "type": "string",
-            "maxLength": 500
+            "maxLength": 10000
         },
         "value": {
             "storages": ["SQL"],
