@@ -26,7 +26,7 @@
             "id": "CE_Transaction_data",
             "title": "Transaction.data",
             "type": "string",
-            "maxLength": 1000
+            "maxLength": 10000
         },
         "nodeSignature": {
             "storages": ["SQL"],
