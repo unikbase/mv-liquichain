@@ -1,0 +1,9 @@
+{
+  "code" : "LIQUICHAIN",
+  "description" : "Liquichain accounts",
+  "license" : "GPL",
+  "currentVersion" : "0.22",
+  "isInDraft" : true,
+  "moduleDependencies" : [ ],
+  "moduleFiles" : [ ]
+}

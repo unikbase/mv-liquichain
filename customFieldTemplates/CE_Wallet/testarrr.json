@@ -1,6 +1,6 @@
 {
-  "code" : "groupPurchases",
-  "description" : "Group purchases",
+  "code" : "testarrr",
+  "description" : "test purchase",
   "fieldType" : "ENTITY",
   "accountLevel" : "CE_Wallet",
   "appliesTo" : "CE_Wallet",
@@ -15,7 +15,7 @@
   "contentTypes" : [ ],
   "fileExtensions" : [ ],
   "saveOnExplorer" : false,
-  "guiPosition" : "tab:Wallet:0;field:7",
+  "guiPosition" : "tab:Wallet:0;field:9",
   "identifier" : false,
   "storages" : [ "SQL" ],
   "samples" : [ ],
