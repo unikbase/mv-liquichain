@@ -55,7 +55,7 @@ public class LiquichainTransaction extends Script {
         this.toAddress=toAddress;
     }
 
-    public void setValue(String value){
+    public void setToValue(String value){
         this.value=value;
     }
 
@@ -150,10 +150,11 @@ public class LiquichainTransaction extends Script {
         String transactionHash = "";
         try{
             transactionHash =  transfer(fromAddress,toAddress,new BigInteger(value));
+            result = "{\"transaction_hash\":\""+transactionHash+"\"}";
         } catch (Exception e){
             log.error(" transafer error", e);
+            result = "{\"error\":\""+e.getMessage()+"\"}";
         }
-        result = "{\"transaction_hash\":\""+transactionHash+"\"}";
     }
 
 }
