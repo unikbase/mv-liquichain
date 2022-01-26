@@ -12,7 +12,6 @@ import org.meveo.service.technicalservice.wsendpoint.WebsocketServerEndpoint;
 
 import javax.enterprise.context.ApplicationScoped;
 
-@ApplicationScoped
 public class LiquichainWSExchange extends Script {
   
     private static final Logger log = LoggerFactory.getLogger(LiquichainWSExchange.class);
