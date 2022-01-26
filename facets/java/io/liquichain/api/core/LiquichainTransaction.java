@@ -101,7 +101,7 @@ public class LiquichainTransaction extends Script {
         
         Transaction transac = new Transaction();
         transactionHash=Hash.sha3(hexValue);
-        transac.setHexHash(transactionHash);
+        transac.setHexHash(transactionHash.substring(2));
         transac.setFromHexHash(fromWallet.getUuid());
         transac.setToHexHash(toWallet.getUuid());
         transac.setNonce(""+nonce);
@@ -109,7 +109,7 @@ public class LiquichainTransaction extends Script {
         transac.setGasLimit("0");
         transac.setValue(""+value);
       
-        transac.setSignedHash(hexValue);
+        transac.setSignedHash(hexValue.substring(2));
       
         transac.setCreationDate(java.time.Instant.now());
         
