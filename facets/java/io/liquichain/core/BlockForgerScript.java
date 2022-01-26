@@ -40,7 +40,7 @@ public class BlockForgerScript extends Script {
 
     private int networkId = 7;
 
-    static public long blockHeight = 1662295;
+    static public long blockHeight = 1;
   
     private Block parentBlock=null;
     
@@ -119,6 +119,7 @@ public class BlockForgerScript extends Script {
       } 
       if(currentTransactions.size()==0){
         log.info("no transaction to forge");
+        blockHeight=parentBlock.getBlockNumber();
         isForging.set(false);
         return;
       } else {
