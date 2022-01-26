@@ -55,7 +55,7 @@ public class LiquichainTransaction extends Script {
         this.toAddress=toAddress;
     }
 
-    public void setToValue(String value){
+    public void setValue(String value){
         this.value=value;
     }
 
