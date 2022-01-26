@@ -98,7 +98,7 @@ public class BlockForgerScript extends Script {
         List<Map<String, Object>> res = crossStorageService.find(defaultRepo, cetCache.getCustomEntityTemplate("Block"), lastBlockPC);
         if(res.size()>0){
             result = CEIUtils.deserialize(res.get(0), Block.class);
-            //log.info("lastBlock number:{}",result.getBlockNumber());
+            log.info("lastBlock number:{}",result.getBlockNumber());
         }
         } catch(Exception e){
           log.error("getLastBlock:{}",e);
@@ -118,11 +118,11 @@ public class BlockForgerScript extends Script {
          return;
       } 
       if(currentTransactions.size()==0){
-       // log.info("no transaction to forge");
+        log.info("no transaction to forge");
         isForging.set(false);
         return;
       } else {
-        //log.info("forging {} transactions",currentTransactions.size());
+        log.info("forging {} transactions",currentTransactions.size());
         Map<String,Wallet> wallets = new HashMap<>();
         List<Transaction> orderedTransactions = currentTransactions.stream().sorted((t1,t2)->(t1.getCreationDate().compareTo(t2.getCreationDate()))).collect(Collectors.toList());
         
