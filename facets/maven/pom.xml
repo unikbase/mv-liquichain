@@ -18,14 +18,14 @@
     </dependency>
     <dependency>
       <groupId>org.web3j</groupId>
-      <artifactId>crypto</artifactId>
-      <version>4.8.9</version>
+      <artifactId>core</artifactId>
+      <version>4.8.4</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.web3j</groupId>
-      <artifactId>core</artifactId>
-      <version>4.8.4</version>
+      <artifactId>crypto</artifactId>
+      <version>4.8.9</version>
       <scope>provided</scope>
     </dependency>
   </dependencies>
