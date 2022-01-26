@@ -17,6 +17,17 @@
             "type": "string",
             "maxLength": 128
         },
+        "privateKey": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "private key",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Wallet_privateKey",
+            "title": "Wallet.privateKey",
+            "type": "string",
+            "maxLength": 100
+        },
         "application": {
             "storages": ["SQL"],
             "nullable": false,
