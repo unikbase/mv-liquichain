@@ -32,7 +32,6 @@ public class LiquichainTransaction extends Script {
     private CrossStorageApi crossStorageApi = getCDIBean(CrossStorageApi.class);
     private RepositoryService repositoryService = getCDIBean(RepositoryService.class);
     private Repository defaultRepo = repositoryService.findDefaultRepository();
-    private CrossStorageService crossStorageService = getCDIBean(CrossStorageService.class);
 
     private static enum BLOCKCHAIN_TYPE {
         DATABASE,
@@ -41,11 +40,31 @@ public class LiquichainTransaction extends Script {
     }
 
     private static final BLOCKCHAIN_TYPE BLOCKCHAIN_BACKEND = BLOCKCHAIN_TYPE.DATABASE;
- 
 
 
+    private String fromAddress;
+    private String toAddress;
+    private String value;
+    private String result;
+    
+    public void setFromAddress(String fromAddress){
+        this.fromAddress=fromAddress;
+    }
 
-    public void transferDB(String fromAddress,String toAddress,BigInteger value) throws Exception {
+    public void setToAddress(String toAddress){
+        this.toAddress=toAddress;
+    }
+
+    public void setToValue(String value){
+        this.value=value;
+    }
+
+    public String getResult(){
+        return result;
+    }
+
+    public String transferDB(String fromAddress,String toAddress,BigInteger value) throws Exception {
+        String transactionHash="";
         Wallet toWallet = crossStorageApi.find(defaultRepo,toAddress, Wallet.class);
         Wallet fromWallet = crossStorageApi.find(defaultRepo,fromAddress,Wallet.class);
         if(fromWallet.getPrivateKey()==null){
@@ -81,7 +100,8 @@ public class LiquichainTransaction extends Script {
         String hexValue = Numeric.toHexString(signedMessage);
         
         Transaction transac = new Transaction();
-        transac.setHexHash(Hash.sha3(hexValue));
+        transactionHash=Hash.sha3(hexValue);
+        transac.setHexHash(transactionHash);
         transac.setFromHexHash(fromWallet.getUuid());
         transac.setToHexHash(toWallet.getUuid());
         transac.setNonce(""+nonce);
@@ -97,38 +117,43 @@ public class LiquichainTransaction extends Script {
         //FIXME: you should get the BlockForgerScript from scriptService
         
         BlockForgerScript.addTransaction(transac);
-        //result = "Success";
-        //result = createResponse("", null);
-        
-        //return result;
+        return transactionHash;
     }
 
-    private void transferBesu(String fromAddress,String toAddress,BigInteger amount) throws Exception {
-        //return "";
+    private String transferBesu(String fromAddress,String toAddress,BigInteger amount) throws Exception {
+        return "";
     }
 
-    private void transferFabric(String fromAddress,String toAddress,BigInteger amount)  throws Exception {
-        //return "";
+    private String transferFabric(String fromAddress,String toAddress,BigInteger amount)  throws Exception {
+        return "";
     }
 
-    public void transfer(String fromAddress,String toAddress,BigInteger amount) throws Exception{
-        
+    public String transfer(String fromAddress,String toAddress,BigInteger amount) throws Exception{
+        String transactionHash = "";
         switch (BLOCKCHAIN_BACKEND){
             case BESU:
-                transferBesu(fromAddress,toAddress,amount);
+                transactionHash = transferBesu(fromAddress,toAddress,amount);
                 break;
             case FABRIC:
-                transferFabric(fromAddress,toAddress,amount);
+                transactionHash = transferFabric(fromAddress,toAddress,amount);
                 break;
             default:
-                transferDB(fromAddress,toAddress,amount);
+                transactionHash = transferDB(fromAddress,toAddress,amount);
                 break;
         }
+        return transactionHash;
     }
 
-    //used to create the key pair in the wallet from the input private key
+    //used to transfer from local account
     @Override
     public void execute(Map<String, Object> parameters) throws BusinessException {
+        String transactionHash = "";
+        try{
+            transactionHash =  transfer(fromAddress,toAddress,new BigInteger(value));
+        } catch (Exception e){
+            log.error(" transafer error", e);
+        }
+        result = "{\"transaction_hash\":\""+transactionHash+"\"}";
     }
 
 }
