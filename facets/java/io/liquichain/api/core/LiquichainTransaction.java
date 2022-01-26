@@ -21,7 +21,6 @@ import org.meveo.service.custom.NativeCustomEntityInstanceService;
 import org.meveo.admin.exception.BusinessException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import java.math.BigInteger;
 import org.meveo.model.customEntities.Wallet;
 import org.meveo.model.customEntities.Transaction;
 import org.meveo.model.storage.Repository;
@@ -33,6 +32,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 import org.web3j.crypto.*;
+import org.web3j.utils.Numeric;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -56,46 +56,54 @@ public class LiquichainTransaction extends Script {
     private static final BLOCKCHAIN_TYPE BLOCKCHAIN_BACKEND = BLOCKCHAIN_TYPE.DATABASE;
  
 
-    public String signTransaction(Wallet wallet,byte[] transactionHash) throws Exception {
-        if(wallet.getPrivateKey()==null){
-            throw new Exception("wallet has no private key");
-        }
-        String privateKey = wallet.getPrivateKey();
-        if(privateKey.startsWith("0x")){
-            privateKey = privateKey.substring(2);
-        }
-        ECKeyPair keyPair = ECKeyPair.create(new BigInteger(privateKey, 16));
-        ECDSASignature sign = keyPair.sign(transactionHash);
-        return sign.toString();
-    }
 
 
-    public void transferDB(String fromAddress,String toAddress,BigInteger amount) throws Exception {
+    public void transferDB(String fromAddress,String toAddress,BigInteger value) throws Exception {
         String result="ok";
         Wallet toWallet = crossStorageApi.find(defaultRepo,toAddress, Wallet.class);
         Wallet fromWallet = crossStorageApi.find(defaultRepo,fromAddress,Wallet.class);
+        if(fromWallet.getPrivateKey()==null){
+            throw new Exception("wallet has no private key");
+        }
+        String privateKey = fromWallet.getPrivateKey();
+        if(privateKey.startsWith("0x")){
+            privateKey = privateKey.substring(2);
+        }
         BigInteger originBalance = new BigInteger(fromWallet.getBalance());
-        log.info("originWallet 0x{} old balance:{} amount:{}",fromAddress,fromWallet.getBalance(),amount);
-        if(amount.compareTo(originBalance)<=0){
-              log.info("persisted paypalOrder, result order:{}",result);
-        } else {
+        log.info("originWallet 0x{} old balance:{} amount:{}",fromAddress,fromWallet.getBalance(),value);
+        if(value.compareTo(originBalance)>0){
             throw new  BusinessException ("Insufficient balance");
         }
+        
+        List<Transaction> walletTransactions = crossStorageApi.find(defaultRepo, Transaction.class).by("wallet", fromWallet.getUuid()).getResults();
+        BigInteger nonce= BigInteger.ONE;
+        if(walletTransactions!=null && walletTransactions.size()>0){
+            walletTransactions.sort(Comparator.comparing(Transaction::getNonce).reversed());
+            Transaction lastTransaction = walletTransactions.get(0);
+            try{
+                nonce=BigInteger.valueOf(Long.parseLong(lastTransaction.getNonce())+1);
+            } catch(Exception e){
+                log.error("invalid nonce :{}",lastTransaction.getNonce());
+            }
+        }
+        String recipientAddress = "0x"+toWallet.getUuid();
+        BigInteger gasLimit = BigInteger.ZERO;
+        BigInteger gasPrice = BigInteger.ZERO;
+        RawTransaction rawTransaction = RawTransaction.createEtherTransaction(nonce, gasPrice, gasLimit,recipientAddress, value);
+        Credentials credentials = Credentials.create(privateKey);
+        byte[] signedMessage = TransactionEncoder.signMessage(rawTransaction, credentials);
+        String hexValue = Numeric.toHexString(signedMessage);
+        
         Transaction transac = new Transaction();
-        //transac.setHexHash(orderId);
+        transac.setHexHash(Hash.sha3(hexValue));
         transac.setFromHexHash(fromWallet.getUuid());
         transac.setToHexHash(toWallet.getUuid());
-        
-        //CrossStorageRequest<Transaction> lastTransactionReq = crossStorageApi.find(defaultRepo, Transaction.class);
-        //lastTransactionReq.by("wallet", fromWallet.getUuid()).fetch("uuid").
-        //FIXME: increment the nonce
-        transac.setNonce("1");
+        transac.setNonce(""+nonce);
         transac.setGasPrice("0");
         transac.setGasLimit("0");
-        transac.setValue("");
+        transac.setValue(""+value);
       
-        //FIXME: sign the transaction
-        transac.setSignedHash(UUID.randomUUID().toString());
+        transac.setSignedHash(hexValue);
       
         transac.setCreationDate(java.time.Instant.now());
         try {
