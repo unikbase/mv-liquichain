@@ -39,6 +39,8 @@ public class Wallet implements CustomEntity {
 
     private String applicationInstanceUUID;
 
+    private String keyPair;
+
     private String publicKey;
 
     private List<GroupPurchase> groupPurchases = new ArrayList<>();
@@ -114,6 +116,14 @@ public class Wallet implements CustomEntity {
 
     public void setApplicationInstanceUUID(String applicationInstanceUUID) {
         this.applicationInstanceUUID = applicationInstanceUUID;
+    }
+
+    public String getKeyPair() {
+        return keyPair;
+    }
+
+    public void setKeyPair(String keyPair) {
+        this.keyPair = keyPair;
     }
 
     public String getPublicKey() {
