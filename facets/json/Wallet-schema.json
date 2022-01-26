@@ -17,6 +17,17 @@
             "type": "string",
             "maxLength": 128
         },
+        "privateKey": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "private key",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Wallet_privateKey",
+            "title": "Wallet.privateKey",
+            "type": "string",
+            "maxLength": 100
+        },
         "application": {
             "storages": ["SQL"],
             "nullable": false,
@@ -70,17 +81,6 @@
             "title": "Wallet.applicationInstanceUUID",
             "type": "string",
             "maxLength": 50
-        },
-        "keyPair": {
-            "storages": ["SQL"],
-            "nullable": true,
-            "description": "key pair",
-            "readOnly": false,
-            "versionable": false,
-            "id": "CE_Wallet_keyPair",
-            "title": "Wallet.keyPair",
-            "type": "string",
-            "maxLength": 1000
         },
         "publicKey": {
             "storages": ["SQL"],
