@@ -80,7 +80,7 @@ public class LiquichainTransaction extends Script {
             throw new  BusinessException ("Insufficient balance");
         }
         
-        List<Transaction> walletTransactions = crossStorageApi.find(defaultRepo, Transaction.class).by("wallet", fromWallet.getUuid()).getResults();
+        List<Transaction> walletTransactions = crossStorageApi.find(defaultRepo, Transaction.class).by("fromHexHash", fromWallet.getUuid()).getResults();
         BigInteger nonce= BigInteger.ONE;
         if(walletTransactions!=null && walletTransactions.size()>0){
             walletTransactions.sort(Comparator.comparing(Transaction::getNonce).reversed());
