@@ -38,6 +38,8 @@ import javax.servlet.http.HttpServletRequest;
 
 public class LiquichainTransaction extends Script {
 
+    private static final long LIQUICHAIN_CHAINID = 76l; 
+    
     private static final Logger log = LoggerFactory.getLogger(LiquichainTransaction.class);
 
     private CrossStorageApi crossStorageApi = getCDIBean(CrossStorageApi.class);
@@ -52,6 +54,21 @@ public class LiquichainTransaction extends Script {
     }
 
     private static final BLOCKCHAIN_TYPE BLOCKCHAIN_BACKEND = BLOCKCHAIN_TYPE.DATABASE;
+ 
+
+    public String signTransaction(Wallet wallet,byte[] transactionHash) throws Exception {
+        if(wallet.getPrivateKey()==null){
+            throw new Exception("wallet has no private key");
+        }
+        String privateKey = wallet.getPrivateKey();
+        if(privateKey.startsWith("0x")){
+            privateKey = privateKey.substring(2);
+        }
+        ECKeyPair keyPair = ECKeyPair.create(new BigInteger(privateKey, 16));
+        ECDSASignature sign = keyPair.sign(transactionHash);
+        return sign.toString();
+    }
+
 
     public void transferDB(String fromAddress,String toAddress,BigInteger amount) throws Exception {
         String result="ok";
@@ -116,6 +133,7 @@ public class LiquichainTransaction extends Script {
         }
     }
 
+    //used to create the key pair in the wallet from the input private key
     @Override
     public void execute(Map<String, Object> parameters) throws BusinessException {
     }
