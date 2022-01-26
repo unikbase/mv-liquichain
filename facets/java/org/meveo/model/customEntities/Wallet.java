@@ -25,8 +25,6 @@ public class Wallet implements CustomEntity {
 
     private String accountHash;
 
-    private String privateKey;
-
     @JsonProperty(required = true)
     private LiquichainApp application;
 
@@ -68,14 +66,6 @@ public class Wallet implements CustomEntity {
 
     public void setAccountHash(String accountHash) {
         this.accountHash = accountHash;
-    }
-
-    public String getPrivateKey() {
-        return privateKey;
-    }
-
-    public void setPrivateKey(String privateKey) {
-        this.privateKey = privateKey;
     }
 
     public LiquichainApp getApplication() {
