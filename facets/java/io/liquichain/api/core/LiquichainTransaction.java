@@ -49,7 +49,7 @@ public class LiquichainTransaction extends Script {
     private ParamBean config = paramBeanFactory.getInstance();
     private String besuApiUrl = config.getProperty("besu.api.url", "http://51.159.10.146/rpc");
     private Web3j web3j = Web3j.build(new HttpService(besuApiUrl));
-    private CloudMessaging cloudMessaging = getCDIBean(CloudMessaging.class);
+    //private CloudMessaging cloudMessaging = getCDIBean(CloudMessaging.class);
 
     private static enum BLOCKCHAIN_TYPE {
         DATABASE, BESU, FABRIC
