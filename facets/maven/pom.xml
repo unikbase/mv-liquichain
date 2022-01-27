@@ -17,6 +17,12 @@
       <scope>provided</scope>
     </dependency>
     <dependency>
+      <groupId>org.meveo</groupId>
+      <artifactId>firebase-messaging</artifactId>
+      <version>0.1</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
       <groupId>org.web3j</groupId>
       <artifactId>core</artifactId>
       <version>4.8.4</version>
