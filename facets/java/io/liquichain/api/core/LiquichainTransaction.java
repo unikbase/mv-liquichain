@@ -48,7 +48,7 @@ public class LiquichainTransaction extends Script {
     private ParamBeanFactory paramBeanFactory = getCDIBean(ParamBeanFactory.class);
     private ParamBean config = paramBeanFactory.getInstance();
     private String besuApiUrl = config.getProperty("besu.api.url", "http://51.159.10.146/rpc");
-    private Web3j web3j = Web3j.build(new HttpService(besuApiUrl));
+    //private Web3j web3j = Web3j.build(new HttpService(besuApiUrl));
     //private CloudMessaging cloudMessaging = getCDIBean(CloudMessaging.class);
 
     private static enum BLOCKCHAIN_TYPE {
@@ -140,7 +140,7 @@ public class LiquichainTransaction extends Script {
         return transactionHash;
     }
 
-    private Optional<TransactionReceipt> sendTransactionReceiptRequest(String transactionHash)
+    /*private Optional<TransactionReceipt> sendTransactionReceiptRequest(String transactionHash)
             throws Exception {
         EthGetTransactionReceipt transactionReceipt = web3j
                 .ethGetTransactionReceipt(transactionHash)
@@ -208,7 +208,7 @@ public class LiquichainTransaction extends Script {
         TransactionReceipt transactionReceipt = waitForTransactionReceipt(transactionHash);
 
         return transactionReceipt.getTransactionHash();
-    }
+    }*/
 
     private String transferFabric(String fromAddress, String toAddress, BigInteger amount)
             throws Exception {
@@ -224,7 +224,7 @@ public class LiquichainTransaction extends Script {
         String transactionHash = "";
         switch (BLOCKCHAIN_BACKEND) {
             case BESU:
-                transactionHash = transferBesu(fromAddress, toAddress, amount);
+                //transactionHash = transferBesu(fromAddress, toAddress, amount);
                 break;
             case FABRIC:
                 transactionHash = transferFabric(fromAddress, toAddress, amount);
