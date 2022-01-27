@@ -49,7 +49,7 @@ public class LiquichainTransaction extends Script {
     private ParamBean config = paramBeanFactory.getInstance();
     private String besuApiUrl = config.getProperty("besu.api.url", "http://51.159.10.146/rpc");
     private Web3j web3j = Web3j.build(new HttpService(besuApiUrl));
-    private CloudMessaging cloudMessaging = new CloudMessaging();
+    //private CloudMessaging cloudMessaging = new CloudMessaging();
 
     private static enum BLOCKCHAIN_TYPE {
         DATABASE, BESU, FABRIC
@@ -235,10 +235,10 @@ public class LiquichainTransaction extends Script {
         }
         try{
             if(!transactionHash.isEmpty()){
-                cloudMessaging.setUserId(toAddress);
-                cloudMessaging.setTitle("telecel play");
-                cloudMessaging.setBody(message);
-                cloudMessaging.execute(null);
+                //cloudMessaging.setUserId(toAddress);
+                //cloudMessaging.setTitle("telecel play");
+                //cloudMessaging.setBody(message);
+                //cloudMessaging.execute(null);
             }
         } catch(Exception e){
             log.warn("cannot send notification to {}:{}",toAddress,message);
