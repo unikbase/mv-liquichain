@@ -24,15 +24,16 @@ import org.web3j.crypto.RawTransaction;
 import org.web3j.crypto.TransactionEncoder;
 import org.web3j.protocol.Web3j;
 import org.web3j.protocol.core.DefaultBlockParameterName;
+/*
 import org.web3j.protocol.core.methods.response.EthGetTransactionCount;
 import org.web3j.protocol.core.methods.response.EthGetTransactionReceipt;
 import org.web3j.protocol.core.methods.response.EthSendTransaction;
 import org.web3j.protocol.core.methods.response.TransactionReceipt;
 import org.web3j.protocol.http.HttpService;
+*/
 import org.web3j.utils.Convert;
 import org.web3j.utils.Convert.Unit;
 import org.web3j.utils.Numeric;
-
 import io.liquichain.core.BlockForgerScript;
 import org.meveo.firebase.CloudMessaging;
 import javax.inject.Inject;
@@ -48,11 +49,10 @@ public class LiquichainTransaction extends Script {
     private Repository defaultRepo = repositoryService.findDefaultRepository();
     private ParamBeanFactory paramBeanFactory = getCDIBean(ParamBeanFactory.class);
     private ParamBean config = paramBeanFactory.getInstance();
-    private String besuApiUrl = config.getProperty("besu.api.url", "http://51.159.10.146/rpc");
-    private Web3j web3j = Web3j.build(new HttpService(besuApiUrl));
+    //private String besuApiUrl = config.getProperty("besu.api.url", "http://51.159.10.146/rpc");
+    //private Web3j web3j = Web3j.build(new HttpService(besuApiUrl));
   
-  @Inject
-    private CloudMessaging cloudMessaging;// = new CloudMessaging();
+    private CloudMessaging cloudMessaging = new CloudMessaging();
 
     private static enum BLOCKCHAIN_TYPE {
         DATABASE, BESU, FABRIC
