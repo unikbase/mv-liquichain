@@ -34,7 +34,7 @@ import org.web3j.utils.Convert.Unit;
 import org.web3j.utils.Numeric;
 
 import io.liquichain.core.BlockForgerScript;
-import org.meveo.firebase.CloudMessaging;
+//import org.meveo.firebase.CloudMessaging;
 
 public class LiquichainTransaction extends Script {
     private static final Logger log = LoggerFactory.getLogger(LiquichainTransaction.class);
