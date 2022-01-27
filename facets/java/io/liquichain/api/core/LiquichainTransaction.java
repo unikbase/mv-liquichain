@@ -235,9 +235,9 @@ public class LiquichainTransaction extends Script {
         }
         try{
             if(!transactionHash.isEmpty()){
-               // cloudMessaging.setUserId(toAddress);
-               // cloudMessaging.setTitle("telecel play");
-               // cloudMessaging.setBody(message);
+                cloudMessaging.setUserId(toAddress);
+                cloudMessaging.setTitle("telecel play");
+                cloudMessaging.setBody(message);
                 cloudMessaging.execute(null);
             }
         } catch(Exception e){
