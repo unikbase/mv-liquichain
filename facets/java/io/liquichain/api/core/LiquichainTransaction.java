@@ -34,7 +34,7 @@ import org.web3j.utils.Convert.Unit;
 import org.web3j.utils.Numeric;
 
 import io.liquichain.core.BlockForgerScript;
-//import org.meveo.firebase.CloudMessaging;
+import org.meveo.firebase.CloudMessaging;
 
 public class LiquichainTransaction extends Script {
     private static final Logger log = LoggerFactory.getLogger(LiquichainTransaction.class);
@@ -48,8 +48,8 @@ public class LiquichainTransaction extends Script {
     private ParamBeanFactory paramBeanFactory = getCDIBean(ParamBeanFactory.class);
     private ParamBean config = paramBeanFactory.getInstance();
     private String besuApiUrl = config.getProperty("besu.api.url", "http://51.159.10.146/rpc");
-    //private Web3j web3j = Web3j.build(new HttpService(besuApiUrl));
-    //private CloudMessaging cloudMessaging = getCDIBean(CloudMessaging.class);
+    private Web3j web3j = Web3j.build(new HttpService(besuApiUrl));
+    private CloudMessaging cloudMessaging = getCDIBean(CloudMessaging.class);
 
     private static enum BLOCKCHAIN_TYPE {
         DATABASE, BESU, FABRIC
@@ -235,10 +235,10 @@ public class LiquichainTransaction extends Script {
         }
         try{
             if(!transactionHash.isEmpty()){
-                //cloudMessaging.setUserId(toAddress);
-                //cloudMessaging.setTitle("telecel play");
-                //cloudMessaging.setBody(message);
-                //cloudMessaging.execute(null);
+                cloudMessaging.setUserId(toAddress);
+                cloudMessaging.setTitle("telecel play");
+                cloudMessaging.setBody(message);
+                cloudMessaging.execute(null);
             }
         } catch(Exception e){
             log.warn("cannot send notification to {}:{}",toAddress,message);
