@@ -82,7 +82,7 @@ public class LiquichainTransaction extends Script {
         return result;
     }
 
-    public String transferDB(String fromAddress, String toAddress, BigInteger value)
+    public String transferDB(String fromAddress, String toAddress, BigInteger value,String type,String description)
             throws Exception {
         String transactionHash = "";
         Wallet toWallet = crossStorageApi.find(defaultRepo, toAddress, Wallet.class);
@@ -131,6 +131,7 @@ public class LiquichainTransaction extends Script {
         transac.setGasPrice("0");
         transac.setGasLimit("0");
         transac.setValue("" + value);
+        transac.setData("{\"type\":\""+type+"\",\"description\":\""+description+"\"");
 
         transac.setSignedHash(hexValue.substring(2));
 
@@ -219,10 +220,10 @@ public class LiquichainTransaction extends Script {
     }
 
     public String transfer(String fromAddress, String toAddress, BigInteger amount) throws Exception {
-        return transfer(fromAddress,toAddress,amount,"You received coins !");
+        return transfer(fromAddress,toAddress,amount,"transfer","","You received coins !");
     }
 
-    public String transfer(String fromAddress, String toAddress, BigInteger amount,String message)
+    public String transfer(String fromAddress, String toAddress, BigInteger amount,String type,String description,String message)
             throws Exception {
         String transactionHash = "";
         switch (BLOCKCHAIN_BACKEND) {
@@ -233,7 +234,7 @@ public class LiquichainTransaction extends Script {
                 transactionHash = transferFabric(fromAddress, toAddress, amount);
                 break;
             default:
-                transactionHash = transferDB(fromAddress, toAddress, amount);
+                transactionHash = transferDB(fromAddress, toAddress,amount,type,description);
                 break;
         }
         try{
