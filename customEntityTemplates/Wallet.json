@@ -216,32 +216,6 @@
     "persisted" : true,
     "filter" : false,
     "unique" : false
-  }, {
-    "code" : "groupPurchases",
-    "description" : "Group purchases",
-    "fieldType" : "ENTITY",
-    "accountLevel" : "CE_Wallet",
-    "appliesTo" : "CE_Wallet",
-    "useInheritedAsDefaultValue" : false,
-    "storageType" : "LIST",
-    "valueRequired" : false,
-    "versionable" : false,
-    "triggerEndPeriodEvent" : false,
-    "entityClazz" : "org.meveo.model.customEntities.CustomEntityTemplate - GroupPurchase",
-    "allowEdit" : true,
-    "hideOnNew" : false,
-    "contentTypes" : [ ],
-    "fileExtensions" : [ ],
-    "saveOnExplorer" : false,
-    "guiPosition" : "tab:Wallet:0;field:7",
-    "identifier" : false,
-    "storages" : [ "SQL" ],
-    "samples" : [ ],
-    "summary" : false,
-    "audited" : false,
-    "persisted" : true,
-    "filter" : false,
-    "unique" : false
   } ],
   "actions" : [ ]
 }
