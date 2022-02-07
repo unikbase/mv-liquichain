@@ -72,17 +72,6 @@
             "title": "Transaction.creationDate",
             "type": "string"
         },
-        "type": {
-            "storages": ["SQL"],
-            "nullable": true,
-            "description": "Type",
-            "readOnly": false,
-            "versionable": false,
-            "id": "CE_Transaction_type",
-            "title": "Transaction.type",
-            "type": "string",
-            "maxLength": 20
-        },
         "nonce": {
             "storages": ["SQL"],
             "nullable": true,
