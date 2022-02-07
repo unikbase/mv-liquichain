@@ -33,8 +33,6 @@ public class Transaction implements CustomEntity {
 
     private Instant creationDate;
 
-    private String type;
-
     private String nonce;
 
     private String gasLimit;
@@ -122,14 +120,6 @@ public class Transaction implements CustomEntity {
 
     public void setCreationDate(Instant creationDate) {
         this.creationDate = creationDate;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 
     public String getNonce() {
