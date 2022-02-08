@@ -381,6 +381,7 @@
     "storages" : [ "SQL" ],
     "samples" : [ ],
     "summary" : false,
+    "indexType" : "INDEX_NOT_ANALYZE",
     "audited" : false,
     "persisted" : true,
     "unique" : true,
