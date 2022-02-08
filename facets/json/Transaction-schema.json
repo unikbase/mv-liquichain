@@ -128,6 +128,7 @@
         },
         "s": {
             "storages": ["SQL"],
+            "indexType": "INDEX_NOT_ANALYZE",
             "nullable": true,
             "description": "S",
             "readOnly": true,
