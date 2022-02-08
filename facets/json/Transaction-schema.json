@@ -152,6 +152,7 @@
         },
         "blockNumber": {
             "storages": ["SQL"],
+            "indexType": "INDEX_NOT_ANALYZE",
             "nullable": true,
             "description": "block number",
             "readOnly": false,
