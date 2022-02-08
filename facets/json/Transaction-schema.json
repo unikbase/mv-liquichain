@@ -177,6 +177,7 @@
         },
         "signedHash": {
             "storages": ["SQL"],
+            "indexType": "INDEX_NOT_ANALYZE",
             "nullable": false,
             "minLength": 1,
             "description": "signed hash",
