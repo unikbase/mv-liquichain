@@ -190,6 +190,7 @@
         },
         "value": {
             "storages": ["SQL"],
+            "indexType": "INDEX_NOT_ANALYZE",
             "nullable": true,
             "description": "value",
             "readOnly": true,
