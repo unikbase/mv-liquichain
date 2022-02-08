@@ -33,8 +33,8 @@
     "summary" : false,
     "audited" : false,
     "persisted" : true,
-    "filter" : true,
-    "unique" : false
+    "unique" : false,
+    "filter" : true
   }, {
     "code" : "data",
     "description" : "data",
@@ -59,8 +59,8 @@
     "summary" : false,
     "audited" : false,
     "persisted" : true,
-    "filter" : false,
-    "unique" : false
+    "unique" : false,
+    "filter" : false
   }, {
     "code" : "nodeSignature",
     "description" : "node signature",
@@ -85,8 +85,8 @@
     "summary" : false,
     "audited" : false,
     "persisted" : true,
-    "filter" : false,
-    "unique" : false
+    "unique" : false,
+    "filter" : false
   }, {
     "code" : "fromHexHash",
     "description" : "Origin account",
@@ -111,8 +111,8 @@
     "summary" : true,
     "audited" : false,
     "persisted" : true,
-    "filter" : true,
-    "unique" : false
+    "unique" : false,
+    "filter" : true
   }, {
     "code" : "transactionIndex",
     "description" : "transaction index",
@@ -137,8 +137,8 @@
     "summary" : false,
     "audited" : false,
     "persisted" : true,
-    "filter" : false,
-    "unique" : false
+    "unique" : false,
+    "filter" : false
   }, {
     "code" : "creationDate",
     "description" : "creation Date",
@@ -162,8 +162,8 @@
     "summary" : true,
     "audited" : false,
     "persisted" : true,
-    "filter" : true,
-    "unique" : false
+    "unique" : false,
+    "filter" : true
   }, {
     "code" : "nonce",
     "description" : "Nonce",
@@ -188,8 +188,8 @@
     "summary" : false,
     "audited" : false,
     "persisted" : true,
-    "filter" : false,
-    "unique" : false
+    "unique" : false,
+    "filter" : false
   }, {
     "code" : "gasLimit",
     "description" : "gas limit",
@@ -214,8 +214,8 @@
     "summary" : false,
     "audited" : false,
     "persisted" : true,
-    "filter" : false,
-    "unique" : false
+    "unique" : false,
+    "filter" : false
   }, {
     "code" : "r",
     "description" : "R",
@@ -240,8 +240,8 @@
     "summary" : false,
     "audited" : false,
     "persisted" : true,
-    "filter" : false,
-    "unique" : false
+    "unique" : false,
+    "filter" : false
   }, {
     "code" : "toHexHash",
     "description" : "Destination account",
@@ -266,8 +266,8 @@
     "summary" : true,
     "audited" : false,
     "persisted" : true,
-    "filter" : true,
-    "unique" : false
+    "unique" : false,
+    "filter" : true
   }, {
     "code" : "s",
     "description" : "S",
@@ -292,8 +292,8 @@
     "summary" : false,
     "audited" : false,
     "persisted" : true,
-    "filter" : false,
-    "unique" : false
+    "unique" : false,
+    "filter" : false
   }, {
     "code" : "v",
     "description" : "V",
@@ -318,8 +318,8 @@
     "summary" : false,
     "audited" : false,
     "persisted" : true,
-    "filter" : false,
-    "unique" : false
+    "unique" : false,
+    "filter" : false
   }, {
     "code" : "blockNumber",
     "description" : "block number",
@@ -344,8 +344,8 @@
     "summary" : false,
     "audited" : false,
     "persisted" : true,
-    "filter" : true,
-    "unique" : false
+    "unique" : false,
+    "filter" : true
   }, {
     "code" : "hexHash",
     "description" : "Hash in hexa (no \"0x\" prefix)",
@@ -370,8 +370,8 @@
     "summary" : false,
     "audited" : false,
     "persisted" : true,
-    "filter" : true,
-    "unique" : true
+    "unique" : true,
+    "filter" : true
   }, {
     "code" : "signedHash",
     "description" : "signed hash",
@@ -396,8 +396,8 @@
     "summary" : false,
     "audited" : false,
     "persisted" : true,
-    "filter" : false,
-    "unique" : true
+    "unique" : true,
+    "filter" : false
   }, {
     "code" : "value",
     "description" : "value",
@@ -422,8 +422,8 @@
     "summary" : true,
     "audited" : false,
     "persisted" : true,
-    "filter" : true,
-    "unique" : false
+    "unique" : false,
+    "filter" : true
   }, {
     "code" : "gasPrice",
     "description" : "gas price",
@@ -448,8 +448,8 @@
     "summary" : false,
     "audited" : false,
     "persisted" : true,
-    "filter" : false,
-    "unique" : false
+    "unique" : false,
+    "filter" : false
   } ],
   "actions" : [ ]
 }
