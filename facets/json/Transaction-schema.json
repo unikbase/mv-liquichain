@@ -164,6 +164,7 @@
         },
         "hexHash": {
             "storages": ["SQL"],
+            "indexType": "INDEX_NOT_ANALYZE",
             "nullable": false,
             "minLength": 1,
             "description": "Hash in hexa (no \"0x\" prefix)",
