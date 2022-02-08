@@ -68,6 +68,7 @@
         },
         "creationDate": {
             "storages": ["SQL"],
+            "indexType": "INDEX_NOT_ANALYZE",
             "nullable": true,
             "format": "date-time",
             "description": "creation Date",
