@@ -3,6 +3,9 @@ package org.meveo.model.customEntities;
 import org.meveo.model.CustomEntity;
 import java.util.List;
 import org.meveo.model.persistence.DBStorageType;
+import org.meveo.model.customEntities.Wallet;
+import java.time.Instant;
+import org.meveo.model.customEntities.LiquichainApp;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class TorrentAnnounce implements CustomEntity {
@@ -19,6 +22,38 @@ public class TorrentAnnounce implements CustomEntity {
     @JsonIgnore()
     private DBStorageType storages;
 
+    private String peerId;
+
+    private Wallet wallet;
+
+    private String ip;
+
+    private Double latitude;
+
+    private Double liveness;
+
+    private String infoHash;
+
+    private Long downloaded;
+
+    private String url;
+
+    private Instant anounceDate;
+
+    private Instant lastAnnounceDate;
+
+    private LiquichainApp application;
+
+    private Long left;
+
+    private Long port;
+
+    private Long uploaded;
+
+    private Double longitude;
+
+    private String status;
+
     @Override()
     public String getUuid() {
         return uuid;
@@ -34,6 +69,134 @@ public class TorrentAnnounce implements CustomEntity {
 
     public void setStorages(DBStorageType storages) {
         this.storages = storages;
+    }
+
+    public String getPeerId() {
+        return peerId;
+    }
+
+    public void setPeerId(String peerId) {
+        this.peerId = peerId;
+    }
+
+    public Wallet getWallet() {
+        return wallet;
+    }
+
+    public void setWallet(Wallet wallet) {
+        this.wallet = wallet;
+    }
+
+    public String getIp() {
+        return ip;
+    }
+
+    public void setIp(String ip) {
+        this.ip = ip;
+    }
+
+    public Double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
+    }
+
+    public Double getLiveness() {
+        return liveness;
+    }
+
+    public void setLiveness(Double liveness) {
+        this.liveness = liveness;
+    }
+
+    public String getInfoHash() {
+        return infoHash;
+    }
+
+    public void setInfoHash(String infoHash) {
+        this.infoHash = infoHash;
+    }
+
+    public Long getDownloaded() {
+        return downloaded;
+    }
+
+    public void setDownloaded(Long downloaded) {
+        this.downloaded = downloaded;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public Instant getAnounceDate() {
+        return anounceDate;
+    }
+
+    public void setAnounceDate(Instant anounceDate) {
+        this.anounceDate = anounceDate;
+    }
+
+    public Instant getLastAnnounceDate() {
+        return lastAnnounceDate;
+    }
+
+    public void setLastAnnounceDate(Instant lastAnnounceDate) {
+        this.lastAnnounceDate = lastAnnounceDate;
+    }
+
+    public LiquichainApp getApplication() {
+        return application;
+    }
+
+    public void setApplication(LiquichainApp application) {
+        this.application = application;
+    }
+
+    public Long getLeft() {
+        return left;
+    }
+
+    public void setLeft(Long left) {
+        this.left = left;
+    }
+
+    public Long getPort() {
+        return port;
+    }
+
+    public void setPort(Long port) {
+        this.port = port;
+    }
+
+    public Long getUploaded() {
+        return uploaded;
+    }
+
+    public void setUploaded(Long uploaded) {
+        this.uploaded = uploaded;
+    }
+
+    public Double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     @Override()
