@@ -159,7 +159,7 @@
             "id": "CE_Transaction_v",
             "title": "Transaction.v",
             "type": "string",
-            "maxLength": 2
+            "maxLength": 4
         },
         "blockNumber": {
             "storages": ["SQL"],
