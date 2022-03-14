@@ -28,6 +28,16 @@
             "type": "string",
             "maxLength": 100
         },
+        "phoneNumber": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "Phone Number",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Wallet_phoneNumber",
+            "title": "Wallet.phoneNumber",
+            "$ref": "#/definitions/VerifiedPhoneNumber"
+        },
         "application": {
             "storages": ["SQL"],
             "nullable": false,
