@@ -17,6 +17,38 @@
             "type": "string",
             "maxLength": 128
         },
+        "publicInfo": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "public Info json",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Wallet_publicInfo",
+            "title": "Wallet.publicInfo",
+            "type": "string"
+        },
+        "applicationInstanceUUID": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "Application instance UUID",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Wallet_applicationInstanceUUID",
+            "title": "Wallet.applicationInstanceUUID",
+            "type": "string",
+            "maxLength": 50
+        },
+        "publicKey": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "public key",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Wallet_publicKey",
+            "title": "Wallet.publicKey",
+            "type": "string",
+            "maxLength": 255
+        },
         "privateKey": {
             "storages": ["SQL"],
             "nullable": true,
@@ -80,6 +112,16 @@
             "type": "string",
             "maxLength": 40
         },
+        "lastPrivateInfoRequest": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "Time (in millis) of last privateInfo request",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Wallet_lastPrivateInfoRequest",
+            "title": "Wallet.lastPrivateInfoRequest",
+            "type": "integer"
+        },
         "name": {
             "storages": ["SQL"],
             "nullable": false,
@@ -92,27 +134,6 @@
             "type": "string",
             "maxLength": 255
         },
-        "publicInfo": {
-            "storages": ["SQL"],
-            "nullable": true,
-            "description": "public Info json",
-            "readOnly": false,
-            "versionable": false,
-            "id": "CE_Wallet_publicInfo",
-            "title": "Wallet.publicInfo",
-            "type": "string"
-        },
-        "applicationInstanceUUID": {
-            "storages": ["SQL"],
-            "nullable": true,
-            "description": "Application instance UUID",
-            "readOnly": false,
-            "versionable": false,
-            "id": "CE_Wallet_applicationInstanceUUID",
-            "title": "Wallet.applicationInstanceUUID",
-            "type": "string",
-            "maxLength": 50
-        },
         "keyPair": {
             "storages": ["SQL"],
             "nullable": true,
@@ -123,17 +144,6 @@
             "title": "Wallet.keyPair",
             "type": "string",
             "maxLength": 1000
-        },
-        "publicKey": {
-            "storages": ["SQL"],
-            "nullable": true,
-            "description": "public key",
-            "readOnly": false,
-            "versionable": false,
-            "id": "CE_Wallet_publicKey",
-            "title": "Wallet.publicKey",
-            "type": "string",
-            "maxLength": 255
         }
     },
     "required": [
