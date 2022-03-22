@@ -6,6 +6,16 @@
     "title": "Wallet",
     "type": "object",
     "properties": {
+        "application": {
+            "storages": ["SQL"],
+            "nullable": false,
+            "description": "Application",
+            "readOnly": true,
+            "versionable": false,
+            "id": "CE_Wallet_application",
+            "title": "Wallet.application",
+            "$ref": "#/definitions/LiquichainApp"
+        },
         "name": {
             "storages": ["SQL"],
             "nullable": false,
@@ -30,5 +40,8 @@
             "maxLength": 255
         }
     },
-    "required": ["name"]
+    "required": [
+        "application",
+        "name"
+    ]
 }
