@@ -4,6 +4,7 @@ import org.meveo.model.CustomEntity;
 import java.util.List;
 import org.meveo.model.persistence.DBStorageType;
 import java.time.Instant;
+import org.meveo.model.customEntities.LiquichainApp;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class TorrentAnnounce implements CustomEntity {
@@ -25,6 +26,8 @@ public class TorrentAnnounce implements CustomEntity {
     private Instant anounceDate;
 
     private Instant lastAnnounceDate;
+
+    private LiquichainApp application;
 
     private Long left;
 
@@ -79,6 +82,14 @@ public class TorrentAnnounce implements CustomEntity {
 
     public void setLastAnnounceDate(Instant lastAnnounceDate) {
         this.lastAnnounceDate = lastAnnounceDate;
+    }
+
+    public LiquichainApp getApplication() {
+        return application;
+    }
+
+    public void setApplication(LiquichainApp application) {
+        this.application = application;
     }
 
     public Long getLeft() {
