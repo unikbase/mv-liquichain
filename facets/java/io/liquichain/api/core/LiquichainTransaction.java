@@ -5,7 +5,6 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.Collections;
 
 import org.meveo.admin.exception.BusinessException;
 import org.meveo.api.persistence.CrossStorageApi;
@@ -106,17 +105,7 @@ public class LiquichainTransaction extends Script {
                 .by("fromHexHash", fromWallet.getUuid()).getResults();
         BigInteger nonce = BigInteger.ONE;
         if (walletTransactions != null && walletTransactions.size() > 0) {
-                      
-            Collections.sort(walletTransactions, new Comparator<Transaction>() {
-              @Override
-              public int compare(Transaction lhs, Transaction rhs) {
-                  if (Long.parseLong(lhs.getNonce())<=Long.parseLong(rhs.getNonce())){
-                      return 1;
-                  }
-                  return -1;
-              }
-          	});
-          
+            walletTransactions.sort(Comparator.comparing(Transaction::getNonce).reversed());
             Transaction lastTransaction = walletTransactions.get(0);
             try {
                 nonce = BigInteger.valueOf(Long.parseLong(lastTransaction.getNonce()) + 1);
@@ -132,7 +121,7 @@ public class LiquichainTransaction extends Script {
         Credentials credentials = Credentials.create(privateKey);
         byte[] signedMessage = TransactionEncoder.signMessage(rawTransaction, credentials);
         String hexValue = Numeric.toHexString(signedMessage);
-		log.info(String.format("hexValue is ===> %s with nonce ===> %s",hexValue,nonce));
+
         Transaction transac = new Transaction();
         transactionHash = Hash.sha3(hexValue);
         transac.setHexHash(transactionHash.substring(2));
@@ -142,7 +131,7 @@ public class LiquichainTransaction extends Script {
         transac.setGasPrice("0");
         transac.setGasLimit("0");
         transac.setValue("" + value);
-        transac.setData("{\"type\":\""+type+"\",\"description\":\""+description+"\"}");
+        transac.setData("{\"type\":\""+type+"\",\"description\":\""+description+"\"");
 
         transac.setSignedHash(hexValue.substring(2));
 
