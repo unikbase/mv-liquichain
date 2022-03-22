@@ -1,1 +1,26 @@
-{"code":"creationDate","description":"creation Date","fieldType":"DATE","accountLevel":"CE_Block","appliesTo":"CE_Block","useInheritedAsDefaultValue":false,"storageType":"SINGLE","valueRequired":false,"versionable":false,"triggerEndPeriodEvent":false,"allowEdit":false,"hideOnNew":false,"contentTypes":[],"fileExtensions":[],"saveOnExplorer":false,"guiPosition":"tab:Block:0;field:0","identifier":false,"storages":["SQL"],"samples":[],"summary":true,"audited":false,"persisted":true,"filter":true,"unique":true}
+{
+  "code" : "creationDate",
+  "description" : "creation Date",
+  "fieldType" : "DATE",
+  "accountLevel" : "CE_Block",
+  "appliesTo" : "CE_Block",
+  "useInheritedAsDefaultValue" : false,
+  "storageType" : "SINGLE",
+  "valueRequired" : false,
+  "versionable" : false,
+  "triggerEndPeriodEvent" : false,
+  "allowEdit" : false,
+  "hideOnNew" : false,
+  "contentTypes" : [ ],
+  "fileExtensions" : [ ],
+  "saveOnExplorer" : false,
+  "guiPosition" : "tab:Block:0;field:0",
+  "identifier" : false,
+  "storages" : [ "SQL" ],
+  "samples" : [ ],
+  "summary" : true,
+  "audited" : false,
+  "persisted" : true,
+  "filter" : true,
+  "unique" : true
+}
