@@ -5,15 +5,30 @@
     "id": "Wallet",
     "title": "Wallet",
     "type": "object",
-    "properties": {"publicKey": {
-        "storages": ["SQL"],
-        "nullable": true,
-        "description": "public key",
-        "readOnly": false,
-        "versionable": false,
-        "id": "CE_Wallet_publicKey",
-        "title": "Wallet.publicKey",
-        "type": "string",
-        "maxLength": 255
-    }}
+    "properties": {
+        "name": {
+            "storages": ["SQL"],
+            "nullable": false,
+            "minLength": 1,
+            "description": "Name",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Wallet_name",
+            "title": "Wallet.name",
+            "type": "string",
+            "maxLength": 255
+        },
+        "publicKey": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "public key",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Wallet_publicKey",
+            "title": "Wallet.publicKey",
+            "type": "string",
+            "maxLength": 255
+        }
+    },
+    "required": ["name"]
 }
