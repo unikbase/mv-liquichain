@@ -19,6 +19,8 @@ public class Wallet implements CustomEntity {
     @JsonIgnore()
     private DBStorageType storages;
 
+    private String publicKey;
+
     @Override()
     public String getUuid() {
         return uuid;
@@ -34,6 +36,14 @@ public class Wallet implements CustomEntity {
 
     public void setStorages(DBStorageType storages) {
         this.storages = storages;
+    }
+
+    public String getPublicKey() {
+        return publicKey;
+    }
+
+    public void setPublicKey(String publicKey) {
+        this.publicKey = publicKey;
     }
 
     @Override()
