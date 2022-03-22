@@ -29,6 +29,17 @@
             "type": "string",
             "maxLength": 255
         },
+        "iconUrl": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "Icon url",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_LiquichainApp_iconUrl",
+            "title": "LiquichainApp.iconUrl",
+            "type": "string",
+            "maxLength": 1000
+        },
         "creationDate": {
             "storages": ["SQL"],
             "nullable": true,
