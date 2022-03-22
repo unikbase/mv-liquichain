@@ -37,6 +37,8 @@ public class Wallet implements CustomEntity {
 
     private String publicInfo;
 
+    private String applicationInstanceUUID;
+
     private String keyPair;
 
     private String publicKey;
@@ -112,6 +114,14 @@ public class Wallet implements CustomEntity {
 
     public void setPublicInfo(String publicInfo) {
         this.publicInfo = publicInfo;
+    }
+
+    public String getApplicationInstanceUUID() {
+        return applicationInstanceUUID;
+    }
+
+    public void setApplicationInstanceUUID(String applicationInstanceUUID) {
+        this.applicationInstanceUUID = applicationInstanceUUID;
     }
 
     public String getKeyPair() {
