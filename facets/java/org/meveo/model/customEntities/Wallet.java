@@ -29,6 +29,8 @@ public class Wallet implements CustomEntity {
     @JsonProperty(required = true)
     private String name;
 
+    private String publicInfo;
+
     private String publicKey;
 
     @Override()
@@ -70,6 +72,14 @@ public class Wallet implements CustomEntity {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getPublicInfo() {
+        return publicInfo;
+    }
+
+    public void setPublicInfo(String publicInfo) {
+        this.publicInfo = publicInfo;
     }
 
     public String getPublicKey() {
