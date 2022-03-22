@@ -4,5 +4,16 @@
     "$schema": "http://json-schema.org/draft-07/schema",
     "id": "Wallet",
     "title": "Wallet",
-    "type": "object"
+    "type": "object",
+    "properties": {"publicKey": {
+        "storages": ["SQL"],
+        "nullable": true,
+        "description": "public key",
+        "readOnly": false,
+        "versionable": false,
+        "id": "CE_Wallet_publicKey",
+        "title": "Wallet.publicKey",
+        "type": "string",
+        "maxLength": 255
+    }}
 }
