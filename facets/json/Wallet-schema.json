@@ -27,6 +27,17 @@
             "title": "Wallet.publicInfo",
             "type": "string"
         },
+        "verified": {
+            "storages": ["SQL"],
+            "default": "false",
+            "nullable": true,
+            "description": "Verified",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Wallet_verified",
+            "title": "Wallet.verified",
+            "type": "string"
+        },
         "applicationInstanceUUID": {
             "storages": ["SQL"],
             "nullable": true,
