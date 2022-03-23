@@ -1,0 +1,12 @@
+{
+  "code" : "VerifiedPhoneNumber",
+  "name" : "Verified Phone Number",
+  "description" : "Verified phone number for Wallet",
+  "customEntityCategoryCode" : "liquichain",
+  "availableStorages" : [ "SQL" ],
+  "sqlStorageConfiguration" : {
+    "storeAsTable" : true
+  },
+  "samples" : [ ],
+  "audited" : false
+}
