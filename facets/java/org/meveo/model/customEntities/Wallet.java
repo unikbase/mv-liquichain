@@ -3,6 +3,7 @@ package org.meveo.model.customEntities;
 import org.meveo.model.CustomEntity;
 import java.util.List;
 import org.meveo.model.persistence.DBStorageType;
+import org.meveo.model.customEntities.VerifiedPhoneNumber;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.meveo.model.customEntities.LiquichainApp;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -24,6 +25,8 @@ public class Wallet implements CustomEntity {
     private String accountHash;
 
     private String privateKey;
+
+    private VerifiedPhoneNumber phoneNumber;
 
     @JsonProperty(required = true)
     private LiquichainApp application;
@@ -74,6 +77,14 @@ public class Wallet implements CustomEntity {
 
     public void setPrivateKey(String privateKey) {
         this.privateKey = privateKey;
+    }
+
+    public VerifiedPhoneNumber getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(VerifiedPhoneNumber phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public LiquichainApp getApplication() {
