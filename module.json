@@ -2,7 +2,7 @@
   "code" : "mv-liquichain",
   "description" : "Liquichain accounts",
   "license" : "GPL",
-  "currentVersion" : "0.22",
+  "currentVersion" : "0.23",
   "isInDraft" : true,
   "moduleDependencies" : [ ],
   "moduleFiles" : [ ]
