@@ -17,6 +17,16 @@
             "title": "TorrentAnnounce.lastAnnounceDate",
             "type": "string"
         },
+        "longitude": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "longitude",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_TorrentAnnounce_longitude",
+            "title": "TorrentAnnounce.longitude",
+            "type": "number"
+        },
         "status": {
             "storages": ["SQL"],
             "nullable": true,
