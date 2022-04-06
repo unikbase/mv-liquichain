@@ -189,10 +189,12 @@ public class LiquichainTransaction extends Script {
                                                      .orderBy("nonce", false) // by largest to smallest
                                                      .getResult();
         BigInteger nonce = BigInteger.ONE;
-        try {
-            nonce = BigInteger.valueOf(Long.parseLong(lastTransaction.getNonce()) + 1);
-        } catch (NumberFormatException e) {
-            LOG.error("invalid nonce :{}", lastTransaction.getNonce());
+        if (lastTransaction != null) {
+            try {
+                nonce = BigInteger.valueOf(Long.parseLong(lastTransaction.getNonce()) + 1);
+            } catch (NumberFormatException e) {
+                LOG.error("invalid nonce :{}", lastTransaction.getNonce());
+            }
         }
 
         String recipientAddress = "0x" + toWallet.getUuid();
