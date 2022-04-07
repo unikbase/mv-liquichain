@@ -88,9 +88,6 @@ public class LiquichainTransaction extends Script {
     private String fromAddress;
     private String toAddress;
     private String value;
-    private String type;
-    private String description;
-    private String message;
     private String result;
 
     public void setFromAddress(String fromAddress) {
@@ -103,18 +100,6 @@ public class LiquichainTransaction extends Script {
 
     public void setValue(String value) {
         this.value = value;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
     }
 
     public String getResult() {
@@ -232,6 +217,7 @@ public class LiquichainTransaction extends Script {
         transaction.setGasLimit(gasLimit.toString());
         transaction.setValue(amount.toString());
         transaction.setData(data);
+        transaction.setType(type);
         transaction.setSignedHash(normalizeHash(encodedTransaction));
         transaction.setCreationDate(java.time.Instant.now());
 
@@ -367,6 +353,7 @@ public class LiquichainTransaction extends Script {
         transaction.setGasLimit(defaultGasLimit.toString());
         transaction.setValue(amount.toString());
         transaction.setData(data);
+        transaction.setType(type);
         transaction.setSignedHash(normalizeHash(encodedTransaction));
         transaction.setCreationDate(java.time.Instant.now());
 
@@ -507,11 +494,7 @@ public class LiquichainTransaction extends Script {
     public void execute(Map<String, Object> parameters) throws BusinessException {
         String transactionHash = "";
         try {
-            if (type == null) {
-                transactionHash = transfer(fromAddress, toAddress, new BigInteger(value));
-            } else {
-                transactionHash = transfer(fromAddress, toAddress, new BigInteger(value), type, description, message);
-            }
+            transactionHash = transfer(fromAddress, toAddress, new BigInteger(value));
             result = "{\"transaction_hash\":\"" + transactionHash + "\"}";
         } catch (Exception e) {
             LOG.error("Transfer error", e);
