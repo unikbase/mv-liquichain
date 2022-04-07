@@ -77,7 +77,7 @@ public class LiquichainTransaction extends Script {
     private Web3j web3j = Web3j.build(new HttpService(besuApiUrl));
 
     private enum BLOCKCHAIN_TYPE {
-        DATABASE, BESU, FABRIC, SMART_CONTRACT, BESU_DB
+        DATABASE, BESU_ONLY, FABRIC, SMART_CONTRACT, BESU
     }
 
     private String blockchainType = config.getProperty("txn.blockchain.type", "BESU");
@@ -88,6 +88,9 @@ public class LiquichainTransaction extends Script {
     private String fromAddress;
     private String toAddress;
     private String value;
+    private String type;
+    private String description;
+    private String message;
     private String result;
 
     public void setFromAddress(String fromAddress) {
@@ -100,6 +103,18 @@ public class LiquichainTransaction extends Script {
 
     public void setValue(String value) {
         this.value = value;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public String getResult() {
@@ -130,8 +145,8 @@ public class LiquichainTransaction extends Script {
         return transactionReceipt.getTransactionReceipt();
     }
 
-    private Optional<TransactionReceipt> getTransactionReceipt(String transactionHash,
-                                                               int sleepDuration, int attempts) throws Exception {
+    private Optional<TransactionReceipt> getTransactionReceipt(
+            String transactionHash, int sleepDuration, int attempts) throws Exception {
         Optional<TransactionReceipt> receiptOptional =
                 sendTransactionReceiptRequest(transactionHash);
         for (int i = 0; i < attempts; i++) {
@@ -432,7 +447,7 @@ public class LiquichainTransaction extends Script {
         String recipientAddress = normalizeHash(to);
         String senderAddress = normalizeHash(from);
         switch (BLOCKCHAIN_BACKEND) {
-            case BESU:
+            case BESU_ONLY:
                 transactionHash = transferBesu(
                         senderAddress,
                         recipientAddress,
@@ -456,7 +471,7 @@ public class LiquichainTransaction extends Script {
                         type,
                         description);
                 break;
-            case BESU_DB:
+            case BESU:
                 transactionHash = transferBesuDB(
                         from,
                         to,
@@ -492,16 +507,18 @@ public class LiquichainTransaction extends Script {
     public void execute(Map<String, Object> parameters) throws BusinessException {
         String transactionHash = "";
         try {
-            transactionHash = transfer(fromAddress, toAddress, new BigInteger(value));
+            if (type == null) {
+                transactionHash = transfer(fromAddress, toAddress, new BigInteger(value));
+            } else {
+                transactionHash = transfer(fromAddress, toAddress, new BigInteger(value), type, description, message);
+            }
             result = "{\"transaction_hash\":\"" + transactionHash + "\"}";
         } catch (Exception e) {
             LOG.error("Transfer error", e);
             result = "{\"error\":\"" + e.getMessage() + "\"}";
         }
     }
-
 }
-
 
 class HttpService extends Service {
 
