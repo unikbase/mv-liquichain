@@ -60,6 +60,7 @@ public class LiquichainTransaction extends Script {
     private static final int ATTEMPTS = 40;
     private static final String INSUFFICIENT_BALANCE = "Insufficient balance";
     private static final String TRANSACTION_FAILED = "Transaction failed";
+    private static final String TRANSACTION_DATA_FORMAT = "{\"type\":\"%s\",\"description\":\"%s\"}";
 
     private CrossStorageApi crossStorageApi = getCDIBean(CrossStorageApi.class);
     private RepositoryService repositoryService = getCDIBean(RepositoryService.class);
@@ -198,7 +199,7 @@ public class LiquichainTransaction extends Script {
         }
 
         String recipientAddress = "0x" + toWallet.getUuid();
-        String data = String.format("{\"type\":\"%s\",\"description\":\"%s\"", type, description);
+        String data = String.format(TRANSACTION_DATA_FORMAT, type, description);
         BigInteger gasLimit = BigInteger.ZERO;
         BigInteger gasPrice = BigInteger.ZERO;
         RawTransaction rawTransaction = RawTransaction
@@ -342,7 +343,7 @@ public class LiquichainTransaction extends Script {
         String completedTransactionHash = transactionReceipt.getTransactionHash();
         LOG.debug("completed transactionHash: {}", completedTransactionHash);
 
-        String data = String.format("{\"type\":\"%s\",\"description\":\"%s\"", type, description);
+        String data = String.format(TRANSACTION_DATA_FORMAT, type, description);
 
         Transaction transaction = new Transaction();
         transaction.setHexHash(normalizeHash(completedTransactionHash));
