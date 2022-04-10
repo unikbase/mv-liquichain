@@ -88,7 +88,7 @@ public class LiquichainTransaction extends Script {
     private String toAddress;
     private String value;
     private String result;
-
+	
     public void setFromAddress(String fromAddress) {
         this.fromAddress = fromAddress;
     }
