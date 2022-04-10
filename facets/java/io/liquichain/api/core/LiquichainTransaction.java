@@ -70,16 +70,14 @@ public class LiquichainTransaction extends Script {
     private String besuApiUrl = config
             .getProperty("besu.api.url", "https://testnet.liquichain.io/rpc");
     private BigInteger defaultGasLimit =
-            new BigInteger(config.getProperty("besu.gas.limit", "21000"));
+            new BigInteger(config.getProperty("besu.gas.limit", "120000"));
     private BigInteger defaultGasPrice = new BigInteger(config.getProperty("besu.gas.price", "0"));
     private String smartContract = config
             .getProperty("besu.smart.contract", "0x0Cd07348D582a6F4A3641D3192f1f467586BE990");
 
     private Web3j web3j = Web3j.build(new HttpService(besuApiUrl));
 
-    private enum BLOCKCHAIN_TYPE {
-        DATABASE, BESU_ONLY, FABRIC, SMART_CONTRACT, BESU
-    }
+    private enum BLOCKCHAIN_TYPE {DATABASE, BESU_ONLY, FABRIC, BESU}
 
     private String blockchainType = config.getProperty("txn.blockchain.type", "BESU");
     private BLOCKCHAIN_TYPE BLOCKCHAIN_BACKEND = BLOCKCHAIN_TYPE.valueOf(blockchainType);
@@ -365,8 +363,8 @@ public class LiquichainTransaction extends Script {
         return completedTransactionHash;
     }
 
-    private String transferSmartContract(String from, String to, BigInteger amount,
-                                         String type, String description) throws Exception {
+    public String transferSmartContract(String from, String to, BigInteger amount,
+                                         String type, String description, String message) throws Exception {
         String sender = normalizeHash(from);
         String recipient = normalizeHash(to);
 
@@ -375,24 +373,15 @@ public class LiquichainTransaction extends Script {
         Credentials credentials = Credentials.create(privateKey);
         BigInteger balance = BigInteger.ZERO;
 
-        if (fromWallet.getBalance() == null || fromWallet.getBalance().isEmpty()) {
-            balance = web3j.ethGetBalance(from, LATEST).sendAsync().get().getBalance();
-        } else {
-            balance = new BigInteger(fromWallet.getBalance());
-        }
-
-        if (balance.compareTo(amount) < 0) {
-            throw new BusinessException(INSUFFICIENT_BALANCE);
-        }
-
+        LOG.info("transfer amount:{} to:{}", amount, toHexHash(to));
         RawTransactionManager manager = new RawTransactionManager(web3j, credentials);
         Function function = new Function(
-                "transferFrom",
-                Arrays.asList(new Address(from), new Address(to), new Uint256(amount)),
+                "transfer",
+                Arrays.asList(new Address(toHexHash(to)), new Uint256(amount)),
                 Arrays.asList(new TypeReference<Bool>() {}));
         String data = FunctionEncoder.encode(function);
 
-        BigInteger gasPrice = web3j.ethGasPrice().send().getGasPrice();
+        BigInteger gasPrice = BigInteger.ZERO;
         EthSendTransaction transaction = manager.sendTransaction(
                 gasPrice,
                 defaultGasLimit,
@@ -400,7 +389,7 @@ public class LiquichainTransaction extends Script {
                 data,
                 null);
         String transactionHash = transaction.getTransactionHash();
-        LOG.debug("pending transactionHash: {}", transactionHash);
+        LOG.info("pending transactionHash: {}", transactionHash);
 
         if (transactionHash == null || transactionHash.isEmpty()) {
             throw new BusinessException(TRANSACTION_FAILED);
@@ -409,9 +398,19 @@ public class LiquichainTransaction extends Script {
         TransactionReceipt transactionReceipt = waitForTransactionReceipt(transactionHash);
 
         String completedTransactionHash = transactionReceipt.getTransactionHash();
-        LOG.debug("completed transactionHash: {}", completedTransactionHash);
+        LOG.info("completed transactionHash: {}", completedTransactionHash);
 
-        updateWalletBalances(sender, recipient);
+        //updateWalletBalances(sender, recipient);
+        try {
+            if (!completedTransactionHash.isEmpty()) {
+                cloudMessaging.setUserId(recipient);
+                cloudMessaging.setTitle("Telecel Play");
+                cloudMessaging.setBody(message);
+                cloudMessaging.execute(null);
+            }
+        } catch (Exception e) {
+            LOG.warn("cannot send notification to {}: {}", toAddress, message);
+        }
 
         return completedTransactionHash;
     }
@@ -447,14 +446,6 @@ public class LiquichainTransaction extends Script {
                 transactionHash = transferFabric(
                         senderAddress,
                         recipientAddress,
-                        amount,
-                        type,
-                        description);
-                break;
-            case SMART_CONTRACT:
-                transactionHash = transferSmartContract(
-                        from,
-                        to,
                         amount,
                         type,
                         description);
