@@ -17,6 +17,49 @@
             "type": "string",
             "maxLength": 40
         },
+        "ip": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "IP",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_TorrentAnnounce_ip",
+            "title": "TorrentAnnounce.ip",
+            "type": "string",
+            "maxLength": 50
+        },
+        "infoHash": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "info hash",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_TorrentAnnounce_infoHash",
+            "title": "TorrentAnnounce.infoHash",
+            "type": "string",
+            "maxLength": 40
+        },
+        "downloaded": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "downloaded bytes",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_TorrentAnnounce_downloaded",
+            "title": "TorrentAnnounce.downloaded",
+            "type": "integer"
+        },
+        "url": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "url of the server (when peer is a server)",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_TorrentAnnounce_url",
+            "title": "TorrentAnnounce.url",
+            "type": "string",
+            "maxLength": 1000
+        },
         "anounceDate": {
             "storages": ["SQL"],
             "nullable": true,
@@ -59,16 +102,15 @@
             "title": "TorrentAnnounce.left",
             "type": "integer"
         },
-        "ip": {
+        "port": {
             "storages": ["SQL"],
             "nullable": true,
-            "description": "IP",
+            "description": "port",
             "readOnly": false,
             "versionable": false,
-            "id": "CE_TorrentAnnounce_ip",
-            "title": "TorrentAnnounce.ip",
-            "type": "string",
-            "maxLength": 50
+            "id": "CE_TorrentAnnounce_port",
+            "title": "TorrentAnnounce.port",
+            "type": "integer"
         },
         "uploaded": {
             "storages": ["SQL"],
@@ -80,38 +122,6 @@
             "title": "TorrentAnnounce.uploaded",
             "type": "integer",
             "minimum": 0
-        },
-        "infoHash": {
-            "storages": ["SQL"],
-            "nullable": true,
-            "description": "info hash",
-            "readOnly": false,
-            "versionable": false,
-            "id": "CE_TorrentAnnounce_infoHash",
-            "title": "TorrentAnnounce.infoHash",
-            "type": "string",
-            "maxLength": 40
-        },
-        "downloaded": {
-            "storages": ["SQL"],
-            "nullable": true,
-            "description": "downloaded bytes",
-            "readOnly": false,
-            "versionable": false,
-            "id": "CE_TorrentAnnounce_downloaded",
-            "title": "TorrentAnnounce.downloaded",
-            "type": "integer"
-        },
-        "url": {
-            "storages": ["SQL"],
-            "nullable": true,
-            "description": "url of the server (when peer is a server)",
-            "readOnly": false,
-            "versionable": false,
-            "id": "CE_TorrentAnnounce_url",
-            "title": "TorrentAnnounce.url",
-            "type": "string",
-            "maxLength": 1000
         },
         "longitude": {
             "storages": ["SQL"],
