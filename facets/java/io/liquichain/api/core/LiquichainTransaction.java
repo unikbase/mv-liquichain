@@ -427,7 +427,7 @@ public class LiquichainTransaction extends Script {
 
         crossStorageApi.createOrUpdate(defaultRepo, transaction);
 
-        updateWalletBalances(sender, recipient);
+        // updateWalletBalances(sender, recipient);
         
         try {
             if (!completedTransactionHash.isEmpty()) {
