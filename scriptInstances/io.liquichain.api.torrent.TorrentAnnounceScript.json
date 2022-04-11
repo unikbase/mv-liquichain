@@ -53,11 +53,6 @@
   "transactionType" : "SAME",
   "executionRoles" : [ ],
   "sourcingRoles" : [ ],
-  "mavenDependencies" : [ {
-    "groupId" : "org.web3j",
-    "artifactId" : "core",
-    "version" : "4.8.4",
-    "coordinates" : "org.web3j:core:4.8.4"
-  } ],
+  "mavenDependencies" : [ ],
   "importScriptInstances" : [ ]
 }
