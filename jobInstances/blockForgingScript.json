@@ -1,5 +1,5 @@
 {
-  "active" : true,
+  "active" : false,
   "code" : "blockForgingScript",
   "description" : "Run block forging script",
   "jobCategory" : "MEDIATION",
