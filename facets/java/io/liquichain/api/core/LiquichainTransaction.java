@@ -88,7 +88,7 @@ public class LiquichainTransaction extends Script {
     private String toAddress;
     private String value;
     private String result;
-	
+
     public void setFromAddress(String fromAddress) {
         this.fromAddress = fromAddress;
     }
@@ -320,7 +320,6 @@ public class LiquichainTransaction extends Script {
 
         RawTransaction rawTransaction = RawTransaction
                 .createEtherTransaction(nonce, gasPrice, defaultGasLimit, to, amount);
-
         byte[] signedMessage = TransactionEncoder.signMessage(rawTransaction, credentials);
         String encodedTransaction = Numeric.toHexString(signedMessage);
 
@@ -369,6 +368,7 @@ public class LiquichainTransaction extends Script {
         String recipient = normalizeHash(to);
 
         Wallet fromWallet = crossStorageApi.find(defaultRepo, sender, Wallet.class);
+        Wallet toWallet = crossStorageApi.find(defaultRepo, recipient, Wallet.class);
         String privateKey = fromWallet.getPrivateKey();
         Credentials credentials = Credentials.create(privateKey);
         BigInteger balance = BigInteger.ZERO;
@@ -382,13 +382,13 @@ public class LiquichainTransaction extends Script {
         String data = FunctionEncoder.encode(function);
 
         BigInteger gasPrice = BigInteger.ZERO;
-        EthSendTransaction transaction = manager.sendTransaction(
+        EthSendTransaction sendTransaction = manager.sendTransaction(
                 gasPrice,
                 defaultGasLimit,
                 smartContract,
                 data,
                 null);
-        String transactionHash = transaction.getTransactionHash();
+        String transactionHash = sendTransaction.getTransactionHash();
         LOG.info("pending transactionHash: {}", transactionHash);
 
         if (transactionHash == null || transactionHash.isEmpty()) {
@@ -400,7 +400,35 @@ public class LiquichainTransaction extends Script {
         String completedTransactionHash = transactionReceipt.getTransactionHash();
         LOG.info("completed transactionHash: {}", completedTransactionHash);
 
-        //updateWalletBalances(sender, recipient);
+        EthGetTransactionCount ethGetTransactionCount = web3j
+                .ethGetTransactionCount(credentials.getAddress(), LATEST)
+                .send();
+        BigInteger nonce = ethGetTransactionCount.getTransactionCount();
+
+        RawTransaction rawTransaction = RawTransaction
+                .createEtherTransaction(nonce, gasPrice, defaultGasLimit, to, amount);
+        byte[] signedMessage = TransactionEncoder.signMessage(rawTransaction, credentials);
+        String encodedTransaction = Numeric.toHexString(signedMessage);
+
+        String transactionData = String.format(TRANSACTION_DATA_FORMAT, type, description);
+
+        Transaction transaction = new Transaction();
+        transaction.setHexHash(normalizeHash(completedTransactionHash));
+        transaction.setFromHexHash(fromWallet.getUuid());
+        transaction.setToHexHash(toWallet.getUuid());
+        transaction.setNonce("" + nonce);
+        transaction.setGasPrice(gasPrice.toString());
+        transaction.setGasLimit(defaultGasLimit.toString());
+        transaction.setValue(amount.toString());
+        transaction.setData(transactionData);
+        transaction.setType(type);
+        transaction.setSignedHash(normalizeHash(encodedTransaction));
+        transaction.setCreationDate(java.time.Instant.now());
+
+        crossStorageApi.createOrUpdate(defaultRepo, transaction);
+
+        updateWalletBalances(sender, recipient);
+        
         try {
             if (!completedTransactionHash.isEmpty()) {
                 cloudMessaging.setUserId(recipient);
@@ -409,7 +437,7 @@ public class LiquichainTransaction extends Script {
                 cloudMessaging.execute(null);
             }
         } catch (Exception e) {
-            LOG.warn("cannot send notification to {}: {}", toAddress, message);
+            LOG.warn("cannot send notification to {}: {}", to, message);
         }
 
         return completedTransactionHash;
@@ -476,7 +504,7 @@ public class LiquichainTransaction extends Script {
                 cloudMessaging.execute(null);
             }
         } catch (Exception e) {
-            LOG.warn("cannot send notification to {}: {}", toAddress, message);
+            LOG.warn("cannot send notification to {}: {}", recipientAddress, message);
         }
         return transactionHash;
     }
