@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.meveo</groupId>
   <artifactId>mv-liquichain</artifactId>
-  <version>0.22</version>
+  <version>0.23</version>
   <properties>
     <maven.compiler.target>11</maven.compiler.target>
     <maven.compiler.source>11</maven.compiler.source>
@@ -57,7 +57,7 @@
     <dependency>
       <groupId>org.web3j</groupId>
       <artifactId>core</artifactId>
-      <version>4.8.4</version>
+      <version>4.8.9</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
