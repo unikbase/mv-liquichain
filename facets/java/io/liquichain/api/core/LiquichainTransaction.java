@@ -56,7 +56,7 @@ import io.liquichain.core.BlockForgerScript;
 
 public class LiquichainTransaction extends Script {
     private static final Logger LOG = LoggerFactory.getLogger(LiquichainTransaction.class);
-    private static final int SLEEP_DURATION = 15000;
+    private static final int SLEEP_DURATION = 1000;
     private static final int ATTEMPTS = 40;
     private static final String INSUFFICIENT_BALANCE = "Insufficient balance";
     private static final String TRANSACTION_FAILED = "Transaction failed";
@@ -109,17 +109,17 @@ public class LiquichainTransaction extends Script {
         if (hash.startsWith("0x")) {
             return hash.substring(2);
         }
-        return hash;
+        return hash.toLowerCase();
     }
 
     private String toHexHash(String hash) {
         if (hash.startsWith("0x")) {
             return hash;
         }
-        return "0x" + hash;
+        return "0x" + hash.toLowerCase();
     }
 
-    private Optional<TransactionReceipt> sendTransactionReceiptRequest(String transactionHash)
+    public Optional<TransactionReceipt> sendTransactionReceiptRequest(String transactionHash)
             throws Exception {
         EthGetTransactionReceipt transactionReceipt = web3j
                 .ethGetTransactionReceipt(transactionHash)
@@ -171,8 +171,8 @@ public class LiquichainTransaction extends Script {
     private String transferDB(String from, String to, BigInteger amount, String type,
                               String description) throws Exception {
         String transactionHash = "";
-        Wallet toWallet = crossStorageApi.find(defaultRepo, to, Wallet.class);
-        Wallet fromWallet = crossStorageApi.find(defaultRepo, from, Wallet.class);
+        Wallet toWallet = crossStorageApi.find(defaultRepo, to.toLowerCase(), Wallet.class);
+        Wallet fromWallet = crossStorageApi.find(defaultRepo, from.toLowerCase(), Wallet.class);
         if (fromWallet.getPrivateKey() == null) {
             throw new Exception("wallet has no private key");
         }
@@ -292,8 +292,8 @@ public class LiquichainTransaction extends Script {
     private String transferBesuDB(String from, String to, BigInteger amount,
                                   String type, String description) throws Exception {
 
-        Wallet fromWallet = crossStorageApi.find(defaultRepo, from, Wallet.class);
-        Wallet toWallet = crossStorageApi.find(defaultRepo, to, Wallet.class);
+        Wallet fromWallet = crossStorageApi.find(defaultRepo, from.toLowerCase(), Wallet.class);
+        Wallet toWallet = crossStorageApi.find(defaultRepo, to.toLowerCase(), Wallet.class);
 
         String privateKey = fromWallet.getPrivateKey();
         BigInteger balance = BigInteger.ZERO;
@@ -354,6 +354,9 @@ public class LiquichainTransaction extends Script {
         transaction.setType(type);
         transaction.setSignedHash(normalizeHash(encodedTransaction));
         transaction.setCreationDate(java.time.Instant.now());
+        transaction.setBlockNumber(normalizeHash(transactionReceipt.getBlockNumberRaw()));
+        transaction.setBlockHash(normalizeHash(transactionReceipt.getBlockHash()));
+        transaction.setTransactionIndex(transactionReceipt.getTransactionIndex().longValue());
 
         crossStorageApi.createOrUpdate(defaultRepo, transaction);
 
@@ -399,6 +402,7 @@ public class LiquichainTransaction extends Script {
 
         String completedTransactionHash = transactionReceipt.getTransactionHash();
         LOG.info("completed transactionHash: {}", completedTransactionHash);
+        LOG.info("transactionReceipt: {}", transactionReceipt.toString());
 
         EthGetTransactionCount ethGetTransactionCount = web3j
                 .ethGetTransactionCount(credentials.getAddress(), LATEST)
@@ -424,6 +428,9 @@ public class LiquichainTransaction extends Script {
         transaction.setType(type);
         transaction.setSignedHash(normalizeHash(encodedTransaction));
         transaction.setCreationDate(java.time.Instant.now());
+        transaction.setBlockNumber(normalizeHash(transactionReceipt.getBlockNumberRaw()));
+        transaction.setBlockHash(normalizeHash(transactionReceipt.getBlockHash()));
+        transaction.setTransactionIndex(transactionReceipt.getTransactionIndex().longValue());
 
         crossStorageApi.createOrUpdate(defaultRepo, transaction);
 

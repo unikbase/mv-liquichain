@@ -7,56 +7,15 @@
   "synchronous" : true,
   "method" : "GET",
   "parameterMappings" : [ {
-    "serviceParameter" : "compact",
+    "serviceParameter" : "peer_id",
     "multivalued" : false,
-    "parameterName" : "compact",
-    "valueRequired" : false
-  }, {
-    "serviceParameter" : "downloaded",
-    "multivalued" : false,
-    "parameterName" : "downloaded",
+    "parameterName" : "peer_id",
     "defaultValue" : "0",
-    "valueRequired" : false
-  }, {
-    "serviceParameter" : "event",
-    "multivalued" : false,
-    "parameterName" : "event",
-    "defaultValue" : "empty",
-    "valueRequired" : false
+    "valueRequired" : true
   }, {
     "serviceParameter" : "info_hash",
     "multivalued" : false,
     "parameterName" : "info_hash",
-    "defaultValue" : "0",
-    "valueRequired" : true
-  }, {
-    "serviceParameter" : "latitude",
-    "multivalued" : false,
-    "parameterName" : "latitude",
-    "defaultValue" : "0",
-    "valueRequired" : false
-  }, {
-    "serviceParameter" : "left",
-    "multivalued" : false,
-    "parameterName" : "left",
-    "defaultValue" : "0",
-    "valueRequired" : false
-  }, {
-    "serviceParameter" : "liveness",
-    "multivalued" : false,
-    "parameterName" : "liveness",
-    "defaultValue" : "0",
-    "valueRequired" : false
-  }, {
-    "serviceParameter" : "longitude",
-    "multivalued" : false,
-    "parameterName" : "longitude",
-    "defaultValue" : "0",
-    "valueRequired" : false
-  }, {
-    "serviceParameter" : "peer_id",
-    "multivalued" : false,
-    "parameterName" : "peer_id",
     "defaultValue" : "0",
     "valueRequired" : true
   }, {
@@ -66,9 +25,9 @@
     "defaultValue" : "0",
     "valueRequired" : true
   }, {
-    "serviceParameter" : "sign",
+    "serviceParameter" : "downloaded",
     "multivalued" : false,
-    "parameterName" : "sign",
+    "parameterName" : "downloaded",
     "defaultValue" : "0",
     "valueRequired" : false
   }, {
@@ -76,6 +35,23 @@
     "multivalued" : false,
     "parameterName" : "uploaded",
     "defaultValue" : "0",
+    "valueRequired" : false
+  }, {
+    "serviceParameter" : "left",
+    "multivalued" : false,
+    "parameterName" : "left",
+    "defaultValue" : "0",
+    "valueRequired" : false
+  }, {
+    "serviceParameter" : "event",
+    "multivalued" : false,
+    "parameterName" : "event",
+    "defaultValue" : "empty",
+    "valueRequired" : false
+  }, {
+    "serviceParameter" : "compact",
+    "multivalued" : false,
+    "parameterName" : "compact",
     "valueRequired" : false
   }, {
     "serviceParameter" : "url",
@@ -86,6 +62,30 @@
     "serviceParameter" : "wallet_id",
     "multivalued" : false,
     "parameterName" : "wallet_id",
+    "defaultValue" : "0",
+    "valueRequired" : false
+  }, {
+    "serviceParameter" : "liveness",
+    "multivalued" : false,
+    "parameterName" : "liveness",
+    "defaultValue" : "0",
+    "valueRequired" : false
+  }, {
+    "serviceParameter" : "sign",
+    "multivalued" : false,
+    "parameterName" : "sign",
+    "defaultValue" : "0",
+    "valueRequired" : false
+  }, {
+    "serviceParameter" : "latitude",
+    "multivalued" : false,
+    "parameterName" : "latitude",
+    "defaultValue" : "0",
+    "valueRequired" : false
+  }, {
+    "serviceParameter" : "longitude",
+    "multivalued" : false,
+    "parameterName" : "longitude",
     "defaultValue" : "0",
     "valueRequired" : false
   } ],

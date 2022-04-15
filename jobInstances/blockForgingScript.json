@@ -10,10 +10,10 @@
       "entityReferenceValue" : {
         "classname" : "org.meveo.model.scripts.ScriptInstance",
         "code" : "io.liquichain.core.BlockForgerScript",
-        "id" : 5
+        "id" : 9
       }
     } ]
   },
-  "timerCode" : "10sec",
+  "timerCode" : "Daily-midnight",
   "limitToSingleNode" : true
 }
