@@ -1,0 +1,99 @@
+{
+  "code" : "announce",
+  "description" : "Torrent tracker announce service",
+  "secured" : false,
+  "checkPathParams" : false,
+  "serviceCode" : "io.liquichain.api.torrent.TorrentAnnounceScript",
+  "synchronous" : true,
+  "method" : "GET",
+  "parameterMappings" : [ {
+    "serviceParameter" : "peer_id",
+    "multivalued" : false,
+    "parameterName" : "peer_id",
+    "defaultValue" : "0",
+    "valueRequired" : true
+  }, {
+    "serviceParameter" : "info_hash",
+    "multivalued" : false,
+    "parameterName" : "info_hash",
+    "defaultValue" : "0",
+    "valueRequired" : true
+  }, {
+    "serviceParameter" : "port",
+    "multivalued" : false,
+    "parameterName" : "port",
+    "defaultValue" : "0",
+    "valueRequired" : true
+  }, {
+    "serviceParameter" : "downloaded",
+    "multivalued" : false,
+    "parameterName" : "downloaded",
+    "defaultValue" : "0",
+    "valueRequired" : false
+  }, {
+    "serviceParameter" : "uploaded",
+    "multivalued" : false,
+    "parameterName" : "uploaded",
+    "defaultValue" : "0",
+    "valueRequired" : false
+  }, {
+    "serviceParameter" : "left",
+    "multivalued" : false,
+    "parameterName" : "left",
+    "defaultValue" : "0",
+    "valueRequired" : false
+  }, {
+    "serviceParameter" : "event",
+    "multivalued" : false,
+    "parameterName" : "event",
+    "defaultValue" : "empty",
+    "valueRequired" : false
+  }, {
+    "serviceParameter" : "compact",
+    "multivalued" : false,
+    "parameterName" : "compact",
+    "valueRequired" : false
+  }, {
+    "serviceParameter" : "url",
+    "multivalued" : false,
+    "parameterName" : "url",
+    "valueRequired" : false
+  }, {
+    "serviceParameter" : "wallet_id",
+    "multivalued" : false,
+    "parameterName" : "wallet_id",
+    "defaultValue" : "0",
+    "valueRequired" : false
+  }, {
+    "serviceParameter" : "liveness",
+    "multivalued" : false,
+    "parameterName" : "liveness",
+    "defaultValue" : "0",
+    "valueRequired" : false
+  }, {
+    "serviceParameter" : "sign",
+    "multivalued" : false,
+    "parameterName" : "sign",
+    "defaultValue" : "0",
+    "valueRequired" : false
+  }, {
+    "serviceParameter" : "latitude",
+    "multivalued" : false,
+    "parameterName" : "latitude",
+    "defaultValue" : "0",
+    "valueRequired" : false
+  }, {
+    "serviceParameter" : "longitude",
+    "multivalued" : false,
+    "parameterName" : "longitude",
+    "defaultValue" : "0",
+    "valueRequired" : false
+  } ],
+  "pathParameters" : [ ],
+  "roles" : [ ],
+  "returnedVariableName" : "result",
+  "serializeResult" : false,
+  "contentType" : "application/json",
+  "basePath" : "announce",
+  "path" : "/"
+}
