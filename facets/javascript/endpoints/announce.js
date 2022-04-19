@@ -164,4 +164,4 @@ const announceForm = (container) => {
 	};
 }
 
-export default new announce();
+export { announce, announceForm };
