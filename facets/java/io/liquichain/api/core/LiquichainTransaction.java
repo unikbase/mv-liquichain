@@ -56,11 +56,12 @@ import io.liquichain.core.BlockForgerScript;
 
 public class LiquichainTransaction extends Script {
     private static final Logger LOG = LoggerFactory.getLogger(LiquichainTransaction.class);
-    private static final int SLEEP_DURATION = 15000;
+    private static final int SLEEP_DURATION = 1000;
     private static final int ATTEMPTS = 40;
     private static final String INSUFFICIENT_BALANCE = "Insufficient balance";
     private static final String TRANSACTION_FAILED = "Transaction failed";
-    private static final String TRANSACTION_DATA_FORMAT = "{\"type\":\"%s\",\"description\":\"%s\"}";
+    private static final String TRANSACTION_DATA_FORMAT =
+            "{\"type\":\"%s\",\"description\":\"%s\"}";
 
     private CrossStorageApi crossStorageApi = getCDIBean(CrossStorageApi.class);
     private RepositoryService repositoryService = getCDIBean(RepositoryService.class);
@@ -77,7 +78,9 @@ public class LiquichainTransaction extends Script {
 
     private Web3j web3j = Web3j.build(new HttpService(besuApiUrl));
 
-    private enum BLOCKCHAIN_TYPE {DATABASE, BESU_ONLY, FABRIC, BESU}
+    private enum BLOCKCHAIN_TYPE {
+        DATABASE, BESU_ONLY, FABRIC, BESU
+    }
 
     private String blockchainType = config.getProperty("txn.blockchain.type", "BESU");
     private BLOCKCHAIN_TYPE BLOCKCHAIN_BACKEND = BLOCKCHAIN_TYPE.valueOf(blockchainType);
@@ -109,17 +112,17 @@ public class LiquichainTransaction extends Script {
         if (hash.startsWith("0x")) {
             return hash.substring(2);
         }
-        return hash;
+        return hash.toLowerCase();
     }
 
     private String toHexHash(String hash) {
         if (hash.startsWith("0x")) {
-            return hash;
+            return hash.toLowerCase();
         }
-        return "0x" + hash;
+        return "0x" + hash.toLowerCase();
     }
 
-    private Optional<TransactionReceipt> sendTransactionReceiptRequest(String transactionHash)
+    public Optional<TransactionReceipt> sendTransactionReceiptRequest(String transactionHash)
             throws Exception {
         EthGetTransactionReceipt transactionReceipt = web3j
                 .ethGetTransactionReceipt(transactionHash)
@@ -169,10 +172,14 @@ public class LiquichainTransaction extends Script {
     }
 
     private String transferDB(String from, String to, BigInteger amount, String type,
-                              String description) throws Exception {
+            String description) throws Exception {
         String transactionHash = "";
-        Wallet toWallet = crossStorageApi.find(defaultRepo, to, Wallet.class);
-        Wallet fromWallet = crossStorageApi.find(defaultRepo, from, Wallet.class);
+
+        String sender = normalizeHash(from);
+        String recipient = normalizeHash(to);
+
+        Wallet fromWallet = crossStorageApi.find(defaultRepo, sender, Wallet.class);
+        Wallet toWallet = crossStorageApi.find(defaultRepo, recipient, Wallet.class);
         if (fromWallet.getPrivateKey() == null) {
             throw new Exception("wallet has no private key");
         }
@@ -184,9 +191,9 @@ public class LiquichainTransaction extends Script {
         }
 
         Transaction lastTransaction = crossStorageApi.find(defaultRepo, Transaction.class)
-                                                     .by("fromHexHash", fromWallet.getUuid())
-                                                     .orderBy("nonce", false) // by largest to smallest
-                                                     .getResult();
+                .by("fromHexHash", fromWallet.getUuid())
+                .orderBy("nonce", false) // by largest to smallest
+                .getResult();
         BigInteger nonce = BigInteger.ONE;
         if (lastTransaction != null) {
             try {
@@ -229,8 +236,10 @@ public class LiquichainTransaction extends Script {
     }
 
     private String transferBesu(String from, String to, BigInteger amount,
-                                String type, String description) throws Exception {
-        Wallet fromWallet = crossStorageApi.find(defaultRepo, from, Wallet.class);
+            String type, String description) throws Exception {
+        String sender = normalizeHash(from);
+        
+        Wallet fromWallet = crossStorageApi.find(defaultRepo, sender, Wallet.class);
         String privateKey = fromWallet.getPrivateKey();
         BigInteger balance = BigInteger.ZERO;
 
@@ -254,7 +263,7 @@ public class LiquichainTransaction extends Script {
         org.web3j.protocol.core.methods.request.Transaction transaction =
                 org.web3j.protocol.core.methods.request.Transaction
                         .createEtherTransaction(from, nonce, defaultGasPrice,
-                                                defaultGasLimit, to, amount);
+                                defaultGasLimit, to, amount);
 
         BigInteger estimatedGas = web3j.ethEstimateGas(transaction).send().getAmountUsed();
         LOG.debug("estimatedGas: {}", estimatedGas);
@@ -290,10 +299,13 @@ public class LiquichainTransaction extends Script {
     }
 
     private String transferBesuDB(String from, String to, BigInteger amount,
-                                  String type, String description) throws Exception {
+            String type, String description) throws Exception {
 
-        Wallet fromWallet = crossStorageApi.find(defaultRepo, from, Wallet.class);
-        Wallet toWallet = crossStorageApi.find(defaultRepo, to, Wallet.class);
+        String sender = normalizeHash(from);
+        String recipient = normalizeHash(to);
+
+        Wallet fromWallet = crossStorageApi.find(defaultRepo, sender, Wallet.class);
+        Wallet toWallet = crossStorageApi.find(defaultRepo, recipient, Wallet.class);
 
         String privateKey = fromWallet.getPrivateKey();
         BigInteger balance = BigInteger.ZERO;
@@ -366,7 +378,7 @@ public class LiquichainTransaction extends Script {
     }
 
     public String transferSmartContract(String from, String to, BigInteger amount,
-                                         String type, String description, String message) throws Exception {
+            String type, String description, String message) throws Exception {
         String sender = normalizeHash(from);
         String recipient = normalizeHash(to);
 
@@ -435,7 +447,7 @@ public class LiquichainTransaction extends Script {
         crossStorageApi.createOrUpdate(defaultRepo, transaction);
 
         // updateWalletBalances(sender, recipient);
-        
+
         try {
             if (!completedTransactionHash.isEmpty()) {
                 cloudMessaging.setUserId(recipient);
@@ -451,7 +463,7 @@ public class LiquichainTransaction extends Script {
     }
 
     private String transferFabric(String from, String to, BigInteger amount,
-                                  String type, String description) throws Exception {
+            String type, String description) throws Exception {
         return "";
     }
 
@@ -464,7 +476,7 @@ public class LiquichainTransaction extends Script {
     }
 
     public String transfer(String from, String to, BigInteger amount, String type,
-                           String description, String message) throws Exception {
+            String description, String message) throws Exception {
         String transactionHash = "";
         String recipientAddress = normalizeHash(to);
         String senderAddress = normalizeHash(from);
@@ -587,9 +599,9 @@ class HttpService extends Service {
         Response response = null;
         try {
             response = httpClient.target(url)
-                                 .request(MediaType.APPLICATION_JSON)
-                                 .headers(convertHeaders())
-                                 .post(Entity.json(request));
+                    .request(MediaType.APPLICATION_JSON)
+                    .headers(convertHeaders())
+                    .post(Entity.json(request));
         } catch (ClientConnectionException e) {
             throw new IOException("Unable to connect to " + url, e);
         }

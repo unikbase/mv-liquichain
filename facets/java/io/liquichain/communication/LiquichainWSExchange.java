@@ -63,6 +63,7 @@ public class LiquichainWSExchange extends Script {
       String account = (String)message.get("account");
       //TODO: verify signature
       session.getUserProperties().put("username", account);
+      websocketServerEndpoint.consumeUserMessages(session, "liquichain_"+account);
     }
   
   
