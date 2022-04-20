@@ -347,15 +347,16 @@ public class LiquichainTransaction extends Script {
             throw new BusinessException(TRANSACTION_FAILED);
         }
 
-        TransactionReceipt transactionReceipt = waitForTransactionReceipt(transactionHash);
+        // TransactionReceipt transactionReceipt = waitForTransactionReceipt(transactionHash);
 
-        String completedTransactionHash = transactionReceipt.getTransactionHash();
-        LOG.debug("completed transactionHash: {}", completedTransactionHash);
+        // String completedTransactionHash = transactionReceipt.getTransactionHash();
+        // LOG.debug("completed transactionHash: {}", completedTransactionHash);
 
         String data = String.format(TRANSACTION_DATA_FORMAT, type, description);
 
         Transaction transaction = new Transaction();
-        transaction.setHexHash(normalizeHash(completedTransactionHash));
+        // transaction.setHexHash(normalizeHash(completedTransactionHash));
+        transaction.setHexHash(normalizeHash(transactionHash));
         transaction.setFromHexHash(fromWallet.getUuid());
         transaction.setToHexHash(toWallet.getUuid());
         transaction.setNonce("" + nonce);
@@ -366,15 +367,17 @@ public class LiquichainTransaction extends Script {
         transaction.setType(type);
         transaction.setSignedHash(normalizeHash(encodedTransaction));
         transaction.setCreationDate(java.time.Instant.now());
-        transaction.setBlockNumber(normalizeHash(transactionReceipt.getBlockNumberRaw()));
-        transaction.setBlockHash(normalizeHash(transactionReceipt.getBlockHash()));
-        transaction.setTransactionIndex(transactionReceipt.getTransactionIndex().longValue());
+        // transaction.setBlockNumber(normalizeHash(transactionReceipt.getBlockNumberRaw()));
+        // transaction.setBlockHash(normalizeHash(transactionReceipt.getBlockHash()));
+        // transaction.setTransactionIndex(transactionReceipt.getTransactionIndex().longValue());
+        transaction.setBlockNumber("1");
+        transaction.setBlockHash("e8594f30d08b412027f4546506249d09134b9283530243e01e4cdbc34945bcf0"); 
 
         crossStorageApi.createOrUpdate(defaultRepo, transaction);
 
         updateWalletBalances(from, to);
 
-        return completedTransactionHash;
+        return transactionHash;
     }
 
     public String transferSmartContract(String from, String to, BigInteger amount,
@@ -410,11 +413,11 @@ public class LiquichainTransaction extends Script {
             throw new BusinessException(TRANSACTION_FAILED);
         }
 
-        TransactionReceipt transactionReceipt = waitForTransactionReceipt(transactionHash);
+        // TransactionReceipt transactionReceipt = waitForTransactionReceipt(transactionHash);
 
-        String completedTransactionHash = transactionReceipt.getTransactionHash();
-        LOG.info("completed transactionHash: {}", completedTransactionHash);
-        LOG.info("transactionReceipt: {}", transactionReceipt.toString());
+        // String completedTransactionHash = transactionReceipt.getTransactionHash();
+        // LOG.info("completed transactionHash: {}", completedTransactionHash);
+        // LOG.info("transactionReceipt: {}", transactionReceipt.toString());
 
         EthGetTransactionCount ethGetTransactionCount = web3j
                 .ethGetTransactionCount(credentials.getAddress(), LATEST)
@@ -429,7 +432,8 @@ public class LiquichainTransaction extends Script {
         String transactionData = String.format(TRANSACTION_DATA_FORMAT, type, description);
 
         Transaction transaction = new Transaction();
-        transaction.setHexHash(normalizeHash(completedTransactionHash));
+        // transaction.setHexHash(normalizeHash(completedTransactionHash));
+        transaction.setHexHash(normalizeHash(transactionHash));
         transaction.setFromHexHash(fromWallet.getUuid());
         transaction.setToHexHash(toWallet.getUuid());
         transaction.setNonce("" + nonce);
@@ -440,16 +444,18 @@ public class LiquichainTransaction extends Script {
         transaction.setType(type);
         transaction.setSignedHash(normalizeHash(encodedTransaction));
         transaction.setCreationDate(java.time.Instant.now());
-        transaction.setBlockNumber(normalizeHash(transactionReceipt.getBlockNumberRaw()));
-        transaction.setBlockHash(normalizeHash(transactionReceipt.getBlockHash()));
-        transaction.setTransactionIndex(transactionReceipt.getTransactionIndex().longValue());
+        // transaction.setBlockNumber(normalizeHash(transactionReceipt.getBlockNumberRaw()));
+        // transaction.setBlockHash(normalizeHash(transactionReceipt.getBlockHash()));
+        // transaction.setTransactionIndex(transactionReceipt.getTransactionIndex().longValue());
+        transaction.setBlockNumber("1");
+        transaction.setBlockHash("e8594f30d08b412027f4546506249d09134b9283530243e01e4cdbc34945bcf0");        
 
         crossStorageApi.createOrUpdate(defaultRepo, transaction);
 
         // updateWalletBalances(sender, recipient);
 
         try {
-            if (!completedTransactionHash.isEmpty()) {
+            if (!transactionHash.isEmpty()) {
                 cloudMessaging.setUserId(recipient);
                 cloudMessaging.setTitle("Telecel Play");
                 cloudMessaging.setBody(message);
@@ -459,7 +465,7 @@ public class LiquichainTransaction extends Script {
             LOG.warn("cannot send notification to {}: {}", to, message);
         }
 
-        return completedTransactionHash;
+        return transactionHash;
     }
 
     private String transferFabric(String from, String to, BigInteger amount,
