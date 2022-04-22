@@ -75,6 +75,7 @@ public class LiquichainTransaction extends Script {
     private BigInteger defaultGasPrice = new BigInteger(config.getProperty("besu.gas.price", "0"));
     private String smartContract = config
             .getProperty("besu.smart.contract", "0x0Cd07348D582a6F4A3641D3192f1f467586BE990");
+    private String APP_NAME = config.getProperty("eth.api.appname", "liquichain");
 
     private Web3j web3j = Web3j.build(new HttpService(besuApiUrl));
 
@@ -238,7 +239,7 @@ public class LiquichainTransaction extends Script {
     private String transferBesu(String from, String to, BigInteger amount,
             String type, String description) throws Exception {
         String sender = normalizeHash(from);
-        
+
         Wallet fromWallet = crossStorageApi.find(defaultRepo, sender, Wallet.class);
         String privateKey = fromWallet.getPrivateKey();
         BigInteger balance = BigInteger.ZERO;
@@ -451,7 +452,7 @@ public class LiquichainTransaction extends Script {
         try {
             if (!completedTransactionHash.isEmpty()) {
                 cloudMessaging.setUserId(recipient);
-                cloudMessaging.setTitle("Telecel Play");
+                cloudMessaging.setTitle(APP_NAME);
                 cloudMessaging.setBody(message);
                 cloudMessaging.execute(null);
             }
@@ -541,6 +542,7 @@ public class LiquichainTransaction extends Script {
         }
     }
 }
+
 
 class HttpService extends Service {
 
