@@ -432,6 +432,7 @@ public class LiquichainTransaction extends Script {
         String transactionData = String.format(TRANSACTION_DATA_FORMAT, type, description);
 
         Transaction transaction = new Transaction();
+        // transaction.setHexHash(normalizeHash(completedTransactionHash));
         transaction.setHexHash(normalizeHash(transactionHash));
         transaction.setFromHexHash(fromWallet.getUuid());
         transaction.setToHexHash(toWallet.getUuid());

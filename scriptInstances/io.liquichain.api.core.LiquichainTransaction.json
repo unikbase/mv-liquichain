@@ -26,5 +26,9 @@
     "version" : "4.8.9",
     "coordinates" : "org.web3j:crypto:4.8.9"
   } ],
-  "importScriptInstances" : [ "io.liquichain.core.BlockForgerScript", "org.meveo.firebase.CloudMessaging" ]
+  "importScriptInstances" : [
+    "io.liquichain.core.BlockForgerScript",
+    "org.meveo.firebase.CloudMessaging",
+    "org.meveo.credentials.CredentialHelperService"
+  ]
 }
