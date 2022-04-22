@@ -21,6 +21,6 @@
   "summary" : true,
   "audited" : false,
   "persisted" : true,
-  "unique" : true,
-  "filter" : true
+  "filter" : true,
+  "unique" : true
 }
