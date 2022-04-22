@@ -29,6 +29,17 @@
             "type": "string",
             "maxLength": 255
         },
+        "description": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "description",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_LiquichainApp_description",
+            "title": "LiquichainApp.description",
+            "type": "string",
+            "maxLength": 1000
+        },
         "registrationRules": {
             "storages": ["SQL"],
             "nullable": true,
