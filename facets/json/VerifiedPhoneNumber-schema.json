@@ -29,6 +29,17 @@
             "title": "VerifiedPhoneNumber.phoneNumber",
             "type": "string",
             "maxLength": 255
+        },
+        "verified": {
+            "storages": ["SQL"],
+            "default": "false",
+            "nullable": true,
+            "description": "Verified",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_VerifiedPhoneNumber_verified",
+            "title": "VerifiedPhoneNumber.verified",
+            "type": "string"
         }
     },
     "required": [
