@@ -21,6 +21,9 @@ public class VerifiedPhoneNumber implements CustomEntity {
     private DBStorageType storages;
 
     @JsonProperty(required = true)
+    private String walletId;
+
+    @JsonProperty(required = true)
     private String phoneNumber;
 
     @Override()
@@ -38,6 +41,14 @@ public class VerifiedPhoneNumber implements CustomEntity {
 
     public void setStorages(DBStorageType storages) {
         this.storages = storages;
+    }
+
+    public String getWalletId() {
+        return walletId;
+    }
+
+    public void setWalletId(String walletId) {
+        this.walletId = walletId;
     }
 
     public String getPhoneNumber() {
