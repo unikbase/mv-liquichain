@@ -25,6 +25,14 @@ public class Wallet implements CustomEntity {
 
     private String accountHash;
 
+    private String publicInfo;
+
+    private Boolean verified;
+
+    private String applicationInstanceUUID;
+
+    private String publicKey;
+
     private String privateKey;
 
     private VerifiedEmail emailAddress;
@@ -41,13 +49,7 @@ public class Wallet implements CustomEntity {
     @JsonProperty(required = true)
     private String name;
 
-    private String publicInfo;
-
-    private Boolean verified;
-
     private String keyPair;
-
-    private String publicKey;
 
     @Override()
     public String getUuid() {
@@ -72,6 +74,38 @@ public class Wallet implements CustomEntity {
 
     public void setAccountHash(String accountHash) {
         this.accountHash = accountHash;
+    }
+
+    public String getPublicInfo() {
+        return publicInfo;
+    }
+
+    public void setPublicInfo(String publicInfo) {
+        this.publicInfo = publicInfo;
+    }
+
+    public Boolean getVerified() {
+        return verified;
+    }
+
+    public void setVerified(Boolean verified) {
+        this.verified = verified;
+    }
+
+    public String getApplicationInstanceUUID() {
+        return applicationInstanceUUID;
+    }
+
+    public void setApplicationInstanceUUID(String applicationInstanceUUID) {
+        this.applicationInstanceUUID = applicationInstanceUUID;
+    }
+
+    public String getPublicKey() {
+        return publicKey;
+    }
+
+    public void setPublicKey(String publicKey) {
+        this.publicKey = publicKey;
     }
 
     public String getPrivateKey() {
@@ -130,36 +164,12 @@ public class Wallet implements CustomEntity {
         this.name = name;
     }
 
-    public String getPublicInfo() {
-        return publicInfo;
-    }
-
-    public void setPublicInfo(String publicInfo) {
-        this.publicInfo = publicInfo;
-    }
-
-    public Boolean getVerified() {
-        return verified;
-    }
-
-    public void setVerified(Boolean verified) {
-        this.verified = verified;
-    }
-
     public String getKeyPair() {
         return keyPair;
     }
 
     public void setKeyPair(String keyPair) {
         this.keyPair = keyPair;
-    }
-
-    public String getPublicKey() {
-        return publicKey;
-    }
-
-    public void setPublicKey(String publicKey) {
-        this.publicKey = publicKey;
     }
 
     @Override()
