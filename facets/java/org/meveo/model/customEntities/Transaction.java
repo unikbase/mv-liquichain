@@ -39,6 +39,8 @@ public class Transaction implements CustomEntity {
 
     private String nonce;
 
+    private String webhookUrl;
+
     private String gasLimit;
 
     private String r;
@@ -152,6 +154,14 @@ public class Transaction implements CustomEntity {
 
     public void setNonce(String nonce) {
         this.nonce = nonce;
+    }
+
+    public String getWebhookUrl() {
+        return webhookUrl;
+    }
+
+    public void setWebhookUrl(String webhookUrl) {
+        this.webhookUrl = webhookUrl;
     }
 
     public String getGasLimit() {
