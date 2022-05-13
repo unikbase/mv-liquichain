@@ -18,6 +18,17 @@
             "type": "string",
             "maxLength": 64
         },
+        "metadata": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "Metadata",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Transaction_metadata",
+            "title": "Transaction.metadata",
+            "type": "string",
+            "maxLength": 255
+        },
         "redirectUrl": {
             "storages": ["SQL"],
             "nullable": true,
