@@ -23,6 +23,8 @@ public class Transaction implements CustomEntity {
 
     private String blockHash;
 
+    private String redirectUrl;
+
     private String data;
 
     private String nodeSignature;
@@ -86,6 +88,14 @@ public class Transaction implements CustomEntity {
 
     public void setBlockHash(String blockHash) {
         this.blockHash = blockHash;
+    }
+
+    public String getRedirectUrl() {
+        return redirectUrl;
+    }
+
+    public void setRedirectUrl(String redirectUrl) {
+        this.redirectUrl = redirectUrl;
     }
 
     public String getData() {
