@@ -18,6 +18,17 @@
             "type": "string",
             "maxLength": 64
         },
+        "redirectUrl": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "Redirect URL",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Transaction_redirectUrl",
+            "title": "Transaction.redirectUrl",
+            "type": "string",
+            "maxLength": 255
+        },
         "data": {
             "storages": ["SQL"],
             "indexType": "INDEX_NOT_ANALYZE",
