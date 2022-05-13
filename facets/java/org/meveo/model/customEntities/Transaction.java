@@ -33,6 +33,8 @@ public class Transaction implements CustomEntity {
 
     private String fromHexHash;
 
+    private String description;
+
     private Long transactionIndex;
 
     private Instant creationDate;
@@ -132,6 +134,14 @@ public class Transaction implements CustomEntity {
 
     public void setFromHexHash(String fromHexHash) {
         this.fromHexHash = fromHexHash;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Long getTransactionIndex() {
