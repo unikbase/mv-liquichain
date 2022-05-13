@@ -59,6 +59,8 @@ public class Transaction implements CustomEntity {
 
     private String value;
 
+    private Instant expirationDate;
+
     private String gasPrice;
 
     @Override()
@@ -220,6 +222,14 @@ public class Transaction implements CustomEntity {
 
     public void setValue(String value) {
         this.value = value;
+    }
+
+    public Instant getExpirationDate() {
+        return expirationDate;
+    }
+
+    public void setExpirationDate(Instant expirationDate) {
+        this.expirationDate = expirationDate;
     }
 
     public String getGasPrice() {
