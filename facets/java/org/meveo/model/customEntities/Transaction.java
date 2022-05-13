@@ -23,6 +23,8 @@ public class Transaction implements CustomEntity {
 
     private String blockHash;
 
+    private String metadata;
+
     private String redirectUrl;
 
     private String data;
@@ -90,6 +92,14 @@ public class Transaction implements CustomEntity {
 
     public void setBlockHash(String blockHash) {
         this.blockHash = blockHash;
+    }
+
+    public String getMetadata() {
+        return metadata;
+    }
+
+    public void setMetadata(String metadata) {
+        this.metadata = metadata;
     }
 
     public String getRedirectUrl() {
