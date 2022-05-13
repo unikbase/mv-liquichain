@@ -112,6 +112,17 @@
             "type": "string",
             "maxLength": 255
         },
+        "webhookUrl": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "Webhook URL",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Transaction_webhookUrl",
+            "title": "Transaction.webhookUrl",
+            "type": "string",
+            "maxLength": 255
+        },
         "gasLimit": {
             "storages": ["SQL"],
             "indexType": "INDEX_NOT_ANALYZE",
