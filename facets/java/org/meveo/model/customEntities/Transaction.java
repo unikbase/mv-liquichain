@@ -55,6 +55,8 @@ public class Transaction implements CustomEntity {
     @JsonProperty(required = true)
     private String signedHash;
 
+    private String currency;
+
     private String value;
 
     private String gasPrice;
@@ -202,6 +204,14 @@ public class Transaction implements CustomEntity {
 
     public void setSignedHash(String signedHash) {
         this.signedHash = signedHash;
+    }
+
+    public String getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
     }
 
     public String getValue() {
