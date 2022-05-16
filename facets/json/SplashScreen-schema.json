@@ -1,0 +1,56 @@
+{
+    "storages": ["SQL"],
+    "default": "Splash screen content",
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "id": "SplashScreen",
+    "title": "Splash Screen",
+    "type": "object",
+    "properties": {
+        "image": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "Image",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_SplashScreen_image",
+            "title": "SplashScreen.image",
+            "type": "string"
+        },
+        "title": {
+            "storages": ["SQL"],
+            "nullable": false,
+            "minLength": 1,
+            "description": "Title",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_SplashScreen_title",
+            "title": "SplashScreen.title",
+            "type": "string",
+            "maxLength": 255
+        },
+        "content": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "Content",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_SplashScreen_content",
+            "title": "SplashScreen.content",
+            "type": "string"
+        },
+        "order": {
+            "storages": ["SQL"],
+            "nullable": false,
+            "description": "Order",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_SplashScreen_order",
+            "title": "SplashScreen.order",
+            "type": "integer"
+        }
+    },
+    "required": [
+        "order",
+        "title"
+    ]
+}

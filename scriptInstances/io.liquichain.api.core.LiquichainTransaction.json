@@ -1,0 +1,30 @@
+{
+  "code" : "io.liquichain.api.core.LiquichainTransaction",
+  "description" : "perform transaction from internal accounts",
+  "inputs" : [ {
+    "name" : "fromAddress",
+    "type" : "String"
+  }, {
+    "name" : "toAddress",
+    "type" : "String"
+  }, {
+    "name" : "value",
+    "type" : "String"
+  } ],
+  "outputs" : [ {
+    "name" : "result",
+    "type" : "String"
+  } ],
+  "generateOutputs" : false,
+  "type" : "JAVA",
+  "transactionType" : "NONE",
+  "executionRoles" : [ ],
+  "sourcingRoles" : [ ],
+  "mavenDependencies" : [ {
+    "groupId" : "org.web3j",
+    "artifactId" : "crypto",
+    "version" : "4.8.9",
+    "coordinates" : "org.web3j:crypto:4.8.9"
+  } ],
+  "importScriptInstances" : [ "io.liquichain.core.BlockForgerScript", "org.meveo.firebase.CloudMessaging" ]
+}
