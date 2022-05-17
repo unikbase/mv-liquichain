@@ -23,6 +23,8 @@ public class Transaction implements CustomEntity {
 
     private String metadata;
 
+    private String toHexHash;
+
     private String s;
 
     private String fromHexHash;
@@ -57,6 +59,14 @@ public class Transaction implements CustomEntity {
 
     public void setMetadata(String metadata) {
         this.metadata = metadata;
+    }
+
+    public String getToHexHash() {
+        return toHexHash;
+    }
+
+    public void setToHexHash(String toHexHash) {
+        this.toHexHash = toHexHash;
     }
 
     public String getS() {
