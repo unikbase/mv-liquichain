@@ -5,6 +5,7 @@ import java.util.List;
 import org.meveo.model.persistence.DBStorageType;
 import org.meveo.model.customEntities.VerifiedPhoneNumber;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.meveo.model.customEntities.LiquichainApp;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class Wallet implements CustomEntity {
@@ -22,6 +23,9 @@ public class Wallet implements CustomEntity {
     private DBStorageType storages;
 
     private VerifiedPhoneNumber phoneNumber;
+
+    @JsonProperty(required = true)
+    private LiquichainApp application;
 
     @JsonProperty(required = true)
     private String name;
@@ -51,6 +55,14 @@ public class Wallet implements CustomEntity {
 
     public void setPhoneNumber(VerifiedPhoneNumber phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public LiquichainApp getApplication() {
+        return application;
+    }
+
+    public void setApplication(LiquichainApp application) {
+        this.application = application;
     }
 
     public String getName() {
