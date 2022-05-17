@@ -75,6 +75,18 @@
             "type": "string",
             "maxLength": 20
         },
+        "gasLimit": {
+            "storages": ["SQL"],
+            "indexType": "INDEX_NOT_ANALYZE",
+            "nullable": true,
+            "description": "gas limit",
+            "readOnly": true,
+            "versionable": false,
+            "id": "CE_Transaction_gasLimit",
+            "title": "Transaction.gasLimit",
+            "type": "string",
+            "maxLength": 255
+        },
         "toHexHash": {
             "storages": ["SQL"],
             "indexType": "INDEX_NOT_ANALYZE",
