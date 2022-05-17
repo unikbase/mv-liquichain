@@ -52,6 +52,17 @@
             "type": "string",
             "maxLength": 40
         },
+        "description": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "Description",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Transaction_description",
+            "title": "Transaction.description",
+            "type": "string",
+            "maxLength": 255
+        },
         "transactionIndex": {
             "storages": ["SQL"],
             "indexType": "INDEX_NOT_ANALYZE",
