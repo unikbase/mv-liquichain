@@ -52,6 +52,18 @@
             "type": "string",
             "maxLength": 40
         },
+        "transactionIndex": {
+            "storages": ["SQL"],
+            "indexType": "INDEX_NOT_ANALYZE",
+            "nullable": true,
+            "description": "transaction index",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Transaction_transactionIndex",
+            "title": "Transaction.transactionIndex",
+            "type": "integer",
+            "minimum": 0
+        },
         "creationDate": {
             "storages": ["SQL"],
             "indexType": "INDEX_NOT_ANALYZE",
