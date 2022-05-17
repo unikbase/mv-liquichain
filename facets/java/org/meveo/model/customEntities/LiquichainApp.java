@@ -36,6 +36,8 @@ public class LiquichainApp implements CustomEntity {
 
     private Instant creationDate;
 
+    private String version;
+
     @JsonProperty(required = true)
     private String shortCode;
 
@@ -110,6 +112,14 @@ public class LiquichainApp implements CustomEntity {
 
     public void setCreationDate(Instant creationDate) {
         this.creationDate = creationDate;
+    }
+
+    public String getVersion() {
+        return version;
+    }
+
+    public void setVersion(String version) {
+        this.version = version;
     }
 
     public String getShortCode() {
