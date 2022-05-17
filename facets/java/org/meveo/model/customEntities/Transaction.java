@@ -42,6 +42,8 @@ public class Transaction implements CustomEntity {
 
     private Instant expirationDate;
 
+    private String gasPrice;
+
     @Override()
     public String getUuid() {
         return uuid;
@@ -137,6 +139,14 @@ public class Transaction implements CustomEntity {
 
     public void setExpirationDate(Instant expirationDate) {
         this.expirationDate = expirationDate;
+    }
+
+    public String getGasPrice() {
+        return gasPrice;
+    }
+
+    public void setGasPrice(String gasPrice) {
+        this.gasPrice = gasPrice;
     }
 
     @Override()
