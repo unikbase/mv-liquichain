@@ -3,8 +3,8 @@ package org.meveo.model.customEntities;
 import org.meveo.model.CustomEntity;
 import java.util.List;
 import org.meveo.model.persistence.DBStorageType;
-import java.time.Instant;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.time.Instant;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class Transaction implements CustomEntity {
@@ -25,6 +25,8 @@ public class Transaction implements CustomEntity {
 
     private String metadata;
 
+    private String redirectUrl;
+
     private String data;
 
     private String nodeSignature;
@@ -37,25 +39,9 @@ public class Transaction implements CustomEntity {
 
     private Long transactionIndex;
 
-    private Instant creationDate;
-
     private String type;
 
-    private String nonce;
-
-    private String webhookUrl;
-
     private String gasLimit;
-
-    private String r;
-
-    private String toHexHash;
-
-    private String s;
-
-    private String v;
-
-    private String blockNumber;
 
     @JsonProperty(required = true)
     private String hexHash;
@@ -70,6 +56,22 @@ public class Transaction implements CustomEntity {
     private Instant expirationDate;
 
     private String gasPrice;
+
+    private Instant creationDate;
+
+    private String nonce;
+
+    private String webhookUrl;
+
+    private String r;
+
+    private String toHexHash;
+
+    private String s;
+
+    private String v;
+
+    private String blockNumber;
 
     @Override()
     public String getUuid() {
@@ -102,6 +104,14 @@ public class Transaction implements CustomEntity {
 
     public void setMetadata(String metadata) {
         this.metadata = metadata;
+    }
+
+    public String getRedirectUrl() {
+        return redirectUrl;
+    }
+
+    public void setRedirectUrl(String redirectUrl) {
+        this.redirectUrl = redirectUrl;
     }
 
     public String getData() {
@@ -152,14 +162,6 @@ public class Transaction implements CustomEntity {
         this.transactionIndex = transactionIndex;
     }
 
-    public Instant getCreationDate() {
-        return creationDate;
-    }
-
-    public void setCreationDate(Instant creationDate) {
-        this.creationDate = creationDate;
-    }
-
     public String getType() {
         return type;
     }
@@ -168,68 +170,12 @@ public class Transaction implements CustomEntity {
         this.type = type;
     }
 
-    public String getNonce() {
-        return nonce;
-    }
-
-    public void setNonce(String nonce) {
-        this.nonce = nonce;
-    }
-
-    public String getWebhookUrl() {
-        return webhookUrl;
-    }
-
-    public void setWebhookUrl(String webhookUrl) {
-        this.webhookUrl = webhookUrl;
-    }
-
     public String getGasLimit() {
         return gasLimit;
     }
 
     public void setGasLimit(String gasLimit) {
         this.gasLimit = gasLimit;
-    }
-
-    public String getR() {
-        return r;
-    }
-
-    public void setR(String r) {
-        this.r = r;
-    }
-
-    public String getToHexHash() {
-        return toHexHash;
-    }
-
-    public void setToHexHash(String toHexHash) {
-        this.toHexHash = toHexHash;
-    }
-
-    public String getS() {
-        return s;
-    }
-
-    public void setS(String s) {
-        this.s = s;
-    }
-
-    public String getV() {
-        return v;
-    }
-
-    public void setV(String v) {
-        this.v = v;
-    }
-
-    public String getBlockNumber() {
-        return blockNumber;
-    }
-
-    public void setBlockNumber(String blockNumber) {
-        this.blockNumber = blockNumber;
     }
 
     public String getHexHash() {
@@ -278,6 +224,70 @@ public class Transaction implements CustomEntity {
 
     public void setGasPrice(String gasPrice) {
         this.gasPrice = gasPrice;
+    }
+
+    public Instant getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(Instant creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    public String getNonce() {
+        return nonce;
+    }
+
+    public void setNonce(String nonce) {
+        this.nonce = nonce;
+    }
+
+    public String getWebhookUrl() {
+        return webhookUrl;
+    }
+
+    public void setWebhookUrl(String webhookUrl) {
+        this.webhookUrl = webhookUrl;
+    }
+
+    public String getR() {
+        return r;
+    }
+
+    public void setR(String r) {
+        this.r = r;
+    }
+
+    public String getToHexHash() {
+        return toHexHash;
+    }
+
+    public void setToHexHash(String toHexHash) {
+        this.toHexHash = toHexHash;
+    }
+
+    public String getS() {
+        return s;
+    }
+
+    public void setS(String s) {
+        this.s = s;
+    }
+
+    public String getV() {
+        return v;
+    }
+
+    public void setV(String v) {
+        this.v = v;
+    }
+
+    public String getBlockNumber() {
+        return blockNumber;
+    }
+
+    public void setBlockNumber(String blockNumber) {
+        this.blockNumber = blockNumber;
     }
 
     @Override()
