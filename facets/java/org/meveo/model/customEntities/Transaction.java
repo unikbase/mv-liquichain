@@ -20,6 +20,8 @@ public class Transaction implements CustomEntity {
     @JsonIgnore()
     private DBStorageType storages;
 
+    private String s;
+
     private String fromHexHash;
 
     @JsonProperty(required = true)
@@ -42,6 +44,14 @@ public class Transaction implements CustomEntity {
 
     public void setStorages(DBStorageType storages) {
         this.storages = storages;
+    }
+
+    public String getS() {
+        return s;
+    }
+
+    public void setS(String s) {
+        this.s = s;
     }
 
     public String getFromHexHash() {
