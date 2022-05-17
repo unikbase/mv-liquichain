@@ -50,7 +50,22 @@
             "id": "CE_LiquichainApp_creationDate",
             "title": "LiquichainApp.creationDate",
             "type": "string"
+        },
+        "shortCode": {
+            "storages": ["SQL"],
+            "nullable": false,
+            "minLength": 1,
+            "description": "Short code",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_LiquichainApp_shortCode",
+            "title": "LiquichainApp.shortCode",
+            "type": "string",
+            "maxLength": 5
         }
     },
-    "required": ["name"]
+    "required": [
+        "name",
+        "shortCode"
+    ]
 }
