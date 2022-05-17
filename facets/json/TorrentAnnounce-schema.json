@@ -59,6 +59,17 @@
             "title": "TorrentAnnounce.left",
             "type": "integer"
         },
+        "ip": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "IP",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_TorrentAnnounce_ip",
+            "title": "TorrentAnnounce.ip",
+            "type": "string",
+            "maxLength": 50
+        },
         "uploaded": {
             "storages": ["SQL"],
             "nullable": true,
