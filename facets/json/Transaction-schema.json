@@ -6,6 +6,18 @@
     "title": "Transaction",
     "type": "object",
     "properties": {
+        "fromHexHash": {
+            "storages": ["SQL"],
+            "indexType": "INDEX_NOT_ANALYZE",
+            "nullable": true,
+            "description": "Origin account",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Transaction_fromHexHash",
+            "title": "Transaction.fromHexHash",
+            "type": "string",
+            "maxLength": 40
+        },
         "signedHash": {
             "storages": ["SQL"],
             "indexType": "INDEX_NOT_ANALYZE",
