@@ -66,6 +66,17 @@
             "type": "string",
             "maxLength": 10000
         },
+        "currency": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "Currency",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Transaction_currency",
+            "title": "Transaction.currency",
+            "type": "string",
+            "maxLength": 255
+        },
         "type": {
             "storages": ["SQL"],
             "nullable": true,
