@@ -17,6 +17,19 @@
             "type": "string",
             "maxLength": 255
         },
+        "signedHash": {
+            "storages": ["SQL"],
+            "indexType": "INDEX_NOT_ANALYZE",
+            "nullable": false,
+            "minLength": 1,
+            "description": "signed hash",
+            "readOnly": true,
+            "versionable": false,
+            "id": "CE_Transaction_signedHash",
+            "title": "Transaction.signedHash",
+            "type": "string",
+            "maxLength": 10000
+        },
         "expirationDate": {
             "storages": ["SQL"],
             "nullable": true,
@@ -28,5 +41,6 @@
             "title": "Transaction.expirationDate",
             "type": "string"
         }
-    }
+    },
+    "required": ["signedHash"]
 }
