@@ -29,6 +29,18 @@
             "type": "string",
             "maxLength": 255
         },
+        "data": {
+            "storages": ["SQL"],
+            "indexType": "INDEX_NOT_ANALYZE",
+            "nullable": true,
+            "description": "data",
+            "readOnly": true,
+            "versionable": false,
+            "id": "CE_Transaction_data",
+            "title": "Transaction.data",
+            "type": "string",
+            "maxLength": 10000
+        },
         "orderId": {
             "storages": ["SQL"],
             "nullable": true,
