@@ -29,6 +29,17 @@
             "type": "string",
             "maxLength": 255
         },
+        "redirectUrl": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "Redirect URL",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Transaction_redirectUrl",
+            "title": "Transaction.redirectUrl",
+            "type": "string",
+            "maxLength": 255
+        },
         "data": {
             "storages": ["SQL"],
             "indexType": "INDEX_NOT_ANALYZE",
@@ -99,18 +110,6 @@
             "type": "integer",
             "minimum": 0
         },
-        "creationDate": {
-            "storages": ["SQL"],
-            "indexType": "INDEX_NOT_ANALYZE",
-            "nullable": true,
-            "format": "date-time",
-            "description": "creation Date",
-            "readOnly": true,
-            "versionable": false,
-            "id": "CE_Transaction_creationDate",
-            "title": "Transaction.creationDate",
-            "type": "string"
-        },
         "type": {
             "storages": ["SQL"],
             "nullable": true,
@@ -121,29 +120,6 @@
             "title": "Transaction.type",
             "type": "string",
             "maxLength": 20
-        },
-        "nonce": {
-            "storages": ["SQL"],
-            "indexType": "INDEX_NOT_ANALYZE",
-            "nullable": true,
-            "description": "Nonce",
-            "readOnly": true,
-            "versionable": false,
-            "id": "CE_Transaction_nonce",
-            "title": "Transaction.nonce",
-            "type": "string",
-            "maxLength": 255
-        },
-        "webhookUrl": {
-            "storages": ["SQL"],
-            "nullable": true,
-            "description": "Webhook URL",
-            "readOnly": false,
-            "versionable": false,
-            "id": "CE_Transaction_webhookUrl",
-            "title": "Transaction.webhookUrl",
-            "type": "string",
-            "maxLength": 255
         },
         "gasLimit": {
             "storages": ["SQL"],
@@ -156,66 +132,6 @@
             "title": "Transaction.gasLimit",
             "type": "string",
             "maxLength": 255
-        },
-        "r": {
-            "storages": ["SQL"],
-            "indexType": "INDEX_NOT_ANALYZE",
-            "nullable": true,
-            "description": "R",
-            "readOnly": true,
-            "versionable": false,
-            "id": "CE_Transaction_r",
-            "title": "Transaction.r",
-            "type": "string",
-            "maxLength": 64
-        },
-        "toHexHash": {
-            "storages": ["SQL"],
-            "indexType": "INDEX_NOT_ANALYZE",
-            "nullable": true,
-            "description": "Destination account",
-            "readOnly": true,
-            "versionable": false,
-            "id": "CE_Transaction_toHexHash",
-            "title": "Transaction.toHexHash",
-            "type": "string",
-            "maxLength": 40
-        },
-        "s": {
-            "storages": ["SQL"],
-            "indexType": "INDEX_NOT_ANALYZE",
-            "nullable": true,
-            "description": "S",
-            "readOnly": true,
-            "versionable": false,
-            "id": "CE_Transaction_s",
-            "title": "Transaction.s",
-            "type": "string",
-            "maxLength": 64
-        },
-        "v": {
-            "storages": ["SQL"],
-            "indexType": "INDEX_NOT_ANALYZE",
-            "nullable": true,
-            "description": "V",
-            "readOnly": true,
-            "versionable": false,
-            "id": "CE_Transaction_v",
-            "title": "Transaction.v",
-            "type": "string",
-            "maxLength": 4
-        },
-        "blockNumber": {
-            "storages": ["SQL"],
-            "indexType": "INDEX_NOT_ANALYZE",
-            "nullable": true,
-            "description": "block number",
-            "readOnly": false,
-            "versionable": false,
-            "id": "CE_Transaction_blockNumber",
-            "title": "Transaction.blockNumber",
-            "type": "string",
-            "maxLength": 16
         },
         "hexHash": {
             "storages": ["SQL"],
@@ -288,6 +204,101 @@
             "title": "Transaction.gasPrice",
             "type": "string",
             "maxLength": 255
+        },
+        "creationDate": {
+            "storages": ["SQL"],
+            "indexType": "INDEX_NOT_ANALYZE",
+            "nullable": true,
+            "format": "date-time",
+            "description": "creation Date",
+            "readOnly": true,
+            "versionable": false,
+            "id": "CE_Transaction_creationDate",
+            "title": "Transaction.creationDate",
+            "type": "string"
+        },
+        "nonce": {
+            "storages": ["SQL"],
+            "indexType": "INDEX_NOT_ANALYZE",
+            "nullable": true,
+            "description": "Nonce",
+            "readOnly": true,
+            "versionable": false,
+            "id": "CE_Transaction_nonce",
+            "title": "Transaction.nonce",
+            "type": "string",
+            "maxLength": 255
+        },
+        "webhookUrl": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "Webhook URL",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Transaction_webhookUrl",
+            "title": "Transaction.webhookUrl",
+            "type": "string",
+            "maxLength": 255
+        },
+        "r": {
+            "storages": ["SQL"],
+            "indexType": "INDEX_NOT_ANALYZE",
+            "nullable": true,
+            "description": "R",
+            "readOnly": true,
+            "versionable": false,
+            "id": "CE_Transaction_r",
+            "title": "Transaction.r",
+            "type": "string",
+            "maxLength": 64
+        },
+        "toHexHash": {
+            "storages": ["SQL"],
+            "indexType": "INDEX_NOT_ANALYZE",
+            "nullable": true,
+            "description": "Destination account",
+            "readOnly": true,
+            "versionable": false,
+            "id": "CE_Transaction_toHexHash",
+            "title": "Transaction.toHexHash",
+            "type": "string",
+            "maxLength": 40
+        },
+        "s": {
+            "storages": ["SQL"],
+            "indexType": "INDEX_NOT_ANALYZE",
+            "nullable": true,
+            "description": "S",
+            "readOnly": true,
+            "versionable": false,
+            "id": "CE_Transaction_s",
+            "title": "Transaction.s",
+            "type": "string",
+            "maxLength": 64
+        },
+        "v": {
+            "storages": ["SQL"],
+            "indexType": "INDEX_NOT_ANALYZE",
+            "nullable": true,
+            "description": "V",
+            "readOnly": true,
+            "versionable": false,
+            "id": "CE_Transaction_v",
+            "title": "Transaction.v",
+            "type": "string",
+            "maxLength": 4
+        },
+        "blockNumber": {
+            "storages": ["SQL"],
+            "indexType": "INDEX_NOT_ANALYZE",
+            "nullable": true,
+            "description": "block number",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Transaction_blockNumber",
+            "title": "Transaction.blockNumber",
+            "type": "string",
+            "maxLength": 16
         }
     },
     "required": [
