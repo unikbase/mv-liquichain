@@ -27,6 +27,17 @@
             "title": "Block.parentHash",
             "type": "string",
             "maxLength": 64
+        },
+        "hash": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "hash",
+            "readOnly": true,
+            "versionable": false,
+            "id": "CE_Block_hash",
+            "title": "Block.hash",
+            "type": "string",
+            "maxLength": 64
         }
     }
 }
