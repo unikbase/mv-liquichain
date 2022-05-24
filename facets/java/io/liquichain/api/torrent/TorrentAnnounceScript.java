@@ -36,7 +36,6 @@ import org.meveo.api.exception.EntityDoesNotExistsException;
 
 import javax.enterprise.context.ApplicationScoped;
 
-@ApplicationScoped
 public class TorrentAnnounceScript extends Script {
 
   private static final Logger log = LoggerFactory.getLogger(TorrentAnnounceScript.class);
@@ -179,8 +178,13 @@ public class TorrentAnnounceScript extends Script {
         if (info_hash.length() != 40) {
           String infoHash = param.substring(10);
           try {
-            infoHash = URLDecoder.decode(infoHash, "ISO-8859-1");
-            info_hash = String.format("%x", new BigInteger(1, infoHash.getBytes()));
+            char[] chars = URLDecoder.decode(infoHash, "ISO-8859-1").toCharArray();
+            StringBuilder sb = new StringBuilder("");
+            for(int i = 0;i<chars.length;i++)
+            {
+                 sb.append(Integer.toHexString(chars[i]));        
+            }
+            info_hash=sb.toString();
             log.info("info_hash={}", info_hash);
           } catch (Exception e) {
             e.printStackTrace();
@@ -189,10 +193,15 @@ public class TorrentAnnounceScript extends Script {
       }
       if (param.startsWith("peer_id=")) {
         if (peer_id.length() != 40) {
-          String peerId = param.substring(10);
+          String peerId = param.substring(8);
           try {
-            peerId = URLDecoder.decode(peerId, "ISO-8859-1");
-            peer_id = String.format("%x", new BigInteger(1, peerId.getBytes()));
+            char[] chars = URLDecoder.decode(peerId, "ISO-8859-1").toCharArray();
+            StringBuilder sb = new StringBuilder("");
+            for(int i = 0;i<chars.length;i++)
+            {
+                 sb.append(Integer.toHexString(chars[i]));        
+            }
+            peer_id=sb.toString();
             log.info("peer_id={}", peer_id);
           } catch (Exception e) {
             e.printStackTrace();
@@ -203,8 +212,13 @@ public class TorrentAnnounceScript extends Script {
         if (wallet_id.length() != 40) {
           String walletId = param.substring(10);
           try {
-            walletId = URLDecoder.decode(walletId, "ISO-8859-1");
-            wallet_id = String.format("%x", new BigInteger(1, walletId.getBytes()));
+            char[] chars = URLDecoder.decode(walletId, "ISO-8859-1").toCharArray();
+            StringBuilder sb = new StringBuilder("");
+            for(int i = 0;i<chars.length;i++)
+            {
+                 sb.append(Integer.toHexString(chars[i]));        
+            }
+            wallet_id=sb.toString();
             log.info("wallet_id={}", wallet_id);
           } catch (Exception e) {
             e.printStackTrace();
