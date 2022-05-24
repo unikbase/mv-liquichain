@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<header>
+    <title>Tracker Mngr</title>
+</header>
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    .content {
+        display: flex;
+        background-color: beige;
+        border-radius: 3px;
+        padding: 1.8em;
+    }
+
+    .form {
+        flex: 1;
+        order: 1;
+        margin-right: 2em;
+    }
+
+    .form input {
+        width: 100%;
+    }
+
+    .form input,
+    .form button {
+        padding: 1em;
+        margin-bottom: 1em;
+    }
+
+    .form button {
+        background: gray;
+        color: white;
+        border: 0;
+    }
+</style>
+<div class="content">
+<div class="form">
+    <label for="tracker_url">Tracker url</label>
+    <input type="text" id="tracker_url" value="https://dev.telecelplay.io/meveo/rest/announce" />
+
+    <label for="info_hash">Info hash</label>
+    <input type="text" id="info_hash" placeholder="Info hash" value="5319a58970b3cb6297fd4c26ee95c1e7a0fc0621" />
+
+    <label for="peer_id">Peer Id</label>
+    <input type="text" id="peer_id" placeholder="Peer Id" value="3d6cd565ace5dc8e61c1d3a93ea0e4f8f2e81f06" />
+
+    <label for="port">Port</label>
+    <input type="text" id="port" placeholder="Port" value="6881" />
+
+    <input type="button" id="send_announce" value="Send">
+
+</div>
+</div>
+
+
+<script>
+    function encodeHex(hash){
+        let result=hash.replace(/.{2}/g, function(m) {
+        var v = parseInt(m, 16);
+        if (v <= 127) {
+            m = encodeURIComponent(String.fromCharCode(v));
+            if (m[0] === '%')
+                m = m.toLowerCase();
+        } else
+            m = '%' + m;
+        return m;
+        });
+        console.log("hash "+hash+"=>"+result);
+        return result;
+    }
+
+    var url = null;
+
+    let trackerUrlElmt = document.getElementById("tracker_url");
+    let sendAnnounceElmt = document.getElementById("send_announce");
+    trackerUrlElmt.addEventListener("change", (e) => {
+        try {
+            url = new URL(e.srcElement.value);
+            console.log("tracker url:" + trackerUrl);
+        } catch (_) {
+            alert("invalid tracker url");
+        }
+    });
+    sendAnnounceElmt.addEventListener("click", async (e) => {
+        console.log("send announce request");
+        url = new URL(trackerUrlElmt.value);
+        let info_hash = document.getElementById("info_hash").value;
+        let peer_id = document.getElementById("peer_id").value; 
+        url.searchParams.append("port", parseInt(document.getElementById("port").value)); 
+        url.searchParams.append("downloaded", 0); 
+        url.searchParams.append("uploaded", 0); 
+        url.searchParams.append("left", 0); 
+        url+="&info_hash="+encodeHex(info_hash);
+        url+="&peer_id="+encodeHex(peer_id);
+        console.log("calling url:"+url);
+        try {
+            let response = await fetch(url);
+            console.log(response.status); // 200
+            console.log(response.statusText); // OK
+            if (response.status === 200) {
+                let data = await response.text();
+                console.log(data);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    });
+</script>
+
+</html>
