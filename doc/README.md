@@ -14,9 +14,15 @@ The server will respond to the announce with a list of nodes that are most adapt
 Network awareness :
 Let assume we have a network of 5 devices A,B,C,D,E with the following configuration
 
-A – B
-|     |
-C – D – E
+
+```mermaid
+graph TD;
+    A-->B;
+    A-->C;
+    B-->D;
+    C-->D;
+    D-->E;
+```
 
 Namely A is connected to B and C, B is connected to A and D , D is connected to C,B and E.
 Let suppose A connects first, then it will send an announce to the infohash X of the mobile app.
@@ -33,4 +39,23 @@ Improvement 1:
 Improvement 2:
 -	In case A can make new connections, he could try to establish a new connection with E then D if not possible with E.
 
+In case the server doesnt find a route from A to E he could setup one using itself as an intermediary.
+
+## Mobile app p2p message relay
+
+When a user A want to send a message to E, he uses his routing table.
+if he locally has no route to E then he send an announce to the Telecel server with the info_hash equals to E address. As a response he gets a list of paths.
+Following the previous example A would receive the paths B-D-E and C-D-E.
+He would then send a request on its existing webRTC connection to B `sendMessage(from="A",to="D-E",content="message content",dateSent=..,signature=..)`
+where the signature sign the message content and dateSent with A key. 
+
+When receiving such request, B would then relay that message to D by sending over webRTC : `sendMessage(from="A",to="D-E",content="message content",dateSent=..,signature=..)`
+
+When receiving it D would relay to E over webRTC :`sendMessage(from="A",to="E",content="message content",dateSent=..,signature=..)`
+
+E would then send back to D an ack, signing the message signature and receiption date : `ackMessage(from="E",to="A",dateReceived=..,signature=..)`
+
+TODO: handle the case where on relaying message/ack fails.-> The node will query the server to find a new route.
+
+## Mobile app topic message relay
 
