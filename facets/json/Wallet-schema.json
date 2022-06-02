@@ -36,7 +36,7 @@
             "versionable": false,
             "id": "CE_Wallet_verified",
             "title": "Wallet.verified",
-            "type": "string"
+            "type": "boolean"
         },
         "applicationInstanceUUID": {
             "storages": ["SQL"],
@@ -59,6 +59,16 @@
             "title": "Wallet.publicKey",
             "type": "string",
             "maxLength": 255
+        },
+        "privateInfo": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "Private Info",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Wallet_privateInfo",
+            "title": "Wallet.privateInfo",
+            "type": "string"
         },
         "privateKey": {
             "storages": ["SQL"],
@@ -155,6 +165,22 @@
             "title": "Wallet.keyPair",
             "type": "string",
             "maxLength": 1000
+        },
+        "groupPurchases": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "uniqueItems": true,
+            "description": "Group purchases",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Wallet_groupPurchases",
+            "title": "Wallet.groupPurchases",
+            "type": "array",
+            "items": {
+                "id": "CE_Wallet_groupPurchases_item",
+                "title": "Wallet.groupPurchases item",
+                "$ref": "#/definitions/GroupPurchase"
+            }
         }
     },
     "required": [
