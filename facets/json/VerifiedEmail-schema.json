@@ -27,7 +27,7 @@
             "versionable": false,
             "id": "CE_VerifiedEmail_verified",
             "title": "VerifiedEmail.verified",
-            "type": "string"
+            "type": "boolean"
         },
         "email": {
             "storages": ["SQL"],

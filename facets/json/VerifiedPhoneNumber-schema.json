@@ -39,7 +39,7 @@
             "versionable": false,
             "id": "CE_VerifiedPhoneNumber_verified",
             "title": "VerifiedPhoneNumber.verified",
-            "type": "string"
+            "type": "boolean"
         }
     },
     "required": [
