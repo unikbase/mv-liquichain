@@ -81,6 +81,17 @@
             "title": "Wallet.publicInfo",
             "type": "string"
         },
+        "keyPair": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "key pair",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Wallet_keyPair",
+            "title": "Wallet.keyPair",
+            "type": "string",
+            "maxLength": 1000
+        },
         "publicKey": {
             "storages": ["SQL"],
             "nullable": true,
