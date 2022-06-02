@@ -7,6 +7,8 @@ import org.meveo.model.customEntities.VerifiedEmail;
 import org.meveo.model.customEntities.VerifiedPhoneNumber;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.meveo.model.customEntities.LiquichainApp;
+import org.meveo.model.customEntities.GroupPurchase;
+import java.util.ArrayList;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class Wallet implements CustomEntity {
@@ -33,6 +35,8 @@ public class Wallet implements CustomEntity {
 
     private String publicKey;
 
+    private String privateInfo;
+
     private String privateKey;
 
     private VerifiedEmail emailAddress;
@@ -52,6 +56,8 @@ public class Wallet implements CustomEntity {
     private String name;
 
     private String keyPair;
+
+    private List<GroupPurchase> groupPurchases = new ArrayList<>();
 
     @Override()
     public String getUuid() {
@@ -108,6 +114,14 @@ public class Wallet implements CustomEntity {
 
     public void setPublicKey(String publicKey) {
         this.publicKey = publicKey;
+    }
+
+    public String getPrivateInfo() {
+        return privateInfo;
+    }
+
+    public void setPrivateInfo(String privateInfo) {
+        this.privateInfo = privateInfo;
     }
 
     public String getPrivateKey() {
@@ -180,6 +194,14 @@ public class Wallet implements CustomEntity {
 
     public void setKeyPair(String keyPair) {
         this.keyPair = keyPair;
+    }
+
+    public List<GroupPurchase> getGroupPurchases() {
+        return groupPurchases;
+    }
+
+    public void setGroupPurchases(List<GroupPurchase> groupPurchases) {
+        this.groupPurchases = groupPurchases;
     }
 
     @Override()
