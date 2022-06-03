@@ -24,6 +24,8 @@ public class Block implements CustomEntity {
 
     private String parentHash;
 
+    private String hash;
+
     @Override()
     public String getUuid() {
         return uuid;
@@ -55,6 +57,14 @@ public class Block implements CustomEntity {
 
     public void setParentHash(String parentHash) {
         this.parentHash = parentHash;
+    }
+
+    public String getHash() {
+        return hash;
+    }
+
+    public void setHash(String hash) {
+        this.hash = hash;
     }
 
     @Override()
