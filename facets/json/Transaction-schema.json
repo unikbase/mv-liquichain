@@ -89,6 +89,18 @@
             "type": "string",
             "maxLength": 20
         },
+        "nonce": {
+            "storages": ["SQL"],
+            "indexType": "INDEX_NOT_ANALYZE",
+            "nullable": true,
+            "description": "Nonce",
+            "readOnly": true,
+            "versionable": false,
+            "id": "CE_Transaction_nonce",
+            "title": "Transaction.nonce",
+            "type": "string",
+            "maxLength": 255
+        },
         "gasLimit": {
             "storages": ["SQL"],
             "indexType": "INDEX_NOT_ANALYZE",
