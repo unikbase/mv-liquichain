@@ -39,6 +39,16 @@
             "title": "TorrentAnnounce.lastAnnounceDate",
             "type": "string"
         },
+        "application": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "Application",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_TorrentAnnounce_application",
+            "title": "TorrentAnnounce.application",
+            "$ref": "#/definitions/LiquichainApp"
+        },
         "left": {
             "storages": ["SQL"],
             "nullable": true,
