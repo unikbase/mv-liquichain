@@ -6,6 +6,17 @@
     "title": "Announce",
     "type": "object",
     "properties": {
+        "peerId": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "Peer Id (20 byte hexa no 0x)",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_TorrentAnnounce_peerId",
+            "title": "TorrentAnnounce.peerId",
+            "type": "string",
+            "maxLength": 40
+        },
         "anounceDate": {
             "storages": ["SQL"],
             "nullable": true,
