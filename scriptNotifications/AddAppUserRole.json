@@ -2,7 +2,7 @@
   "active" : true,
   "code" : "AddAppUserRole",
   "classNameFilter" : "org.meveo.model.module.MeveoModule",
-  "eventTypeFilter" : "CREATED",
+  "eventTypeFilter" : "POST_INSTALL",
   "elFilter" : "#{\"mv-liquichain\".equals(event.getCode())}",
   "scriptInstanceCode" : "io.liquichain.api.core.AddAppUserRole",
   "scriptParams" : { },
