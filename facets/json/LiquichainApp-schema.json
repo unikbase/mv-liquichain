@@ -28,6 +28,17 @@
             "type": "string",
             "maxLength": 255
         },
+        "previousHash": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "hash of previous version",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_LiquichainApp_previousHash",
+            "title": "LiquichainApp.previousHash",
+            "type": "string",
+            "maxLength": 40
+        },
         "name": {
             "storages": ["SQL"],
             "nullable": false,
