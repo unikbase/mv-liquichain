@@ -22,6 +22,8 @@ public class Wallet implements CustomEntity {
 
     private VerifiedPhoneNumber phoneNumber;
 
+    private String publicKey;
+
     @Override()
     public String getUuid() {
         return uuid;
@@ -45,6 +47,14 @@ public class Wallet implements CustomEntity {
 
     public void setPhoneNumber(VerifiedPhoneNumber phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public String getPublicKey() {
+        return publicKey;
+    }
+
+    public void setPublicKey(String publicKey) {
+        this.publicKey = publicKey;
     }
 
     @Override()
