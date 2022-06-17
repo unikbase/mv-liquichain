@@ -22,7 +22,7 @@ public class AddAppUserRole extends Script {
 
         Role role = new Role();
         role.setName("APP_USER");
-        role.setDescription("App ");
+        role.setDescription("Role for Liquichain App secured endpoints ");
 
         roleService.create(role);
     }
