@@ -45,6 +45,8 @@ public class Transaction implements CustomEntity {
 
     private String v;
 
+    private String blockNumber;
+
     @JsonProperty(required = true)
     private String hexHash;
 
@@ -166,6 +168,14 @@ public class Transaction implements CustomEntity {
 
     public void setV(String v) {
         this.v = v;
+    }
+
+    public String getBlockNumber() {
+        return blockNumber;
+    }
+
+    public void setBlockNumber(String blockNumber) {
+        this.blockNumber = blockNumber;
     }
 
     public String getHexHash() {
