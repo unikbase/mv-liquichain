@@ -36,6 +36,9 @@ public class LiquichainWSExchange extends Script {
 	}
   
     public void onOpen(Map<String, Object> parameters) throws BusinessException {
+	session = (Session) parameters.get("WS_SESSION");
+        String userName = (String)session.getUserProperties().get("username");
+        websocketServerEndpoint.consumeUserMessages(session, "liquichain_"+userName);
       log.info("onOpen");
     }
   
