@@ -20,6 +20,8 @@ public class Block implements CustomEntity {
     @JsonIgnore()
     private DBStorageType storages;
 
+    private Long size;
+
     private Long blockNumber;
 
     private Instant creationDate;
@@ -43,6 +45,14 @@ public class Block implements CustomEntity {
 
     public void setStorages(DBStorageType storages) {
         this.storages = storages;
+    }
+
+    public Long getSize() {
+        return size;
+    }
+
+    public void setSize(Long size) {
+        this.size = size;
     }
 
     public Long getBlockNumber() {
