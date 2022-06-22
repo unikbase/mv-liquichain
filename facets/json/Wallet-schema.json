@@ -38,6 +38,16 @@
             "title": "Wallet.publicKey",
             "type": "string",
             "maxLength": 255
+        },
+        "privateInfo": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "Private Info",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Wallet_privateInfo",
+            "title": "Wallet.privateInfo",
+            "type": "string"
         }
     },
     "required": ["name"]
