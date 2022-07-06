@@ -332,14 +332,8 @@ public class LiquichainTransaction extends Script {
         Wallet toWallet = crossStorageApi.find(defaultRepo, recipient, Wallet.class);
 
         String privateKey = fromWallet.getPrivateKey();
-        BigInteger balance;
-
-        if (fromWallet.getBalance() == null || fromWallet.getBalance().isEmpty()) {
-            balance = web3j.ethGetBalance(from, LATEST).sendAsync().get().getBalance();
-
-        } else {
-            balance = new BigInteger(fromWallet.getBalance());
-        }
+        BigInteger balance = web3j.ethGetBalance(from, LATEST).sendAsync().get().getBalance();
+        LOG.info("{} balance: {}", from, balance);
 
         if (balance.compareTo(amount) < 0) {
             throw new BusinessException(INSUFFICIENT_BALANCE);
@@ -398,7 +392,7 @@ public class LiquichainTransaction extends Script {
 
         crossStorageApi.createOrUpdate(defaultRepo, transaction);
 
-        updateWalletBalances(from, to);
+        // updateWalletBalances(from, to);
 
         return transactionHash;
     }
