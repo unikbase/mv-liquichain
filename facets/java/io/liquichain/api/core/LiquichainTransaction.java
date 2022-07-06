@@ -322,7 +322,7 @@ public class LiquichainTransaction extends Script {
         return completedTransactionHash;
     }
 
-    private String transferBesuDB(String from, String to, BigInteger amount,
+    private synchronized String transferBesuDB(String from, String to, BigInteger amount,
         String type, String description) throws Exception {
 
         String sender = normalizeHash(from);
@@ -365,7 +365,7 @@ public class LiquichainTransaction extends Script {
             .get();
 
         String transactionHash = ethSendTransaction.getTransactionHash();
-        LOG.debug("pending transactionHash: {}", transactionHash);
+        LOG.info("pending transactionHash: {}", transactionHash);
 
         if (transactionHash == null || transactionHash.isEmpty()) {
             throw new BusinessException(TRANSACTION_FAILED);
@@ -514,7 +514,7 @@ public class LiquichainTransaction extends Script {
         return "";
     }
 
-    public String transfer(String from, String to, BigInteger amount)
+    public synchronized String transfer(String from, String to, BigInteger amount)
         throws Exception {
         String message = String.format(
             "You received %s coins !",
@@ -522,7 +522,7 @@ public class LiquichainTransaction extends Script {
         return transfer(from, to, amount, "transfer", "Transfer coins", message);
     }
 
-    public String transfer(String from, String to, BigInteger amount, String type,
+    public synchronized String transfer(String from, String to, BigInteger amount, String type,
         String description, String message) throws Exception {
         this.init();
         String transactionHash;
