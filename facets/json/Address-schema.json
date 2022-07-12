@@ -1,0 +1,127 @@
+{
+    "storages": ["SQL"],
+    "default": "Address linked to Wallet",
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "id": "Address",
+    "title": "Address",
+    "type": "object",
+    "properties": {
+        "phoneNumber": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "Phone number",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Address_phoneNumber",
+            "title": "Address.phoneNumber",
+            "$ref": "#/definitions/VerifiedPhoneNumber"
+        },
+        "wallet": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "Wallet",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Address_wallet",
+            "title": "Address.wallet",
+            "$ref": "#/definitions/Wallet"
+        },
+        "city": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "City",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Address_city",
+            "title": "Address.city",
+            "type": "string",
+            "maxLength": 50
+        },
+        "streetAddress": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "Street Address",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Address_streetAddress",
+            "title": "Address.streetAddress",
+            "type": "string",
+            "maxLength": 200
+        },
+        "countryCode": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "Country code",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Address_countryCode",
+            "title": "Address.countryCode",
+            "type": "string",
+            "maxLength": 2
+        },
+        "dialCode": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "Dial code",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Address_dialCode",
+            "title": "Address.dialCode",
+            "type": "string",
+            "maxLength": 10
+        },
+        "latitude": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "Latitude",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Address_latitude",
+            "title": "Address.latitude",
+            "type": "number"
+        },
+        "postalCode": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "Postal code",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Address_postalCode",
+            "title": "Address.postalCode",
+            "type": "string",
+            "maxLength": 10
+        },
+        "name": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "Name",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Address_name",
+            "title": "Address.name",
+            "type": "string",
+            "maxLength": 100
+        },
+        "state": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "State",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Address_state",
+            "title": "Address.state",
+            "type": "string",
+            "maxLength": 50
+        },
+        "longitude": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "Longitude",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Address_longitude",
+            "title": "Address.longitude",
+            "type": "number"
+        }
+    }
+}
