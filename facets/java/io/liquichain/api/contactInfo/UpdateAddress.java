@@ -28,8 +28,8 @@ public class UpdateAddress extends Script {
     private String countryCode;
     private String dialCode;
     private String postalCode;
-    private double longitude;
-    private double latitude;
+    private Double longitude;
+    private Double latitude;
     private String walletId;
     private String phoneNumber;
     private final Map<String, Object> result = new HashMap<>();
