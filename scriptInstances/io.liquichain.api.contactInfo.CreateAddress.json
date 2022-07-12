@@ -1,5 +1,6 @@
 {
   "code" : "io.liquichain.api.contactInfo.CreateAddress",
+  "description" : "Create address details",
   "inputs" : [ ],
   "outputs" : [ ],
   "generateOutputs" : false,
