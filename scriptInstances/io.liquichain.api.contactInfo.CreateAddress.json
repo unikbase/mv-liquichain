@@ -1,8 +1,44 @@
 {
   "code" : "io.liquichain.api.contactInfo.CreateAddress",
   "description" : "Create address details",
-  "inputs" : [ ],
-  "outputs" : [ ],
+  "inputs" : [ {
+    "name" : "name",
+    "type" : "String"
+  }, {
+    "name" : "streetAddress",
+    "type" : "String"
+  }, {
+    "name" : "city",
+    "type" : "String"
+  }, {
+    "name" : "state",
+    "type" : "String"
+  }, {
+    "name" : "countryCode",
+    "type" : "String"
+  }, {
+    "name" : "dialCode",
+    "type" : "String"
+  }, {
+    "name" : "postalCode",
+    "type" : "String"
+  }, {
+    "name" : "longitude",
+    "type" : "double"
+  }, {
+    "name" : "latitude",
+    "type" : "double"
+  }, {
+    "name" : "walletId",
+    "type" : "String"
+  }, {
+    "name" : "phoneNumber",
+    "type" : "String"
+  } ],
+  "outputs" : [ {
+    "name" : "result",
+    "type" : "Map<String,Object>"
+  } ],
   "generateOutputs" : false,
   "type" : "JAVA",
   "transactionType" : "SAME",
