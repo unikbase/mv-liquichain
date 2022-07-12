@@ -1,5 +1,6 @@
 {
   "code" : "updateAddress",
+  "description" : "Update address",
   "secured" : true,
   "checkPathParams" : true,
   "serviceCode" : "io.liquichain.api.contactInfo.UpdateAddress",
