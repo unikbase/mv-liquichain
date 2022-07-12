@@ -1,0 +1,75 @@
+{
+  "code" : "createAddress",
+  "description" : "Create Address",
+  "secured" : true,
+  "checkPathParams" : true,
+  "serviceCode" : "io.liquichain.api.contactInfo.CreateAddress",
+  "synchronous" : true,
+  "method" : "POST",
+  "parameterMappings" : [ {
+    "serviceParameter" : "name",
+    "multivalued" : false,
+    "parameterName" : "name",
+    "valueRequired" : false
+  }, {
+    "serviceParameter" : "streetAddress",
+    "multivalued" : false,
+    "parameterName" : "streetAddress",
+    "valueRequired" : false
+  }, {
+    "serviceParameter" : "city",
+    "multivalued" : false,
+    "parameterName" : "city",
+    "valueRequired" : false
+  }, {
+    "serviceParameter" : "state",
+    "multivalued" : false,
+    "parameterName" : "state",
+    "valueRequired" : false
+  }, {
+    "serviceParameter" : "countryCode",
+    "multivalued" : false,
+    "parameterName" : "countryCode",
+    "valueRequired" : false
+  }, {
+    "serviceParameter" : "dialCode",
+    "multivalued" : false,
+    "parameterName" : "dialCode",
+    "valueRequired" : false
+  }, {
+    "serviceParameter" : "postalCode",
+    "multivalued" : false,
+    "parameterName" : "postalCode",
+    "valueRequired" : false
+  }, {
+    "serviceParameter" : "longitude",
+    "multivalued" : false,
+    "parameterName" : "longitude",
+    "valueRequired" : false
+  }, {
+    "serviceParameter" : "latitude",
+    "multivalued" : false,
+    "parameterName" : "latitude",
+    "valueRequired" : false
+  }, {
+    "serviceParameter" : "walletId",
+    "multivalued" : false,
+    "parameterName" : "walletId",
+    "valueRequired" : false
+  }, {
+    "serviceParameter" : "phoneNumber",
+    "multivalued" : false,
+    "parameterName" : "phoneNumber",
+    "valueRequired" : false
+  } ],
+  "pathParameters" : [ ],
+  "roles" : [ ],
+  "returnedVariableName" : "result",
+  "serializeResult" : true,
+  "contentType" : "application/json",
+  "basePath" : "address",
+  "path" : "/",
+  "pool" : {
+    "usePool" : false
+  }
+}
