@@ -24,10 +24,10 @@
     "type" : "String"
   }, {
     "name" : "longitude",
-    "type" : "double"
+    "type" : "Double"
   }, {
     "name" : "latitude",
-    "type" : "double"
+    "type" : "Double"
   }, {
     "name" : "walletId",
     "type" : "String"
