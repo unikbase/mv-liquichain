@@ -168,6 +168,7 @@ public class UpdateAddress extends Script {
         }
 
         Map<String, Object> addressDetails = new HashMap<>();
+        addressDetails.put("uuid", address.getUuid());
         addressDetails.put("name", address.getName());
         addressDetails.put("streetAddress", address.getStreetAddress());
         addressDetails.put("city", address.getCity());
