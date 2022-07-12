@@ -122,6 +122,10 @@ public class UpdateAddress extends Script {
                                                      .by("phoneNumber", phoneNumber)
                                                      .getResult();
             } catch (Exception e) {
+                // do nothing, create a new phone number instead
+            }
+
+            if (verifiedPhoneNumber == null) {
                 verifiedPhoneNumber = new VerifiedPhoneNumber();
             }
 

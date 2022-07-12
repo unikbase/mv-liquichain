@@ -119,12 +119,16 @@ public class CreateAddress extends Script {
 
         VerifiedPhoneNumber verifiedPhoneNumber = null;
         if (phoneNumber != null) {
-            try{
+            try {
                 verifiedPhoneNumber = crossStorageApi.find(defaultRepo, VerifiedPhoneNumber.class)
                                                      .by("walletId", walletId)
                                                      .by("phoneNumber", phoneNumber)
                                                      .getResult();
             } catch (Exception e) {
+                // do nothing, create a new phone number instead
+            }
+
+            if (verifiedPhoneNumber == null) {
                 verifiedPhoneNumber = new VerifiedPhoneNumber();
             }
 
