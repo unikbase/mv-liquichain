@@ -1,0 +1,20 @@
+{
+  "code" : "getAddress",
+  "description" : "Get Address by uuid",
+  "secured" : true,
+  "checkPathParams" : true,
+  "serviceCode" : "io.liquichain.api.contactInfo.GetAddress",
+  "synchronous" : true,
+  "method" : "GET",
+  "parameterMappings" : [ ],
+  "pathParameters" : [ "uuid" ],
+  "roles" : [ ],
+  "returnedVariableName" : "result",
+  "serializeResult" : true,
+  "contentType" : "application/json",
+  "basePath" : "address",
+  "path" : "/{uuid}",
+  "pool" : {
+    "usePool" : false
+  }
+}
