@@ -93,14 +93,22 @@ public class UpdateAddress extends Script {
     @Override
     public void execute(Map<String, Object> parameters) throws BusinessException {
         super.execute(parameters);
-        Address address;
+        Address address = null;
         try {
             address = crossStorageApi.find(defaultRepo, uuid, Address.class);
         } catch (Exception e) {
-            String errorMessage = String.format("Address with id %s not found", uuid);
+            String errorMessage = "Failed to retrieve address with id " + uuid;
             LOG.error(errorMessage, e);
             result.put("status", "fail");
             result.put("result", errorMessage);
+        }
+
+        if (address == null) {
+            String errorMessage = String.format("Address with id %s not found", uuid);
+            LOG.error(errorMessage);
+            result.put("status", "fail");
+            result.put("result", errorMessage);
+            return;
         }
 
         Wallet wallet;
@@ -116,7 +124,7 @@ public class UpdateAddress extends Script {
 
         VerifiedPhoneNumber verifiedPhoneNumber = null;
         if (phoneNumber != null) {
-            try{
+            try {
                 verifiedPhoneNumber = crossStorageApi.find(defaultRepo, VerifiedPhoneNumber.class)
                                                      .by("walletId", walletId)
                                                      .by("phoneNumber", phoneNumber)
@@ -143,7 +151,6 @@ public class UpdateAddress extends Script {
             }
         }
 
-        address = new Address();
         address.setName(name);
         address.setStreetAddress(streetAddress);
         address.setCity(city);
