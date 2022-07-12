@@ -13,7 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class GetAddress extends Script {
-	private static final Logger LOG = LoggerFactory.getLogger(DeleteAddress.class);
+	private static final Logger LOG = LoggerFactory.getLogger(GetAddress.class);
 	private final CrossStorageApi crossStorageApi = getCDIBean(CrossStorageApi.class);
 	private final RepositoryService repositoryService = getCDIBean(RepositoryService.class);
 	private final Repository defaultRepo = repositoryService.findDefaultRepository();
