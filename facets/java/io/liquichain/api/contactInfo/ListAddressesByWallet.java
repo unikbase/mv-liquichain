@@ -30,7 +30,11 @@ public class ListAddressesByWallet extends Script {
     }
 
     public void setWalletId(String walletId) {
-        this.walletId = walletId;
+        if (walletId == null) {
+            this.walletId = walletId;
+        } else {
+            this.walletId = (walletId.startsWith("0x") ? walletId.substring(2) : walletId).toLowerCase();
+        }
     }
 
     private Map<String, Object> mapAddress(Address address) {
