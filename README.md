@@ -21,3 +21,14 @@ this message bind the open websocket to the wallet address of the client
 if some pending message are queued by the server for this wallet address, they are sent to the client
 
 ### Send message
+
+WebSocket endpoint: ws://localhost:8080/meveo/ws/liquichain
+
+smaple message:
+```
+{
+    "message":"Hello! How are you?",
+    "to":"<wallet address of the client>",
+    "action":"message"
+}
+```
