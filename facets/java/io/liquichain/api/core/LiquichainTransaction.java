@@ -7,10 +7,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigInteger;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 import org.meveo.admin.exception.BusinessException;
 import org.meveo.api.persistence.CrossStorageApi;
@@ -399,6 +396,11 @@ public class LiquichainTransaction extends Script {
 
     public String transferSmartContract(String from, String to, BigInteger amount,
         String type, String description, String message) throws Exception {
+        return this.transferSmartContract(from, to, amount, type, description, message, null);
+    }
+
+    public String transferSmartContract(String from, String to, BigInteger amount,
+        String type, String description, String message, String initiator) throws Exception {
         String sender = normalizeHash(from);
         String recipient = normalizeHash(to);
 
@@ -420,7 +422,7 @@ public class LiquichainTransaction extends Script {
         Function function = new Function(
             "transfer",
             Arrays.asList(new Address(toHexHash(to)), new Uint256(amount)),
-            Arrays.asList(new TypeReference<Bool>() {
+            List.of(new TypeReference<Bool>() {
             }));
         String data = FunctionEncoder.encode(function);
 
@@ -485,6 +487,7 @@ public class LiquichainTransaction extends Script {
         // transaction.setTransactionIndex(transactionReceipt.getTransactionIndex().longValue());
         transaction.setBlockNumber("1");
         transaction.setBlockHash("e8594f30d08b412027f4546506249d09134b9283530243e01e4cdbc34945bcf0");
+        transaction.setInitiator(initiator);
 
         crossStorageApi.createOrUpdate(defaultRepo, transaction);
 
