@@ -3,7 +3,6 @@ package org.meveo.model.customEntities;
 import org.meveo.model.CustomEntity;
 import java.util.List;
 import org.meveo.model.persistence.DBStorageType;
-import org.meveo.model.customEntities.Wallet;
 import java.time.Instant;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -27,8 +26,6 @@ public class Transaction implements CustomEntity {
     private String data;
 
     private String nodeSignature;
-
-    private Wallet initiator;
 
     private String fromHexHash;
 
@@ -101,14 +98,6 @@ public class Transaction implements CustomEntity {
 
     public void setNodeSignature(String nodeSignature) {
         this.nodeSignature = nodeSignature;
-    }
-
-    public Wallet getInitiator() {
-        return initiator;
-    }
-
-    public void setInitiator(Wallet initiator) {
-        this.initiator = initiator;
     }
 
     public String getFromHexHash() {
