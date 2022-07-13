@@ -42,6 +42,16 @@
             "type": "string",
             "maxLength": 255
         },
+        "initiator": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "Initiated by",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Transaction_initiator",
+            "title": "Transaction.initiator",
+            "$ref": "#/definitions/Wallet"
+        },
         "fromHexHash": {
             "storages": ["SQL"],
             "indexType": "INDEX_NOT_ANALYZE",
