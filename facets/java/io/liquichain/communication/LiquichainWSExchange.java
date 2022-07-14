@@ -66,15 +66,24 @@ public class LiquichainWSExchange extends Script {
         String account = (String) message.get("account");
         //TODO: verify signature
         session.getUserProperties().put("username", account);
-        websocketServerEndpoint.consumeUserMessages(session, "liquichain_" + account);
+		boolean persistMessage = (Boolean)message.get("persistMessage") == null? true : ((Boolean)message.get("persistMessage")).booleanValue();
+      	if(persistMessage ){
+        	websocketServerEndpoint.consumeUserMessages(session, "liquichain_" + account);
+		}
     }
 
 
-    public void sendMessage(Map<String, Object> message, Map<String, Object> parameters) throws BusinessException {
-        String destination = (String) message.get("to");
-        String txtMessage = (String) message.get("message");
-        //TODO: verify signature
-        log.info("sendMessage {} {}", destination, txtMessage);
-        websocketServerEndpoint.sendMessage("liquichain", destination, txtMessage);
+     public void sendMessage(Map<String, Object> message,Map<String, Object> parameters) throws BusinessException {
+      String destination = (String)message.get("to");
+      String txtMessage = (String)message.get("message");
+      
+      boolean persistMessage = (Boolean)message.get("persistMessage") == null? true : ((Boolean)message.get("persistMessage")).booleanValue();      
+      if(persistMessage ){
+        Pattern nonTextMsgRegex=Pattern.compile("(\\{\\s*\"webrtc\"\\s*:\\s*true|\\{\\s*\"action\"\\s*:\\s*\"\\s*chat\\s*\")");
+        persistMessage = !nonTextMsgRegex.matcher(txtMessage).lookingAt();
+      }
+      //TODO: verify signature
+      log.info("sendMessage {} {}",destination,txtMessage);
+      websocketServerEndpoint.sendMessage("liquichain", destination, txtMessage, persistMessage);
     }
 }
