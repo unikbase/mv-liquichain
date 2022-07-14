@@ -66,10 +66,7 @@ public class LiquichainWSExchange extends Script {
         String account = (String) message.get("account");
         //TODO: verify signature
         session.getUserProperties().put("username", account);
-		boolean persistMessage = (Boolean)message.get("persistMessage") == null? true : ((Boolean)message.get("persistMessage")).booleanValue();
-      	if(persistMessage ){
-        	websocketServerEndpoint.consumeUserMessages(session, "liquichain_" + account);
-		}
+	websocketServerEndpoint.consumeUserMessages(session, "liquichain_" + account);
     }
 
 
