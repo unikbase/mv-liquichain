@@ -29,6 +29,8 @@ smaple message:
 {
     "message":"Hello! How are you?",
     "to":"<wallet address of the client>",
-    "action":"message"
+    "action":"message",
+    "persistMessage": false
 }
 ```
+in above message payload, persistMessage boolean parameter is not mandatory, if it is not supplied then by default its assumed true. 
