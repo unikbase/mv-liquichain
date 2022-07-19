@@ -1,6 +1,7 @@
 package io.liquichain.communication;
 
 import java.util.Map;
+import java.util.regex.Pattern;
 
 import org.meveo.service.script.Script;
 import org.meveo.admin.exception.BusinessException;
@@ -19,6 +20,7 @@ public class LiquichainWSExchange extends Script {
     private final WebsocketServerEndpoint websocketServerEndpoint = getCDIBean(WebsocketServerEndpoint.class);
 
     private Session session;
+
     @Override
     public void execute(Map<String, Object> parameters) throws BusinessException {
         log.info("params:{}", parameters);
@@ -44,7 +46,7 @@ public class LiquichainWSExchange extends Script {
 
     public void onMessage(Map<String, Object> parameters) throws BusinessException {
         String message = (String) parameters.get("WS_MESSAGE");
-        Map<String, Object> map = null;
+        Map<String, Object> map;
         try {
             map = mapper.readValue(message, Map.class);
         } catch (Exception e) {
@@ -66,21 +68,23 @@ public class LiquichainWSExchange extends Script {
         String account = (String) message.get("account");
         //TODO: verify signature
         session.getUserProperties().put("username", account);
-	websocketServerEndpoint.consumeUserMessages(session, "liquichain_" + account);
+        websocketServerEndpoint.consumeUserMessages(session, "liquichain_" + account);
     }
 
 
-     public void sendMessage(Map<String, Object> message,Map<String, Object> parameters) throws BusinessException {
-      String destination = (String)message.get("to");
-      String txtMessage = (String)message.get("message");
-      
-      boolean persistMessage = (Boolean)message.get("persistMessage") == null? true : ((Boolean)message.get("persistMessage")).booleanValue();      
-      if(persistMessage ){
-        Pattern nonTextMsgRegex=Pattern.compile("(\\{\\s*\"webrtc\"\\s*:\\s*true|\\{\\s*\"action\"\\s*:\\s*\"\\s*chat\\s*\")");
-        persistMessage = !nonTextMsgRegex.matcher(txtMessage).lookingAt();
-      }
-      //TODO: verify signature
-      log.info("sendMessage {} {}",destination,txtMessage);
-      websocketServerEndpoint.sendMessage("liquichain", destination, txtMessage, persistMessage);
+    public void sendMessage(Map<String, Object> message, Map<String, Object> parameters) throws BusinessException {
+        String destination = (String) message.get("to");
+        String txtMessage = (String) message.get("message");
+
+        Boolean shouldPersist = (Boolean) message.get("persistMessage");
+        boolean persistMessage = shouldPersist == null || shouldPersist;
+        if (persistMessage) {
+            Pattern nonTextMsgRegex =
+                Pattern.compile("(\\{\\s*\"webrtc\"\\s*:\\s*true|\\{\\s*\"action\"\\s*:\\s*\"\\s*chat\\s*\")");
+            persistMessage = !nonTextMsgRegex.matcher(txtMessage).lookingAt();
+        }
+        //TODO: verify signature
+        log.info("sendMessage {} {}", destination, txtMessage);
+        websocketServerEndpoint.sendMessage("liquichain", destination, txtMessage, persistMessage);
     }
 }
