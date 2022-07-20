@@ -66,7 +66,6 @@ public class LiquichainWSExchange extends Script {
 
     public void register(Map<String, Object> message, Map<String, Object> parameters) throws BusinessException {
         String account = (String) message.get("account");
-        //TODO: verify signature
         session.getUserProperties().put("username", account);
         websocketServerEndpoint.consumeUserMessages(session, "liquichain_" + account);
     }
@@ -83,7 +82,6 @@ public class LiquichainWSExchange extends Script {
                 Pattern.compile("(\\{\\s*\"webrtc\"\\s*:\\s*true|\\{\\s*\"action\"\\s*:\\s*\"\\s*chat\\s*\")");
             persistMessage = !nonTextMsgRegex.matcher(txtMessage).lookingAt();
         }
-        //TODO: verify signature
         log.info("sendMessage {} {}", destination, txtMessage);
         websocketServerEndpoint.sendMessage("liquichain", destination, txtMessage);
     }
