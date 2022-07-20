@@ -85,6 +85,6 @@ public class LiquichainWSExchange extends Script {
         }
         //TODO: verify signature
         log.info("sendMessage {} {}", destination, txtMessage);
-        websocketServerEndpoint.sendMessage("liquichain", destination, txtMessage, persistMessage);
+        websocketServerEndpoint.sendMessage("liquichain", destination, txtMessage);
     }
 }
