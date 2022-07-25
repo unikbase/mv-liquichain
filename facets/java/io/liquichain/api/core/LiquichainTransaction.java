@@ -343,19 +343,38 @@ public class LiquichainTransaction extends Script {
         BigInteger nonce = ethGetTransactionCount.getTransactionCount();
 
         BigInteger gasPrice = web3j.ethGasPrice().send().getGasPrice();
-        LOG.debug("gasPrice: {}", gasPrice);
+        LOG.info("gasPrice: {}", gasPrice);
+        LOG.info("gasLimit: {}", defaultGasLimit);
 
         RawTransaction rawTransaction = RawTransaction
             .createEtherTransaction(nonce, gasPrice, defaultGasLimit, to, amount);
         byte[] signedMessage = TransactionEncoder.signMessage(rawTransaction, credentials);
         String encodedTransaction = Numeric.toHexString(signedMessage);
 
-        EthSendTransaction ethSendTransaction = web3j
-            .ethSendRawTransaction(encodedTransaction)
-            .sendAsync()
-            .get();
+        RawTransactionManager manager = new RawTransactionManager(web3j, credentials);
 
-        String transactionHash = ethSendTransaction.getTransactionHash();
+        LOG.info("raw transaction manager created");
+
+        Function function = new Function(
+            "transfer",
+            Arrays.asList(new Address(toHexHash(to)), new Uint256(amount)),
+            List.of(new TypeReference<Bool>() {
+            }));
+        String data = FunctionEncoder.encode(function);
+
+        LOG.info("transfer function encoded");
+
+        EthSendTransaction sendTransaction = manager.sendTransaction(
+            gasPrice,
+            defaultGasLimit,
+            smartContract,
+            data,
+            null);
+
+        LOG.info("sending transaction");
+
+        String transactionHash = sendTransaction.getTransactionHash();
+
         LOG.info("pending transactionHash: {}", transactionHash);
 
         if (transactionHash == null || transactionHash.isEmpty()) {
@@ -366,7 +385,7 @@ public class LiquichainTransaction extends Script {
         // String completedTransactionHash = transactionReceipt.getTransactionHash();
         // LOG.debug("completed transactionHash: {}", completedTransactionHash);
 
-        String data = String.format(TRANSACTION_DATA_FORMAT, type, description);
+        String extraData = String.format(TRANSACTION_DATA_FORMAT, type, description);
 
         Transaction transaction = new Transaction();
         // transaction.setHexHash(normalizeHash(completedTransactionHash));
@@ -377,7 +396,7 @@ public class LiquichainTransaction extends Script {
         transaction.setGasPrice(gasPrice.toString());
         transaction.setGasLimit(defaultGasLimit.toString());
         transaction.setValue(amount.toString());
-        transaction.setData(data);
+        transaction.setData(extraData);
         transaction.setType(type);
         transaction.setSignedHash(normalizeHash(encodedTransaction));
         transaction.setCreationDate(java.time.Instant.now());
