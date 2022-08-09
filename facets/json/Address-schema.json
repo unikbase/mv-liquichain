@@ -6,6 +6,17 @@
     "title": "Address",
     "type": "object",
     "properties": {
+        "country": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "Country",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Address_country",
+            "title": "Address.country",
+            "type": "string",
+            "maxLength": 100
+        },
         "phoneNumber": {
             "storages": ["SQL"],
             "nullable": true,
