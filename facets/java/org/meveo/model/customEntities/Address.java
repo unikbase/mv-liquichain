@@ -21,6 +21,8 @@ public class Address implements CustomEntity {
     @JsonIgnore()
     private DBStorageType storages;
 
+    private String country;
+
     private VerifiedPhoneNumber phoneNumber;
 
     private Wallet wallet;
@@ -56,6 +58,14 @@ public class Address implements CustomEntity {
 
     public void setStorages(DBStorageType storages) {
         this.storages = storages;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
     }
 
     public VerifiedPhoneNumber getPhoneNumber() {
