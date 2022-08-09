@@ -29,8 +29,6 @@ public class Address implements CustomEntity {
 
     private String streetAddress;
 
-    private String countryCode;
-
     private String dialCode;
 
     private Double latitude;
@@ -90,14 +88,6 @@ public class Address implements CustomEntity {
 
     public void setStreetAddress(String streetAddress) {
         this.streetAddress = streetAddress;
-    }
-
-    public String getCountryCode() {
-        return countryCode;
-    }
-
-    public void setCountryCode(String countryCode) {
-        this.countryCode = countryCode;
     }
 
     public String getDialCode() {
