@@ -28,6 +28,8 @@ public class Address implements CustomEntity {
 
     private String state;
 
+    private Double longitude;
+
     @Override()
     public String getUuid() {
         return uuid;
@@ -75,6 +77,14 @@ public class Address implements CustomEntity {
 
     public void setState(String state) {
         this.state = state;
+    }
+
+    public Double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
     }
 
     @Override()
