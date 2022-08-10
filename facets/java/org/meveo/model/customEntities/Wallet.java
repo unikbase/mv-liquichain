@@ -41,6 +41,8 @@ public class Wallet implements CustomEntity {
 
     private String publicInfo;
 
+    private Boolean verified;
+
     private String keyPair;
 
     private String publicKey;
@@ -126,6 +128,14 @@ public class Wallet implements CustomEntity {
 
     public void setPublicInfo(String publicInfo) {
         this.publicInfo = publicInfo;
+    }
+
+    public Boolean getVerified() {
+        return verified;
+    }
+
+    public void setVerified(Boolean verified) {
+        this.verified = verified;
     }
 
     public String getKeyPair() {
