@@ -5,15 +5,28 @@
     "id": "Block",
     "title": "Block",
     "type": "object",
-    "properties": {"parentHash": {
-        "storages": ["SQL"],
-        "nullable": true,
-        "description": "parent hash",
-        "readOnly": true,
-        "versionable": false,
-        "id": "CE_Block_parentHash",
-        "title": "Block.parentHash",
-        "type": "string",
-        "maxLength": 64
-    }}
+    "properties": {
+        "creationDate": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "format": "date-time",
+            "description": "creation Date",
+            "readOnly": true,
+            "versionable": false,
+            "id": "CE_Block_creationDate",
+            "title": "Block.creationDate",
+            "type": "string"
+        },
+        "parentHash": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "parent hash",
+            "readOnly": true,
+            "versionable": false,
+            "id": "CE_Block_parentHash",
+            "title": "Block.parentHash",
+            "type": "string",
+            "maxLength": 64
+        }
+    }
 }
