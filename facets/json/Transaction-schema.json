@@ -18,6 +18,18 @@
             "type": "string",
             "maxLength": 64
         },
+        "data": {
+            "storages": ["SQL"],
+            "indexType": "INDEX_NOT_ANALYZE",
+            "nullable": true,
+            "description": "data",
+            "readOnly": true,
+            "versionable": false,
+            "id": "CE_Transaction_data",
+            "title": "Transaction.data",
+            "type": "string",
+            "maxLength": 10000
+        },
         "initiator": {
             "storages": ["SQL"],
             "nullable": true,
