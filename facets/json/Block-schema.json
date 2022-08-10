@@ -4,5 +4,16 @@
     "$schema": "http://json-schema.org/draft-07/schema",
     "id": "Block",
     "title": "Block",
-    "type": "object"
+    "type": "object",
+    "properties": {"parentHash": {
+        "storages": ["SQL"],
+        "nullable": true,
+        "description": "parent hash",
+        "readOnly": true,
+        "versionable": false,
+        "id": "CE_Block_parentHash",
+        "title": "Block.parentHash",
+        "type": "string",
+        "maxLength": 64
+    }}
 }
