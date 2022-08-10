@@ -48,6 +48,16 @@
             "title": "Address.state",
             "type": "string",
             "maxLength": 50
+        },
+        "longitude": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "Longitude",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Address_longitude",
+            "title": "Address.longitude",
+            "type": "number"
         }
     }
 }
