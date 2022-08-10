@@ -3,8 +3,8 @@ package org.meveo.model.customEntities;
 import org.meveo.model.CustomEntity;
 import java.util.List;
 import org.meveo.model.persistence.DBStorageType;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.Instant;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class Transaction implements CustomEntity {
@@ -23,6 +23,14 @@ public class Transaction implements CustomEntity {
 
     private String blockHash;
 
+    private String initiator;
+
+    private String fromHexHash;
+
+    private Instant creationDate;
+
+    private String type;
+
     private String gasLimit;
 
     private String toHexHash;
@@ -34,14 +42,8 @@ public class Transaction implements CustomEntity {
     @JsonProperty(required = true)
     private String hexHash;
 
-    private String fromHexHash;
-
     @JsonProperty(required = true)
     private String signedHash;
-
-    private Instant creationDate;
-
-    private String type;
 
     private String value;
 
@@ -70,6 +72,38 @@ public class Transaction implements CustomEntity {
 
     public void setBlockHash(String blockHash) {
         this.blockHash = blockHash;
+    }
+
+    public String getInitiator() {
+        return initiator;
+    }
+
+    public void setInitiator(String initiator) {
+        this.initiator = initiator;
+    }
+
+    public String getFromHexHash() {
+        return fromHexHash;
+    }
+
+    public void setFromHexHash(String fromHexHash) {
+        this.fromHexHash = fromHexHash;
+    }
+
+    public Instant getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(Instant creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String getGasLimit() {
@@ -112,36 +146,12 @@ public class Transaction implements CustomEntity {
         this.hexHash = hexHash;
     }
 
-    public String getFromHexHash() {
-        return fromHexHash;
-    }
-
-    public void setFromHexHash(String fromHexHash) {
-        this.fromHexHash = fromHexHash;
-    }
-
     public String getSignedHash() {
         return signedHash;
     }
 
     public void setSignedHash(String signedHash) {
         this.signedHash = signedHash;
-    }
-
-    public Instant getCreationDate() {
-        return creationDate;
-    }
-
-    public void setCreationDate(Instant creationDate) {
-        this.creationDate = creationDate;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 
     public String getValue() {
