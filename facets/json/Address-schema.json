@@ -27,6 +27,17 @@
             "title": "Address.phoneNumber",
             "$ref": "#/definitions/VerifiedPhoneNumber"
         },
+        "city": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "City",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Address_city",
+            "title": "Address.city",
+            "type": "string",
+            "maxLength": 50
+        },
         "streetAddress": {
             "storages": ["SQL"],
             "nullable": true,
