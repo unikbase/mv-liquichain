@@ -6,6 +6,18 @@
     "title": "Block",
     "type": "object",
     "properties": {
+        "blockNumber": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "block number",
+            "maximum": 10000000,
+            "readOnly": true,
+            "versionable": false,
+            "id": "CE_Block_blockNumber",
+            "title": "Block.blockNumber",
+            "type": "integer",
+            "minimum": 0
+        },
         "creationDate": {
             "storages": ["SQL"],
             "nullable": true,
