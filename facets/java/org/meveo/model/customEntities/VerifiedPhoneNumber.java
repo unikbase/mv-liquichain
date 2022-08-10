@@ -26,6 +26,8 @@ public class VerifiedPhoneNumber implements CustomEntity {
     @JsonProperty(required = true)
     private String phoneNumber;
 
+    private Boolean verified;
+
     @Override()
     public String getUuid() {
         return uuid;
@@ -57,6 +59,14 @@ public class VerifiedPhoneNumber implements CustomEntity {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public Boolean getVerified() {
+        return verified;
+    }
+
+    public void setVerified(Boolean verified) {
+        this.verified = verified;
     }
 
     @Override()
