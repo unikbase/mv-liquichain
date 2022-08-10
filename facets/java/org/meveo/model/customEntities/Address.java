@@ -32,6 +32,8 @@ public class Address implements CustomEntity {
 
     private String dialCode;
 
+    private Double latitude;
+
     private String postalCode;
 
     private String name;
@@ -103,6 +105,14 @@ public class Address implements CustomEntity {
 
     public void setDialCode(String dialCode) {
         this.dialCode = dialCode;
+    }
+
+    public Double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
     }
 
     public String getPostalCode() {
