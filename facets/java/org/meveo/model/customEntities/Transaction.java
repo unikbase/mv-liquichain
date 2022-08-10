@@ -23,6 +23,8 @@ public class Transaction implements CustomEntity {
 
     private String blockHash;
 
+    private String data;
+
     private String initiator;
 
     private String fromHexHash;
@@ -76,6 +78,14 @@ public class Transaction implements CustomEntity {
 
     public void setBlockHash(String blockHash) {
         this.blockHash = blockHash;
+    }
+
+    public String getData() {
+        return data;
+    }
+
+    public void setData(String data) {
+        this.data = data;
     }
 
     public String getInitiator() {
