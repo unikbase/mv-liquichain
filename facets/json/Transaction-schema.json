@@ -88,6 +88,18 @@
             "type": "string",
             "maxLength": 255
         },
+        "r": {
+            "storages": ["SQL"],
+            "indexType": "INDEX_NOT_ANALYZE",
+            "nullable": true,
+            "description": "R",
+            "readOnly": true,
+            "versionable": false,
+            "id": "CE_Transaction_r",
+            "title": "Transaction.r",
+            "type": "string",
+            "maxLength": 64
+        },
         "toHexHash": {
             "storages": ["SQL"],
             "indexType": "INDEX_NOT_ANALYZE",
