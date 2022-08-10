@@ -71,6 +71,16 @@
             "type": "string",
             "maxLength": 10
         },
+        "latitude": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "Latitude",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Address_latitude",
+            "title": "Address.latitude",
+            "type": "number"
+        },
         "postalCode": {
             "storages": ["SQL"],
             "nullable": true,
