@@ -27,6 +27,16 @@
             "title": "Address.phoneNumber",
             "$ref": "#/definitions/VerifiedPhoneNumber"
         },
+        "wallet": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "Wallet",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Address_wallet",
+            "title": "Address.wallet",
+            "$ref": "#/definitions/Wallet"
+        },
         "city": {
             "storages": ["SQL"],
             "nullable": true,
