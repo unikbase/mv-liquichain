@@ -49,6 +49,17 @@
             "type": "string",
             "maxLength": 200
         },
+        "countryCode": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "Country code",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Address_countryCode",
+            "title": "Address.countryCode",
+            "type": "string",
+            "maxLength": 2
+        },
         "dialCode": {
             "storages": ["SQL"],
             "nullable": true,
