@@ -38,6 +38,17 @@
             "type": "string",
             "maxLength": 10
         },
+        "name": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "Name",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Address_name",
+            "title": "Address.name",
+            "type": "string",
+            "maxLength": 100
+        },
         "state": {
             "storages": ["SQL"],
             "nullable": true,
