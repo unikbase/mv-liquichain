@@ -3,6 +3,7 @@ package org.meveo.model.customEntities;
 import org.meveo.model.CustomEntity;
 import java.util.List;
 import org.meveo.model.persistence.DBStorageType;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class VerifiedPhoneNumber implements CustomEntity {
@@ -19,6 +20,9 @@ public class VerifiedPhoneNumber implements CustomEntity {
     @JsonIgnore()
     private DBStorageType storages;
 
+    @JsonProperty(required = true)
+    private String phoneNumber;
+
     @Override()
     public String getUuid() {
         return uuid;
@@ -34,6 +38,14 @@ public class VerifiedPhoneNumber implements CustomEntity {
 
     public void setStorages(DBStorageType storages) {
         this.storages = storages;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     @Override()
