@@ -83,6 +83,6 @@ public class LiquichainWSExchange extends Script {
             persistMessage = !nonTextMsgRegex.matcher(txtMessage).lookingAt();
         }
         log.info("sendMessage {} {}", destination, txtMessage);
-        websocketServerEndpoint.sendMessage("liquichain", destination, txtMessage);
+        websocketServerEndpoint.sendMessage("liquichain", destination, txtMessage, persistMessage);
     }
 }
