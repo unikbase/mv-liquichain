@@ -17,5 +17,5 @@
     "version" : "4.8.9",
     "coordinates" : "org.web3j:core:4.8.9"
   } ],
-  "importScriptInstances" : [ ]
+  "importScriptInstances" : [ "org.meveo.model.customEntities.Transaction", "org.meveo.model.customEntities.Wallet" ]
 }
