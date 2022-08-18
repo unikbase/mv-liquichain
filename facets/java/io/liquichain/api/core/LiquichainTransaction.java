@@ -13,6 +13,7 @@ import org.meveo.admin.exception.BusinessException;
 import org.meveo.api.persistence.CrossStorageApi;
 import org.meveo.commons.utils.ParamBean;
 import org.meveo.commons.utils.ParamBeanFactory;
+import org.meveo.model.customEntities.LiquichainApp;
 import org.meveo.model.customEntities.Transaction;
 import org.meveo.model.customEntities.Wallet;
 import org.meveo.model.storage.Repository;
@@ -101,13 +102,14 @@ public class LiquichainTransaction extends Script {
     }
 
     public void init() {
-
         this.defaultRepo = repositoryService.findDefaultRepository();
         ParamBean config = paramBeanFactory.getInstance();
         this.defaultGasLimit = new BigInteger(config.getProperty("besu.gas.limit", "120000"));
         this.defaultGasPrice = new BigInteger(config.getProperty("besu.gas.price", "0"));
-        this.smartContract = config
-            .getProperty("besu.smart.contract", "0x0Cd07348D582a6F4A3641D3192f1f467586BE990");
+        String appName = config.getProperty("eth.api.appname", "licoin");
+        LiquichainApp liquichainApp = crossStorageApi.find(defaultRepo, LiquichainApp.class)
+                                                     .by("name", appName).getResult() ;
+        this.smartContract = liquichainApp.getHexCode();
         String besuApiUrl = config.getProperty("besu.api.url", "https://testnet.liquichain.io/rpc");
         this.web3j = Web3j.build(new HttpService(besuApiUrl));
         String blockchainType = config.getProperty("txn.blockchain.type", "BESU");
