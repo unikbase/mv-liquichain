@@ -4,46 +4,5 @@
     "$schema": "http://json-schema.org/draft-07/schema",
     "id": "VerifiedEmail",
     "title": "Verified Email",
-    "type": "object",
-    "properties": {
-        "walletId": {
-            "storages": ["SQL"],
-            "nullable": false,
-            "minLength": 1,
-            "description": "Associated Wallet ID",
-            "readOnly": false,
-            "versionable": false,
-            "id": "CE_VerifiedEmail_walletId",
-            "title": "VerifiedEmail.walletId",
-            "type": "string",
-            "maxLength": 255
-        },
-        "verified": {
-            "storages": ["SQL"],
-            "default": "false",
-            "nullable": true,
-            "description": "Verified",
-            "readOnly": false,
-            "versionable": false,
-            "id": "CE_VerifiedEmail_verified",
-            "title": "VerifiedEmail.verified",
-            "type": "boolean"
-        },
-        "email": {
-            "storages": ["SQL"],
-            "nullable": false,
-            "minLength": 1,
-            "description": "Email Address",
-            "readOnly": false,
-            "versionable": false,
-            "id": "CE_VerifiedEmail_email",
-            "title": "VerifiedEmail.email",
-            "type": "string",
-            "maxLength": 255
-        }
-    },
-    "required": [
-        "email",
-        "walletId"
-    ]
+    "type": "object"
 }
