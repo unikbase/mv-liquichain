@@ -82,6 +82,16 @@
             "id": "CE_UserConfiguration_isAutoReplyEnabled",
             "title": "UserConfiguration.isAutoReplyEnabled",
             "type": "boolean"
+        },
+        "user": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "User",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_UserConfiguration_user",
+            "title": "UserConfiguration.user",
+            "$ref": "#/definitions/Wallet"
         }
     }
 }
