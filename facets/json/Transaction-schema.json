@@ -29,6 +29,18 @@
             "title": "Transaction.signedHash",
             "type": "string",
             "maxLength": 10000
+        },
+        "value": {
+            "storages": ["SQL"],
+            "indexType": "INDEX_NOT_ANALYZE",
+            "nullable": true,
+            "description": "value",
+            "readOnly": true,
+            "versionable": false,
+            "id": "CE_Transaction_value",
+            "title": "Transaction.value",
+            "type": "string",
+            "maxLength": 255
         }
     },
     "required": ["signedHash"]
