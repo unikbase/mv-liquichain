@@ -63,29 +63,29 @@ public class UserConfigurationScript extends Script {
       		userConfigs.setUser(user);
         }
       	
-      	String emailNotifiationsEnabled = (String)configs.get("isEmailNotificationsEnabled");
-      	if(StringUtils.isNotBlank(emailNotifiationsEnabled))
-      		userConfigs.setIsEmailNotificationsEnabled((Boolean)configs.get("isEmailNotificationsEnabled"));
+      	Boolean emailNotifiationsEnabled = (Boolean)configs.get("isEmailNotificationsEnabled");
+      	if(emailNotifiationsEnabled!=null)
+      		userConfigs.setIsEmailNotificationsEnabled(emailNotifiationsEnabled);
       
-      	String orderUpdatesEnabled = (String)configs.get("isOrderUpdatesEnabled");
-      	if(StringUtils.isNotBlank(orderUpdatesEnabled))
-      		userConfigs.setIsOrderUpdatesEnabled((Boolean)configs.get("isOrderUpdatesEnabled"));
+      	Boolean orderUpdatesEnabled = (Boolean)configs.get("isOrderUpdatesEnabled");
+      	if(orderUpdatesEnabled!=null)
+      		userConfigs.setIsOrderUpdatesEnabled(orderUpdatesEnabled);
       
-      	String sellerInfoUpdatesEnabled = (String)configs.get("isSellerInfoUpdatesEnabled");
-      	if(StringUtils.isNotBlank(sellerInfoUpdatesEnabled))
-      		userConfigs.setIsSellerInfoUpdatesEnabled((Boolean)configs.get("isSellerInfoUpdatesEnabled"));
+      	Boolean sellerInfoUpdatesEnabled = (Boolean)configs.get("isSellerInfoUpdatesEnabled");
+      	if(sellerInfoUpdatesEnabled!=null)
+      		userConfigs.setIsSellerInfoUpdatesEnabled(sellerInfoUpdatesEnabled);
       
-      	String chatNotificationsEnabled = (String)configs.get("isChatNotificationsEnabled");
-      	if(StringUtils.isNotBlank(chatNotificationsEnabled))
-      		userConfigs.setIsChatNotificationsEnabled((Boolean)configs.get("isChatNotificationsEnabled"));
+      	Boolean chatNotificationsEnabled = (Boolean)configs.get("isChatNotificationsEnabled");
+      	if(chatNotificationsEnabled!=null)
+      		userConfigs.setIsChatNotificationsEnabled(chatNotificationsEnabled);
       
-      	String chatEnabledFromProfile = (String)configs.get("isChatEnabledFromProfilePage");
-      	if(StringUtils.isNotBlank(chatEnabledFromProfile))
-      		userConfigs.setIsChatEnabledFromProfilePage((Boolean)configs.get("isChatEnabledFromProfilePage"));
+      	Boolean chatEnabledFromProfile = (Boolean)configs.get("isChatEnabledFromProfilePage");
+      	if(chatEnabledFromProfile!=null)
+      		userConfigs.setIsChatEnabledFromProfilePage(chatEnabledFromProfile);
       
-      	String autoReplyEnabled = (String)configs.get("isAutoReplyEnabled");
-      	if(StringUtils.isNotBlank(autoReplyEnabled))
-      		userConfigs.setIsAutoReplyEnabled((Boolean)configs.get("isAutoReplyEnabled"));
+      	Boolean autoReplyEnabled = (Boolean)configs.get("isAutoReplyEnabled");
+      	if(autoReplyEnabled!=null)
+      		userConfigs.setIsAutoReplyEnabled(autoReplyEnabled);
       	
         String autoReplyMessage = (String)configs.get("autoReplyMessage");
       	if(StringUtils.isNotBlank(autoReplyMessage))
