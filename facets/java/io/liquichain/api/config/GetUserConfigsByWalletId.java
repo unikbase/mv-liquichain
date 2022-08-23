@@ -71,6 +71,7 @@ public class GetUserConfigsByWalletId extends Script {
  				configs.setIsSellerInfoUpdatesEnabled(true);
               	configs.setIsChatNotificationsEnabled(true);
               	configs.setIsChatEnabledFromProfilePage(true);
+              	configs.setIsAutoReplyEnabled(true);
             }
           	result = new Gson().toJson(configs);
           	return;
