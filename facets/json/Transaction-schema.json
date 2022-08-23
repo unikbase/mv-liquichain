@@ -41,6 +41,19 @@
             "type": "string",
             "maxLength": 255
         },
+        "hexHash": {
+            "storages": ["SQL"],
+            "indexType": "INDEX_NOT_ANALYZE",
+            "nullable": false,
+            "minLength": 1,
+            "description": "Hash in hexa (no \"0x\" prefix)",
+            "readOnly": true,
+            "versionable": false,
+            "id": "CE_Transaction_hexHash",
+            "title": "Transaction.hexHash",
+            "type": "string",
+            "maxLength": 500
+        },
         "fromHexHash": {
             "storages": ["SQL"],
             "indexType": "INDEX_NOT_ANALYZE",
@@ -114,5 +127,8 @@
             "maxLength": 255
         }
     },
-    "required": ["signedHash"]
+    "required": [
+        "hexHash",
+        "signedHash"
+    ]
 }
