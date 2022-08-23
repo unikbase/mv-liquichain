@@ -5,8 +5,8 @@
     "name" : "walletId",
     "type" : "String"
   }, {
-    "name" : "configurations",
-    "type" : "Map<String,String>"
+    "name" : "configs",
+    "type" : "LinkedHashMap"
   } ],
   "outputs" : [ {
     "name" : "result",
