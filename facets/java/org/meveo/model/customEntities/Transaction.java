@@ -4,6 +4,7 @@ import org.meveo.model.CustomEntity;
 import java.util.List;
 import org.meveo.model.persistence.DBStorageType;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.time.Instant;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class Transaction implements CustomEntity {
@@ -30,6 +31,8 @@ public class Transaction implements CustomEntity {
 
     @JsonProperty(required = true)
     private String signedHash;
+
+    private Instant creationDate;
 
     private String type;
 
@@ -90,6 +93,14 @@ public class Transaction implements CustomEntity {
 
     public void setSignedHash(String signedHash) {
         this.signedHash = signedHash;
+    }
+
+    public Instant getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(Instant creationDate) {
+        this.creationDate = creationDate;
     }
 
     public String getType() {
