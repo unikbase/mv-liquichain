@@ -12,9 +12,9 @@
     "parameterName" : "walletId",
     "valueRequired" : false
   }, {
-    "serviceParameter" : "configurations",
+    "serviceParameter" : "configs",
     "multivalued" : false,
-    "parameterName" : "configurations",
+    "parameterName" : "configs",
     "valueRequired" : false
   } ],
   "pathParameters" : [ ],
