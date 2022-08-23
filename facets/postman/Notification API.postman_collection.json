@@ -1,0 +1,125 @@
+{
+	"info": {
+		"_postman_id": "97b02897-4052-4387-a696-50bb378fd27f",
+		"name": "Notification API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30784"
+	},
+	"item": [
+		{
+			"name": "Get notifications by wallet",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"pm.collectionVariables.set(\"notification_id\", jsonData.result[0].uuid);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{protocol}}://{{hostname}}:{{port}}/{{webContext}}/rest/wallet/:walletId/notifications",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{hostname}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"{{webContext}}",
+						"rest",
+						"wallet",
+						":walletId",
+						"notifications"
+					],
+					"variable": [
+						{
+							"key": "walletId",
+							"value": "0x7411754226e335303518f1bf12d925978d9f83f2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete notification",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{protocol}}://{{hostname}}:{{port}}/{{webContext}}/rest/delete-notification/{{notification_id}}",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{hostname}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"{{webContext}}",
+						"rest",
+						"delete-notification",
+						"{{notification_id}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "{{meveo.password}}",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "{{meveo.user}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "notification_id",
+			"value": ""
+		}
+	]
+}
