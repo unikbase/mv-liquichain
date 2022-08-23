@@ -24,6 +24,8 @@ public class Wallet implements CustomEntity {
 
     private String test;
 
+    private String publicKey;
+
     @Override()
     public String getUuid() {
         return uuid;
@@ -55,6 +57,14 @@ public class Wallet implements CustomEntity {
 
     public void setTest(String test) {
         this.test = test;
+    }
+
+    public String getPublicKey() {
+        return publicKey;
+    }
+
+    public void setPublicKey(String publicKey) {
+        this.publicKey = publicKey;
     }
 
     @Override()
