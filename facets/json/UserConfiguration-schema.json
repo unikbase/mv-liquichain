@@ -32,6 +32,17 @@
             "title": "UserConfiguration.isEmailNotificationsEnabled",
             "type": "boolean"
         },
+        "isOrderUpdatesEnabled": {
+            "storages": ["SQL"],
+            "default": "true",
+            "nullable": true,
+            "description": "Receive order's update",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_UserConfiguration_isOrderUpdatesEnabled",
+            "title": "UserConfiguration.isOrderUpdatesEnabled",
+            "type": "boolean"
+        },
         "user": {
             "storages": ["SQL"],
             "nullable": true,
