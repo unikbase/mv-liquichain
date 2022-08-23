@@ -9,10 +9,12 @@
   "parameterMappings" : [ {
     "serviceParameter" : "walletId",
     "multivalued" : false,
+    "parameterName" : "walletId",
     "valueRequired" : false
   }, {
     "serviceParameter" : "configurations",
     "multivalued" : false,
+    "parameterName" : "configurations",
     "valueRequired" : false
   } ],
   "pathParameters" : [ ],
