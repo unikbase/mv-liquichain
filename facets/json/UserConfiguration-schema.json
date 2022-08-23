@@ -21,6 +21,17 @@
             "title": "UserConfiguration.configurations",
             "type": "object"
         },
+        "isEmailNotificationsEnabled": {
+            "storages": ["SQL"],
+            "default": "true",
+            "nullable": true,
+            "description": "Email's notification settings",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_UserConfiguration_isEmailNotificationsEnabled",
+            "title": "UserConfiguration.isEmailNotificationsEnabled",
+            "type": "boolean"
+        },
         "user": {
             "storages": ["SQL"],
             "nullable": true,
