@@ -22,6 +22,8 @@ public class UserConfiguration implements CustomEntity {
     @JsonIgnore()
     private DBStorageType storages;
 
+    private Boolean isChatNotificationsEnabled;
+
     private Boolean IsSellerInfoUpdatesEnabled;
 
     private Map<String, String> configurations = new HashMap<>();
@@ -47,6 +49,14 @@ public class UserConfiguration implements CustomEntity {
 
     public void setStorages(DBStorageType storages) {
         this.storages = storages;
+    }
+
+    public Boolean getIsChatNotificationsEnabled() {
+        return isChatNotificationsEnabled;
+    }
+
+    public void setIsChatNotificationsEnabled(Boolean isChatNotificationsEnabled) {
+        this.isChatNotificationsEnabled = isChatNotificationsEnabled;
     }
 
     public Boolean getIsSellerInfoUpdatesEnabled() {
