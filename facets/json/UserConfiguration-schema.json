@@ -54,7 +54,7 @@
             "storages": ["SQL"],
             "default": "true",
             "nullable": true,
-            "description": "Email's notification settings",
+            "description": "Email Notifications Allowed",
             "readOnly": false,
             "versionable": false,
             "id": "CE_UserConfiguration_isEmailNotificationsEnabled",
@@ -81,17 +81,6 @@
             "versionable": false,
             "id": "CE_UserConfiguration_isAutoReplyEnabled",
             "title": "UserConfiguration.isAutoReplyEnabled",
-            "type": "boolean"
-        },
-        "isEmailNotificationsEnabled": {
-            "storages": ["SQL"],
-            "default": "true",
-            "nullable": true,
-            "description": "Email Notifications Allowed",
-            "readOnly": false,
-            "versionable": false,
-            "id": "CE_UserConfiguration_isEmailNotificationsEnabled",
-            "title": "UserConfiguration.isEmailNotificationsEnabled",
             "type": "boolean"
         },
         "user": {
