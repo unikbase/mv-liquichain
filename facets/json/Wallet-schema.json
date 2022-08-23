@@ -5,14 +5,27 @@
     "id": "Wallet",
     "title": "Wallet",
     "type": "object",
-    "properties": {"phoneNumber": {
-        "storages": ["SQL"],
-        "nullable": true,
-        "description": "Phone Number",
-        "readOnly": false,
-        "versionable": false,
-        "id": "CE_Wallet_phoneNumber",
-        "title": "Wallet.phoneNumber",
-        "$ref": "#/definitions/VerifiedPhoneNumber"
-    }}
+    "properties": {
+        "phoneNumber": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "Phone Number",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Wallet_phoneNumber",
+            "title": "Wallet.phoneNumber",
+            "$ref": "#/definitions/VerifiedPhoneNumber"
+        },
+        "test": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "test",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Wallet_test",
+            "title": "Wallet.test",
+            "type": "string",
+            "maxLength": 255
+        }
+    }
 }
