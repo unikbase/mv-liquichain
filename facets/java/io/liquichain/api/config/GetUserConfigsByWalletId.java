@@ -56,7 +56,7 @@ public class GetUserConfigsByWalletId extends Script {
           		return;
         	}
         	walletId = (walletId.startsWith("0x") ? walletId.substring(2) : walletId).toLowerCase();
-        	Wallet user = crossStorageApi.find(defaultRepo, Wallet.class).by("wallet", walletId).getResult(); 
+        	Wallet user = crossStorageApi.find(defaultRepo, Wallet.class).by("uuid", walletId).getResult(); 
         	if(user == null){
         		result = returnError("USER_NOT_FOUND", "merchant not found against provided walletId.");
 				return;
