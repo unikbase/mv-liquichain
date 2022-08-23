@@ -1,8 +1,6 @@
 {
   "active" : false,
   "code" : "purge_job_history",
-  "jobCategory" : "UTILS",
-  "jobTemplate" : "PurgeJob",
   "customFields" : {
     "customField" : [ {
       "code" : "PurgeJob_jobExecHistory_jobName",
@@ -12,6 +10,8 @@
       "longValue" : 1
     } ]
   },
+  "jobCategory" : "UTILS",
+  "jobTemplate" : "PurgeJob",
   "timerCode" : "Daily-midnight",
   "limitToSingleNode" : true
 }
