@@ -6,6 +6,18 @@
     "title": "Transaction",
     "type": "object",
     "properties": {
+        "s": {
+            "storages": ["SQL"],
+            "indexType": "INDEX_NOT_ANALYZE",
+            "nullable": true,
+            "description": "S",
+            "readOnly": true,
+            "versionable": false,
+            "id": "CE_Transaction_s",
+            "title": "Transaction.s",
+            "type": "string",
+            "maxLength": 64
+        },
         "test": {
             "storages": ["SQL"],
             "nullable": true,
