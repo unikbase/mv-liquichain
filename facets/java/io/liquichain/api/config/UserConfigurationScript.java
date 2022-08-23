@@ -20,7 +20,7 @@ public class UserConfigurationScript extends Script {
     private final Repository defaultRepo = repositoryService.findDefaultRepository();
 
     private String walletId;
-  	private Map<String,String> configurations;
+  	private Map<String,String> configurations = new HashMap<>();
     private String result;
 
     public String getResult() {
