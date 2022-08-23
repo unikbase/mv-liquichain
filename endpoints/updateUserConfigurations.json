@@ -21,7 +21,7 @@
   "serializeResult" : false,
   "contentType" : "application/json",
   "basePath" : "user",
-  "path" : "/configs",
+  "path" : "/config",
   "pool" : {
     "usePool" : false
   }
