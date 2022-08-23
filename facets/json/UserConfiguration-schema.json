@@ -5,14 +5,31 @@
     "id": "UserConfiguration",
     "title": "User Configurations",
     "type": "object",
-    "properties": {"user": {
-        "storages": ["SQL"],
-        "nullable": true,
-        "description": "User",
-        "readOnly": false,
-        "versionable": false,
-        "id": "CE_UserConfiguration_user",
-        "title": "UserConfiguration.user",
-        "$ref": "#/definitions/Wallet"
-    }}
+    "properties": {
+        "configurations": {
+            "storages": ["SQL"],
+            "patternProperties": {"^.*$": {
+                "id": "CE_UserConfiguration_configurations_item",
+                "title": "UserConfiguration.configurations item",
+                "type": "string"
+            }},
+            "nullable": true,
+            "description": "Configurations",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_UserConfiguration_configurations",
+            "title": "UserConfiguration.configurations",
+            "type": "object"
+        },
+        "user": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "User",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_UserConfiguration_user",
+            "title": "UserConfiguration.user",
+            "$ref": "#/definitions/Wallet"
+        }
+    }
 }
