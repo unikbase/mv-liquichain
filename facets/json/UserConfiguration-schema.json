@@ -6,6 +6,17 @@
     "title": "User Configurations",
     "type": "object",
     "properties": {
+        "isChatNotificationsEnabled": {
+            "storages": ["SQL"],
+            "default": "true",
+            "nullable": true,
+            "description": "Chat notifications settings",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_UserConfiguration_isChatNotificationsEnabled",
+            "title": "UserConfiguration.isChatNotificationsEnabled",
+            "type": "boolean"
+        },
         "IsSellerInfoUpdatesEnabled": {
             "storages": ["SQL"],
             "default": "true",
