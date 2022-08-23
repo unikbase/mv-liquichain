@@ -4,6 +4,7 @@ import org.meveo.model.CustomEntity;
 import java.util.List;
 import org.meveo.model.persistence.DBStorageType;
 import org.meveo.model.customEntities.VerifiedPhoneNumber;
+import org.meveo.model.customEntities.Wallet;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class Address implements CustomEntity {
@@ -23,6 +24,8 @@ public class Address implements CustomEntity {
     private String country;
 
     private VerifiedPhoneNumber phoneNumber;
+
+    private Wallet wallet;
 
     private String city;
 
@@ -73,6 +76,14 @@ public class Address implements CustomEntity {
 
     public void setPhoneNumber(VerifiedPhoneNumber phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public Wallet getWallet() {
+        return wallet;
+    }
+
+    public void setWallet(Wallet wallet) {
+        this.wallet = wallet;
     }
 
     public String getCity() {
