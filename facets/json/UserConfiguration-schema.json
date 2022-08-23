@@ -1,0 +1,46 @@
+{
+    "storages": ["SQL"],
+    "default": "User's Configurations",
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "id": "UserConfiguration",
+    "title": "User Configurations",
+    "type": "object",
+    "properties": {
+        "configurations": {
+            "storages": ["SQL"],
+            "patternProperties": {"^.*$": {
+                "id": "CE_UserConfiguration_configurations_item",
+                "title": "UserConfiguration.configurations item",
+                "type": "string"
+            }},
+            "nullable": true,
+            "description": "Configurations",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_UserConfiguration_configurations",
+            "title": "UserConfiguration.configurations",
+            "type": "object"
+        },
+        "isEmailNotificationsEnabled": {
+            "storages": ["SQL"],
+            "default": "true",
+            "nullable": true,
+            "description": "Email Notifications Allowed",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_UserConfiguration_isEmailNotificationsEnabled",
+            "title": "UserConfiguration.isEmailNotificationsEnabled",
+            "type": "boolean"
+        },
+        "user": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "User",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_UserConfiguration_user",
+            "title": "UserConfiguration.user",
+            "$ref": "#/definitions/Wallet"
+        }
+    }
+}
