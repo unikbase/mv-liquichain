@@ -60,6 +60,17 @@
             "type": "string",
             "maxLength": 10
         },
+        "postalCode": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "Postal code",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Address_postalCode",
+            "title": "Address.postalCode",
+            "type": "string",
+            "maxLength": 10
+        },
         "name": {
             "storages": ["SQL"],
             "nullable": true,
