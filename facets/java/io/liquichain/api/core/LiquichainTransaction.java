@@ -108,7 +108,7 @@ public class LiquichainTransaction extends Script {
         this.defaultGasPrice = new BigInteger(config.getProperty("besu.gas.price", "0"));
         String appName = config.getProperty("eth.api.appname", "licoin");
         LiquichainApp liquichainApp = crossStorageApi.find(defaultRepo, LiquichainApp.class)
-                                                     .by("name", appName).getResult() ;
+                                                     .by("name", appName).getResult();
         this.smartContract = liquichainApp.getHexCode();
         String besuApiUrl = config.getProperty("besu.api.url", "https://testnet.liquichain.io/rpc");
         this.web3j = Web3j.build(new HttpService(besuApiUrl));
@@ -514,15 +514,11 @@ public class LiquichainTransaction extends Script {
 
         // updateWalletBalances(sender, recipient);
 
-        try {
-            LOG.info("sending transaction notification");
-            cloudMessaging.setUserId(recipient);
-            cloudMessaging.setTitle("Telecel Play");
-            cloudMessaging.setBody(message);
-            cloudMessaging.execute(null);
-        } catch (Exception e) {
-            LOG.warn("cannot send notification to {}: {}", to, message);
-        }
+        LOG.info("sending transaction notification");
+        cloudMessaging.setUserId(recipient);
+        cloudMessaging.setTitle("Telecel Play");
+        cloudMessaging.setBody(message);
+        cloudMessaging.execute(null);
 
         return transactionHash;
     }
@@ -581,16 +577,13 @@ public class LiquichainTransaction extends Script {
                 break;
         }
         // TODO - send notification to the user e.g. CloudMessaging
-        try {
-            if (!transactionHash.isEmpty()) {
-                cloudMessaging.setUserId(recipientAddress);
-                cloudMessaging.setTitle("Telecel Play");
-                cloudMessaging.setBody(message);
-                cloudMessaging.execute(null);
-            }
-        } catch (Exception e) {
-            LOG.warn("cannot send notification to {}: {}", recipientAddress, message);
+        if (!transactionHash.isEmpty()) {
+            cloudMessaging.setUserId(recipientAddress);
+            cloudMessaging.setTitle("Telecel Play");
+            cloudMessaging.setBody(message);
+            cloudMessaging.execute(null);
         }
+
         return transactionHash;
     }
 
