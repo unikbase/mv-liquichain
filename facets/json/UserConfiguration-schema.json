@@ -35,7 +35,7 @@
         "user": {
             "storages": ["SQL"],
             "nullable": true,
-            "description": "User's wallet",
+            "description": "User",
             "readOnly": false,
             "versionable": false,
             "id": "CE_UserConfiguration_user",
