@@ -66,6 +66,12 @@ public class GetUserConfigsByWalletId extends Script {
           	if(configs == null){
 				configs = new UserConfiguration();
               	configs.setUser(user);
+              	configs.setIsEmailNotificationsEnabled(true);
+              	configs.setIsOrderUpdatesEnabled(true);
+ 				configs.setIsSellerInfoUpdatesEnabled(true);
+              	configs.setIsChatNotificationsEnabled(true);
+              	configs.setIsChatEnabledFromProfilePage(true);
+ 				configs.setIsAutoReplyEnabled(true);              	
             }
           	result = new Gson().toJson(configs);
           	return;
