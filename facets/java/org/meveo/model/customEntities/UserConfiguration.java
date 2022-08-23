@@ -34,6 +34,8 @@ public class UserConfiguration implements CustomEntity {
 
     private Boolean isAutoReplyEnabled;
 
+    private Boolean isEmailNotificationsEnabled;
+
     private Wallet user;
 
     @Override()
@@ -107,6 +109,14 @@ public class UserConfiguration implements CustomEntity {
 
     public void setIsAutoReplyEnabled(Boolean isAutoReplyEnabled) {
         this.isAutoReplyEnabled = isAutoReplyEnabled;
+    }
+
+    public Boolean getIsEmailNotificationsEnabled() {
+        return isEmailNotificationsEnabled;
+    }
+
+    public void setIsEmailNotificationsEnabled(Boolean isEmailNotificationsEnabled) {
+        this.isEmailNotificationsEnabled = isEmailNotificationsEnabled;
     }
 
     public Wallet getUser() {
