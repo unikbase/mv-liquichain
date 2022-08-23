@@ -1,6 +1,6 @@
 {
   "code" : "user",
-  "description" : "User's wallet",
+  "description" : "User",
   "fieldType" : "ENTITY",
   "accountLevel" : "CE_UserConfiguration",
   "appliesTo" : "CE_UserConfiguration",
