@@ -1,15 +1,15 @@
 {
-  "code" : "user",
-  "description" : "User",
-  "fieldType" : "ENTITY",
+  "code" : "isAutoReplyEnabled",
+  "description" : "Auto reply chat message enabled",
+  "fieldType" : "BOOLEAN",
   "accountLevel" : "CE_UserConfiguration",
   "appliesTo" : "CE_UserConfiguration",
+  "defaultValue" : "true",
   "useInheritedAsDefaultValue" : false,
   "storageType" : "SINGLE",
   "valueRequired" : false,
   "versionable" : false,
   "triggerEndPeriodEvent" : false,
-  "entityClazz" : "org.meveo.model.customEntities.CustomEntityTemplate - Wallet",
   "allowEdit" : true,
   "hideOnNew" : false,
   "contentTypes" : [ ],
@@ -23,5 +23,5 @@
   "audited" : false,
   "persisted" : true,
   "filter" : true,
-  "unique" : true
+  "unique" : false
 }

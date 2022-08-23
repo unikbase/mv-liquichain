@@ -3,8 +3,6 @@ package org.meveo.model.customEntities;
 import org.meveo.model.CustomEntity;
 import java.util.List;
 import org.meveo.model.persistence.DBStorageType;
-import java.util.Map;
-import java.util.HashMap;
 import org.meveo.model.customEntities.Wallet;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -22,7 +20,19 @@ public class UserConfiguration implements CustomEntity {
     @JsonIgnore()
     private DBStorageType storages;
 
-    private Map<String, String> configurations = new HashMap<>();
+    private String autoReplyMessage;
+
+    private Boolean isChatNotificationsEnabled;
+
+    private Boolean IsSellerInfoUpdatesEnabled;
+
+    private Boolean isChatEnabledFromProfilePage;
+
+    private Boolean isEmailNotificationsEnabled;
+
+    private Boolean isOrderUpdatesEnabled;
+
+    private Boolean isAutoReplyEnabled;
 
     private Wallet user;
 
@@ -43,12 +53,60 @@ public class UserConfiguration implements CustomEntity {
         this.storages = storages;
     }
 
-    public Map<String, String> getConfigurations() {
-        return configurations;
+    public String getAutoReplyMessage() {
+        return autoReplyMessage;
     }
 
-    public void setConfigurations(Map<String, String> configurations) {
-        this.configurations = configurations;
+    public void setAutoReplyMessage(String autoReplyMessage) {
+        this.autoReplyMessage = autoReplyMessage;
+    }
+
+    public Boolean getIsChatNotificationsEnabled() {
+        return isChatNotificationsEnabled;
+    }
+
+    public void setIsChatNotificationsEnabled(Boolean isChatNotificationsEnabled) {
+        this.isChatNotificationsEnabled = isChatNotificationsEnabled;
+    }
+
+    public Boolean getIsSellerInfoUpdatesEnabled() {
+        return IsSellerInfoUpdatesEnabled;
+    }
+
+    public void setIsSellerInfoUpdatesEnabled(Boolean IsSellerInfoUpdatesEnabled) {
+        this.IsSellerInfoUpdatesEnabled = IsSellerInfoUpdatesEnabled;
+    }
+
+    public Boolean getIsChatEnabledFromProfilePage() {
+        return isChatEnabledFromProfilePage;
+    }
+
+    public void setIsChatEnabledFromProfilePage(Boolean isChatEnabledFromProfilePage) {
+        this.isChatEnabledFromProfilePage = isChatEnabledFromProfilePage;
+    }
+
+    public Boolean getIsEmailNotificationsEnabled() {
+        return isEmailNotificationsEnabled;
+    }
+
+    public void setIsEmailNotificationsEnabled(Boolean isEmailNotificationsEnabled) {
+        this.isEmailNotificationsEnabled = isEmailNotificationsEnabled;
+    }
+
+    public Boolean getIsOrderUpdatesEnabled() {
+        return isOrderUpdatesEnabled;
+    }
+
+    public void setIsOrderUpdatesEnabled(Boolean isOrderUpdatesEnabled) {
+        this.isOrderUpdatesEnabled = isOrderUpdatesEnabled;
+    }
+
+    public Boolean getIsAutoReplyEnabled() {
+        return isAutoReplyEnabled;
+    }
+
+    public void setIsAutoReplyEnabled(Boolean isAutoReplyEnabled) {
+        this.isAutoReplyEnabled = isAutoReplyEnabled;
     }
 
     public Wallet getUser() {
