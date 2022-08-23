@@ -5,15 +5,30 @@
     "id": "LiquichainApp",
     "title": "Application",
     "type": "object",
-    "properties": {"hexCode": {
-        "storages": ["SQL"],
-        "nullable": true,
-        "description": "code in hexa as returned by get code (no \"0x\")",
-        "readOnly": false,
-        "versionable": false,
-        "id": "CE_LiquichainApp_hexCode",
-        "title": "LiquichainApp.hexCode",
-        "type": "string",
-        "maxLength": 255
-    }}
+    "properties": {
+        "hexCode": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "code in hexa as returned by get code (no \"0x\")",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_LiquichainApp_hexCode",
+            "title": "LiquichainApp.hexCode",
+            "type": "string",
+            "maxLength": 255
+        },
+        "name": {
+            "storages": ["SQL"],
+            "nullable": false,
+            "minLength": 1,
+            "description": "Name",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_LiquichainApp_name",
+            "title": "LiquichainApp.name",
+            "type": "string",
+            "maxLength": 255
+        }
+    },
+    "required": ["name"]
 }
