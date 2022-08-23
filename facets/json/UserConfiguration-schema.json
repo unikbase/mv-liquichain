@@ -4,5 +4,15 @@
     "$schema": "http://json-schema.org/draft-07/schema",
     "id": "UserConfiguration",
     "title": "User Configurations",
-    "type": "object"
+    "type": "object",
+    "properties": {"user": {
+        "storages": ["SQL"],
+        "nullable": true,
+        "description": "User",
+        "readOnly": false,
+        "versionable": false,
+        "id": "CE_UserConfiguration_user",
+        "title": "UserConfiguration.user",
+        "$ref": "#/definitions/Wallet"
+    }}
 }
