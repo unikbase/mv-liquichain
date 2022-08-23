@@ -3,7 +3,6 @@ package org.meveo.model.customEntities;
 import org.meveo.model.CustomEntity;
 import java.util.List;
 import org.meveo.model.persistence.DBStorageType;
-import org.meveo.model.customEntities.Wallet;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class UserConfiguration implements CustomEntity {
@@ -33,8 +32,6 @@ public class UserConfiguration implements CustomEntity {
     private Boolean isOrderUpdatesEnabled;
 
     private Boolean isAutoReplyEnabled;
-
-    private Wallet user;
 
     @Override()
     public String getUuid() {
@@ -107,14 +104,6 @@ public class UserConfiguration implements CustomEntity {
 
     public void setIsAutoReplyEnabled(Boolean isAutoReplyEnabled) {
         this.isAutoReplyEnabled = isAutoReplyEnabled;
-    }
-
-    public Wallet getUser() {
-        return user;
-    }
-
-    public void setUser(Wallet user) {
-        this.user = user;
     }
 
     @Override()
