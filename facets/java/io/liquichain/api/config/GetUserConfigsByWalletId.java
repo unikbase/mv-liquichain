@@ -50,7 +50,7 @@ public class GetUserConfigsByWalletId extends Script {
   	@Override
 	public void execute(Map<String, Object> parameters) throws BusinessException {
     	try{
-          	log.info("filter merchant by walletId == {}",walletId);
+          	log.info("filter user settings by walletId == {}",walletId);
       		if(StringUtils.isBlank(walletId)){
           		result = returnError("USER_NOT_FOUND","invalid walletId");
           		return;
