@@ -48,5 +48,5 @@
   "executionRoles" : [ "APP_USER" ],
   "sourcingRoles" : [ ],
   "mavenDependencies" : [ ],
-  "importScriptInstances" : [ "org.meveo.model.customEntities.Address" ]
+  "importScriptInstances" : [ ]
 }
