@@ -40,6 +40,8 @@ public class Wallet implements CustomEntity {
 
     private String publicInfo;
 
+    private String keyPair;
+
     private String publicKey;
 
     private String privateInfo;
@@ -123,6 +125,14 @@ public class Wallet implements CustomEntity {
 
     public void setPublicInfo(String publicInfo) {
         this.publicInfo = publicInfo;
+    }
+
+    public String getKeyPair() {
+        return keyPair;
+    }
+
+    public void setKeyPair(String keyPair) {
+        this.keyPair = keyPair;
     }
 
     public String getPublicKey() {
