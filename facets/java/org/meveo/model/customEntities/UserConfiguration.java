@@ -24,6 +24,8 @@ public class UserConfiguration implements CustomEntity {
 
     private Map<String, String> configurations = new HashMap<>();
 
+    private Boolean isEmailNotificationsEnabled;
+
     private Wallet user;
 
     @Override()
@@ -49,6 +51,14 @@ public class UserConfiguration implements CustomEntity {
 
     public void setConfigurations(Map<String, String> configurations) {
         this.configurations = configurations;
+    }
+
+    public Boolean getIsEmailNotificationsEnabled() {
+        return isEmailNotificationsEnabled;
+    }
+
+    public void setIsEmailNotificationsEnabled(Boolean isEmailNotificationsEnabled) {
+        this.isEmailNotificationsEnabled = isEmailNotificationsEnabled;
     }
 
     public Wallet getUser() {
