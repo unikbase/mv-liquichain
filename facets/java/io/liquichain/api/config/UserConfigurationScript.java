@@ -2,10 +2,13 @@ package io.liquichain.api.config;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.LinkedHashMap;
 
 import org.meveo.api.persistence.CrossStorageApi;
 import org.meveo.model.customEntities.Wallet;
 import org.meveo.model.customEntities.UserConfiguration;
+import org.meveo.commons.utils.StringUtils;
+
 import org.meveo.model.storage.Repository;
 import org.meveo.service.script.Script;
 import org.meveo.admin.exception.BusinessException;
@@ -20,7 +23,8 @@ public class UserConfigurationScript extends Script {
     private final Repository defaultRepo = repositoryService.findDefaultRepository();
 
     private String walletId;
-  	private Map<String,String> configurations = new HashMap<>();
+	private LinkedHashMap configs;
+  
     private String result;
 
     public String getResult() {
@@ -31,8 +35,8 @@ public class UserConfigurationScript extends Script {
         this.walletId = walletId;
     }
 
-    public void setConfigurations(Map<String,String> configurations) {
-        this.configurations = configurations;
+    public void setConfigs(LinkedHashMap configs) {
+        this.configs = configs;
     }
 
   	private String returnError(String errorCode, String message) {
@@ -53,13 +57,43 @@ public class UserConfigurationScript extends Script {
 			return;
         }
       
-      	UserConfiguration configs = new UserConfiguration();
-      	configs.setUser(user);
-      	configs.setConfigurations(configurations);
+      	UserConfiguration userConfigs = crossStorageApi.find(defaultRepo, UserConfiguration.class).by("user", user).getResult();
+      	if(userConfigs == null){
+          	userConfigs = new UserConfiguration();
+      		userConfigs.setUser(user);
+        }
+      	
+      	String emailNotifiationsEnabled = (String)configs.get("isEmailNotificationsEnabled");
+      	if(StringUtils.isNotBlank(emailNotifiationsEnabled))
+      		userConfigs.setIsEmailNotificationsEnabled((Boolean)configs.get("isEmailNotificationsEnabled"));
+      
+      	String orderUpdatesEnabled = (String)configs.get("isOrderUpdatesEnabled");
+      	if(StringUtils.isNotBlank(orderUpdatesEnabled))
+      		userConfigs.setIsOrderUpdatesEnabled((Boolean)configs.get("isOrderUpdatesEnabled"));
+      
+      	String sellerInfoUpdatesEnabled = (String)configs.get("isSellerInfoUpdatesEnabled");
+      	if(StringUtils.isNotBlank(sellerInfoUpdatesEnabled))
+      		userConfigs.setIsSellerInfoUpdatesEnabled((Boolean)configs.get("isSellerInfoUpdatesEnabled"));
+      
+      	String chatNotificationsEnabled = (String)configs.get("isChatNotificationsEnabled");
+      	if(StringUtils.isNotBlank(chatNotificationsEnabled))
+      		userConfigs.setIsChatNotificationsEnabled((Boolean)configs.get("isChatNotificationsEnabled"));
+      
+      	String chatEnabledFromProfile = (String)configs.get("isChatEnabledFromProfilePage");
+      	if(StringUtils.isNotBlank(chatEnabledFromProfile))
+      		userConfigs.setIsChatEnabledFromProfilePage((Boolean)configs.get("isChatEnabledFromProfilePage"));
+      
+      	String autoReplyEnabled = (String)configs.get("isAutoReplyEnabled");
+      	if(StringUtils.isNotBlank(autoReplyEnabled))
+      		userConfigs.setIsAutoReplyEnabled((Boolean)configs.get("isAutoReplyEnabled"));
+      	
+        String autoReplyMessage = (String)configs.get("autoReplyMessage");
+      	if(StringUtils.isNotBlank(autoReplyMessage))
+      		userConfigs.setAutoReplyMessage(autoReplyMessage);
       
       	try{
-			crossStorageApi.createOrUpdate(defaultRepo, configs);
-          	result = "{ \"status\" : \"success\" , \"message\": \"user settings has been updated successfully.\"}";
+			crossStorageApi.createOrUpdate(defaultRepo, userConfigs);
+          	result = "{ \"status\" : \"success\" , \"message\": \"user configurations has been updated successfully.\"}";
         } catch(Exception ex){
         	log.error("Error in paytech payment transaction creation : {}",ex);
           	throw new BusinessException("Unable to create update user settings");
