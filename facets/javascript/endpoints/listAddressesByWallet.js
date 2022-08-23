@@ -1,33 +1,53 @@
-const listAddressesByWallet = async (parameters) =>  {
-	const baseUrl = window.location.origin;
-	const url = new URL(`${window.location.pathname.split('/')[1]}/rest/listAddressesByWallet/${parameters.walletId}`, baseUrl);
-	return fetch(url.toString(), {
-		method: 'GET'
-	});
+import EndpointInterface from "#{API_BASE_URL}/api/rest/endpoint/EndpointInterface.js";
+
+// the request schema, this should be updated
+// whenever changes to the endpoint parameters are made
+// this is important because this is used to validate and parse the request parameters
+const requestSchema = {
+  "title" : "listAddressesByWalletRequest",
+  "id" : "listAddressesByWalletRequest",
+  "default" : "Schema definition for listAddressesByWallet",
+  "$schema" : "http://json-schema.org/draft-07/schema",
+  "type" : "object"
 }
 
-const listAddressesByWalletForm = (container) => {
-	const html = `<form id='listAddressesByWallet-form'>
-		<div id='listAddressesByWallet-walletId-form-field'>
-			<label for='walletId'>walletId</label>
-			<input type='text' id='listAddressesByWallet-walletId-param' name='walletId'/>
-		</div>
-		<button type='button'>Test</button>
-	</form>`;
-
-	container.insertAdjacentHTML('beforeend', html)
-
-	const walletId = container.querySelector('#listAddressesByWallet-walletId-param');
-
-	container.querySelector('#listAddressesByWallet-form button').onclick = () => {
-		const params = {
-			walletId : walletId.value !== "" ? walletId.value : undefined
-		};
-
-		listAddressesByWallet(params).then(r => r.text().then(
-				t => alert(t)
-			));
-	};
+// the response schema, this should be updated
+// whenever changes to the endpoint parameters are made
+// this is important because this could be used to parse the result
+const responseSchema = {
+  "title" : "listAddressesByWalletResponse",
+  "id" : "listAddressesByWalletResponse",
+  "default" : "Schema definition for listAddressesByWallet",
+  "$schema" : "http://json-schema.org/draft-07/schema",
+  "type" : "object",
+  "properties" : {
+    "result" : {
+      "title" : "result",
+      "type" : "string",
+      "minLength" : 1
+    }
+  }
 }
 
-export { listAddressesByWallet, listAddressesByWalletForm };
+// should contain offline mock data, make sure it adheres to the response schema
+const mockResult = {};
+
+class listAddressesByWallet extends EndpointInterface {
+	constructor() {
+		// name and http method, these are inserted when code is generated
+		super("listAddressesByWallet", "GET");
+		this.requestSchema = requestSchema;
+		this.responseSchema = responseSchema;
+		this.mockResult = mockResult;
+	}
+
+	getRequestSchema() {
+		return this.requestSchema;
+	}
+
+	getResponseSchema() {
+		return this.responseSchema;
+	}
+}
+
+export default new listAddressesByWallet();
