@@ -28,6 +28,17 @@
             "title": "LiquichainApp.name",
             "type": "string",
             "maxLength": 255
+        },
+        "creationDate": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "format": "date-time",
+            "description": "Creation date",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_LiquichainApp_creationDate",
+            "title": "LiquichainApp.creationDate",
+            "type": "string"
         }
     },
     "required": ["name"]
