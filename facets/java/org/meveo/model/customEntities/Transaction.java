@@ -31,6 +31,8 @@ public class Transaction implements CustomEntity {
     @JsonProperty(required = true)
     private String signedHash;
 
+    private String type;
+
     private String value;
 
     @Override()
@@ -88,6 +90,14 @@ public class Transaction implements CustomEntity {
 
     public void setSignedHash(String signedHash) {
         this.signedHash = signedHash;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public String getValue() {
