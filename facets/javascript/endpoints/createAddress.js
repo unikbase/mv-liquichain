@@ -1,109 +1,110 @@
-const createAddress = async (parameters) =>  {
-	const baseUrl = window.location.origin;
-	const url = new URL(`${window.location.pathname.split('/')[1]}/rest/createAddress/`, baseUrl);
-	return fetch(url.toString(), {
-		method: 'POST', 
-		headers : new Headers({
- 			'Content-Type': 'application/json'
-		}),
-		body: JSON.stringify({
-			name : parameters.name,
-			streetAddress : parameters.streetAddress,
-			city : parameters.city,
-			state : parameters.state,
-			countryCode : parameters.countryCode,
-			dialCode : parameters.dialCode,
-			postalCode : parameters.postalCode,
-			longitude : parameters.longitude,
-			latitude : parameters.latitude,
-			walletId : parameters.walletId,
-			phoneNumber : parameters.phoneNumber
-		})
-	});
+import EndpointInterface from "#{API_BASE_URL}/api/rest/endpoint/EndpointInterface.js";
+
+// the request schema, this should be updated
+// whenever changes to the endpoint parameters are made
+// this is important because this is used to validate and parse the request parameters
+const requestSchema = {
+  "title" : "createAddressRequest",
+  "id" : "createAddressRequest",
+  "default" : "Schema definition for createAddress",
+  "$schema" : "http://json-schema.org/draft-07/schema",
+  "type" : "object",
+  "properties" : {
+    "walletId" : {
+      "title" : "walletId",
+      "type" : "string",
+      "minLength" : 1
+    },
+    "phoneNumber" : {
+      "title" : "phoneNumber",
+      "type" : "string",
+      "minLength" : 1
+    },
+    "streetAddress" : {
+      "title" : "streetAddress",
+      "type" : "string",
+      "minLength" : 1
+    },
+    "city" : {
+      "title" : "city",
+      "type" : "string",
+      "minLength" : 1
+    },
+    "countryCode" : {
+      "title" : "countryCode",
+      "type" : "string",
+      "minLength" : 1
+    },
+    "dialCode" : {
+      "title" : "dialCode",
+      "type" : "string",
+      "minLength" : 1
+    },
+    "postalCode" : {
+      "title" : "postalCode",
+      "type" : "string",
+      "minLength" : 1
+    },
+    "latitude" : {
+      "title" : "latitude",
+      "type" : "string",
+      "minLength" : 1
+    },
+    "name" : {
+      "title" : "name",
+      "type" : "string",
+      "minLength" : 1
+    },
+    "state" : {
+      "title" : "state",
+      "type" : "string",
+      "minLength" : 1
+    },
+    "longitude" : {
+      "title" : "longitude",
+      "type" : "string",
+      "minLength" : 1
+    }
+  }
 }
 
-const createAddressForm = (container) => {
-	const html = `<form id='createAddress-form'>
-		<div id='createAddress-name-form-field'>
-			<label for='name'>name</label>
-			<input type='text' id='createAddress-name-param' name='name'/>
-		</div>
-		<div id='createAddress-streetAddress-form-field'>
-			<label for='streetAddress'>streetAddress</label>
-			<input type='text' id='createAddress-streetAddress-param' name='streetAddress'/>
-		</div>
-		<div id='createAddress-city-form-field'>
-			<label for='city'>city</label>
-			<input type='text' id='createAddress-city-param' name='city'/>
-		</div>
-		<div id='createAddress-state-form-field'>
-			<label for='state'>state</label>
-			<input type='text' id='createAddress-state-param' name='state'/>
-		</div>
-		<div id='createAddress-countryCode-form-field'>
-			<label for='countryCode'>countryCode</label>
-			<input type='text' id='createAddress-countryCode-param' name='countryCode'/>
-		</div>
-		<div id='createAddress-dialCode-form-field'>
-			<label for='dialCode'>dialCode</label>
-			<input type='text' id='createAddress-dialCode-param' name='dialCode'/>
-		</div>
-		<div id='createAddress-postalCode-form-field'>
-			<label for='postalCode'>postalCode</label>
-			<input type='text' id='createAddress-postalCode-param' name='postalCode'/>
-		</div>
-		<div id='createAddress-longitude-form-field'>
-			<label for='longitude'>longitude</label>
-			<input type='text' id='createAddress-longitude-param' name='longitude'/>
-		</div>
-		<div id='createAddress-latitude-form-field'>
-			<label for='latitude'>latitude</label>
-			<input type='text' id='createAddress-latitude-param' name='latitude'/>
-		</div>
-		<div id='createAddress-walletId-form-field'>
-			<label for='walletId'>walletId</label>
-			<input type='text' id='createAddress-walletId-param' name='walletId'/>
-		</div>
-		<div id='createAddress-phoneNumber-form-field'>
-			<label for='phoneNumber'>phoneNumber</label>
-			<input type='text' id='createAddress-phoneNumber-param' name='phoneNumber'/>
-		</div>
-		<button type='button'>Test</button>
-	</form>`;
-
-	container.insertAdjacentHTML('beforeend', html)
-
-	const name = container.querySelector('#createAddress-name-param');
-	const streetAddress = container.querySelector('#createAddress-streetAddress-param');
-	const city = container.querySelector('#createAddress-city-param');
-	const state = container.querySelector('#createAddress-state-param');
-	const countryCode = container.querySelector('#createAddress-countryCode-param');
-	const dialCode = container.querySelector('#createAddress-dialCode-param');
-	const postalCode = container.querySelector('#createAddress-postalCode-param');
-	const longitude = container.querySelector('#createAddress-longitude-param');
-	const latitude = container.querySelector('#createAddress-latitude-param');
-	const walletId = container.querySelector('#createAddress-walletId-param');
-	const phoneNumber = container.querySelector('#createAddress-phoneNumber-param');
-
-	container.querySelector('#createAddress-form button').onclick = () => {
-		const params = {
-			name : name.value !== "" ? name.value : undefined,
-			streetAddress : streetAddress.value !== "" ? streetAddress.value : undefined,
-			city : city.value !== "" ? city.value : undefined,
-			state : state.value !== "" ? state.value : undefined,
-			countryCode : countryCode.value !== "" ? countryCode.value : undefined,
-			dialCode : dialCode.value !== "" ? dialCode.value : undefined,
-			postalCode : postalCode.value !== "" ? postalCode.value : undefined,
-			longitude : longitude.value !== "" ? longitude.value : undefined,
-			latitude : latitude.value !== "" ? latitude.value : undefined,
-			walletId : walletId.value !== "" ? walletId.value : undefined,
-			phoneNumber : phoneNumber.value !== "" ? phoneNumber.value : undefined
-		};
-
-		createAddress(params).then(r => r.text().then(
-				t => alert(t)
-			));
-	};
+// the response schema, this should be updated
+// whenever changes to the endpoint parameters are made
+// this is important because this could be used to parse the result
+const responseSchema = {
+  "title" : "createAddressResponse",
+  "id" : "createAddressResponse",
+  "default" : "Schema definition for createAddress",
+  "$schema" : "http://json-schema.org/draft-07/schema",
+  "type" : "object",
+  "properties" : {
+    "result" : {
+      "title" : "result",
+      "type" : "string",
+      "minLength" : 1
+    }
+  }
 }
 
-export { createAddress, createAddressForm };
+// should contain offline mock data, make sure it adheres to the response schema
+const mockResult = {};
+
+class createAddress extends EndpointInterface {
+	constructor() {
+		// name and http method, these are inserted when code is generated
+		super("createAddress", "POST");
+		this.requestSchema = requestSchema;
+		this.responseSchema = responseSchema;
+		this.mockResult = mockResult;
+	}
+
+	getRequestSchema() {
+		return this.requestSchema;
+	}
+
+	getResponseSchema() {
+		return this.responseSchema;
+	}
+}
+
+export default new createAddress();
