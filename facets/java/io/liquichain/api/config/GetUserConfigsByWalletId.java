@@ -76,7 +76,7 @@ public class GetUserConfigsByWalletId extends Script {
           	result = new Gson().toJson(configs);
           	return;
         } catch(Exception ex){
-            log.error("User's configurations not found against provided provided data.");
+            log.error("User's configurations not found against provided provided data. {}",ex);
           	returnError("USER_CONFIG_NOT_FOUND","User's configurations not found against provided data.");
         }      	
 	}
