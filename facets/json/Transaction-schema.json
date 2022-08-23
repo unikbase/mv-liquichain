@@ -18,6 +18,64 @@
             "type": "string",
             "maxLength": 64
         },
+        "test": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "test",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Transaction_test",
+            "title": "Transaction.test",
+            "type": "string",
+            "maxLength": 255
+        },
+        "fromHexHash": {
+            "storages": ["SQL"],
+            "indexType": "INDEX_NOT_ANALYZE",
+            "nullable": true,
+            "description": "Origin account",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Transaction_fromHexHash",
+            "title": "Transaction.fromHexHash",
+            "type": "string",
+            "maxLength": 40
+        },
+        "creationDate": {
+            "storages": ["SQL"],
+            "indexType": "INDEX_NOT_ANALYZE",
+            "nullable": true,
+            "format": "date-time",
+            "description": "creation Date",
+            "readOnly": true,
+            "versionable": false,
+            "id": "CE_Transaction_creationDate",
+            "title": "Transaction.creationDate",
+            "type": "string"
+        },
+        "type": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "Type",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Transaction_type",
+            "title": "Transaction.type",
+            "type": "string",
+            "maxLength": 20
+        },
+        "gasLimit": {
+            "storages": ["SQL"],
+            "indexType": "INDEX_NOT_ANALYZE",
+            "nullable": true,
+            "description": "gas limit",
+            "readOnly": true,
+            "versionable": false,
+            "id": "CE_Transaction_gasLimit",
+            "title": "Transaction.gasLimit",
+            "type": "string",
+            "maxLength": 255
+        },
         "toHexHash": {
             "storages": ["SQL"],
             "indexType": "INDEX_NOT_ANALYZE",
@@ -41,17 +99,6 @@
             "title": "Transaction.s",
             "type": "string",
             "maxLength": 64
-        },
-        "test": {
-            "storages": ["SQL"],
-            "nullable": true,
-            "description": "test",
-            "readOnly": false,
-            "versionable": false,
-            "id": "CE_Transaction_test",
-            "title": "Transaction.test",
-            "type": "string",
-            "maxLength": 255
         },
         "v": {
             "storages": ["SQL"],
@@ -78,18 +125,6 @@
             "type": "string",
             "maxLength": 500
         },
-        "fromHexHash": {
-            "storages": ["SQL"],
-            "indexType": "INDEX_NOT_ANALYZE",
-            "nullable": true,
-            "description": "Origin account",
-            "readOnly": false,
-            "versionable": false,
-            "id": "CE_Transaction_fromHexHash",
-            "title": "Transaction.fromHexHash",
-            "type": "string",
-            "maxLength": 40
-        },
         "signedHash": {
             "storages": ["SQL"],
             "indexType": "INDEX_NOT_ANALYZE",
@@ -102,29 +137,6 @@
             "title": "Transaction.signedHash",
             "type": "string",
             "maxLength": 10000
-        },
-        "creationDate": {
-            "storages": ["SQL"],
-            "indexType": "INDEX_NOT_ANALYZE",
-            "nullable": true,
-            "format": "date-time",
-            "description": "creation Date",
-            "readOnly": true,
-            "versionable": false,
-            "id": "CE_Transaction_creationDate",
-            "title": "Transaction.creationDate",
-            "type": "string"
-        },
-        "type": {
-            "storages": ["SQL"],
-            "nullable": true,
-            "description": "Type",
-            "readOnly": false,
-            "versionable": false,
-            "id": "CE_Transaction_type",
-            "title": "Transaction.type",
-            "type": "string",
-            "maxLength": 20
         },
         "value": {
             "storages": ["SQL"],
