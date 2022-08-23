@@ -24,6 +24,8 @@ public class Address implements CustomEntity {
 
     private VerifiedPhoneNumber phoneNumber;
 
+    private String dialCode;
+
     private String state;
 
     @Override()
@@ -57,6 +59,14 @@ public class Address implements CustomEntity {
 
     public void setPhoneNumber(VerifiedPhoneNumber phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public String getDialCode() {
+        return dialCode;
+    }
+
+    public void setDialCode(String dialCode) {
+        this.dialCode = dialCode;
     }
 
     public String getState() {
