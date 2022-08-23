@@ -22,6 +22,8 @@ public class UserConfiguration implements CustomEntity {
     @JsonIgnore()
     private DBStorageType storages;
 
+    private Boolean IsSellerInfoUpdatesEnabled;
+
     private Map<String, String> configurations = new HashMap<>();
 
     private Boolean isEmailNotificationsEnabled;
@@ -45,6 +47,14 @@ public class UserConfiguration implements CustomEntity {
 
     public void setStorages(DBStorageType storages) {
         this.storages = storages;
+    }
+
+    public Boolean getIsSellerInfoUpdatesEnabled() {
+        return IsSellerInfoUpdatesEnabled;
+    }
+
+    public void setIsSellerInfoUpdatesEnabled(Boolean IsSellerInfoUpdatesEnabled) {
+        this.IsSellerInfoUpdatesEnabled = IsSellerInfoUpdatesEnabled;
     }
 
     public Map<String, String> getConfigurations() {
