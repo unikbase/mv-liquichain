@@ -1,0 +1,20 @@
+{
+  "code" : "walletNotifications",
+  "description" : "Get notifications by wallet",
+  "secured" : true,
+  "checkPathParams" : true,
+  "serviceCode" : "io.liquichain.api.notification.GetNotificationsByWallet",
+  "synchronous" : true,
+  "method" : "GET",
+  "parameterMappings" : [ ],
+  "pathParameters" : [ "walletId" ],
+  "roles" : [ ],
+  "returnedVariableName" : "result",
+  "serializeResult" : true,
+  "contentType" : "application/json",
+  "basePath" : "wallet",
+  "path" : "/{walletId}/notifications",
+  "pool" : {
+    "usePool" : false
+  }
+}
