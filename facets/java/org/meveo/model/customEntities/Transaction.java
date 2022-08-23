@@ -25,6 +25,8 @@ public class Transaction implements CustomEntity {
 
     private String test;
 
+    private String initiator;
+
     private String fromHexHash;
 
     private Instant creationDate;
@@ -80,6 +82,14 @@ public class Transaction implements CustomEntity {
 
     public void setTest(String test) {
         this.test = test;
+    }
+
+    public String getInitiator() {
+        return initiator;
+    }
+
+    public void setInitiator(String initiator) {
+        this.initiator = initiator;
     }
 
     public String getFromHexHash() {
