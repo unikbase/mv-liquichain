@@ -26,6 +26,8 @@ public class UserConfiguration implements CustomEntity {
 
     private Boolean isEmailNotificationsEnabled;
 
+    private Boolean isOrderUpdatesEnabled;
+
     private Wallet user;
 
     @Override()
@@ -59,6 +61,14 @@ public class UserConfiguration implements CustomEntity {
 
     public void setIsEmailNotificationsEnabled(Boolean isEmailNotificationsEnabled) {
         this.isEmailNotificationsEnabled = isEmailNotificationsEnabled;
+    }
+
+    public Boolean getIsOrderUpdatesEnabled() {
+        return isOrderUpdatesEnabled;
+    }
+
+    public void setIsOrderUpdatesEnabled(Boolean isOrderUpdatesEnabled) {
+        this.isOrderUpdatesEnabled = isOrderUpdatesEnabled;
     }
 
     public Wallet getUser() {
