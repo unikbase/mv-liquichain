@@ -60,5 +60,4 @@ public class GetNotificationsByWallet extends Script {
         result.put("status", "success");
         result.put("result", notifications);
     }
-
 }
