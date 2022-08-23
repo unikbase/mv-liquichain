@@ -22,6 +22,8 @@ public class UserConfiguration implements CustomEntity {
     @JsonIgnore()
     private DBStorageType storages;
 
+    private String autoReplyMessage;
+
     private Boolean isChatNotificationsEnabled;
 
     private Boolean IsSellerInfoUpdatesEnabled;
@@ -53,6 +55,14 @@ public class UserConfiguration implements CustomEntity {
 
     public void setStorages(DBStorageType storages) {
         this.storages = storages;
+    }
+
+    public String getAutoReplyMessage() {
+        return autoReplyMessage;
+    }
+
+    public void setAutoReplyMessage(String autoReplyMessage) {
+        this.autoReplyMessage = autoReplyMessage;
     }
 
     public Boolean getIsChatNotificationsEnabled() {
