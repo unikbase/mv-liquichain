@@ -65,6 +65,17 @@
             "title": "UserConfiguration.isEmailNotificationsEnabled",
             "type": "boolean"
         },
+        "isAutoReplyEnabled": {
+            "storages": ["SQL"],
+            "default": "true",
+            "nullable": true,
+            "description": "Auto reply chat message enabled",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_UserConfiguration_isAutoReplyEnabled",
+            "title": "UserConfiguration.isAutoReplyEnabled",
+            "type": "boolean"
+        },
         "user": {
             "storages": ["SQL"],
             "nullable": true,
