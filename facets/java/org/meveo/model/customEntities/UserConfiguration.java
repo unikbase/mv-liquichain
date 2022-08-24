@@ -26,6 +26,8 @@ public class UserConfiguration implements CustomEntity {
 
     private Map<String, String> configurations = new HashMap<>();
 
+    private Boolean isChatEnabledFromProfilePage;
+
     private Boolean isEmailNotificationsEnabled;
 
     private Wallet user;
@@ -61,6 +63,14 @@ public class UserConfiguration implements CustomEntity {
 
     public void setConfigurations(Map<String, String> configurations) {
         this.configurations = configurations;
+    }
+
+    public Boolean getIsChatEnabledFromProfilePage() {
+        return isChatEnabledFromProfilePage;
+    }
+
+    public void setIsChatEnabledFromProfilePage(Boolean isChatEnabledFromProfilePage) {
+        this.isChatEnabledFromProfilePage = isChatEnabledFromProfilePage;
     }
 
     public Boolean getIsEmailNotificationsEnabled() {
