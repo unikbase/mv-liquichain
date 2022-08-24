@@ -32,6 +32,17 @@
             "title": "UserConfiguration.configurations",
             "type": "object"
         },
+        "isChatEnabledFromProfilePage": {
+            "storages": ["SQL"],
+            "default": "true",
+            "nullable": true,
+            "description": "Chat allowed from profile page",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_UserConfiguration_isChatEnabledFromProfilePage",
+            "title": "UserConfiguration.isChatEnabledFromProfilePage",
+            "type": "boolean"
+        },
         "isEmailNotificationsEnabled": {
             "storages": ["SQL"],
             "default": "true",
