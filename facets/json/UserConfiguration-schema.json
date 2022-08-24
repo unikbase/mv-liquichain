@@ -17,6 +17,17 @@
             "type": "string",
             "maxLength": 500
         },
+        "isChatNotificationsEnabled": {
+            "storages": ["SQL"],
+            "default": "true",
+            "nullable": true,
+            "description": "Chat notifications settings",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_UserConfiguration_isChatNotificationsEnabled",
+            "title": "UserConfiguration.isChatNotificationsEnabled",
+            "type": "boolean"
+        },
         "configurations": {
             "storages": ["SQL"],
             "patternProperties": {"^.*$": {
