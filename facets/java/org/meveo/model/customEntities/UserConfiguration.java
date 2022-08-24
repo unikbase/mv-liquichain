@@ -24,6 +24,8 @@ public class UserConfiguration implements CustomEntity {
 
     private String autoReplyMessage;
 
+    private Boolean isChatNotificationsEnabled;
+
     private Map<String, String> configurations = new HashMap<>();
 
     private Boolean isChatEnabledFromProfilePage;
@@ -55,6 +57,14 @@ public class UserConfiguration implements CustomEntity {
 
     public void setAutoReplyMessage(String autoReplyMessage) {
         this.autoReplyMessage = autoReplyMessage;
+    }
+
+    public Boolean getIsChatNotificationsEnabled() {
+        return isChatNotificationsEnabled;
+    }
+
+    public void setIsChatNotificationsEnabled(Boolean isChatNotificationsEnabled) {
+        this.isChatNotificationsEnabled = isChatNotificationsEnabled;
     }
 
     public Map<String, String> getConfigurations() {
