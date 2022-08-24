@@ -17,71 +17,20 @@
             "type": "string",
             "maxLength": 500
         },
-        "isChatNotificationsEnabled": {
+        "configurations": {
             "storages": ["SQL"],
-            "default": "true",
+            "patternProperties": {"^.*$": {
+                "id": "CE_UserConfiguration_configurations_item",
+                "title": "UserConfiguration.configurations item",
+                "type": "string"
+            }},
             "nullable": true,
-            "description": "Chat notifications settings",
+            "description": "Configurations",
             "readOnly": false,
             "versionable": false,
-            "id": "CE_UserConfiguration_isChatNotificationsEnabled",
-            "title": "UserConfiguration.isChatNotificationsEnabled",
-            "type": "boolean"
-        },
-        "IsSellerInfoUpdatesEnabled": {
-            "storages": ["SQL"],
-            "default": "true",
-            "nullable": true,
-            "description": "Seller info updates",
-            "readOnly": false,
-            "versionable": false,
-            "id": "CE_UserConfiguration_IsSellerInfoUpdatesEnabled",
-            "title": "UserConfiguration.IsSellerInfoUpdatesEnabled",
-            "type": "boolean"
-        },
-        "isChatEnabledFromProfilePage": {
-            "storages": ["SQL"],
-            "default": "true",
-            "nullable": true,
-            "description": "Chat allowed from profile page",
-            "readOnly": false,
-            "versionable": false,
-            "id": "CE_UserConfiguration_isChatEnabledFromProfilePage",
-            "title": "UserConfiguration.isChatEnabledFromProfilePage",
-            "type": "boolean"
-        },
-        "isEmailNotificationsEnabled": {
-            "storages": ["SQL"],
-            "default": "true",
-            "nullable": true,
-            "description": "Email's notification settings",
-            "readOnly": false,
-            "versionable": false,
-            "id": "CE_UserConfiguration_isEmailNotificationsEnabled",
-            "title": "UserConfiguration.isEmailNotificationsEnabled",
-            "type": "boolean"
-        },
-        "isOrderUpdatesEnabled": {
-            "storages": ["SQL"],
-            "default": "true",
-            "nullable": true,
-            "description": "Receive order's update",
-            "readOnly": false,
-            "versionable": false,
-            "id": "CE_UserConfiguration_isOrderUpdatesEnabled",
-            "title": "UserConfiguration.isOrderUpdatesEnabled",
-            "type": "boolean"
-        },
-        "isAutoReplyEnabled": {
-            "storages": ["SQL"],
-            "default": "true",
-            "nullable": true,
-            "description": "Auto reply chat message enabled",
-            "readOnly": false,
-            "versionable": false,
-            "id": "CE_UserConfiguration_isAutoReplyEnabled",
-            "title": "UserConfiguration.isAutoReplyEnabled",
-            "type": "boolean"
+            "id": "CE_UserConfiguration_configurations",
+            "title": "UserConfiguration.configurations",
+            "type": "object"
         },
         "isEmailNotificationsEnabled": {
             "storages": ["SQL"],
