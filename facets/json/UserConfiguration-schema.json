@@ -28,6 +28,17 @@
             "title": "UserConfiguration.isChatNotificationsEnabled",
             "type": "boolean"
         },
+        "IsSellerInfoUpdatesEnabled": {
+            "storages": ["SQL"],
+            "default": "true",
+            "nullable": true,
+            "description": "Seller info updates",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_UserConfiguration_IsSellerInfoUpdatesEnabled",
+            "title": "UserConfiguration.IsSellerInfoUpdatesEnabled",
+            "type": "boolean"
+        },
         "configurations": {
             "storages": ["SQL"],
             "patternProperties": {"^.*$": {
