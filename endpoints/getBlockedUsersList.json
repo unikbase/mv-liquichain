@@ -1,0 +1,25 @@
+{
+  "code" : "getBlockedUsersList",
+  "description" : "Get blocked users list by walletId",
+  "secured" : true,
+  "checkPathParams" : true,
+  "serviceCode" : "io.liquichain.api.config.GetBlockUser",
+  "synchronous" : true,
+  "method" : "GET",
+  "parameterMappings" : [ {
+    "serviceParameter" : "walletId",
+    "multivalued" : false,
+    "parameterName" : "walletId",
+    "valueRequired" : false
+  } ],
+  "pathParameters" : [ ],
+  "roles" : [ ],
+  "returnedVariableName" : "result",
+  "serializeResult" : false,
+  "contentType" : "application/json",
+  "basePath" : "user",
+  "path" : "/block",
+  "pool" : {
+    "usePool" : false
+  }
+}
