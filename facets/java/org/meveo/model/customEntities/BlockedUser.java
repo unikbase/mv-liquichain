@@ -25,6 +25,8 @@ public class BlockedUser implements CustomEntity {
 
     private Wallet wallet;
 
+    private Wallet targetWallet;
+
     @Override()
     public String getUuid() {
         return uuid;
@@ -56,6 +58,14 @@ public class BlockedUser implements CustomEntity {
 
     public void setWallet(Wallet wallet) {
         this.wallet = wallet;
+    }
+
+    public Wallet getTargetWallet() {
+        return targetWallet;
+    }
+
+    public void setTargetWallet(Wallet targetWallet) {
+        this.targetWallet = targetWallet;
     }
 
     @Override()
