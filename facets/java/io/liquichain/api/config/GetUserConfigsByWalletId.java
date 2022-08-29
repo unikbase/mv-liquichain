@@ -47,13 +47,9 @@ public class GetUserConfigsByWalletId extends Script {
         return this.result;
     }
   
-    private void init() {
-        this.userUtils = new UserUtils(crossStorageApi, defaultRepo);
-    }
   
   	@Override
 	public void execute(Map<String, Object> parameters) throws BusinessException {
-      	init();
     	try{
           	log.info("filter user settings by walletId == {}",walletId);
       		if(StringUtils.isBlank(walletId)){
@@ -65,7 +61,8 @@ public class GetUserConfigsByWalletId extends Script {
         		result = returnError("USER_NOT_FOUND", "merchant not found against provided walletId.");
 				return;
         	}
-          
+          	
+          	this.userUtils = new UserUtils(crossStorageApi, defaultRepo,user);
          	UserConfiguration configs = userUtils.getUserConfigurationsByWalletId(walletId);
 			log.info("isEmailNotificationsEnabled == {}",userUtils.isUserEmailNotificationsAllowed(walletId));
               
