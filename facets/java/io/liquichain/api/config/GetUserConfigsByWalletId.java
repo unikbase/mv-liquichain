@@ -60,7 +60,6 @@ public class GetUserConfigsByWalletId extends Script {
           		result = returnError("USER_NOT_FOUND","invalid walletId");
           		return;
         	}
-        	walletId = (walletId.startsWith("0x") ? walletId.substring(2) : walletId).toLowerCase();
         	Wallet user = crossStorageApi.find(defaultRepo, Wallet.class).by("uuid", walletId).getResult(); 
         	if(user == null){
         		result = returnError("USER_NOT_FOUND", "merchant not found against provided walletId.");
@@ -71,16 +70,6 @@ public class GetUserConfigsByWalletId extends Script {
          	UserConfiguration configs = userUtils.getUserConfigurationsByWalletId(walletId);
 			log.info("isEmailNotificationsEnabled == {}",userUtils.isUserEmailNotificationsAllowed(walletId));
               
-          	if(configs == null){
-				configs = new UserConfiguration();
-              	configs.setUser(user);
-              	configs.setIsEmailNotificationsEnabled(true);
-              	configs.setIsOrderUpdatesEnabled(true);
- 				configs.setIsSellerInfoUpdatesEnabled(true);
-              	configs.setIsChatNotificationsEnabled(true);
-              	configs.setIsChatEnabledFromProfilePage(true);
-              	configs.setIsAutoReplyEnabled(true);
-            }
           	result = new Gson().toJson(configs);
           	return;
         } catch(Exception ex){
