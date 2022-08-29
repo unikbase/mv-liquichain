@@ -53,6 +53,7 @@ public class GetUserConfigsByWalletId extends Script {
   
   	@Override
 	public void execute(Map<String, Object> parameters) throws BusinessException {
+      	init();
     	try{
           	log.info("filter user settings by walletId == {}",walletId);
       		if(StringUtils.isBlank(walletId)){
