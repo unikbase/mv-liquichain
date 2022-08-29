@@ -81,9 +81,12 @@ public class UserUtils extends Script {
         	}
         	walletId = (walletId.startsWith("0x") ? walletId.substring(2) : walletId).toLowerCase();
 
-          	return crossStorageApi.find(defaultRepo, UserConfiguration.class)
+          	UserConfiguration userConfig = crossStorageApi.find(defaultRepo, UserConfiguration.class)
             		.by("user", walletId)
                 	.getResult();
+          	if(userConfig == null)
+            	userConfig = new UserConfiguration();
+          	return userConfig;
         }catch(Exception ex){
         	log.error("Failed to retrieve the user's configurations for wallet id :"+walletId+" errorMessage: "+ex);
         }
