@@ -66,7 +66,6 @@ public class GetUserConfigsByWalletId extends Script {
 				return;
         	}
           
-          	//UserConfiguration configs = crossStorageApi.find(defaultRepo, UserConfiguration.class).by("user", user).getResult();
          	UserConfiguration configs = userUtils.getUserConfigurationsByWalletId(walletId);
 			log.info("isEmailNotificationsEnabled == {}",userUtils.isUserEmailNotificationsAllowed(walletId));
               
