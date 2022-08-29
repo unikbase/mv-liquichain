@@ -41,32 +41,32 @@ public class UserUtils extends Script {
   	
   	public boolean isUserEmailNotificationsAllowed(String walletId){
    		UserConfiguration userConfig = loadUserConfigurationByWalletId(walletId);
-    	return userConfig == null || userConfig.getIsEmailNotificationsEnabled()?true:false; 
+    	return userConfig != null && userConfig.getIsEmailNotificationsEnabled()?true:false; 
     }
   
   	public boolean isUserOrderUpdatesAllowed(String walletId){
    		UserConfiguration userConfig = loadUserConfigurationByWalletId(walletId);
-    	return userConfig == null || userConfig.getIsOrderUpdatesEnabled()?true:false; 
+    	return userConfig != null && userConfig.getIsOrderUpdatesEnabled()?true:false; 
     }
 
   	public boolean isUserSellerInfoUpdatesAllowed(String walletId){
    		UserConfiguration userConfig = loadUserConfigurationByWalletId(walletId);
-    	return userConfig == null || userConfig.getIsSellerInfoUpdatesEnabled()?true:false; 
+    	return userConfig != null && userConfig.getIsSellerInfoUpdatesEnabled()?true:false; 
     }
   
   	public boolean isUserChatNotificationsAllowed(String walletId){
    		UserConfiguration userConfig = loadUserConfigurationByWalletId(walletId);
-    	return userConfig == null || userConfig.getIsChatNotificationsEnabled()?true:false; 
+    	return userConfig != null && userConfig.getIsChatNotificationsEnabled()?true:false; 
     }
   
   	public boolean isUserChatFromProfilePageAllowed(String walletId){
    		UserConfiguration userConfig = loadUserConfigurationByWalletId(walletId);
-    	return userConfig == null || userConfig.getIsChatEnabledFromProfilePage()?true:false; 
+    	return userConfig != null && userConfig.getIsChatEnabledFromProfilePage()?true:false; 
     }
   
   	public boolean isUserAutoReplyMessageAllowed(String walletId){
    		UserConfiguration userConfig = loadUserConfigurationByWalletId(walletId);
-    	return userConfig == null || userConfig.getIsAutoReplyEnabled()?true:false; 
+    	return userConfig != null && userConfig.getIsAutoReplyEnabled()?true:false; 
     }  
   
   	public String getUserAutoReplyMessage(String walletId){
@@ -82,21 +82,26 @@ public class UserUtils extends Script {
         	}
         	walletId = (walletId.startsWith("0x") ? walletId.substring(2) : walletId).toLowerCase();
 			Wallet user = crossStorageApi.find(defaultRepo, Wallet.class).by("uuid", walletId).getResult();
-              
+            if(user == null){
+            	log.error("user not found against walletId = {}",walletId);  
+              	return null;
+            }
+          
           	UserConfiguration configs = crossStorageApi.find(defaultRepo, UserConfiguration.class)
             		.by("user", user)
                 	.getResult();
           	//== loading the default configurations
           	if(configs == null){
             	configs = new UserConfiguration();
-              	configs.setUser(user);
               	configs.setIsEmailNotificationsEnabled(true);
               	configs.setIsOrderUpdatesEnabled(true);
  				configs.setIsSellerInfoUpdatesEnabled(true);
               	configs.setIsChatNotificationsEnabled(true);
               	configs.setIsChatEnabledFromProfilePage(true);
               	configs.setIsAutoReplyEnabled(true);
-            }              
+            }
+          	configs.setUser(user);
+          
           	return configs;
         }catch(Exception ex){
         	log.error("Failed to retrieve the user's configurations for wallet id :"+walletId+" errorMessage: "+ex);
