@@ -5,6 +5,7 @@ import java.util.Map;
 import org.meveo.api.persistence.CrossStorageApi;
 import org.meveo.model.storage.Repository;
 import org.meveo.model.customEntities.UserConfiguration;
+import org.meveo.commons.utils.StringUtils;
 
 import org.meveo.service.script.Script;
 import org.meveo.admin.exception.BusinessException;
@@ -74,9 +75,15 @@ public class UserUtils extends Script {
   
   	private UserConfiguration loadUserConfigurationByWalletId(String walletId){
       	try{
-    		return crossStorageApi.find(defaultRepo, UserConfiguration.class)
-            	.by("user", walletId)
-                .getResult();
+        	if(StringUtils.isBlank(walletId)){
+              	log.error("Failed to retrieve user's configuration. walletId is not provided.");
+          		return null;
+        	}
+        	walletId = (walletId.startsWith("0x") ? walletId.substring(2) : walletId).toLowerCase();
+
+          	return crossStorageApi.find(defaultRepo, UserConfiguration.class)
+            		.by("user", walletId)
+                	.getResult();
         }catch(Exception ex){
         	log.error("Failed to retrieve the user's configurations for wallet id :"+walletId+" errorMessage: "+ex);
         }
