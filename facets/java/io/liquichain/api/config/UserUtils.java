@@ -5,6 +5,7 @@ import java.util.Map;
 import org.meveo.api.persistence.CrossStorageApi;
 import org.meveo.model.storage.Repository;
 import org.meveo.model.customEntities.UserConfiguration;
+import org.meveo.model.customEntities.BlockedUser;
 import org.meveo.model.customEntities.Wallet;
 import org.meveo.commons.utils.StringUtils;
 
@@ -117,6 +118,19 @@ public class UserUtils extends Script {
         	log.error("Failed to retrieve the user's configurations for wallet id :"+walletId+" errorMessage: "+ex);
         }
       	return null;
+    }
+  
+  	public boolean isUserBlocked(String walletId, String targetWalletId){
+      
+		log.info("checking if - targetWalletId = {} is blocked by wallet = {}",targetWalletId,walletId);
+        walletId = (walletId.startsWith("0x") ? walletId.substring(2) : walletId).toLowerCase();
+        targetWalletId = (targetWalletId.startsWith("0x") ? targetWalletId.substring(2) : targetWalletId).toLowerCase();
+    
+      	BlockedUser blockedUser = crossStorageApi.find(defaultRepo, BlockedUser.class)
+          .by("targetWallet",targetWalletId)
+          .by("wallet", walletId).getResult();
+      	
+		return blockedUser!=null;
     }
   	
 }
