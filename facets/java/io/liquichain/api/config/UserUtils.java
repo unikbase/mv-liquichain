@@ -46,7 +46,31 @@ public class UserUtils extends Script {
    		UserConfiguration userConfig = loadUserConfigurationByWalletId(walletId);
     	return userConfig == null || userConfig.getIsOrderUpdatesEnabled()?true:false; 
     }
+
+  	public boolean isUserSellerInfoUpdatesAllowed(String walletId){
+   		UserConfiguration userConfig = loadUserConfigurationByWalletId(walletId);
+    	return userConfig == null || userConfig.getIsSellerInfoUpdatesEnabled()?true:false; 
+    }
   
+  	public boolean isUserChatNotificationsAllowed(String walletId){
+   		UserConfiguration userConfig = loadUserConfigurationByWalletId(walletId);
+    	return userConfig == null || userConfig.getIsChatNotificationsEnabled()?true:false; 
+    }
+  
+  	public boolean isUserChatFromProfilePageAllowed(String walletId){
+   		UserConfiguration userConfig = loadUserConfigurationByWalletId(walletId);
+    	return userConfig == null || userConfig.getIsChatEnabledFromProfilePage()?true:false; 
+    }
+  
+  	public boolean isUserAutoReplyMessageAllowed(String walletId){
+   		UserConfiguration userConfig = loadUserConfigurationByWalletId(walletId);
+    	return userConfig == null || userConfig.getIsAutoReplyEnabled()?true:false; 
+    }  
+  
+  	public String getUserAutoReplyMessage(String walletId){
+   		UserConfiguration userConfig = loadUserConfigurationByWalletId(walletId);
+    	return userConfig.getAutoReplyMessage(); 
+    }
   
   	private UserConfiguration loadUserConfigurationByWalletId(String walletId){
       	try{
