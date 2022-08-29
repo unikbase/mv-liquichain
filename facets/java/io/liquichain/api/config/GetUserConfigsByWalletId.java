@@ -32,6 +32,7 @@ public class GetUserConfigsByWalletId extends Script {
     private final CrossStorageApi crossStorageApi = getCDIBean(CrossStorageApi.class);
     private final RepositoryService repositoryService = getCDIBean(RepositoryService.class);
     private final Repository defaultRepo = repositoryService.findDefaultRepository();
+  	private UserUtils userUtils; 	
   
   	public void setWalletId(String walletId){ this.walletId=walletId;}	
   
@@ -46,6 +47,9 @@ public class GetUserConfigsByWalletId extends Script {
         return this.result;
     }
   
+    private void init() {
+        this.userUtils = new UserUtils(crossStorageApi, defaultRepo);
+    }
   
   	@Override
 	public void execute(Map<String, Object> parameters) throws BusinessException {
@@ -62,7 +66,10 @@ public class GetUserConfigsByWalletId extends Script {
 				return;
         	}
           
-          	UserConfiguration configs = crossStorageApi.find(defaultRepo, UserConfiguration.class).by("user", user).getResult();
+          	//UserConfiguration configs = crossStorageApi.find(defaultRepo, UserConfiguration.class).by("user", user).getResult();
+         	UserConfiguration configs = userUtils.getUserConfigurationsByWalletId(walletId);
+			log.info("isEmailNotificationsEnabled == {}",userUtils.isUserEmailNotificationsAllowed(walletId));
+              
           	if(configs == null){
 				configs = new UserConfiguration();
               	configs.setUser(user);
