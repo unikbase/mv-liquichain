@@ -16,6 +16,7 @@ import org.slf4j.LoggerFactory;
 public class UserUtils extends Script {
 	
     private static final Logger log = LoggerFactory.getLogger(UserUtils.class);
+  	private Wallet user;
 
     private CrossStorageApi crossStorageApi;
     private Repository defaultRepo;
@@ -27,6 +28,12 @@ public class UserUtils extends Script {
     public UserUtils(CrossStorageApi crossStorageApi, Repository defaultRepo) {
         this.crossStorageApi = crossStorageApi;
         this.defaultRepo = defaultRepo;
+    }
+  
+  	public UserUtils(CrossStorageApi crossStorageApi, Repository defaultRepo, Wallet user) {
+        this.crossStorageApi = crossStorageApi;
+        this.defaultRepo = defaultRepo;
+      	this.user = user;
     }
   
   
@@ -80,11 +87,14 @@ public class UserUtils extends Script {
               	log.error("Failed to retrieve user's configuration. walletId is not provided.");
           		return null;
         	}
-        	walletId = (walletId.startsWith("0x") ? walletId.substring(2) : walletId).toLowerCase();
-			Wallet user = crossStorageApi.find(defaultRepo, Wallet.class).by("uuid", walletId).getResult();
+
             if(user == null){
-            	log.error("user not found against walletId = {}",walletId);  
-              	return null;
+        		walletId = (walletId.startsWith("0x") ? walletId.substring(2) : walletId).toLowerCase();
+				user = crossStorageApi.find(defaultRepo, Wallet.class).by("uuid", walletId).getResult();
+              	if(user == null){
+            		log.error("User not found against walletId = {}",walletId);  
+              		return null;
+                }
             }
           
           	UserConfiguration configs = crossStorageApi.find(defaultRepo, UserConfiguration.class)
