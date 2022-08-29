@@ -33,7 +33,22 @@ public class UserUtils extends Script {
 		super.execute(parameters);
 	}
 	
-  	public UserConfiguration getUserConfigurationsByWalletId(String walletId) throws BusinessException{
+  	public UserConfiguration getUserConfigurationsByWalletId(String walletId){
+		return loadUserConfigurationByWalletId(walletId);
+    }
+  	
+  	public boolean isUserEmailNotificationsAllowed(String walletId){
+   		UserConfiguration userConfig = loadUserConfigurationByWalletId(walletId);
+    	return userConfig == null || userConfig.getIsEmailNotificationsEnabled()?true:false; 
+    }
+  
+  	public boolean isUserOrderUpdatesAllowed(String walletId){
+   		UserConfiguration userConfig = loadUserConfigurationByWalletId(walletId);
+    	return userConfig == null || userConfig.getIsOrderUpdatesEnabled()?true:false; 
+    }
+  
+  
+  	private UserConfiguration loadUserConfigurationByWalletId(String walletId){
       	try{
     		return crossStorageApi.find(defaultRepo, UserConfiguration.class)
             	.by("user", walletId)
