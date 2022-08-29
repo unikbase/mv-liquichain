@@ -26,6 +26,16 @@
             "id": "CE_BlockedUser_wallet",
             "title": "BlockedUser.wallet",
             "$ref": "#/definitions/Wallet"
+        },
+        "targetWallet": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "Blocked User",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_BlockedUser_targetWallet",
+            "title": "BlockedUser.targetWallet",
+            "$ref": "#/definitions/Wallet"
         }
     }
 }
