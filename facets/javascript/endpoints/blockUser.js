@@ -1,53 +1,70 @@
-const blockUser = async (parameters) =>  {
-	const baseUrl = window.location.origin;
-	const url = new URL(`${window.location.pathname.split('/')[1]}/rest/blockUser/`, baseUrl);
-	return fetch(url.toString(), {
-		method: 'POST', 
-		headers : new Headers({
- 			'Content-Type': 'application/json'
-		}),
-		body: JSON.stringify({
-			walletId : parameters.walletId,
-			targetWalletId : parameters.targetWalletId,
-			blocked : parameters.blocked
-		})
-	});
+import EndpointInterface from "#{API_BASE_URL}/api/rest/endpoint/EndpointInterface.js";
+
+// the request schema, this should be updated
+// whenever changes to the endpoint parameters are made
+// this is important because this is used to validate and parse the request parameters
+const requestSchema = {
+  "title" : "blockUserRequest",
+  "id" : "blockUserRequest",
+  "default" : "Schema definition for blockUser",
+  "$schema" : "http://json-schema.org/draft-07/schema",
+  "type" : "object",
+  "properties" : {
+    "walletId" : {
+      "title" : "walletId",
+      "type" : "string",
+      "minLength" : 1
+    },
+    "blocked" : {
+      "title" : "blocked",
+      "type" : "string",
+      "minLength" : 1
+    },
+    "targetWalletId" : {
+      "title" : "targetWalletId",
+      "type" : "string",
+      "minLength" : 1
+    }
+  }
 }
 
-const blockUserForm = (container) => {
-	const html = `<form id='blockUser-form'>
-		<div id='blockUser-walletId-form-field'>
-			<label for='walletId'>walletId</label>
-			<input type='text' id='blockUser-walletId-param' name='walletId'/>
-		</div>
-		<div id='blockUser-targetWalletId-form-field'>
-			<label for='targetWalletId'>targetWalletId</label>
-			<input type='text' id='blockUser-targetWalletId-param' name='targetWalletId'/>
-		</div>
-		<div id='blockUser-blocked-form-field'>
-			<label for='blocked'>blocked</label>
-			<input type='text' id='blockUser-blocked-param' name='blocked'/>
-		</div>
-		<button type='button'>Test</button>
-	</form>`;
-
-	container.insertAdjacentHTML('beforeend', html)
-
-	const walletId = container.querySelector('#blockUser-walletId-param');
-	const targetWalletId = container.querySelector('#blockUser-targetWalletId-param');
-	const blocked = container.querySelector('#blockUser-blocked-param');
-
-	container.querySelector('#blockUser-form button').onclick = () => {
-		const params = {
-			walletId : walletId.value !== "" ? walletId.value : undefined,
-			targetWalletId : targetWalletId.value !== "" ? targetWalletId.value : undefined,
-			blocked : blocked.value !== "" ? blocked.value : undefined
-		};
-
-		blockUser(params).then(r => r.text().then(
-				t => alert(t)
-			));
-	};
+// the response schema, this should be updated
+// whenever changes to the endpoint parameters are made
+// this is important because this could be used to parse the result
+const responseSchema = {
+  "title" : "blockUserResponse",
+  "id" : "blockUserResponse",
+  "default" : "Schema definition for blockUser",
+  "$schema" : "http://json-schema.org/draft-07/schema",
+  "type" : "object",
+  "properties" : {
+    "result" : {
+      "title" : "result",
+      "type" : "string",
+      "minLength" : 1
+    }
+  }
 }
 
-export { blockUser, blockUserForm };
+// should contain offline mock data, make sure it adheres to the response schema
+const mockResult = {};
+
+class blockUser extends EndpointInterface {
+	constructor() {
+		// name and http method, these are inserted when code is generated
+		super("blockUser", "POST");
+		this.requestSchema = requestSchema;
+		this.responseSchema = responseSchema;
+		this.mockResult = mockResult;
+	}
+
+	getRequestSchema() {
+		return this.requestSchema;
+	}
+
+	getResponseSchema() {
+		return this.responseSchema;
+	}
+}
+
+export default new blockUser();
