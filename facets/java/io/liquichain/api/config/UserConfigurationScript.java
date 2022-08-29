@@ -95,7 +95,7 @@ public class UserConfigurationScript extends Script {
 			crossStorageApi.createOrUpdate(defaultRepo, userConfigs);
           	result = "{ \"status\" : \"success\" , \"message\": \"user configurations has been updated successfully.\"}";
         } catch(Exception ex){
-        	log.error("Error in paytech payment transaction creation : {}",ex);
+        	log.error("Error in user configurations updation : {}",ex);
           	throw new BusinessException("Unable to create update user settings");
         }
     }

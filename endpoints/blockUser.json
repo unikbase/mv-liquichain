@@ -1,0 +1,36 @@
+{
+  "code" : "blockUser",
+  "description" : "Block-Unblock the User",
+  "secured" : true,
+  "checkPathParams" : true,
+  "serviceCode" : "io.liquichain.api.config.BlockUser",
+  "synchronous" : true,
+  "method" : "POST",
+  "parameterMappings" : [ {
+    "serviceParameter" : "walletId",
+    "multivalued" : false,
+    "parameterName" : "walletId",
+    "valueRequired" : false
+  }, {
+    "serviceParameter" : "targetWalletId",
+    "multivalued" : false,
+    "parameterName" : "targetWalletId",
+    "valueRequired" : false
+  }, {
+    "serviceParameter" : "blocked",
+    "multivalued" : false,
+    "parameterName" : "blocked",
+    "defaultValue" : "true",
+    "valueRequired" : false
+  } ],
+  "pathParameters" : [ ],
+  "roles" : [ ],
+  "returnedVariableName" : "result",
+  "serializeResult" : false,
+  "contentType" : "application/json",
+  "basePath" : "user",
+  "path" : "/block",
+  "pool" : {
+    "usePool" : false
+  }
+}
