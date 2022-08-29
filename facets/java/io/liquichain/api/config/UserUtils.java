@@ -5,6 +5,7 @@ import java.util.Map;
 import org.meveo.api.persistence.CrossStorageApi;
 import org.meveo.model.storage.Repository;
 import org.meveo.model.customEntities.UserConfiguration;
+import org.meveo.model.customEntities.Wallet;
 import org.meveo.commons.utils.StringUtils;
 
 import org.meveo.service.script.Script;
@@ -80,13 +81,23 @@ public class UserUtils extends Script {
           		return null;
         	}
         	walletId = (walletId.startsWith("0x") ? walletId.substring(2) : walletId).toLowerCase();
-
-          	UserConfiguration userConfig = crossStorageApi.find(defaultRepo, UserConfiguration.class)
-            		.by("user", walletId)
+			Wallet user = crossStorageApi.find(defaultRepo, Wallet.class).by("uuid", walletId).getResult();
+              
+          	UserConfiguration configs = crossStorageApi.find(defaultRepo, UserConfiguration.class)
+            		.by("user", user)
                 	.getResult();
-          	if(userConfig == null)
-            	userConfig = new UserConfiguration();
-          	return userConfig;
+          	//== loading the default configurations
+          	if(configs == null){
+            	configs = new UserConfiguration();
+              	configs.setUser(user);
+              	configs.setIsEmailNotificationsEnabled(true);
+              	configs.setIsOrderUpdatesEnabled(true);
+ 				configs.setIsSellerInfoUpdatesEnabled(true);
+              	configs.setIsChatNotificationsEnabled(true);
+              	configs.setIsChatEnabledFromProfilePage(true);
+              	configs.setIsAutoReplyEnabled(true);
+            }              
+          	return configs;
         }catch(Exception ex){
         	log.error("Failed to retrieve the user's configurations for wallet id :"+walletId+" errorMessage: "+ex);
         }
