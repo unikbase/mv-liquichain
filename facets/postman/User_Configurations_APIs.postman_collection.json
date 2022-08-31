@@ -363,6 +363,136 @@
 			]
 		},
 		{
+			"name": "Get Contact Info",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{protocol}}://{{hostname}}:{{port}}/{{webContext}}/rest/user/contact-info",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{hostname}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"{{webContext}}",
+						"rest",
+						"user",
+						"contact-info"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "create purchase order user 1 Copy",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \t\"name\": \"token1\",\r\n    \t\"type\": \"FCMToken\",\r\n    \t\"properties\": {\r\n            \"userId\": \"{{user1_wallet}}\",\r\n            \"token\": \"tokenvalue\"\r\n        }\r\n}"
+						},
+						"url": {
+							"raw": "{{protocol}}://{{hostname}}:{{port}}/{{webContext}}/api/rest/{{repoId}}/persistence",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{hostname}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{webContext}}",
+								"api",
+								"rest",
+								"{{repoId}}",
+								"persistence"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.15.12"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 21 Jan 2022 04:08:45 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "171"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, must-revalidate"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Content-Type, Authorization"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Accept,Authorization,Cache-Control,Content-Type,DNT,If-Modified-Since,Keep-Alive,Origin,User-Agent,X-Requested-With"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Credentials",
+							"value": "true"
+						},
+						{
+							"key": "Access-Control-Allow-Credentials",
+							"value": "true"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET, POST, DELETE, PUT"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "GET, POST, PUT, DELETE, OPTIONS"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"code\": \"FCMToken\",\n        \"name\": \"token1\",\n        \"uuid\": \"47f6c19f-752a-4d98-a516-e20c61ae5d2c\",\n        \"properties\": {\n            \"userId\": \"540393827f402ab70d283a7706231b5cef8fec0c\",\n            \"token\": \"tokenvalue\"\n        }\n    }\n]"
+				}
+			]
+		},
+		{
 			"name": "Get Blocked Users list by wallet",
 			"request": {
 				"auth": {
