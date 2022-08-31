@@ -1,0 +1,20 @@
+{
+  "code" : "getUserContactInfo",
+  "description" : "Get User's Contact Info",
+  "secured" : true,
+  "checkPathParams" : true,
+  "serviceCode" : "io.liquichain.api.config.ContactInfo",
+  "synchronous" : true,
+  "method" : "GET",
+  "parameterMappings" : [ ],
+  "pathParameters" : [ ],
+  "roles" : [ ],
+  "returnedVariableName" : "result",
+  "serializeResult" : false,
+  "contentType" : "application/json",
+  "basePath" : "user",
+  "path" : "/contact-info",
+  "pool" : {
+    "usePool" : false
+  }
+}
