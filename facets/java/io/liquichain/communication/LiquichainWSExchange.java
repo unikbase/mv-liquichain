@@ -1,6 +1,7 @@
 package io.liquichain.communication;
 
 import java.util.Map;
+import java.util.HashMap;
 import java.util.regex.Pattern;
 
 import org.meveo.service.script.Script;
@@ -18,6 +19,7 @@ public class LiquichainWSExchange extends Script {
 
     private final ObjectMapper mapper = new ObjectMapper();
     private final WebsocketServerEndpoint websocketServerEndpoint = getCDIBean(WebsocketServerEndpoint.class);
+  	private final Script createMessageScript = getCDIBean(CreateMessageInConversation.class);
 
     private Session session;
 
@@ -84,5 +86,12 @@ public class LiquichainWSExchange extends Script {
         }
         log.info("sendMessage {} {}", destination, txtMessage);
         websocketServerEndpoint.sendMessage("liquichain", destination, txtMessage, persistMessage);
+  
+      	Map<String, Object> context = new HashMap<>(){{
+        	put("chatConversationId", message.get("chatConversationId"));
+          	put("senderWalletId", session.getUserProperties().get("username"));
+          	put("message",  message.get("message"));
+        }};
+      	createMessageScript.execute(context);
     }
 }
