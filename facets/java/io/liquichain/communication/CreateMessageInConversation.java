@@ -106,8 +106,12 @@ public class CreateMessageInConversation extends Script {
     public void setSenderWalletId(String senderWalletId) {
         this.senderWalletId = senderWalletId;
     }
+  
+    public void setMessage(String message) {
+        this.message = message;
+    }
 
     public String getResult() {
-        return this.result;
+        return this.result; 
     }
 }

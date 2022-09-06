@@ -7,6 +7,9 @@
   }, {
     "name" : "senderWalletId",
     "type" : "String"
+  }, {
+    "name" : "message",
+    "type" : "String"
   } ],
   "outputs" : [ {
     "name" : "result",
