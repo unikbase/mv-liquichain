@@ -37,6 +37,23 @@
             "title": "ChatConversation.title",
             "type": "string",
             "maxLength": 255
+        },
+        "participants": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "uniqueItems": true,
+            "description": "Participants",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_ChatConversation_participants",
+            "title": "ChatConversation.participants",
+            "type": "array",
+            "items": {
+                "id": "CE_ChatConversation_participants_item",
+                "title": "ChatConversation.participants item",
+                "type": "string",
+                "maxLength": 255
+            }
         }
     }
 }
