@@ -1,0 +1,30 @@
+{
+  "code" : "createChatConversation",
+  "description" : "Create Chart Conversation",
+  "secured" : true,
+  "checkPathParams" : true,
+  "serviceCode" : "io.liquichain.communication.CreateChatConversation",
+  "synchronous" : true,
+  "method" : "POST",
+  "parameterMappings" : [ {
+    "serviceParameter" : "createrWalletId",
+    "multivalued" : false,
+    "parameterName" : "createrWalletId",
+    "valueRequired" : true
+  }, {
+    "serviceParameter" : "title",
+    "multivalued" : false,
+    "parameterName" : "title",
+    "valueRequired" : true
+  } ],
+  "pathParameters" : [ ],
+  "roles" : [ ],
+  "returnedVariableName" : "result",
+  "serializeResult" : false,
+  "contentType" : "application/json",
+  "basePath" : "createChatConversation",
+  "path" : "/",
+  "pool" : {
+    "usePool" : false
+  }
+}

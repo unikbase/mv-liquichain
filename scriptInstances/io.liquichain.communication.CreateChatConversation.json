@@ -1,0 +1,22 @@
+{
+  "code" : "io.liquichain.communication.CreateChatConversation",
+  "description" : "Create Chat Conversation",
+  "inputs" : [ {
+    "name" : "createrWalletId",
+    "type" : "String"
+  }, {
+    "name" : "title",
+    "type" : "String"
+  } ],
+  "outputs" : [ {
+    "name" : "result",
+    "type" : "String"
+  } ],
+  "generateOutputs" : false,
+  "type" : "JAVA",
+  "transactionType" : "SAME",
+  "executionRoles" : [ ],
+  "sourcingRoles" : [ ],
+  "mavenDependencies" : [ ],
+  "importScriptInstances" : [ ]
+}

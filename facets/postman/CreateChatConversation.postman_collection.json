@@ -1,0 +1,138 @@
+{
+	"info": {
+		"_postman_id": "a5fba419-6799-49c9-905e-91cf06d3d934",
+		"name": "CreateChatConversation",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19903493"
+	},
+	"item": [
+		{
+			"name": "Login and init var",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"response is ok\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.environment.get(\"variable_key\");",
+							"var json = pm.response.json();",
+							"var token = json[\"access_token\"];",
+							"var refreshToken = json[\"refresh_token\"]",
+							"pm.environment.set(\"access_token\", token);",
+							"pm.environment.set(\"refresh_token\", refreshToken);",
+							"",
+							"",
+							"pm.environment.set(\"user1_wallet\", \"540393827f402ab70d283a7706231b5cef8fec0c\");",
+							"pm.environment.set(\"user2_wallet\", \"87bebc4094bc195e97e431f25f86c246c0ed6608\");",
+							"pm.environment.set(\"user3_wallet\", \"a3fce546963eccaea1c3d87b72c0612fa22d1a91\");",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "client_id",
+							"value": "meveo-web",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "meveo.admin",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "meveo",
+							"type": "text"
+						},
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "afe07e5a-68cb-4fb0-8b75-5b6053b07dc3",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{protocol}}://{{keycloak.hostname}}:{{keycloak.port}}/auth/realms/{{webContext}}/protocol/openid-connect/token",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{keycloak.hostname}}"
+					],
+					"port": "{{keycloak.port}}",
+					"path": [
+						"auth",
+						"realms",
+						"{{webContext}}",
+						"protocol",
+						"openid-connect",
+						"token"
+					]
+				},
+				"description": "Request Keycloak and get auth token"
+			},
+			"response": []
+		},
+		{
+			"name": "createChatConversation",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"createrWalletId\" : \"e14495ee-9f1a-42a3-bc1a-e254f4c4e345\",\r\n    \"title\" : \"Group Purchase Conversation\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{protocol}}://{{hostname}}:{{port}}/{{webContext}}/rest/createChatConversation",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{hostname}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"{{webContext}}",
+						"rest",
+						"createChatConversation"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

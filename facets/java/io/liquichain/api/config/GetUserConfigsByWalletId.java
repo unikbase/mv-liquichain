@@ -32,6 +32,7 @@ public class GetUserConfigsByWalletId extends Script {
     private final CrossStorageApi crossStorageApi = getCDIBean(CrossStorageApi.class);
     private final RepositoryService repositoryService = getCDIBean(RepositoryService.class);
     private final Repository defaultRepo = repositoryService.findDefaultRepository();
+  	private UserUtils userUtils; 	
   
   	public void setWalletId(String walletId){ this.walletId=walletId;}	
   
@@ -55,24 +56,16 @@ public class GetUserConfigsByWalletId extends Script {
           		result = returnError("USER_NOT_FOUND","invalid walletId");
           		return;
         	}
-        	walletId = (walletId.startsWith("0x") ? walletId.substring(2) : walletId).toLowerCase();
         	Wallet user = crossStorageApi.find(defaultRepo, Wallet.class).by("uuid", walletId).getResult(); 
         	if(user == null){
-        		result = returnError("USER_NOT_FOUND", "merchant not found against provided walletId.");
+        		result = returnError("USER_NOT_FOUND", "user not found against provided walletId.");
 				return;
         	}
-          
-          	UserConfiguration configs = crossStorageApi.find(defaultRepo, UserConfiguration.class).by("user", user).getResult();
-          	if(configs == null){
-				configs = new UserConfiguration();
-              	configs.setUser(user);
-              	configs.setIsEmailNotificationsEnabled(true);
-              	configs.setIsOrderUpdatesEnabled(true);
- 				configs.setIsSellerInfoUpdatesEnabled(true);
-              	configs.setIsChatNotificationsEnabled(true);
-              	configs.setIsChatEnabledFromProfilePage(true);
-              	configs.setIsAutoReplyEnabled(true);
-            }
+          	
+          	this.userUtils = new UserUtils(crossStorageApi, defaultRepo,user);
+         	UserConfiguration configs = userUtils.getUserConfigurationsByWalletId(walletId);
+			log.info("isEmailNotificationsEnabled == {}",userUtils.isUserEmailNotificationsAllowed(walletId));
+              
           	result = new Gson().toJson(configs);
           	return;
         } catch(Exception ex){
