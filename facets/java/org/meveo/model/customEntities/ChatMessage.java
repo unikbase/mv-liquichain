@@ -5,6 +5,7 @@ import java.util.List;
 import org.meveo.model.persistence.DBStorageType;
 import org.meveo.model.customEntities.Wallet;
 import org.meveo.model.customEntities.ChatConversation;
+import java.time.Instant;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class ChatMessage implements CustomEntity {
@@ -24,6 +25,8 @@ public class ChatMessage implements CustomEntity {
     private Wallet sender;
 
     private ChatConversation chatConversation;
+
+    private Instant creationDate;
 
     @Override()
     public String getUuid() {
@@ -56,6 +59,14 @@ public class ChatMessage implements CustomEntity {
 
     public void setChatConversation(ChatConversation chatConversation) {
         this.chatConversation = chatConversation;
+    }
+
+    public Instant getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(Instant creationDate) {
+        this.creationDate = creationDate;
     }
 
     @Override()
