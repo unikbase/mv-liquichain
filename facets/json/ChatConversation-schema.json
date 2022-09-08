@@ -26,6 +26,17 @@
             "id": "CE_ChatConversation_creationDate",
             "title": "ChatConversation.creationDate",
             "type": "string"
+        },
+        "title": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "Title",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_ChatConversation_title",
+            "title": "ChatConversation.title",
+            "type": "string",
+            "maxLength": 255
         }
     }
 }
