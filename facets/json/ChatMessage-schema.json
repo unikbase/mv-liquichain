@@ -36,6 +36,17 @@
             "id": "CE_ChatMessage_creationDate",
             "title": "ChatMessage.creationDate",
             "type": "string"
+        },
+        "message": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "Message",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_ChatMessage_message",
+            "title": "ChatMessage.message",
+            "type": "string",
+            "maxLength": 255
         }
     }
 }
