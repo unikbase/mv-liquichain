@@ -3,7 +3,6 @@ package org.meveo.model.customEntities;
 import org.meveo.model.CustomEntity;
 import java.util.List;
 import org.meveo.model.persistence.DBStorageType;
-import java.time.Instant;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class ChatConversation implements CustomEntity {
@@ -20,12 +19,6 @@ public class ChatConversation implements CustomEntity {
     @JsonIgnore()
     private DBStorageType storages;
 
-    private Long messageCount;
-
-    private Instant creationDate;
-
-    private String title;
-
     @Override()
     public String getUuid() {
         return uuid;
@@ -41,30 +34,6 @@ public class ChatConversation implements CustomEntity {
 
     public void setStorages(DBStorageType storages) {
         this.storages = storages;
-    }
-
-    public Long getMessageCount() {
-        return messageCount;
-    }
-
-    public void setMessageCount(Long messageCount) {
-        this.messageCount = messageCount;
-    }
-
-    public Instant getCreationDate() {
-        return creationDate;
-    }
-
-    public void setCreationDate(Instant creationDate) {
-        this.creationDate = creationDate;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 
     @Override()
