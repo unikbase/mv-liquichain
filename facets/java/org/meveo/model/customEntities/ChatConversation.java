@@ -19,6 +19,8 @@ public class ChatConversation implements CustomEntity {
     @JsonIgnore()
     private DBStorageType storages;
 
+    private Long messageCount;
+
     @Override()
     public String getUuid() {
         return uuid;
@@ -34,6 +36,14 @@ public class ChatConversation implements CustomEntity {
 
     public void setStorages(DBStorageType storages) {
         this.storages = storages;
+    }
+
+    public Long getMessageCount() {
+        return messageCount;
+    }
+
+    public void setMessageCount(Long messageCount) {
+        this.messageCount = messageCount;
     }
 
     @Override()
