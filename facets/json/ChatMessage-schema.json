@@ -25,6 +25,17 @@
             "id": "CE_ChatMessage_chatConversation",
             "title": "ChatMessage.chatConversation",
             "$ref": "#/definitions/ChatConversation"
+        },
+        "creationDate": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "format": "date-time",
+            "description": "Creation Date",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_ChatMessage_creationDate",
+            "title": "ChatMessage.creationDate",
+            "type": "string"
         }
     }
 }
