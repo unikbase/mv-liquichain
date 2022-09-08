@@ -28,6 +28,8 @@ public class ChatMessage implements CustomEntity {
 
     private Instant creationDate;
 
+    private String message;
+
     @Override()
     public String getUuid() {
         return uuid;
@@ -67,6 +69,14 @@ public class ChatMessage implements CustomEntity {
 
     public void setCreationDate(Instant creationDate) {
         this.creationDate = creationDate;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     @Override()
