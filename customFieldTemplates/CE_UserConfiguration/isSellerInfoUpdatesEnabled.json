@@ -1,6 +1,6 @@
 {
   "code" : "isSellerInfoUpdatesEnabled",
-  "description" : "Seller info updates\t",
+  "description" : "Seller info updates enabled",
   "fieldType" : "BOOLEAN",
   "accountLevel" : "CE_UserConfiguration",
   "appliesTo" : "CE_UserConfiguration",

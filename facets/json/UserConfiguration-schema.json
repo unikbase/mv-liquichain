@@ -65,7 +65,7 @@
             "storages": ["SQL"],
             "default": "false",
             "nullable": true,
-            "description": "Seller info updates\t",
+            "description": "Seller info updates enabled",
             "readOnly": false,
             "versionable": false,
             "id": "CE_UserConfiguration_isSellerInfoUpdatesEnabled",
