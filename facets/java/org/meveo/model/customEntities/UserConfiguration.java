@@ -24,13 +24,13 @@ public class UserConfiguration implements CustomEntity {
 
     private Boolean isChatNotificationsEnabled;
 
-    private Boolean IsSellerInfoUpdatesEnabled;
-
     private Boolean isChatEnabledFromProfilePage;
 
     private Boolean isEmailNotificationsEnabled;
 
     private Boolean isOrderUpdatesEnabled;
+
+    private Boolean isSellerInfoUpdatesEnabled;
 
     private Boolean isAutoReplyEnabled;
 
@@ -69,14 +69,6 @@ public class UserConfiguration implements CustomEntity {
         this.isChatNotificationsEnabled = isChatNotificationsEnabled;
     }
 
-    public Boolean getIsSellerInfoUpdatesEnabled() {
-        return IsSellerInfoUpdatesEnabled;
-    }
-
-    public void setIsSellerInfoUpdatesEnabled(Boolean IsSellerInfoUpdatesEnabled) {
-        this.IsSellerInfoUpdatesEnabled = IsSellerInfoUpdatesEnabled;
-    }
-
     public Boolean getIsChatEnabledFromProfilePage() {
         return isChatEnabledFromProfilePage;
     }
@@ -99,6 +91,14 @@ public class UserConfiguration implements CustomEntity {
 
     public void setIsOrderUpdatesEnabled(Boolean isOrderUpdatesEnabled) {
         this.isOrderUpdatesEnabled = isOrderUpdatesEnabled;
+    }
+
+    public Boolean getIsSellerInfoUpdatesEnabled() {
+        return isSellerInfoUpdatesEnabled;
+    }
+
+    public void setIsSellerInfoUpdatesEnabled(Boolean isSellerInfoUpdatesEnabled) {
+        this.isSellerInfoUpdatesEnabled = isSellerInfoUpdatesEnabled;
     }
 
     public Boolean getIsAutoReplyEnabled() {
