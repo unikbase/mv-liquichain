@@ -53,20 +53,16 @@ public class CreateChatConversation extends Script {
                     .getResults();
         Optional<ChatConversation> existingChatConversation = Optional.ofNullable(null);  
         if(participants.size() > 0){
-            LOG.info("Chat participant found ");         	
         	List<String> chatConversationUUIds = participants.stream().map(participant -> participant.getChatConversation().getUuid() ).collect(Collectors.toList());
         	if(chatConversationUUIds != null && chatConversationUUIds.size() > 0 ){
                 List<ChatConversation> chatConversations = crossStorageApi.find(defaultRepo, ChatConversation.class)
                     	.by("inList uuid", chatConversationUUIds)
-                    	.getResults();  
-                chatConversations.forEach(c->LOG.info("Chat Title ="+c.getTitle()+"title provided = "+title+"  :  isTitle matched ="+title.equals(c.getTitle()))); 
+                    	.getResults(); 
           		existingChatConversation = chatConversations.stream().filter(c -> title.equals(c.getTitle())).findFirst();
         	}
         }
       
         
-        
-      
         if(existingChatConversation.isPresent()){
             result = "{\"status\": \"success\", \"result\": \"" + existingChatConversation.get().getUuid() + "\"}";
             LOG.info("Chat Conversation exixts already with Id: " + existingChatConversation.get().getUuid() );
