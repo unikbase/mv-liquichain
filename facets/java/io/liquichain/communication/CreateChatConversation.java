@@ -2,7 +2,9 @@ package io.liquichain.communication;
 
 import java.util.Map;
 import java.util.List;
+import java.util.Optional;
 import java.time.Instant;
+import java.util.stream.Collectors;  
 
 import org.meveo.service.script.Script;
 import org.meveo.admin.exception.BusinessException;
@@ -14,6 +16,7 @@ import org.meveo.service.storage.RepositoryService;
 
 import org.meveo.model.customEntities.Wallet;
 import org.meveo.model.customEntities.ChatConversation;
+import org.meveo.model.customEntities.ChatConversationParticipant;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,7 +38,7 @@ public class CreateChatConversation extends Script {
 
         createrWalletId = normalizeHash(createrWalletId);
         Wallet createrWallet = null;
-
+      
         try {
             createrWallet = crossStorageApi.find(defaultRepo, createrWalletId, Wallet.class);
         } catch (EntityDoesNotExistsException ex) {
@@ -44,21 +47,54 @@ public class CreateChatConversation extends Script {
             LOG.error(errorMessage, ex);
             return;
         }
+      
+        List<ChatConversationParticipant> participants = crossStorageApi.find(defaultRepo, ChatConversationParticipant.class)
+                    .by("participant", createrWallet)                    
+                    .getResults();
+        Optional<ChatConversation> existingChatConversation = Optional.ofNullable(null);  
+        if(participants.size() > 0){
+            LOG.info("Chat participant found ");         	
+        	List<String> chatConversationUUIds = participants.stream().map(participant -> participant.getChatConversation().getUuid() ).collect(Collectors.toList());
+        	if(chatConversationUUIds != null && chatConversationUUIds.size() > 0 ){
+                List<ChatConversation> chatConversations = crossStorageApi.find(defaultRepo, ChatConversation.class)
+                    	.by("inList uuid", chatConversationUUIds)
+                    	.getResults();  
+                chatConversations.forEach(c->LOG.info("Chat Title ="+c.getTitle()+"title provided = "+title+"  :  isTitle matched ="+title.equals(c.getTitle()))); 
+          		existingChatConversation = chatConversations.stream().filter(c -> title.equals(c.getTitle())).findFirst();
+        	}
+        }/*else{
+            LOG.info("Donot know Why Participants not found");
+            result = "{\"status\": \"failed\", \"result\": \"Sill Error: Donot know Why Participants not found\"}";
+            return;
+        }*/
+      
+        
+        
+      
+        if(existingChatConversation.isPresent()){
+            result = "{\"status\": \"success\", \"result\": \"" + existingChatConversation.get().getUuid() + "\"}";
+            LOG.info("Chat Conversation exixts already with Id: " + existingChatConversation.get().getUuid() );
+        }else{
+        	
+          	if(!existingChatConversation.isPresent()){
+          		return;
+        	}
 
-        try {
-            ChatConversation chatConversation = new ChatConversation();
-            chatConversation.setTitle(this.title);
-            chatConversation.setCreationDate(Instant.now());
+        	try {
+            	ChatConversation chatConversation = new ChatConversation();
+            	chatConversation.setTitle(this.title);
+            	chatConversation.setCreationDate(Instant.now());
 
-            String uuid = crossStorageApi.createOrUpdate(defaultRepo, chatConversation);
+            	String uuid = crossStorageApi.createOrUpdate(defaultRepo, chatConversation);
 
-            LOG.info("Chat Conversation created with Id: " + uuid);
-            result = "{\"status\": \"success\", \"result\": \"" + uuid + "\"}";
+            	LOG.info("Chat Conversation created with Id: " + uuid);
+            	result = "{\"status\": \"success\", \"result\": \"" + uuid + "\"}";
 
-        } catch (Exception ex) {
-            String errorMessage = "Failed to create Chat Conversation with createrWalletId = " + createrWalletId;
-            result = "{\"status\": \"failed\", \"result\": \"" + errorMessage + "\"}";
-            LOG.error(errorMessage, ex);
+        	} catch (Exception ex) {
+            	String errorMessage = "Failed to create Chat Conversation with createrWalletId = " + createrWalletId;
+            	result = "{\"status\": \"failed\", \"result\": \"" + errorMessage + "\"}";
+            	LOG.error(errorMessage, ex);
+        	}    
         }
     }
 
