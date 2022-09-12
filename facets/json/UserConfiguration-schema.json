@@ -28,21 +28,6 @@
             "title": "UserConfiguration.isChatNotificationsEnabled",
             "type": "boolean"
         },
-        "configurations": {
-            "storages": ["SQL"],
-            "patternProperties": {"^.*$": {
-                "id": "CE_UserConfiguration_configurations_item",
-                "title": "UserConfiguration.configurations item",
-                "type": "string"
-            }},
-            "nullable": true,
-            "description": "Configurations",
-            "readOnly": false,
-            "versionable": false,
-            "id": "CE_UserConfiguration_configurations",
-            "title": "UserConfiguration.configurations",
-            "type": "object"
-        },
         "isChatEnabledFromProfilePage": {
             "storages": ["SQL"],
             "default": "true",
