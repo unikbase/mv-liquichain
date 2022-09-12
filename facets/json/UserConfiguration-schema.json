@@ -69,7 +69,7 @@
             "storages": ["SQL"],
             "default": "true",
             "nullable": true,
-            "description": "Email Notifications Allowed",
+            "description": "Email's notification settings",
             "readOnly": false,
             "versionable": false,
             "id": "CE_UserConfiguration_isEmailNotificationsEnabled",
