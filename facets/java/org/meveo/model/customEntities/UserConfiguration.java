@@ -3,6 +3,8 @@ package org.meveo.model.customEntities;
 import org.meveo.model.CustomEntity;
 import java.util.List;
 import org.meveo.model.persistence.DBStorageType;
+import java.util.Map;
+import java.util.HashMap;
 import org.meveo.model.customEntities.Wallet;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -23,6 +25,10 @@ public class UserConfiguration implements CustomEntity {
     private String autoReplyMessage;
 
     private Boolean isChatNotificationsEnabled;
+
+    private Boolean IsSellerInfoUpdatesEnabled;
+
+    private Map<String, String> configurations = new HashMap<>();
 
     private Boolean isChatEnabledFromProfilePage;
 
@@ -67,6 +73,22 @@ public class UserConfiguration implements CustomEntity {
 
     public void setIsChatNotificationsEnabled(Boolean isChatNotificationsEnabled) {
         this.isChatNotificationsEnabled = isChatNotificationsEnabled;
+    }
+
+    public Boolean getIsSellerInfoUpdatesEnabled() {
+        return IsSellerInfoUpdatesEnabled;
+    }
+
+    public void setIsSellerInfoUpdatesEnabled(Boolean IsSellerInfoUpdatesEnabled) {
+        this.IsSellerInfoUpdatesEnabled = IsSellerInfoUpdatesEnabled;
+    }
+
+    public Map<String, String> getConfigurations() {
+        return configurations;
+    }
+
+    public void setConfigurations(Map<String, String> configurations) {
+        this.configurations = configurations;
     }
 
     public Boolean getIsChatEnabledFromProfilePage() {
