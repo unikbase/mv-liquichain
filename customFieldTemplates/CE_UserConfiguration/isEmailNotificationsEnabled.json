@@ -1,6 +1,6 @@
 {
   "code" : "isEmailNotificationsEnabled",
-  "description" : "Email Notifications Allowed",
+  "description" : "Email's notification settings",
   "fieldType" : "BOOLEAN",
   "accountLevel" : "CE_UserConfiguration",
   "appliesTo" : "CE_UserConfiguration",
@@ -15,7 +15,7 @@
   "contentTypes" : [ ],
   "fileExtensions" : [ ],
   "saveOnExplorer" : false,
-  "guiPosition" : "tab:User Configurations:0;field:1",
+  "guiPosition" : "tab:User Configurations:0;field:2",
   "identifier" : false,
   "storages" : [ "SQL" ],
   "samples" : [ ],
