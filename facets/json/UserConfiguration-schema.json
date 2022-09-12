@@ -28,6 +28,32 @@
             "title": "UserConfiguration.isChatNotificationsEnabled",
             "type": "boolean"
         },
+        "IsSellerInfoUpdatesEnabled": {
+            "storages": ["SQL"],
+            "default": "true",
+            "nullable": true,
+            "description": "Seller info updates",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_UserConfiguration_IsSellerInfoUpdatesEnabled",
+            "title": "UserConfiguration.IsSellerInfoUpdatesEnabled",
+            "type": "boolean"
+        },
+        "configurations": {
+            "storages": ["SQL"],
+            "patternProperties": {"^.*$": {
+                "id": "CE_UserConfiguration_configurations_item",
+                "title": "UserConfiguration.configurations item",
+                "type": "string"
+            }},
+            "nullable": true,
+            "description": "Configurations",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_UserConfiguration_configurations",
+            "title": "UserConfiguration.configurations",
+            "type": "object"
+        },
         "isChatEnabledFromProfilePage": {
             "storages": ["SQL"],
             "default": "true",
@@ -43,7 +69,7 @@
             "storages": ["SQL"],
             "default": "true",
             "nullable": true,
-            "description": "Email's notification settings",
+            "description": "Email Notifications Allowed",
             "readOnly": false,
             "versionable": false,
             "id": "CE_UserConfiguration_isEmailNotificationsEnabled",
