@@ -62,11 +62,7 @@ public class CreateChatConversation extends Script {
                 chatConversations.forEach(c->LOG.info("Chat Title ="+c.getTitle()+"title provided = "+title+"  :  isTitle matched ="+title.equals(c.getTitle()))); 
           		existingChatConversation = chatConversations.stream().filter(c -> title.equals(c.getTitle())).findFirst();
         	}
-        }/*else{
-            LOG.info("Donot know Why Participants not found");
-            result = "{\"status\": \"failed\", \"result\": \"Sill Error: Donot know Why Participants not found\"}";
-            return;
-        }*/
+        }
       
         
         
@@ -76,10 +72,6 @@ public class CreateChatConversation extends Script {
             LOG.info("Chat Conversation exixts already with Id: " + existingChatConversation.get().getUuid() );
         }else{
         	
-          	if(!existingChatConversation.isPresent()){
-          		return;
-        	}
-
         	try {
             	ChatConversation chatConversation = new ChatConversation();
             	chatConversation.setTitle(this.title);
