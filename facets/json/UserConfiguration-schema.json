@@ -28,17 +28,6 @@
             "title": "UserConfiguration.isChatNotificationsEnabled",
             "type": "boolean"
         },
-        "IsSellerInfoUpdatesEnabled": {
-            "storages": ["SQL"],
-            "default": "true",
-            "nullable": true,
-            "description": "Seller info updates",
-            "readOnly": false,
-            "versionable": false,
-            "id": "CE_UserConfiguration_IsSellerInfoUpdatesEnabled",
-            "title": "UserConfiguration.IsSellerInfoUpdatesEnabled",
-            "type": "boolean"
-        },
         "isChatEnabledFromProfilePage": {
             "storages": ["SQL"],
             "default": "true",
@@ -54,7 +43,7 @@
             "storages": ["SQL"],
             "default": "true",
             "nullable": true,
-            "description": "Email Notifications Allowed",
+            "description": "Email's notification settings",
             "readOnly": false,
             "versionable": false,
             "id": "CE_UserConfiguration_isEmailNotificationsEnabled",
@@ -70,6 +59,17 @@
             "versionable": false,
             "id": "CE_UserConfiguration_isOrderUpdatesEnabled",
             "title": "UserConfiguration.isOrderUpdatesEnabled",
+            "type": "boolean"
+        },
+        "isSellerInfoUpdatesEnabled": {
+            "storages": ["SQL"],
+            "default": "false",
+            "nullable": true,
+            "description": "Seller info updates enabled",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_UserConfiguration_isSellerInfoUpdatesEnabled",
+            "title": "UserConfiguration.isSellerInfoUpdatesEnabled",
             "type": "boolean"
         },
         "isAutoReplyEnabled": {
