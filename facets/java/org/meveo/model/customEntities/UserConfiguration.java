@@ -26,8 +26,6 @@ public class UserConfiguration implements CustomEntity {
 
     private Boolean isChatNotificationsEnabled;
 
-    private Boolean IsSellerInfoUpdatesEnabled;
-
     private Map<String, String> configurations = new HashMap<>();
 
     private Boolean isChatEnabledFromProfilePage;
@@ -73,14 +71,6 @@ public class UserConfiguration implements CustomEntity {
 
     public void setIsChatNotificationsEnabled(Boolean isChatNotificationsEnabled) {
         this.isChatNotificationsEnabled = isChatNotificationsEnabled;
-    }
-
-    public Boolean getIsSellerInfoUpdatesEnabled() {
-        return IsSellerInfoUpdatesEnabled;
-    }
-
-    public void setIsSellerInfoUpdatesEnabled(Boolean IsSellerInfoUpdatesEnabled) {
-        this.IsSellerInfoUpdatesEnabled = IsSellerInfoUpdatesEnabled;
     }
 
     public Map<String, String> getConfigurations() {
