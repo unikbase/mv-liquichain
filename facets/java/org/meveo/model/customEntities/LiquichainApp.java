@@ -21,6 +21,8 @@ public class LiquichainApp implements CustomEntity {
     @JsonIgnore()
     private DBStorageType storages;
 
+    private String upgradeRules;
+
     private String hexCode;
 
     @JsonProperty(required = true)
@@ -52,6 +54,14 @@ public class LiquichainApp implements CustomEntity {
 
     public void setStorages(DBStorageType storages) {
         this.storages = storages;
+    }
+
+    public String getUpgradeRules() {
+        return upgradeRules;
+    }
+
+    public void setUpgradeRules(String upgradeRules) {
+        this.upgradeRules = upgradeRules;
     }
 
     public String getHexCode() {
