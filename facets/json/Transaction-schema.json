@@ -5,15 +5,28 @@
     "id": "Transaction",
     "title": "Transaction",
     "type": "object",
-    "properties": {"metadata": {
-        "storages": ["SQL"],
-        "nullable": true,
-        "description": "Metadata",
-        "readOnly": false,
-        "versionable": false,
-        "id": "CE_Transaction_metadata",
-        "title": "Transaction.metadata",
-        "type": "string",
-        "maxLength": 255
-    }}
+    "properties": {
+        "metadata": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "Metadata",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Transaction_metadata",
+            "title": "Transaction.metadata",
+            "type": "string",
+            "maxLength": 255
+        },
+        "expirationDate": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "format": "date-time",
+            "description": "Expiration date",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Transaction_expirationDate",
+            "title": "Transaction.expirationDate",
+            "type": "string"
+        }
+    }
 }
