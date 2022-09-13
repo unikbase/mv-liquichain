@@ -3,6 +3,7 @@ package org.meveo.model.customEntities;
 import org.meveo.model.CustomEntity;
 import java.util.List;
 import org.meveo.model.persistence.DBStorageType;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class LiquichainApp implements CustomEntity {
@@ -20,6 +21,9 @@ public class LiquichainApp implements CustomEntity {
     private DBStorageType storages;
 
     private String hexCode;
+
+    @JsonProperty(required = true)
+    private String name;
 
     @Override()
     public String getUuid() {
@@ -44,6 +48,14 @@ public class LiquichainApp implements CustomEntity {
 
     public void setHexCode(String hexCode) {
         this.hexCode = hexCode;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override()
