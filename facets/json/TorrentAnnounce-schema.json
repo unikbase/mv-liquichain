@@ -49,6 +49,17 @@
             "title": "TorrentAnnounce.left",
             "type": "integer"
         },
+        "uploaded": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "uploaded bytes",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_TorrentAnnounce_uploaded",
+            "title": "TorrentAnnounce.uploaded",
+            "type": "integer",
+            "minimum": 0
+        },
         "infoHash": {
             "storages": ["SQL"],
             "nullable": true,
