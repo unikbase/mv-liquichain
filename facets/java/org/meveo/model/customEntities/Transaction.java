@@ -3,8 +3,8 @@ package org.meveo.model.customEntities;
 import org.meveo.model.CustomEntity;
 import java.util.List;
 import org.meveo.model.persistence.DBStorageType;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.Instant;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class Transaction implements CustomEntity {
@@ -23,6 +23,14 @@ public class Transaction implements CustomEntity {
 
     private String metadata;
 
+    private String orderId;
+
+    private String fromHexHash;
+
+    private Instant creationDate;
+
+    private String type;
+
     private String toHexHash;
 
     private String s;
@@ -30,16 +38,10 @@ public class Transaction implements CustomEntity {
     @JsonProperty(required = true)
     private String hexHash;
 
-    private String fromHexHash;
-
     @JsonProperty(required = true)
     private String signedHash;
 
     private String currency;
-
-    private Instant creationDate;
-
-    private String type;
 
     private String value;
 
@@ -72,6 +74,38 @@ public class Transaction implements CustomEntity {
         this.metadata = metadata;
     }
 
+    public String getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
+    }
+
+    public String getFromHexHash() {
+        return fromHexHash;
+    }
+
+    public void setFromHexHash(String fromHexHash) {
+        this.fromHexHash = fromHexHash;
+    }
+
+    public Instant getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(Instant creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
     public String getToHexHash() {
         return toHexHash;
     }
@@ -96,14 +130,6 @@ public class Transaction implements CustomEntity {
         this.hexHash = hexHash;
     }
 
-    public String getFromHexHash() {
-        return fromHexHash;
-    }
-
-    public void setFromHexHash(String fromHexHash) {
-        this.fromHexHash = fromHexHash;
-    }
-
     public String getSignedHash() {
         return signedHash;
     }
@@ -118,22 +144,6 @@ public class Transaction implements CustomEntity {
 
     public void setCurrency(String currency) {
         this.currency = currency;
-    }
-
-    public Instant getCreationDate() {
-        return creationDate;
-    }
-
-    public void setCreationDate(Instant creationDate) {
-        this.creationDate = creationDate;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 
     public String getValue() {
