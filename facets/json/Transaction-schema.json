@@ -182,6 +182,18 @@
             "type": "string",
             "maxLength": 4
         },
+        "blockNumber": {
+            "storages": ["SQL"],
+            "indexType": "INDEX_NOT_ANALYZE",
+            "nullable": true,
+            "description": "block number",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Transaction_blockNumber",
+            "title": "Transaction.blockNumber",
+            "type": "string",
+            "maxLength": 16
+        },
         "hexHash": {
             "storages": ["SQL"],
             "indexType": "INDEX_NOT_ANALYZE",
