@@ -19,6 +19,8 @@ public class LiquichainApp implements CustomEntity {
     @JsonIgnore()
     private DBStorageType storages;
 
+    private String hexCode;
+
     @Override()
     public String getUuid() {
         return uuid;
@@ -34,6 +36,14 @@ public class LiquichainApp implements CustomEntity {
 
     public void setStorages(DBStorageType storages) {
         this.storages = storages;
+    }
+
+    public String getHexCode() {
+        return hexCode;
+    }
+
+    public void setHexCode(String hexCode) {
+        this.hexCode = hexCode;
     }
 
     @Override()
