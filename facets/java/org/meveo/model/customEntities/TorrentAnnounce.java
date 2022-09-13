@@ -3,6 +3,7 @@ package org.meveo.model.customEntities;
 import org.meveo.model.CustomEntity;
 import java.util.List;
 import org.meveo.model.persistence.DBStorageType;
+import java.time.Instant;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class TorrentAnnounce implements CustomEntity {
@@ -18,6 +19,8 @@ public class TorrentAnnounce implements CustomEntity {
 
     @JsonIgnore()
     private DBStorageType storages;
+
+    private Instant lastAnnounceDate;
 
     private String status;
 
@@ -36,6 +39,14 @@ public class TorrentAnnounce implements CustomEntity {
 
     public void setStorages(DBStorageType storages) {
         this.storages = storages;
+    }
+
+    public Instant getLastAnnounceDate() {
+        return lastAnnounceDate;
+    }
+
+    public void setLastAnnounceDate(Instant lastAnnounceDate) {
+        this.lastAnnounceDate = lastAnnounceDate;
     }
 
     public String getStatus() {
