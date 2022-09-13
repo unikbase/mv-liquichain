@@ -23,6 +23,14 @@ public class TorrentAnnounce implements CustomEntity {
 
     private String peerId;
 
+    private String ip;
+
+    private String infoHash;
+
+    private Long downloaded;
+
+    private String url;
+
     private Instant anounceDate;
 
     private Instant lastAnnounceDate;
@@ -31,15 +39,9 @@ public class TorrentAnnounce implements CustomEntity {
 
     private Long left;
 
-    private String ip;
+    private Long port;
 
     private Long uploaded;
-
-    private String infoHash;
-
-    private Long downloaded;
-
-    private String url;
 
     private Double longitude;
 
@@ -68,6 +70,38 @@ public class TorrentAnnounce implements CustomEntity {
 
     public void setPeerId(String peerId) {
         this.peerId = peerId;
+    }
+
+    public String getIp() {
+        return ip;
+    }
+
+    public void setIp(String ip) {
+        this.ip = ip;
+    }
+
+    public String getInfoHash() {
+        return infoHash;
+    }
+
+    public void setInfoHash(String infoHash) {
+        this.infoHash = infoHash;
+    }
+
+    public Long getDownloaded() {
+        return downloaded;
+    }
+
+    public void setDownloaded(Long downloaded) {
+        this.downloaded = downloaded;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public Instant getAnounceDate() {
@@ -102,12 +136,12 @@ public class TorrentAnnounce implements CustomEntity {
         this.left = left;
     }
 
-    public String getIp() {
-        return ip;
+    public Long getPort() {
+        return port;
     }
 
-    public void setIp(String ip) {
-        this.ip = ip;
+    public void setPort(Long port) {
+        this.port = port;
     }
 
     public Long getUploaded() {
@@ -116,30 +150,6 @@ public class TorrentAnnounce implements CustomEntity {
 
     public void setUploaded(Long uploaded) {
         this.uploaded = uploaded;
-    }
-
-    public String getInfoHash() {
-        return infoHash;
-    }
-
-    public void setInfoHash(String infoHash) {
-        this.infoHash = infoHash;
-    }
-
-    public Long getDownloaded() {
-        return downloaded;
-    }
-
-    public void setDownloaded(Long downloaded) {
-        this.downloaded = downloaded;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
     }
 
     public Double getLongitude() {
