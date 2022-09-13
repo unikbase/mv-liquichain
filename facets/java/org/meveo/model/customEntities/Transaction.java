@@ -41,6 +41,8 @@ public class Transaction implements CustomEntity {
 
     private String type;
 
+    private String nonce;
+
     private String gasLimit;
 
     private String r;
@@ -162,6 +164,14 @@ public class Transaction implements CustomEntity {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getNonce() {
+        return nonce;
+    }
+
+    public void setNonce(String nonce) {
+        this.nonce = nonce;
     }
 
     public String getGasLimit() {
