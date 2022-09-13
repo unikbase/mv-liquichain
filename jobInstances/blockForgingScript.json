@@ -2,8 +2,6 @@
   "active" : false,
   "code" : "blockForgingScript",
   "description" : "Run block forging script",
-  "jobCategory" : "MEDIATION",
-  "jobTemplate" : "ScriptingJob",
   "customFields" : {
     "customField" : [ {
       "code" : "ScriptingJob_script",
@@ -14,6 +12,8 @@
       }
     } ]
   },
+  "jobCategory" : "MEDIATION",
+  "jobTemplate" : "ScriptingJob",
   "timerCode" : "Daily-midnight",
   "limitToSingleNode" : true
 }
