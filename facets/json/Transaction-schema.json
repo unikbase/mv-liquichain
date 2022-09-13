@@ -122,6 +122,18 @@
             "id": "CE_Transaction_expirationDate",
             "title": "Transaction.expirationDate",
             "type": "string"
+        },
+        "gasPrice": {
+            "storages": ["SQL"],
+            "indexType": "INDEX_NOT_ANALYZE",
+            "nullable": true,
+            "description": "gas price",
+            "readOnly": true,
+            "versionable": false,
+            "id": "CE_Transaction_gasPrice",
+            "title": "Transaction.gasPrice",
+            "type": "string",
+            "maxLength": 255
         }
     },
     "required": ["signedHash"]
