@@ -54,12 +54,12 @@
 						},
 						{
 							"key": "username",
-							"value": "meveo.admin",
+							"value": "{{keycloakUsername}}",
 							"type": "text"
 						},
 						{
 							"key": "password",
-							"value": "meveo",
+							"value": "{{keycloakPassword}}",
 							"type": "text"
 						},
 						{
@@ -111,7 +111,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"createrWalletId\" : \"e14495ee-9f1a-42a3-bc1a-e254f4c4e345\",\r\n    \"title\" : \"Group Purchase Conversation\"\r\n}",
+					"raw": "{\r\n    \"createrWalletId\" : \"e14495ee-9f1a-42a3-bc1a-e254f4c4e345\",\r\n    \"title\" : \"Group Purchase iphone 14\",\r\n    \"groupId\" : \"100\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"

@@ -1,6 +1,6 @@
 {
-  "code" : "messageCount",
-  "description" : "Message Count",
+  "code" : "groupId",
+  "description" : "Group Id",
   "fieldType" : "LONG",
   "accountLevel" : "CE_ChatConversation",
   "appliesTo" : "CE_ChatConversation",
@@ -14,7 +14,7 @@
   "contentTypes" : [ ],
   "fileExtensions" : [ ],
   "saveOnExplorer" : false,
-  "guiPosition" : "tab:Chat Conversation:0;field:4",
+  "guiPosition" : "tab:Chat Conversation:0;field:3",
   "identifier" : false,
   "storages" : [ "SQL" ],
   "samples" : [ ],
