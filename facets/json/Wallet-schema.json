@@ -123,6 +123,16 @@
             "type": "string",
             "maxLength": 40
         },
+        "lastPrivateInfoRequest": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "Time (in millis) of last privateInfo request",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Wallet_lastPrivateInfoRequest",
+            "title": "Wallet.lastPrivateInfoRequest",
+            "type": "integer"
+        },
         "name": {
             "storages": ["SQL"],
             "nullable": false,
