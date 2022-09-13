@@ -37,6 +37,8 @@ public class Transaction implements CustomEntity {
 
     private String gasLimit;
 
+    private String r;
+
     private String toHexHash;
 
     private String s;
@@ -136,6 +138,14 @@ public class Transaction implements CustomEntity {
 
     public void setGasLimit(String gasLimit) {
         this.gasLimit = gasLimit;
+    }
+
+    public String getR() {
+        return r;
+    }
+
+    public void setR(String r) {
+        this.r = r;
     }
 
     public String getToHexHash() {
