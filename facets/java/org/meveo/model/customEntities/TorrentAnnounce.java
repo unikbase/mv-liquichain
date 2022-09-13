@@ -31,6 +31,8 @@ public class TorrentAnnounce implements CustomEntity {
 
     private Long left;
 
+    private String ip;
+
     private Long uploaded;
 
     private String infoHash;
@@ -98,6 +100,14 @@ public class TorrentAnnounce implements CustomEntity {
 
     public void setLeft(Long left) {
         this.left = left;
+    }
+
+    public String getIp() {
+        return ip;
+    }
+
+    public void setIp(String ip) {
+        this.ip = ip;
     }
 
     public Long getUploaded() {
