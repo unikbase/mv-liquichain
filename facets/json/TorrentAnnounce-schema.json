@@ -28,6 +28,16 @@
             "type": "string",
             "maxLength": 50
         },
+        "latitude": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "latitude",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_TorrentAnnounce_latitude",
+            "title": "TorrentAnnounce.latitude",
+            "type": "number"
+        },
         "infoHash": {
             "storages": ["SQL"],
             "nullable": true,
