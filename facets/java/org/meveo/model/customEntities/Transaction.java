@@ -27,6 +27,8 @@ public class Transaction implements CustomEntity {
 
     private String data;
 
+    private String nodeSignature;
+
     private String orderId;
 
     private String fromHexHash;
@@ -102,6 +104,14 @@ public class Transaction implements CustomEntity {
 
     public void setData(String data) {
         this.data = data;
+    }
+
+    public String getNodeSignature() {
+        return nodeSignature;
+    }
+
+    public void setNodeSignature(String nodeSignature) {
+        this.nodeSignature = nodeSignature;
     }
 
     public String getOrderId() {
