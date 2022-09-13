@@ -38,6 +38,17 @@
             "title": "TorrentAnnounce.left",
             "type": "integer"
         },
+        "infoHash": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "info hash",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_TorrentAnnounce_infoHash",
+            "title": "TorrentAnnounce.infoHash",
+            "type": "string",
+            "maxLength": 40
+        },
         "url": {
             "storages": ["SQL"],
             "nullable": true,
