@@ -3,6 +3,7 @@ package org.meveo.model.customEntities;
 import org.meveo.model.CustomEntity;
 import java.util.List;
 import org.meveo.model.persistence.DBStorageType;
+import org.meveo.model.customEntities.VerifiedEmail;
 import org.meveo.model.customEntities.VerifiedPhoneNumber;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.meveo.model.customEntities.LiquichainApp;
@@ -23,6 +24,8 @@ public class Wallet implements CustomEntity {
     private DBStorageType storages;
 
     private String privateKey;
+
+    private VerifiedEmail emailAddress;
 
     private VerifiedPhoneNumber phoneNumber;
 
@@ -65,6 +68,14 @@ public class Wallet implements CustomEntity {
 
     public void setPrivateKey(String privateKey) {
         this.privateKey = privateKey;
+    }
+
+    public VerifiedEmail getEmailAddress() {
+        return emailAddress;
+    }
+
+    public void setEmailAddress(VerifiedEmail emailAddress) {
+        this.emailAddress = emailAddress;
     }
 
     public VerifiedPhoneNumber getPhoneNumber() {
