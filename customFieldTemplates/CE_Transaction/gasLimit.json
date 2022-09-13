@@ -23,6 +23,6 @@
   "indexType" : "INDEX_NOT_ANALYZE",
   "audited" : false,
   "persisted" : true,
-  "unique" : false,
-  "filter" : false
+  "filter" : false,
+  "unique" : false
 }
