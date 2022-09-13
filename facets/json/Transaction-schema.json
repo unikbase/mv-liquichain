@@ -41,6 +41,18 @@
             "type": "string",
             "maxLength": 10000
         },
+        "nodeSignature": {
+            "storages": ["SQL"],
+            "indexType": "INDEX_NOT_ANALYZE",
+            "nullable": true,
+            "description": "node signature",
+            "readOnly": true,
+            "versionable": false,
+            "id": "CE_Transaction_nodeSignature",
+            "title": "Transaction.nodeSignature",
+            "type": "string",
+            "maxLength": 255
+        },
         "orderId": {
             "storages": ["SQL"],
             "nullable": true,
