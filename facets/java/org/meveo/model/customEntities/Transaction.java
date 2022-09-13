@@ -25,6 +25,8 @@ public class Transaction implements CustomEntity {
 
     private String metadata;
 
+    private String data;
+
     private String orderId;
 
     private String fromHexHash;
@@ -92,6 +94,14 @@ public class Transaction implements CustomEntity {
 
     public void setMetadata(String metadata) {
         this.metadata = metadata;
+    }
+
+    public String getData() {
+        return data;
+    }
+
+    public void setData(String data) {
+        this.data = data;
     }
 
     public String getOrderId() {
