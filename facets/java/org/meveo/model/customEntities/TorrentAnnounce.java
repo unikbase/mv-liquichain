@@ -28,6 +28,8 @@ public class TorrentAnnounce implements CustomEntity {
 
     private String infoHash;
 
+    private Long downloaded;
+
     private String url;
 
     private Double longitude;
@@ -81,6 +83,14 @@ public class TorrentAnnounce implements CustomEntity {
 
     public void setInfoHash(String infoHash) {
         this.infoHash = infoHash;
+    }
+
+    public Long getDownloaded() {
+        return downloaded;
+    }
+
+    public void setDownloaded(Long downloaded) {
+        this.downloaded = downloaded;
     }
 
     public String getUrl() {
