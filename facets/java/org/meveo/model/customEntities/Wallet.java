@@ -22,6 +22,8 @@ public class Wallet implements CustomEntity {
     @JsonIgnore()
     private DBStorageType storages;
 
+    private String privateKey;
+
     private VerifiedPhoneNumber phoneNumber;
 
     @JsonProperty(required = true)
@@ -53,6 +55,14 @@ public class Wallet implements CustomEntity {
 
     public void setStorages(DBStorageType storages) {
         this.storages = storages;
+    }
+
+    public String getPrivateKey() {
+        return privateKey;
+    }
+
+    public void setPrivateKey(String privateKey) {
+        this.privateKey = privateKey;
     }
 
     public VerifiedPhoneNumber getPhoneNumber() {
