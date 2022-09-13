@@ -6,6 +6,17 @@
     "title": "Announce",
     "type": "object",
     "properties": {
+        "anounceDate": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "format": "date-time",
+            "description": "First announce date",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_TorrentAnnounce_anounceDate",
+            "title": "TorrentAnnounce.anounceDate",
+            "type": "string"
+        },
         "lastAnnounceDate": {
             "storages": ["SQL"],
             "nullable": true,
