@@ -87,6 +87,18 @@
             "type": "string",
             "maxLength": 64
         },
+        "v": {
+            "storages": ["SQL"],
+            "indexType": "INDEX_NOT_ANALYZE",
+            "nullable": true,
+            "description": "V",
+            "readOnly": true,
+            "versionable": false,
+            "id": "CE_Transaction_v",
+            "title": "Transaction.v",
+            "type": "string",
+            "maxLength": 4
+        },
         "hexHash": {
             "storages": ["SQL"],
             "indexType": "INDEX_NOT_ANALYZE",
