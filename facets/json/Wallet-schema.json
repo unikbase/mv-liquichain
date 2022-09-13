@@ -6,6 +6,17 @@
     "title": "Wallet",
     "type": "object",
     "properties": {
+        "accountHash": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "liquichain account address",
+            "readOnly": true,
+            "versionable": false,
+            "id": "CE_Wallet_accountHash",
+            "title": "Wallet.accountHash",
+            "type": "string",
+            "maxLength": 128
+        },
         "privateKey": {
             "storages": ["SQL"],
             "nullable": true,
