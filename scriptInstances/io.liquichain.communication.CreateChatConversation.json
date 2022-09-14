@@ -7,6 +7,9 @@
   }, {
     "name" : "title",
     "type" : "String"
+  }, {
+    "name" : "groupId",
+    "type" : "Long"
   } ],
   "outputs" : [ {
     "name" : "result",

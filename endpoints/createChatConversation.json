@@ -16,6 +16,11 @@
     "multivalued" : false,
     "parameterName" : "title",
     "valueRequired" : true
+  }, {
+    "serviceParameter" : "groupId",
+    "multivalued" : false,
+    "parameterName" : "groupId",
+    "valueRequired" : false
   } ],
   "pathParameters" : [ ],
   "roles" : [ ],

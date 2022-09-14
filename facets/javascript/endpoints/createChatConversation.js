@@ -10,6 +10,11 @@ const requestSchema = {
   "$schema" : "http://json-schema.org/draft-07/schema",
   "type" : "object",
   "properties" : {
+    "groupId" : {
+      "title" : "groupId",
+      "type" : "string",
+      "minLength" : 1
+    },
     "createrWalletId" : {
       "title" : "createrWalletId",
       "type" : "string",

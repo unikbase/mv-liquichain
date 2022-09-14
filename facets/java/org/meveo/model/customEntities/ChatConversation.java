@@ -23,6 +23,8 @@ public class ChatConversation implements CustomEntity {
 
     private Long messageCount;
 
+    private Long groupId;
+
     private Instant creationDate;
 
     private String title;
@@ -52,6 +54,14 @@ public class ChatConversation implements CustomEntity {
 
     public void setMessageCount(Long messageCount) {
         this.messageCount = messageCount;
+    }
+
+    public Long getGroupId() {
+        return groupId;
+    }
+
+    public void setGroupId(Long groupId) {
+        this.groupId = groupId;
     }
 
     public Instant getCreationDate() {
