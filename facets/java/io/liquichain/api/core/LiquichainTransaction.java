@@ -81,7 +81,6 @@ public class LiquichainTransaction extends Script {
 
 
     private BLOCKCHAIN_TYPE blockchainBackend;
-    private final CloudMessaging cloudMessaging = new CloudMessaging();
 
     private String fromAddress;
     private String toAddress;
@@ -515,11 +514,7 @@ public class LiquichainTransaction extends Script {
         // updateWalletBalances(sender, recipient);
 
         LOG.info("sending transaction notification");
-        cloudMessaging.setUserId(recipient);
-        cloudMessaging.setTitle("Telecel Play");
-        cloudMessaging.setBody(message);
-        cloudMessaging.execute(null);
-
+        CloudMessaging.sendNotification(crossStorageApi, defaultRepo, recipient, "Telecel Play", message);
         return transactionHash;
     }
 
@@ -576,12 +571,9 @@ public class LiquichainTransaction extends Script {
                     description);
                 break;
         }
-        // TODO - send notification to the user e.g. CloudMessaging
+
         if (!transactionHash.isEmpty()) {
-            cloudMessaging.setUserId(recipientAddress);
-            cloudMessaging.setTitle("Telecel Play");
-            cloudMessaging.setBody(message);
-            cloudMessaging.execute(null);
+            CloudMessaging.sendNotification(crossStorageApi, defaultRepo, recipientAddress, "Telecel Play", message);
         }
 
         return transactionHash;
