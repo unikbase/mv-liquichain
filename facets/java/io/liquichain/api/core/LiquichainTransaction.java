@@ -315,7 +315,7 @@ public class LiquichainTransaction extends Script {
         String completedTransactionHash = transactionReceipt.getTransactionHash();
         LOG.debug("completed transactionHash: {}", completedTransactionHash);
 
-        updateWalletBalances(from, to);
+//        updateWalletBalances(from, to);
 
         return completedTransactionHash;
     }
