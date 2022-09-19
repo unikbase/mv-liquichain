@@ -320,8 +320,8 @@ public class LiquichainTransaction extends Script {
         return completedTransactionHash;
     }
 
-    private synchronized String transferBesuDB(String from, String to, BigInteger amount,
-        String type, String description) throws Exception {
+    private synchronized String transferBesuDB(String from, String to, BigInteger amount, String type,
+        String description) throws Exception {
 
         String sender = normalizeHash(from);
         String recipient = normalizeHash(to);
@@ -406,11 +406,14 @@ public class LiquichainTransaction extends Script {
         // transaction.setTransactionIndex(transactionReceipt.getTransactionIndex().longValue());
         transaction.setBlockNumber("1");
         transaction.setBlockHash("e8594f30d08b412027f4546506249d09134b9283530243e01e4cdbc34945bcf0");
+        transaction.setInitiator(fromWallet.getUuid());
 
         crossStorageApi.createOrUpdate(defaultRepo, transaction);
 
         // updateWalletBalances(from, to);
 
+        LOG.info("sending transaction notification");
+        CloudMessaging.sendNotification(crossStorageApi, defaultRepo, recipient, "Telecel Play", description);
         return transactionHash;
     }
 
@@ -419,8 +422,8 @@ public class LiquichainTransaction extends Script {
         return this.transferSmartContract(from, to, amount, type, description, message, null);
     }
 
-    public String transferSmartContract(String from, String to, BigInteger amount,
-        String type, String description, String message, String initiator) throws Exception {
+    public String transferSmartContract(String from, String to, BigInteger amount, String type, String description,
+        String message, String initiator) throws Exception {
         String sender = normalizeHash(from);
         String recipient = normalizeHash(to);
 
