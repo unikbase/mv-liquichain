@@ -9,7 +9,7 @@
     "type" : "String"
   }, {
     "name" : "groupId",
-    "type" : "Long"
+    "type" : "String"
   } ],
   "outputs" : [ {
     "name" : "result",
@@ -21,5 +21,5 @@
   "executionRoles" : [ ],
   "sourcingRoles" : [ ],
   "mavenDependencies" : [ ],
-  "importScriptInstances" : [ ]
+  "importScriptInstances" : [ "org.meveo.model.customEntities.ChatConversation" ]
 }
