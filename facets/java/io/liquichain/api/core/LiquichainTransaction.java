@@ -248,6 +248,7 @@ public class LiquichainTransaction extends Script {
         transaction.setType(type);
         transaction.setSignedHash(normalizeHash(encodedTransaction));
         transaction.setCreationDate(java.time.Instant.now());
+        transaction.setInitiator(fromWallet.getUuid());
 
         crossStorageApi.createOrUpdate(defaultRepo, transaction);
 
