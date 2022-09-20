@@ -73,7 +73,7 @@ public class GetChatConversations extends Script {
     					.serializeNulls()
                			.setPrettyPrinting()
     					.create();
-            this.result = new Gson().toJson(chatConversations); //gson.toJson(chatConversations);
+            this.result = gson.toJson(conversations);
         } else {
             this.result = "[]";
         }
