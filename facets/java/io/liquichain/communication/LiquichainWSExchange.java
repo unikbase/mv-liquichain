@@ -90,10 +90,12 @@ public class LiquichainWSExchange extends Script {
         log.info("sendMessage {} {}", destination, txtMessage);
         websocketServerEndpoint.sendMessage("liquichain", destination, txtMessage, persistMessage);
   
-      	
-        createMessageScript.setSenderWalletId(session.getUserProperties().get("username").toString());
-        createMessageScript.setChatConversationId(message.get("conversationId").toString());
-        createMessageScript.setMessage(message.get("message").toString());
-      	createMessageScript.execute(new HashMap<>());
+      	if(message.get("conversationId") != null){          
+          createMessageScript.setSenderWalletId(session.getUserProperties().get("username").toString());        
+          createMessageScript.setChatConversationId(message.get("conversationId").toString());
+          createMessageScript.setMessage(message.get("message").toString());
+      	  createMessageScript.execute(new HashMap<>());
+        }
+        
     }
 }
