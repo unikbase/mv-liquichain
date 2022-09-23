@@ -33,7 +33,7 @@ public class GetChatConversation extends Script {
 
         try {
             ChatConversation chatConversation = crossStorageApi.find(defaultRepo, uuId, ChatConversation.class);
-            result = new Gson().toJson(chatConversation);
+            result = new Gson().toJson(ChatConversationDetail.getInstance().getOutputChatConversation(chatConversation));
 
         } catch (EntityDoesNotExistsException ex) {
             String errorMessage = "Failed to find ChatConversation with hash = " + uuId;
