@@ -1,14 +1,9 @@
 package io.liquichain.communication;
 
 import java.util.Map;
-import java.util.HashMap;
 import java.util.List;
-import java.util.ArrayList;
 import java.util.stream.Stream;
 import java.util.stream.Collectors;
-import java.time.format.DateTimeFormatter;
-import java.time.ZoneId;
-import java.time.LocalDateTime;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -22,7 +17,6 @@ import org.meveo.api.exception.EntityDoesNotExistsException;
 
 import org.meveo.model.customEntities.ChatConversation;
 import org.meveo.model.customEntities.ChatConversationParticipant;
-import org.meveo.model.customEntities.Wallet;
 
 
 import org.slf4j.Logger;
@@ -42,8 +36,7 @@ public class GetChatConversations extends Script {
         super.execute(parameters);
 
         walletId = normalizeHash(walletId);
-        List<ChatConversation> chatConversations = null;
-		Map<String, List<ChatConversationParticipant>> ccParticipants = new HashMap<>();
+        List<ChatConversation> chatConversations = null;		
           
         try {
             List<ChatConversationParticipant> participants = crossStorageApi.find(defaultRepo, ChatConversationParticipant.class)

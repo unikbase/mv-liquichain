@@ -1,0 +1,15 @@
+{
+  "code" : "io.liquichain.communication.ChatConversationDetail",
+  "inputs" : [ ],
+  "outputs" : [ {
+    "name" : "instance",
+    "type" : "ChatConversationDetail"
+  } ],
+  "generateOutputs" : false,
+  "type" : "JAVA",
+  "transactionType" : "SAME",
+  "executionRoles" : [ ],
+  "sourcingRoles" : [ ],
+  "mavenDependencies" : [ ],
+  "importScriptInstances" : [ "org.meveo.model.customEntities.ChatConversation" ]
+}
