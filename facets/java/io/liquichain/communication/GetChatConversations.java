@@ -44,9 +44,7 @@ public class GetChatConversations extends Script {
                     .select("chatConversation")
                     .getResults();
 
-            List<String> chatConversationIds = participants.stream().map(participant -> {
-                return participant.getChatConversation().getUuid();
-            }).collect(Collectors.toList());
+            List<String> chatConversationIds = participants.stream().map(participant -> participant.getChatConversation().getUuid()).collect(Collectors.toList());
 			
           	if(chatConversationIds != null && !chatConversationIds.isEmpty()){
             	chatConversations = crossStorageApi.find(defaultRepo, ChatConversation.class)
@@ -65,7 +63,7 @@ public class GetChatConversations extends Script {
     					.serializeNulls()
                			.setPrettyPrinting()
     					.create();
-            this.result = gson.toJson(ChatConversationDetail.getInstance().getOutputChatConversationList(chatConversations));
+            this.result = gson.toJson((new ChatConversationDetail()).getOutputChatConversationList(chatConversations));
         } else {
             this.result = "[]";
         }

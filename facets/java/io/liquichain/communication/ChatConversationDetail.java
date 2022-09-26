@@ -1,5 +1,7 @@
 package io.liquichain.communication;
 
+import java.util.Set;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.List;
@@ -33,23 +35,54 @@ public class ChatConversationDetail extends Script {
     private final CrossStorageApi crossStorageApi = getCDIBean(CrossStorageApi.class);
     private final RepositoryService repositoryService = getCDIBean(RepositoryService.class);
     private final Repository defaultRepo = repositoryService.findDefaultRepository();
+    private Set<String> allWalletIds = new HashSet<>();
 
     @Override
     public void execute(Map<String, Object> parameters) throws BusinessException {
         super.execute(parameters);
     }
 
+    public UiChatConversation getChatConversationById(ChatConversation chatConversation) {
+      	Map<String, Wallet> walletMap = new HashMap<>();  
+        this.allWalletIds = new HashSet<String>();
+      	UiChatConversation conversation = this.getOutputChatConversation(chatConversation);
+      
+      	List<Wallet> walletList = crossStorageApi.find(defaultRepo, Wallet.class)
+                .by("inList uuid", new ArrayList<String>(this.allWalletIds))
+                .getResults();
+		walletList.stream().forEach(w-> walletMap.put(w.getUuid(), w));
+      	
+      	if(conversation.getParticipants() != null && !conversation.getParticipants().isEmpty()){
+        	conversation.getParticipants().forEach(cp->cp.setName(walletMap.get(cp.getWallet()).getName() ));
+        }        
+        
+        return conversation;
+    }
+
     public List<UiChatConversation> getOutputChatConversationList(List<ChatConversation> chatConversations) {
         List<UiChatConversation> conversations = new ArrayList<>();
-        chatConversations.forEach(cc -> conversations.add(getOutputChatConversation(cc)));
+      	this.allWalletIds = new HashSet<String>();
+        Map<String, Wallet> walletMap = new HashMap<>();  
+      
+        chatConversations.forEach(cc -> { 
+          	UiChatConversation conversation = getOutputChatConversation(cc);          	
+          	conversations.add(conversation);
+        });
+      
+      	List<Wallet> walletList = crossStorageApi.find(defaultRepo, Wallet.class)
+                .by("inList uuid", new ArrayList<String>(this.allWalletIds))
+                .getResults();
+     	 
+      	walletList.stream().forEach(w-> walletMap.put(w.getUuid(), w));      
+      
+      	conversations.forEach(c->c.getParticipants().forEach(cp->cp.setName(walletMap.get(cp.getWallet()).getName() ) ));      	
+      
         return conversations;
     }
 
-    public static ChatConversationDetail getInstance() {
-        return new ChatConversationDetail();
-    }
+   
 
-    public UiChatConversation getOutputChatConversation(ChatConversation cc) {
+    private UiChatConversation getOutputChatConversation(ChatConversation cc) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         List<ChatConversationParticipant> conversationParticipantsList = crossStorageApi.find(defaultRepo, ChatConversationParticipant.class)
                 .by("chatConversation", cc)
@@ -57,117 +90,114 @@ public class ChatConversationDetail extends Script {
 
         UiChatConversation uiChatConversation = new UiChatConversation(cc.getUuid(), cc.getMessageCount(), cc.getConversationGroupId(), conversationParticipantsList,
                 LocalDateTime.ofInstant(cc.getCreationDate(), ZoneId.systemDefault()).format(formatter), cc.getTitle());
-        
-      	return uiChatConversation;
+
+        // fillup list to later call out one query and populate nested objects later to reduce overhead
+      	this.allWalletIds.addAll(conversationParticipantsList.stream().map(cp -> cp.getParticipant().getUuid()).collect(Collectors.toSet()));
+      	conversationParticipantsList.stream().forEach(cp -> { LOG.info(cp.getParticipant().getUuid()); } );
+      
+        return uiChatConversation;
+    }
+
+}
+
+class UiChatConversation {
+    private String uuid;
+    private Long messageCount;
+    private String conversationGroupId;
+    private String creationDate;
+    private String title;
+    private List<UiChatConversationParticipant> participants;
+
+    public UiChatConversation(String uuid, Long messageCount, String conversationGroupId, List<ChatConversationParticipant> chatParticipants, String creationDate, String title) {
+        this.uuid = uuid;
+        this.messageCount = messageCount;
+        this.conversationGroupId = conversationGroupId;
+        this.creationDate = creationDate;
+        this.title = title;
+        this.participants = chatParticipants.stream().map(cp -> new UiChatConversationParticipant(cp.getUuid(), cp.getParticipant().getUuid())).collect(Collectors.toList());
+    }
+
+    public List<UiChatConversationParticipant> getParticipants() {
+        return this.participants;
+    }
+
+    public void setParticipants(List<UiChatConversationParticipant> participants) {
+        this.participants = participants;
     }
 
 
-    class UiChatConversation {
-		private String uuid;
-        private Long messageCount;
-        private String conversationGroupId;
-        private String creationDate;
-        private String title;
-        private List<UiChatConversationParticipant> participants;
-        
-      	public UiChatConversation(String uuid, Long messageCount, String conversationGroupId, List<ChatConversationParticipant> participants, String creationDate, String title) {
-            this.uuid = uuid;
-            this.messageCount = messageCount;
-            this.conversationGroupId = conversationGroupId;
-            this.creationDate = creationDate;
-            this.title = title;
-            this.populateParticipants(participants);
-        }
+    public String getUuid() {
+        return uuid;
+    }
 
-        public List<UiChatConversationParticipant> getParticipants() {
-            return this.participants;
-        }
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
+    }
 
-        public void setParticipants(List<UiChatConversationParticipant> participants) {
-            this.participants = participants;
-        }
+    public Long getMessageCount() {
+        return messageCount;
+    }
 
-        public void populateParticipants(List<ChatConversationParticipant> participants) {
-            if (participants != null) {
-                List<UiChatConversationParticipant> uiChatConversationParticipants = new ArrayList<>();
-                participants.forEach(p -> {
-                    Wallet participantWallet = null;
-                    try {
-                        participantWallet = crossStorageApi.find(defaultRepo, p.getParticipant().getUuid(), Wallet.class);
-                    } catch (EntityDoesNotExistsException ex) {
-                        LOG.error("Failed to find participant wallet againt uuId = " + p.getParticipant().getUuid(), ex);
-                    }
-                    uiChatConversationParticipants.add(new UiChatConversationParticipant(p.getUuid(), participantWallet));
-                });
-                this.participants = uiChatConversationParticipants;
-            }
-        }
+    public void setMessageCount(Long messageCount) {
+        this.messageCount = messageCount;
+    }
 
-        public String getUuid() {
-            return uuid;
-        }
+    public String getConversationGroupId() {
+        return conversationGroupId;
+    }
 
-        public void setUuid(String uuid) {
-            this.uuid = uuid;
-        }
+    public void setConversationGroupId(String conversationGroupId) {
+        this.conversationGroupId = conversationGroupId;
+    }
 
-        public Long getMessageCount() {
-            return messageCount;
-        }
+    public String getCreationDate() {
+        return creationDate;
+    }
 
-        public void setMessageCount(Long messageCount) {
-            this.messageCount = messageCount;
-        }
+    public void setCreationDate(String creationDate) {
+        this.creationDate = creationDate;
+    }
 
-        public String getConversationGroupId() {
-            return conversationGroupId;
-        }
+    public String getTitle() {
+        return title;
+    }
 
-        public void setConversationGroupId(String conversationGroupId) {
-            this.conversationGroupId = conversationGroupId;
-        }
-
-        public String getCreationDate() {
-            return creationDate;
-        }
-
-        public void setCreationDate(String creationDate) {
-            this.creationDate = creationDate;
-        }
-
-        public String getTitle() {
-            return title;
-        }
-
-        public void setTitle(String title) {
-            this.title = title;
-        }
-
-        class UiChatConversationParticipant {
-            private String uuid;
-            private Wallet wallet;
-
-            public UiChatConversationParticipant(String uuid, Wallet wallet) {
-                this.uuid = uuid;
-                this.wallet = wallet;
-            }
-
-            public String getUuId() {
-                return this.uuid;
-            }
-
-            public void setUuId(String uuid) {
-                this.uuid = uuid;
-            }
-
-            public Wallet getWallet() {
-                return this.wallet;
-            }
-
-            public void setWallet(Wallet wallet) {
-                this.wallet = wallet;
-            }
-
-        }
+    public void setTitle(String title) {
+        this.title = title;
     }
 }
+
+class UiChatConversationParticipant {
+    private String participantUuid;
+    private String wallet;
+    private String name;    
+
+    public UiChatConversationParticipant(String participantUuid, String walletId) {
+        this.participantUuid = participantUuid;
+        this.wallet = walletId;
+    }
+
+    public String getParticipantUuid() {
+        return this.participantUuid;
+    }
+
+    public void setParticipantUuid(String participantUuid) {
+        this.participantUuid = participantUuid;
+    }
+
+    public String getWallet() {
+        return this.wallet;
+    }
+
+    public void setWallet(String wallet) {
+        this.wallet = wallet;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }    
+}   
