@@ -61,6 +61,16 @@
     "multivalued" : false,
     "parameterName" : "phoneNumber",
     "valueRequired" : false
+  }, {
+    "serviceParameter" : "notes",
+    "multivalued" : false,
+    "parameterName" : "notes",
+    "valueRequired" : false
+  }, {
+    "serviceParameter" : "isDefault",
+    "multivalued" : false,
+    "parameterName" : "isDefault",
+    "valueRequired" : false
   } ],
   "pathParameters" : [ ],
   "roles" : [ ],

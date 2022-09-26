@@ -15,23 +15,13 @@ const requestSchema = {
       "type" : "string",
       "minLength" : 1
     },
-    "phoneNumber" : {
-      "title" : "phoneNumber",
-      "type" : "string",
-      "minLength" : 1
-    },
-    "streetAddress" : {
-      "title" : "streetAddress",
+    "notes" : {
+      "title" : "notes",
       "type" : "string",
       "minLength" : 1
     },
     "city" : {
       "title" : "city",
-      "type" : "string",
-      "minLength" : 1
-    },
-    "countryCode" : {
-      "title" : "countryCode",
       "type" : "string",
       "minLength" : 1
     },
@@ -47,6 +37,26 @@ const requestSchema = {
     },
     "latitude" : {
       "title" : "latitude",
+      "type" : "string",
+      "minLength" : 1
+    },
+    "isDefault" : {
+      "title" : "isDefault",
+      "type" : "string",
+      "minLength" : 1
+    },
+    "phoneNumber" : {
+      "title" : "phoneNumber",
+      "type" : "string",
+      "minLength" : 1
+    },
+    "streetAddress" : {
+      "title" : "streetAddress",
+      "type" : "string",
+      "minLength" : 1
+    },
+    "countryCode" : {
+      "title" : "countryCode",
       "type" : "string",
       "minLength" : 1
     },
