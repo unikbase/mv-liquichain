@@ -27,16 +27,6 @@
             "type": "string",
             "maxLength": 255
         },
-        "groupId": {
-            "storages": ["SQL"],
-            "nullable": true,
-            "description": "Group Id",
-            "readOnly": false,
-            "versionable": false,
-            "id": "CE_ChatConversation_groupId",
-            "title": "ChatConversation.groupId",
-            "type": "integer"
-        },
         "creationDate": {
             "storages": ["SQL"],
             "nullable": true,
