@@ -4,6 +4,7 @@ import org.meveo.model.CustomEntity;
 import java.util.List;
 import org.meveo.model.persistence.DBStorageType;
 import java.time.Instant;
+import java.util.ArrayList;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class ChatConversation implements CustomEntity {
@@ -24,9 +25,13 @@ public class ChatConversation implements CustomEntity {
 
     private String conversationGroupId;
 
+    private Long groupId;
+
     private Instant creationDate;
 
     private String title;
+
+    private List<String> participants = new ArrayList<>();
 
     @Override()
     public String getUuid() {
@@ -61,6 +66,14 @@ public class ChatConversation implements CustomEntity {
         this.conversationGroupId = conversationGroupId;
     }
 
+    public Long getGroupId() {
+        return groupId;
+    }
+
+    public void setGroupId(Long groupId) {
+        this.groupId = groupId;
+    }
+
     public Instant getCreationDate() {
         return creationDate;
     }
@@ -75,6 +88,14 @@ public class ChatConversation implements CustomEntity {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public List<String> getParticipants() {
+        return participants;
+    }
+
+    public void setParticipants(List<String> participants) {
+        this.participants = participants;
     }
 
     @Override()
