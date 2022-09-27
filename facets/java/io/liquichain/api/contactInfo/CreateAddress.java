@@ -92,7 +92,7 @@ public class CreateAddress extends Script {
     }
 
     public void setIsDefault(Boolean isDefault) {
-        this.isDefault = isDefault != null && isDefault;
+        this.isDefault = isDefault == null ? false : isDefault;
     }
 
     @Override
