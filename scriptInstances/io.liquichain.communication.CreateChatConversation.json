@@ -9,7 +9,7 @@
     "type" : "String"
   }, {
     "name" : "groupId",
-    "type" : "Long"
+    "type" : "String"
   } ],
   "outputs" : [ {
     "name" : "result",

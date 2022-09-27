@@ -17,15 +17,16 @@
             "type": "string",
             "maxLength": 100
         },
-        "phoneNumber": {
+        "notes": {
             "storages": ["SQL"],
             "nullable": true,
-            "description": "Phone number",
+            "description": "Address notes",
             "readOnly": false,
             "versionable": false,
-            "id": "CE_Address_phoneNumber",
-            "title": "Address.phoneNumber",
-            "$ref": "#/definitions/VerifiedPhoneNumber"
+            "id": "CE_Address_notes",
+            "title": "Address.notes",
+            "type": "string",
+            "maxLength": 999
         },
         "wallet": {
             "storages": ["SQL"],
@@ -47,28 +48,6 @@
             "title": "Address.city",
             "type": "string",
             "maxLength": 50
-        },
-        "streetAddress": {
-            "storages": ["SQL"],
-            "nullable": true,
-            "description": "Street Address",
-            "readOnly": false,
-            "versionable": false,
-            "id": "CE_Address_streetAddress",
-            "title": "Address.streetAddress",
-            "type": "string",
-            "maxLength": 200
-        },
-        "countryCode": {
-            "storages": ["SQL"],
-            "nullable": true,
-            "description": "Country code",
-            "readOnly": false,
-            "versionable": false,
-            "id": "CE_Address_countryCode",
-            "title": "Address.countryCode",
-            "type": "string",
-            "maxLength": 2
         },
         "dialCode": {
             "storages": ["SQL"],
@@ -101,6 +80,49 @@
             "title": "Address.postalCode",
             "type": "string",
             "maxLength": 10
+        },
+        "isDefault": {
+            "storages": ["SQL"],
+            "default": "false",
+            "nullable": true,
+            "description": "Is Default Address?",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Address_isDefault",
+            "title": "Address.isDefault",
+            "type": "boolean"
+        },
+        "phoneNumber": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "Phone number",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Address_phoneNumber",
+            "title": "Address.phoneNumber",
+            "$ref": "#/definitions/VerifiedPhoneNumber"
+        },
+        "streetAddress": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "Street Address",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Address_streetAddress",
+            "title": "Address.streetAddress",
+            "type": "string",
+            "maxLength": 200
+        },
+        "countryCode": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "Country code",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Address_countryCode",
+            "title": "Address.countryCode",
+            "type": "string",
+            "maxLength": 2
         },
         "name": {
             "storages": ["SQL"],

@@ -6,6 +6,7 @@ import java.util.stream.Stream;
 import java.util.stream.Collectors;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import org.meveo.api.persistence.CrossStorageApi;
 import org.meveo.model.storage.Repository;
@@ -16,6 +17,7 @@ import org.meveo.api.exception.EntityDoesNotExistsException;
 
 import org.meveo.model.customEntities.ChatConversation;
 import org.meveo.model.customEntities.ChatConversationParticipant;
+
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,35 +36,39 @@ public class GetChatConversations extends Script {
         super.execute(parameters);
 
         walletId = normalizeHash(walletId);
-        List<ChatConversation> chatConversations = null;
-
+        List<ChatConversation> chatConversations = null;		
+          
         try {
             List<ChatConversationParticipant> participants = crossStorageApi.find(defaultRepo, ChatConversationParticipant.class)
                     .by("participant", walletId)
                     .select("chatConversation")
                     .getResults();
 
-            List<String> chatConversationIds = participants.stream().map(participant -> {
-                return participant.getChatConversation().getUuid();
-            }).collect(Collectors.toList());
+            List<String> chatConversationIds = participants.stream().map(participant -> participant.getChatConversation().getUuid()).collect(Collectors.toList());
 			
           	if(chatConversationIds != null && !chatConversationIds.isEmpty()){
             	chatConversations = crossStorageApi.find(defaultRepo, ChatConversation.class)
                     	.by("inList uuid", chatConversationIds)
                     	.getResults();
+                
             }
         } catch (Exception ex) {
             String errorMessage = "Failed to find ChatConversationParticipant with hash = " + walletId;
             LOG.error(errorMessage, ex);
         }
 
+      	
         if (chatConversations != null && !chatConversations.isEmpty()) {
-            this.result = new Gson().toJson(chatConversations);
+            Gson gson = new GsonBuilder()
+    					.serializeNulls()
+               			.setPrettyPrinting()
+    					.create();
+            this.result = gson.toJson((new ChatConversationDetail()).getOutputChatConversationList(chatConversations));
         } else {
             this.result = "[]";
         }
     }
-
+  
     private String normalizeHash(String hash) {
         return hash.startsWith("0x") ? hash.substring(2).toLowerCase() : hash.toLowerCase();
     }
@@ -74,4 +80,5 @@ public class GetChatConversations extends Script {
     public String getResult() {
         return this.result;
     }
+  
 }

@@ -15,23 +15,13 @@ const requestSchema = {
       "type" : "string",
       "minLength" : 1
     },
-    "phoneNumber" : {
-      "title" : "phoneNumber",
-      "type" : "string",
-      "minLength" : 1
-    },
-    "streetAddress" : {
-      "title" : "streetAddress",
+    "notes" : {
+      "title" : "notes",
       "type" : "string",
       "minLength" : 1
     },
     "city" : {
       "title" : "city",
-      "type" : "string",
-      "minLength" : 1
-    },
-    "countryCode" : {
-      "title" : "countryCode",
       "type" : "string",
       "minLength" : 1
     },
@@ -50,15 +40,93 @@ const requestSchema = {
       "type" : "string",
       "minLength" : 1
     },
+    "isDefault" : {
+      "title" : "isDefault",
+      "type" : "string",
+      "minLength" : 1
+    },
+    "phoneNumber" : {
+      "title" : "phoneNumber",
+      "type" : "string",
+      "minLength" : 1
+    },
+    "streetAddress" : {
+      "title" : "streetAddress",
+      "type" : "string",
+      "minLength" : 1
+    },
+    "countryCode" : {
+      "title" : "countryCode",
+      "type" : "string",
+      "minLength" : 1
+    },
     "name" : {
       "title" : "name",
       "type" : "string",
       "minLength" : 1
     },
     "state" : {
-      "title" : "state",
-      "type" : "string",
-      "minLength" : 1
+      "title" : "State",
+      "description" : "state",
+      "id" : "state",
+      "storages" : [ "SQL" ],
+      "type" : "object",
+      "properties" : {
+        "country" : {
+          "title" : "state.country",
+          "description" : "Country",
+          "id" : "CE_state_country",
+          "storages" : [ "SQL" ],
+          "nullable" : true,
+          "readOnly" : false,
+          "versionable" : false,
+          "$ref" : "#/definitions/org.meveo.model.billing.Country"
+        },
+        "stateName" : {
+          "title" : "state.stateName",
+          "description" : "StateName",
+          "id" : "CE_state_stateName",
+          "storages" : [ "SQL" ],
+          "nullable" : true,
+          "readOnly" : false,
+          "versionable" : false,
+          "type" : "string",
+          "maxLength" : 90
+        },
+        "active" : {
+          "title" : "state.active",
+          "description" : "Active",
+          "id" : "CE_state_active",
+          "storages" : [ "SQL" ],
+          "default" : "false",
+          "nullable" : true,
+          "readOnly" : false,
+          "versionable" : false,
+          "type" : "boolean"
+        },
+        "stateCode" : {
+          "title" : "state.stateCode",
+          "description" : "StateCode",
+          "id" : "CE_state_stateCode",
+          "storages" : [ "SQL" ],
+          "nullable" : true,
+          "readOnly" : false,
+          "versionable" : false,
+          "type" : "string",
+          "maxLength" : 6
+        },
+        "id" : {
+          "title" : "state.id",
+          "description" : "id",
+          "id" : "CE_state_id",
+          "storages" : [ ],
+          "nullable" : false,
+          "readOnly" : false,
+          "versionable" : false,
+          "type" : "integer"
+        }
+      },
+      "required" : [ "id" ]
     },
     "longitude" : {
       "title" : "longitude",

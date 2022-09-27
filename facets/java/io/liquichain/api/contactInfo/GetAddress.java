@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.meveo.api.persistence.CrossStorageApi;
 import org.meveo.model.customEntities.Address;
+import org.meveo.model.customEntities.VerifiedPhoneNumber;
 import org.meveo.model.storage.Repository;
 import org.meveo.service.script.Script;
 import org.meveo.admin.exception.BusinessException;
@@ -44,6 +45,10 @@ public class GetAddress extends Script {
 		Address address;
 		try {
 			address = crossStorageApi.find(defaultRepo, uuid, Address.class);
+          	if(address!=null && address.getPhoneNumber()!=null){
+          		address.setPhoneNumber(crossStorageApi.find(defaultRepo,VerifiedPhoneNumber.class)
+                                       .by("uuid",address.getPhoneNumber()).getResult());
+            }
 		} catch (Exception e) {
 			String errorMessage = "Failed to retrieve address with uuid: " + uuid;
 			LOG.error(errorMessage, e);
@@ -64,10 +69,14 @@ public class GetAddress extends Script {
 			addressDetails.put("postalCode", address.getPostalCode());
 			addressDetails.put("longitude", address.getLongitude());
 			addressDetails.put("latitude", address.getLatitude());
-			addressDetails.put("walletId", address.getWallet().getUuid());
+			//addressDetails.put("walletId", address.getWallet().getUuid());
 			addressDetails.put("phoneNumber",
 				address.getPhoneNumber() != null ? address.getPhoneNumber().getPhoneNumber() : null);
-
+			LOG.info("address phonenumber loading = {}",address.getPhoneNumber().getUuid());
+          	LOG.info("address phonenumber verified = {}",address.getPhoneNumber().getVerified());
+			addressDetails.put("notes", address.getNotes());
+			addressDetails.put("isDefault", address.getIsDefault());  
+          
 			result.put("status", "success");
 			result.put("result", addressDetails);
 		} else {

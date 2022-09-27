@@ -29,7 +29,7 @@ public class CreateChatConversation extends Script {
 
     private String createrWalletId;
     private String title;
-  	private Long groupId;
+  	private String groupId;
 
     private String result;
 
@@ -59,7 +59,7 @@ public class CreateChatConversation extends Script {
                 List<ChatConversation> chatConversations = crossStorageApi.find(defaultRepo, ChatConversation.class)
                     	.by("inList uuid", chatConversationUUIds)
                     	.getResults(); 
-          		existingChatConversation = chatConversations.stream().filter(c -> (groupId == null && title.equals(c.getTitle()) ) || groupId.equals(c.getGroupId())  ).findFirst();
+          		existingChatConversation = chatConversations.stream().filter(c -> (groupId == null && title.equals(c.getTitle()) ) || (groupId != null && groupId.equals(c.getConversationGroupId()))  ).findFirst();
         	}
         }
       
@@ -73,7 +73,7 @@ public class CreateChatConversation extends Script {
             	ChatConversation chatConversation = new ChatConversation();
             	chatConversation.setTitle(this.title);
             	chatConversation.setCreationDate(Instant.now());
-              	chatConversation.setGroupId(this.groupId);
+              	chatConversation.setConversationGroupId(this.groupId);
 
             	String uuid = crossStorageApi.createOrUpdate(defaultRepo, chatConversation);
 
@@ -100,7 +100,7 @@ public class CreateChatConversation extends Script {
         this.title = title;
     }
   
-  	public void setGroupId(Long groupId){
+  	public void setGroupId(String groupId){
     	this.groupId = groupId;
     }
 

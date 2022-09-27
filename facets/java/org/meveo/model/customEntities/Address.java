@@ -3,8 +3,8 @@ package org.meveo.model.customEntities;
 import org.meveo.model.CustomEntity;
 import java.util.List;
 import org.meveo.model.persistence.DBStorageType;
-import org.meveo.model.customEntities.VerifiedPhoneNumber;
 import org.meveo.model.customEntities.Wallet;
+import org.meveo.model.customEntities.VerifiedPhoneNumber;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class Address implements CustomEntity {
@@ -23,21 +23,25 @@ public class Address implements CustomEntity {
 
     private String country;
 
-    private VerifiedPhoneNumber phoneNumber;
+    private String notes;
 
     private Wallet wallet;
 
     private String city;
-
-    private String streetAddress;
-
-    private String countryCode;
 
     private String dialCode;
 
     private Double latitude;
 
     private String postalCode;
+
+    private Boolean isDefault;
+
+    private VerifiedPhoneNumber phoneNumber;
+
+    private String streetAddress;
+
+    private String countryCode;
 
     private String name;
 
@@ -70,12 +74,12 @@ public class Address implements CustomEntity {
         this.country = country;
     }
 
-    public VerifiedPhoneNumber getPhoneNumber() {
-        return phoneNumber;
+    public String getNotes() {
+        return notes;
     }
 
-    public void setPhoneNumber(VerifiedPhoneNumber phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setNotes(String notes) {
+        this.notes = notes;
     }
 
     public Wallet getWallet() {
@@ -92,22 +96,6 @@ public class Address implements CustomEntity {
 
     public void setCity(String city) {
         this.city = city;
-    }
-
-    public String getStreetAddress() {
-        return streetAddress;
-    }
-
-    public void setStreetAddress(String streetAddress) {
-        this.streetAddress = streetAddress;
-    }
-
-    public String getCountryCode() {
-        return countryCode;
-    }
-
-    public void setCountryCode(String countryCode) {
-        this.countryCode = countryCode;
     }
 
     public String getDialCode() {
@@ -132,6 +120,38 @@ public class Address implements CustomEntity {
 
     public void setPostalCode(String postalCode) {
         this.postalCode = postalCode;
+    }
+
+    public Boolean getIsDefault() {
+        return isDefault;
+    }
+
+    public void setIsDefault(Boolean isDefault) {
+        this.isDefault = isDefault;
+    }
+
+    public VerifiedPhoneNumber getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(VerifiedPhoneNumber phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getStreetAddress() {
+        return streetAddress;
+    }
+
+    public void setStreetAddress(String streetAddress) {
+        this.streetAddress = streetAddress;
+    }
+
+    public String getCountryCode() {
+        return countryCode;
+    }
+
+    public void setCountryCode(String countryCode) {
+        this.countryCode = countryCode;
     }
 
     public String getName() {

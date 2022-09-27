@@ -3,6 +3,7 @@ package io.liquichain.communication;
 import java.util.Map;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import org.meveo.api.persistence.CrossStorageApi;
 import org.meveo.model.storage.Repository;
@@ -33,7 +34,14 @@ public class GetChatConversation extends Script {
 
         try {
             ChatConversation chatConversation = crossStorageApi.find(defaultRepo, uuId, ChatConversation.class);
-            result = new Gson().toJson(chatConversation);
+          
+          
+          	Gson gson = new GsonBuilder()
+    					.serializeNulls()
+               			.setPrettyPrinting()
+    					.create();
+          
+            this.result = gson.toJson((new ChatConversationDetail()).getChatConversationById(chatConversation));
 
         } catch (EntityDoesNotExistsException ex) {
             String errorMessage = "Failed to find ChatConversation with hash = " + uuId;
