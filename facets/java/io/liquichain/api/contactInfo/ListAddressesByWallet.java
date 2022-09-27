@@ -53,8 +53,8 @@ public class ListAddressesByWallet extends Script {
         addressDetails.put("walletId", address.getWallet().getUuid());
         addressDetails.put("phoneNumber",
             address.getPhoneNumber() != null ? address.getPhoneNumber().getPhoneNumber() : null);
-      	addressDetails.put("notes", address.getNotes());
-		addressDetails.put("isDefault", address.getIsDefault());  
+        addressDetails.put("notes", address.getNotes());
+        addressDetails.put("isDefault", address.getIsDefault());
 
         return addressDetails;
     }
@@ -100,10 +100,11 @@ public class ListAddressesByWallet extends Script {
             result.put("status", "fail");
             result.put("result", errorMessage);
         }
-      	//== loading VerifiedPhoneNumber relationship - couldn't find to load relationship in CrossStorageAPI.find for now
-		if(addresses!=null)
-        	addresses.stream().forEach(a -> a.setPhoneNumber(crossStorageApi.find(defaultRepo,VerifiedPhoneNumber.class)
-                                       .by("uuid",a.getPhoneNumber()).getResult()));
+        //== loading VerifiedPhoneNumber relationship - couldn't find to load relationship in CrossStorageAPI.find for now
+        if (addresses != null)
+            addresses.stream()
+                     .forEach(a -> a.setPhoneNumber(crossStorageApi.find(defaultRepo, VerifiedPhoneNumber.class)
+                                                                   .by("uuid", a.getPhoneNumber()).getResult()));
         List<Map<String, Object>> addressList = addresses == null
             ? new ArrayList<>()
             : addresses.stream()

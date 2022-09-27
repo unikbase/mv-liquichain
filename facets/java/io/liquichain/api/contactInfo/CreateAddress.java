@@ -31,8 +31,8 @@ public class CreateAddress extends Script {
     private Double latitude;
     private String walletId;
     private String phoneNumber;
-  	private String notes;
-  	private Boolean isDefault;
+    private String notes;
+    private Boolean isDefault;
     private final Map<String, Object> result = new HashMap<>();
 
     public Map<String, Object> getResult() {
@@ -86,13 +86,13 @@ public class CreateAddress extends Script {
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
-  	
-  	public void setNotes(String notes){
-    	this.notes = notes;
+
+    public void setNotes(String notes) {
+        this.notes = notes;
     }
-  
-  	public void setIsDefault(Boolean isDefault){
-    	this.isDefault = isDefault==null?false:isDefault;  
+
+    public void setIsDefault(Boolean isDefault) {
+        this.isDefault = isDefault != null && isDefault;
     }
 
     @Override
@@ -168,19 +168,19 @@ public class CreateAddress extends Script {
         address.setLatitude(latitude);
         address.setWallet(wallet);
         address.setPhoneNumber(verifiedPhoneNumber);
-      	address.setNotes(notes);
-		address.setIsDefault(isDefault);
+        address.setNotes(notes);
+        address.setIsDefault(isDefault);
 
         try {
-          	//== need to set existing default address false
-          	if(address.getIsDefault()){
-            	Address defaultAddress = crossStorageApi.find(defaultRepo, Address.class)
-                                                     			.by("wallet", walletId)
-                                                     			.by("isDefault", true)
-                                                     			.getResult();
-            	if(defaultAddress!=null){
-                	defaultAddress.setIsDefault(false);
-                  	crossStorageApi.createOrUpdate(defaultRepo, defaultAddress);
+            //== need to set existing default address false
+            if (address.getIsDefault()) {
+                Address defaultAddress = crossStorageApi.find(defaultRepo, Address.class)
+                                                        .by("wallet", walletId)
+                                                        .by("isDefault", true)
+                                                        .getResult();
+                if (defaultAddress != null) {
+                    defaultAddress.setIsDefault(false);
+                    crossStorageApi.createOrUpdate(defaultRepo, defaultAddress);
                 }
             }
             String uuid = crossStorageApi.createOrUpdate(defaultRepo, address);
@@ -207,8 +207,8 @@ public class CreateAddress extends Script {
         addressDetails.put("walletId", address.getWallet().getUuid());
         addressDetails.put("phoneNumber",
             address.getPhoneNumber() != null ? address.getPhoneNumber().getPhoneNumber() : null);
-      	addressDetails.put("notes", address.getNotes());
-      	addressDetails.put("isDefault", address.getIsDefault());
+        addressDetails.put("notes", address.getNotes());
+        addressDetails.put("isDefault", address.getIsDefault());
 
         result.put("status", "success");
         result.put("result", addressDetails);
