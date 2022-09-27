@@ -25,8 +25,6 @@ public class ChatConversation implements CustomEntity {
 
     private String conversationGroupId;
 
-    private Long groupId;
-
     private Instant creationDate;
 
     private String title;
@@ -64,14 +62,6 @@ public class ChatConversation implements CustomEntity {
 
     public void setConversationGroupId(String conversationGroupId) {
         this.conversationGroupId = conversationGroupId;
-    }
-
-    public Long getGroupId() {
-        return groupId;
-    }
-
-    public void setGroupId(Long groupId) {
-        this.groupId = groupId;
     }
 
     public Instant getCreationDate() {
