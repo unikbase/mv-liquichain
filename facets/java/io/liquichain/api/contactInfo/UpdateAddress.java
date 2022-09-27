@@ -97,7 +97,7 @@ public class UpdateAddress extends Script {
     }
 
     public void setIsDefault(Boolean isDefault) {
-        this.isDefault = isDefault == null ? false : isDefault;
+        this.isDefault = isDefault;
     }
 
     @Override
@@ -173,7 +173,7 @@ public class UpdateAddress extends Script {
         address.setWallet(wallet);
         address.setPhoneNumber(verifiedPhoneNumber);
         address.setNotes(notes);
-        address.setIsDefault(isDefault);
+        address.setIsDefault(isDefault == null ? false : isDefault);
 
         try {
             if (address.getIsDefault()) {
