@@ -3,6 +3,7 @@ package org.meveo.model.customEntities;
 import org.meveo.model.CustomEntity;
 import java.util.List;
 import org.meveo.model.persistence.DBStorageType;
+import java.time.Instant;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class Transaction implements CustomEntity {
@@ -22,6 +23,8 @@ public class Transaction implements CustomEntity {
     private String metadata;
 
     private String initiator;
+
+    private Instant expirationDate;
 
     @Override()
     public String getUuid() {
@@ -54,6 +57,14 @@ public class Transaction implements CustomEntity {
 
     public void setInitiator(String initiator) {
         this.initiator = initiator;
+    }
+
+    public Instant getExpirationDate() {
+        return expirationDate;
+    }
+
+    public void setExpirationDate(Instant expirationDate) {
+        this.expirationDate = expirationDate;
     }
 
     @Override()
