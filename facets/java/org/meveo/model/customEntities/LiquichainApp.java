@@ -4,6 +4,7 @@ import org.meveo.model.CustomEntity;
 import java.util.List;
 import org.meveo.model.persistence.DBStorageType;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.time.Instant;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class LiquichainApp implements CustomEntity {
@@ -24,6 +25,8 @@ public class LiquichainApp implements CustomEntity {
 
     @JsonProperty(required = true)
     private String name;
+
+    private Instant creationDate;
 
     @Override()
     public String getUuid() {
@@ -56,6 +59,14 @@ public class LiquichainApp implements CustomEntity {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Instant getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(Instant creationDate) {
+        this.creationDate = creationDate;
     }
 
     @Override()
