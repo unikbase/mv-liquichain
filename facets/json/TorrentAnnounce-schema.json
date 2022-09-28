@@ -48,6 +48,19 @@
             "title": "TorrentAnnounce.latitude",
             "type": "number"
         },
+        "liveness": {
+            "storages": ["SQL"],
+            "default": 0,
+            "nullable": true,
+            "description": "liveness (percentage of time online in the last running epoch)",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_TorrentAnnounce_liveness",
+            "title": "TorrentAnnounce.liveness",
+            "type": "number",
+            "exclusiveMinimum": true,
+            "minimum": 0
+        },
         "infoHash": {
             "storages": ["SQL"],
             "nullable": true,
