@@ -49,6 +49,16 @@
             "type": "string",
             "maxLength": 40
         },
+        "downloaded": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "downloaded bytes",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_TorrentAnnounce_downloaded",
+            "title": "TorrentAnnounce.downloaded",
+            "type": "integer"
+        },
         "url": {
             "storages": ["SQL"],
             "nullable": true,
