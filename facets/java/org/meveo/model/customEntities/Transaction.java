@@ -3,8 +3,8 @@ package org.meveo.model.customEntities;
 import org.meveo.model.CustomEntity;
 import java.util.List;
 import org.meveo.model.persistence.DBStorageType;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.Instant;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class Transaction implements CustomEntity {
@@ -23,22 +23,25 @@ public class Transaction implements CustomEntity {
 
     private String metadata;
 
+    private String initiator;
+
+    private String fromHexHash;
+
+    private Instant creationDate;
+
+    private String type;
+
     private String toHexHash;
 
     private String s;
 
-    private String initiator;
-
-    private String fromHexHash;
+    @JsonProperty(required = true)
+    private String hexHash;
 
     @JsonProperty(required = true)
     private String signedHash;
 
     private String currency;
-
-    private Instant creationDate;
-
-    private String type;
 
     private String value;
 
@@ -71,22 +74,6 @@ public class Transaction implements CustomEntity {
         this.metadata = metadata;
     }
 
-    public String getToHexHash() {
-        return toHexHash;
-    }
-
-    public void setToHexHash(String toHexHash) {
-        this.toHexHash = toHexHash;
-    }
-
-    public String getS() {
-        return s;
-    }
-
-    public void setS(String s) {
-        this.s = s;
-    }
-
     public String getInitiator() {
         return initiator;
     }
@@ -103,22 +90,6 @@ public class Transaction implements CustomEntity {
         this.fromHexHash = fromHexHash;
     }
 
-    public String getSignedHash() {
-        return signedHash;
-    }
-
-    public void setSignedHash(String signedHash) {
-        this.signedHash = signedHash;
-    }
-
-    public String getCurrency() {
-        return currency;
-    }
-
-    public void setCurrency(String currency) {
-        this.currency = currency;
-    }
-
     public Instant getCreationDate() {
         return creationDate;
     }
@@ -133,6 +104,46 @@ public class Transaction implements CustomEntity {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getToHexHash() {
+        return toHexHash;
+    }
+
+    public void setToHexHash(String toHexHash) {
+        this.toHexHash = toHexHash;
+    }
+
+    public String getS() {
+        return s;
+    }
+
+    public void setS(String s) {
+        this.s = s;
+    }
+
+    public String getHexHash() {
+        return hexHash;
+    }
+
+    public void setHexHash(String hexHash) {
+        this.hexHash = hexHash;
+    }
+
+    public String getSignedHash() {
+        return signedHash;
+    }
+
+    public void setSignedHash(String signedHash) {
+        this.signedHash = signedHash;
+    }
+
+    public String getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
     }
 
     public String getValue() {
