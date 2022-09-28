@@ -3,6 +3,7 @@ package org.meveo.model.customEntities;
 import org.meveo.model.CustomEntity;
 import java.util.List;
 import org.meveo.model.persistence.DBStorageType;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.Instant;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -23,6 +24,9 @@ public class Transaction implements CustomEntity {
     private String metadata;
 
     private String initiator;
+
+    @JsonProperty(required = true)
+    private String signedHash;
 
     private Instant expirationDate;
 
@@ -57,6 +61,14 @@ public class Transaction implements CustomEntity {
 
     public void setInitiator(String initiator) {
         this.initiator = initiator;
+    }
+
+    public String getSignedHash() {
+        return signedHash;
+    }
+
+    public void setSignedHash(String signedHash) {
+        this.signedHash = signedHash;
     }
 
     public Instant getExpirationDate() {
