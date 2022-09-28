@@ -22,6 +22,8 @@ public class TorrentAnnounce implements CustomEntity {
 
     private Instant lastAnnounceDate;
 
+    private String url;
+
     private Double longitude;
 
     private String status;
@@ -49,6 +51,14 @@ public class TorrentAnnounce implements CustomEntity {
 
     public void setLastAnnounceDate(Instant lastAnnounceDate) {
         this.lastAnnounceDate = lastAnnounceDate;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public Double getLongitude() {
