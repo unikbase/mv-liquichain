@@ -5,15 +5,27 @@
     "id": "ChatConversation",
     "title": "Chat Conversation",
     "type": "object",
-    "properties": {"title": {
-        "storages": ["SQL"],
-        "nullable": true,
-        "description": "Title",
-        "readOnly": false,
-        "versionable": false,
-        "id": "CE_ChatConversation_title",
-        "title": "ChatConversation.title",
-        "type": "string",
-        "maxLength": 255
-    }}
+    "properties": {
+        "messageCount": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "Message Count",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_ChatConversation_messageCount",
+            "title": "ChatConversation.messageCount",
+            "type": "integer"
+        },
+        "title": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "Title",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_ChatConversation_title",
+            "title": "ChatConversation.title",
+            "type": "string",
+            "maxLength": 255
+        }
+    }
 }
