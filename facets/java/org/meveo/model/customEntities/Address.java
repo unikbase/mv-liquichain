@@ -22,21 +22,23 @@ public class Address implements CustomEntity {
 
     private String country;
 
-    private Boolean isDefault;
-
     private String notes;
 
-    private VerifiedPhoneNumber phoneNumber;
-
     private String city;
+
+    private String dialCode;
+
+    private Double latitude;
+
+    private String postalCode;
+
+    private Boolean isDefault;
+
+    private VerifiedPhoneNumber phoneNumber;
 
     private String streetAddress;
 
     private String countryCode;
-
-    private String dialCode;
-
-    private String postalCode;
 
     private String name;
 
@@ -69,14 +71,6 @@ public class Address implements CustomEntity {
         this.country = country;
     }
 
-    public Boolean getIsDefault() {
-        return isDefault;
-    }
-
-    public void setIsDefault(Boolean isDefault) {
-        this.isDefault = isDefault;
-    }
-
     public String getNotes() {
         return notes;
     }
@@ -85,20 +79,52 @@ public class Address implements CustomEntity {
         this.notes = notes;
     }
 
-    public VerifiedPhoneNumber getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(VerifiedPhoneNumber phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
     public String getCity() {
         return city;
     }
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    public String getDialCode() {
+        return dialCode;
+    }
+
+    public void setDialCode(String dialCode) {
+        this.dialCode = dialCode;
+    }
+
+    public Double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
+    }
+
+    public String getPostalCode() {
+        return postalCode;
+    }
+
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
+    }
+
+    public Boolean getIsDefault() {
+        return isDefault;
+    }
+
+    public void setIsDefault(Boolean isDefault) {
+        this.isDefault = isDefault;
+    }
+
+    public VerifiedPhoneNumber getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(VerifiedPhoneNumber phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public String getStreetAddress() {
@@ -115,22 +141,6 @@ public class Address implements CustomEntity {
 
     public void setCountryCode(String countryCode) {
         this.countryCode = countryCode;
-    }
-
-    public String getDialCode() {
-        return dialCode;
-    }
-
-    public void setDialCode(String dialCode) {
-        this.dialCode = dialCode;
-    }
-
-    public String getPostalCode() {
-        return postalCode;
-    }
-
-    public void setPostalCode(String postalCode) {
-        this.postalCode = postalCode;
     }
 
     public String getName() {
