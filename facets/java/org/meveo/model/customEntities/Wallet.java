@@ -48,6 +48,8 @@ public class Wallet implements CustomEntity {
 
     private String hexHash;
 
+    private Long lastPrivateInfoRequest;
+
     @JsonProperty(required = true)
     private String name;
 
@@ -164,6 +166,14 @@ public class Wallet implements CustomEntity {
 
     public void setHexHash(String hexHash) {
         this.hexHash = hexHash;
+    }
+
+    public Long getLastPrivateInfoRequest() {
+        return lastPrivateInfoRequest;
+    }
+
+    public void setLastPrivateInfoRequest(Long lastPrivateInfoRequest) {
+        this.lastPrivateInfoRequest = lastPrivateInfoRequest;
     }
 
     public String getName() {
