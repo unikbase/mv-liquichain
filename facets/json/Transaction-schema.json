@@ -5,15 +5,28 @@
     "id": "Transaction",
     "title": "Transaction",
     "type": "object",
-    "properties": {"initiator": {
-        "storages": ["SQL"],
-        "nullable": true,
-        "description": "Initiated by",
-        "readOnly": false,
-        "versionable": false,
-        "id": "CE_Transaction_initiator",
-        "title": "Transaction.initiator",
-        "type": "string",
-        "maxLength": 255
-    }}
+    "properties": {
+        "metadata": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "Metadata",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Transaction_metadata",
+            "title": "Transaction.metadata",
+            "type": "string",
+            "maxLength": 255
+        },
+        "initiator": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "Initiated by",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Transaction_initiator",
+            "title": "Transaction.initiator",
+            "type": "string",
+            "maxLength": 255
+        }
+    }
 }
