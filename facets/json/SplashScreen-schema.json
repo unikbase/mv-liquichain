@@ -5,15 +5,27 @@
     "id": "SplashScreen",
     "title": "Splash Screen",
     "type": "object",
-    "properties": {"order": {
-        "storages": ["SQL"],
-        "nullable": false,
-        "description": "Order",
-        "readOnly": false,
-        "versionable": false,
-        "id": "CE_SplashScreen_order",
-        "title": "SplashScreen.order",
-        "type": "integer"
-    }},
+    "properties": {
+        "content": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "Content",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_SplashScreen_content",
+            "title": "SplashScreen.content",
+            "type": "string"
+        },
+        "order": {
+            "storages": ["SQL"],
+            "nullable": false,
+            "description": "Order",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_SplashScreen_order",
+            "title": "SplashScreen.order",
+            "type": "integer"
+        }
+    },
     "required": ["order"]
 }
