@@ -17,17 +17,6 @@
             "type": "string",
             "maxLength": 100
         },
-        "isDefault": {
-            "storages": ["SQL"],
-            "default": "false",
-            "nullable": true,
-            "description": "Is Default Address?",
-            "readOnly": false,
-            "versionable": false,
-            "id": "CE_Address_isDefault",
-            "title": "Address.isDefault",
-            "type": "boolean"
-        },
         "notes": {
             "storages": ["SQL"],
             "nullable": true,
@@ -39,16 +28,6 @@
             "type": "string",
             "maxLength": 999
         },
-        "phoneNumber": {
-            "storages": ["SQL"],
-            "nullable": true,
-            "description": "Phone number",
-            "readOnly": false,
-            "versionable": false,
-            "id": "CE_Address_phoneNumber",
-            "title": "Address.phoneNumber",
-            "$ref": "#/definitions/VerifiedPhoneNumber"
-        },
         "city": {
             "storages": ["SQL"],
             "nullable": true,
@@ -59,6 +38,59 @@
             "title": "Address.city",
             "type": "string",
             "maxLength": 50
+        },
+        "dialCode": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "Dial code",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Address_dialCode",
+            "title": "Address.dialCode",
+            "type": "string",
+            "maxLength": 10
+        },
+        "latitude": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "Latitude",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Address_latitude",
+            "title": "Address.latitude",
+            "type": "number"
+        },
+        "postalCode": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "Postal code",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Address_postalCode",
+            "title": "Address.postalCode",
+            "type": "string",
+            "maxLength": 10
+        },
+        "isDefault": {
+            "storages": ["SQL"],
+            "default": "false",
+            "nullable": true,
+            "description": "Is Default Address?",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Address_isDefault",
+            "title": "Address.isDefault",
+            "type": "boolean"
+        },
+        "phoneNumber": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "Phone number",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Address_phoneNumber",
+            "title": "Address.phoneNumber",
+            "$ref": "#/definitions/VerifiedPhoneNumber"
         },
         "streetAddress": {
             "storages": ["SQL"],
@@ -81,28 +113,6 @@
             "title": "Address.countryCode",
             "type": "string",
             "maxLength": 2
-        },
-        "dialCode": {
-            "storages": ["SQL"],
-            "nullable": true,
-            "description": "Dial code",
-            "readOnly": false,
-            "versionable": false,
-            "id": "CE_Address_dialCode",
-            "title": "Address.dialCode",
-            "type": "string",
-            "maxLength": 10
-        },
-        "postalCode": {
-            "storages": ["SQL"],
-            "nullable": true,
-            "description": "Postal code",
-            "readOnly": false,
-            "versionable": false,
-            "id": "CE_Address_postalCode",
-            "title": "Address.postalCode",
-            "type": "string",
-            "maxLength": 10
         },
         "name": {
             "storages": ["SQL"],
