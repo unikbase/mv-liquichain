@@ -19,6 +19,8 @@ public class Transaction implements CustomEntity {
     @JsonIgnore()
     private DBStorageType storages;
 
+    private String metadata;
+
     private String initiator;
 
     @Override()
@@ -36,6 +38,14 @@ public class Transaction implements CustomEntity {
 
     public void setStorages(DBStorageType storages) {
         this.storages = storages;
+    }
+
+    public String getMetadata() {
+        return metadata;
+    }
+
+    public void setMetadata(String metadata) {
+        this.metadata = metadata;
     }
 
     public String getInitiator() {
