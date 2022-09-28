@@ -16,6 +16,17 @@
             "title": "ChatConversation.messageCount",
             "type": "integer"
         },
+        "conversationGroupId": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "Group Id",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_ChatConversation_conversationGroupId",
+            "title": "ChatConversation.conversationGroupId",
+            "type": "string",
+            "maxLength": 255
+        },
         "creationDate": {
             "storages": ["SQL"],
             "nullable": true,
