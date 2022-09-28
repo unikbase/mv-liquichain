@@ -28,6 +28,8 @@ public class Transaction implements CustomEntity {
     @JsonProperty(required = true)
     private String signedHash;
 
+    private String value;
+
     private Instant expirationDate;
 
     @Override()
@@ -69,6 +71,14 @@ public class Transaction implements CustomEntity {
 
     public void setSignedHash(String signedHash) {
         this.signedHash = signedHash;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
     }
 
     public Instant getExpirationDate() {
