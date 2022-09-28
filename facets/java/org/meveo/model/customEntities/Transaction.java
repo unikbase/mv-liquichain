@@ -25,6 +25,8 @@ public class Transaction implements CustomEntity {
 
     private String metadata;
 
+    private String redirectUrl;
+
     private String data;
 
     private String nodeSignature;
@@ -104,6 +106,14 @@ public class Transaction implements CustomEntity {
 
     public void setMetadata(String metadata) {
         this.metadata = metadata;
+    }
+
+    public String getRedirectUrl() {
+        return redirectUrl;
+    }
+
+    public void setRedirectUrl(String redirectUrl) {
+        this.redirectUrl = redirectUrl;
     }
 
     public String getData() {
