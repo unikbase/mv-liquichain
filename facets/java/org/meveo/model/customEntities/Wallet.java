@@ -23,6 +23,16 @@ public class Wallet implements CustomEntity {
     @JsonIgnore()
     private DBStorageType storages;
 
+    private String accountHash;
+
+    private String publicInfo;
+
+    private Boolean verified;
+
+    private String publicKey;
+
+    private String privateInfo;
+
     private String privateKey;
 
     private VerifiedEmail emailAddress;
@@ -39,15 +49,7 @@ public class Wallet implements CustomEntity {
     @JsonProperty(required = true)
     private String name;
 
-    private String publicInfo;
-
-    private Boolean verified;
-
     private String keyPair;
-
-    private String publicKey;
-
-    private String privateInfo;
 
     @Override()
     public String getUuid() {
@@ -64,6 +66,46 @@ public class Wallet implements CustomEntity {
 
     public void setStorages(DBStorageType storages) {
         this.storages = storages;
+    }
+
+    public String getAccountHash() {
+        return accountHash;
+    }
+
+    public void setAccountHash(String accountHash) {
+        this.accountHash = accountHash;
+    }
+
+    public String getPublicInfo() {
+        return publicInfo;
+    }
+
+    public void setPublicInfo(String publicInfo) {
+        this.publicInfo = publicInfo;
+    }
+
+    public Boolean getVerified() {
+        return verified;
+    }
+
+    public void setVerified(Boolean verified) {
+        this.verified = verified;
+    }
+
+    public String getPublicKey() {
+        return publicKey;
+    }
+
+    public void setPublicKey(String publicKey) {
+        this.publicKey = publicKey;
+    }
+
+    public String getPrivateInfo() {
+        return privateInfo;
+    }
+
+    public void setPrivateInfo(String privateInfo) {
+        this.privateInfo = privateInfo;
     }
 
     public String getPrivateKey() {
@@ -122,44 +164,12 @@ public class Wallet implements CustomEntity {
         this.name = name;
     }
 
-    public String getPublicInfo() {
-        return publicInfo;
-    }
-
-    public void setPublicInfo(String publicInfo) {
-        this.publicInfo = publicInfo;
-    }
-
-    public Boolean getVerified() {
-        return verified;
-    }
-
-    public void setVerified(Boolean verified) {
-        this.verified = verified;
-    }
-
     public String getKeyPair() {
         return keyPair;
     }
 
     public void setKeyPair(String keyPair) {
         this.keyPair = keyPair;
-    }
-
-    public String getPublicKey() {
-        return publicKey;
-    }
-
-    public void setPublicKey(String publicKey) {
-        this.publicKey = publicKey;
-    }
-
-    public String getPrivateInfo() {
-        return privateInfo;
-    }
-
-    public void setPrivateInfo(String privateInfo) {
-        this.privateInfo = privateInfo;
     }
 
     @Override()
