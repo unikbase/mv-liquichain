@@ -20,6 +20,8 @@ public class SplashScreen implements CustomEntity {
     @JsonIgnore()
     private DBStorageType storages;
 
+    private String image;
+
     private String content;
 
     @JsonProperty(required = true)
@@ -40,6 +42,14 @@ public class SplashScreen implements CustomEntity {
 
     public void setStorages(DBStorageType storages) {
         this.storages = storages;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public String getContent() {
