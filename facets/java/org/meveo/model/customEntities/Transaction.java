@@ -36,6 +36,8 @@ public class Transaction implements CustomEntity {
 
     private String currency;
 
+    private Instant creationDate;
+
     private String type;
 
     private String value;
@@ -113,6 +115,14 @@ public class Transaction implements CustomEntity {
 
     public void setCurrency(String currency) {
         this.currency = currency;
+    }
+
+    public Instant getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(Instant creationDate) {
+        this.creationDate = creationDate;
     }
 
     public String getType() {
