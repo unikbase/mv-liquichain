@@ -17,6 +17,16 @@
             "title": "TorrentAnnounce.lastAnnounceDate",
             "type": "string"
         },
+        "left": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "bytes left to download",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_TorrentAnnounce_left",
+            "title": "TorrentAnnounce.left",
+            "type": "integer"
+        },
         "url": {
             "storages": ["SQL"],
             "nullable": true,
