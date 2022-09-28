@@ -5,14 +5,27 @@
     "id": "UserConfiguration",
     "title": "User Configurations",
     "type": "object",
-    "properties": {"user": {
-        "storages": ["SQL"],
-        "nullable": true,
-        "description": "User",
-        "readOnly": false,
-        "versionable": false,
-        "id": "CE_UserConfiguration_user",
-        "title": "UserConfiguration.user",
-        "$ref": "#/definitions/Wallet"
-    }}
+    "properties": {
+        "isChatNotificationsEnabled": {
+            "storages": ["SQL"],
+            "default": "true",
+            "nullable": true,
+            "description": "Chat notifications settings",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_UserConfiguration_isChatNotificationsEnabled",
+            "title": "UserConfiguration.isChatNotificationsEnabled",
+            "type": "boolean"
+        },
+        "user": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "User",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_UserConfiguration_user",
+            "title": "UserConfiguration.user",
+            "$ref": "#/definitions/Wallet"
+        }
+    }
 }
