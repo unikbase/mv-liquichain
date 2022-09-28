@@ -22,6 +22,9 @@ public class SplashScreen implements CustomEntity {
 
     private String image;
 
+    @JsonProperty(required = true)
+    private String title;
+
     private String content;
 
     @JsonProperty(required = true)
@@ -50,6 +53,14 @@ public class SplashScreen implements CustomEntity {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getContent() {
