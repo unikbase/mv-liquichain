@@ -38,6 +38,17 @@
             "title": "Wallet.verified",
             "type": "boolean"
         },
+        "applicationInstanceUUID": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "Application instance UUID",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Wallet_applicationInstanceUUID",
+            "title": "Wallet.applicationInstanceUUID",
+            "type": "string",
+            "maxLength": 50
+        },
         "publicKey": {
             "storages": ["SQL"],
             "nullable": true,
