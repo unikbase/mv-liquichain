@@ -27,6 +27,17 @@
             "title": "Transaction.initiator",
             "type": "string",
             "maxLength": 255
+        },
+        "expirationDate": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "format": "date-time",
+            "description": "Expiration date",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Transaction_expirationDate",
+            "title": "Transaction.expirationDate",
+            "type": "string"
         }
     }
 }
