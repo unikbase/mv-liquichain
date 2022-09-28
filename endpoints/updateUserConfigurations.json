@@ -1,0 +1,30 @@
+{
+  "code" : "updateUserConfigurations",
+  "description" : "Update user's configurations",
+  "secured" : true,
+  "checkPathParams" : true,
+  "serviceCode" : "io.liquichain.api.config.UserConfigurationScript",
+  "synchronous" : true,
+  "method" : "POST",
+  "parameterMappings" : [ {
+    "serviceParameter" : "walletId",
+    "multivalued" : false,
+    "parameterName" : "walletId",
+    "valueRequired" : false
+  }, {
+    "serviceParameter" : "configs",
+    "multivalued" : false,
+    "parameterName" : "configs",
+    "valueRequired" : false
+  } ],
+  "pathParameters" : [ ],
+  "roles" : [ ],
+  "returnedVariableName" : "result",
+  "serializeResult" : false,
+  "contentType" : "application/json",
+  "basePath" : "user",
+  "path" : "/config",
+  "pool" : {
+    "usePool" : false
+  }
+}

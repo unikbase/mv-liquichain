@@ -1,0 +1,19 @@
+{
+  "code" : "io.liquichain.api.config.GetUserConfigsByWalletId",
+  "description" : "Get User's Configurations By Wallet Id",
+  "inputs" : [ {
+    "name" : "walletId",
+    "type" : "String"
+  } ],
+  "outputs" : [ {
+    "name" : "result",
+    "type" : "String"
+  } ],
+  "generateOutputs" : false,
+  "type" : "JAVA",
+  "transactionType" : "SAME",
+  "executionRoles" : [ ],
+  "sourcingRoles" : [ ],
+  "mavenDependencies" : [ ],
+  "importScriptInstances" : [ ]
+}

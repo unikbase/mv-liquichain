@@ -1,0 +1,20 @@
+{
+  "code" : "listAddressesByWallet",
+  "description" : "List addresses by wallet",
+  "secured" : true,
+  "checkPathParams" : true,
+  "serviceCode" : "io.liquichain.api.contactInfo.ListAddressesByWallet",
+  "synchronous" : true,
+  "method" : "GET",
+  "parameterMappings" : [ ],
+  "pathParameters" : [ "walletId" ],
+  "roles" : [ ],
+  "returnedVariableName" : "result",
+  "serializeResult" : true,
+  "contentType" : "application/json",
+  "basePath" : "address",
+  "path" : "/wallet/{walletId}",
+  "pool" : {
+    "usePool" : false
+  }
+}

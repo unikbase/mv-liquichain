@@ -25,6 +25,8 @@ public class Wallet implements CustomEntity {
 
     private String accountHash;
 
+    private String test;
+
     private String publicInfo;
 
     private Boolean verified;
@@ -32,6 +34,8 @@ public class Wallet implements CustomEntity {
     private String applicationInstanceUUID;
 
     private String publicKey;
+
+    private String privateInfo;
 
     private String privateKey;
 
@@ -78,6 +82,14 @@ public class Wallet implements CustomEntity {
         this.accountHash = accountHash;
     }
 
+    public String getTest() {
+        return test;
+    }
+
+    public void setTest(String test) {
+        this.test = test;
+    }
+
     public String getPublicInfo() {
         return publicInfo;
     }
@@ -108,6 +120,14 @@ public class Wallet implements CustomEntity {
 
     public void setPublicKey(String publicKey) {
         this.publicKey = publicKey;
+    }
+
+    public String getPrivateInfo() {
+        return privateInfo;
+    }
+
+    public void setPrivateInfo(String privateInfo) {
+        this.privateInfo = privateInfo;
     }
 
     public String getPrivateKey() {

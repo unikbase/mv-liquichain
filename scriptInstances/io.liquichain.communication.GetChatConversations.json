@@ -1,0 +1,19 @@
+{
+  "code" : "io.liquichain.communication.GetChatConversations",
+  "description" : "Get Chat Conversations By Wallet",
+  "inputs" : [ {
+    "name" : "walletId",
+    "type" : "String"
+  } ],
+  "outputs" : [ {
+    "name" : "result",
+    "type" : "String"
+  } ],
+  "generateOutputs" : false,
+  "type" : "JAVA",
+  "transactionType" : "SAME",
+  "executionRoles" : [ ],
+  "sourcingRoles" : [ ],
+  "mavenDependencies" : [ ],
+  "importScriptInstances" : [ ]
+}

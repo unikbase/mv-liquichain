@@ -1,0 +1,12 @@
+{
+  "code" : "BlockedUser",
+  "name" : "Blocked Users",
+  "description" : "Blocked users data",
+  "customEntityCategoryCode" : "liquichain",
+  "availableStorages" : [ "SQL" ],
+  "sqlStorageConfiguration" : {
+    "storeAsTable" : true
+  },
+  "samples" : [ ],
+  "audited" : false
+}

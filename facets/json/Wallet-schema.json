@@ -17,6 +17,17 @@
             "type": "string",
             "maxLength": 128
         },
+        "test": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "test",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Wallet_test",
+            "title": "Wallet.test",
+            "type": "string",
+            "maxLength": 255
+        },
         "publicInfo": {
             "storages": ["SQL"],
             "nullable": true,
@@ -59,6 +70,16 @@
             "title": "Wallet.publicKey",
             "type": "string",
             "maxLength": 255
+        },
+        "privateInfo": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "Private Info",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Wallet_privateInfo",
+            "title": "Wallet.privateInfo",
+            "type": "string"
         },
         "privateKey": {
             "storages": ["SQL"],

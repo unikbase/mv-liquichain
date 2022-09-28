@@ -1,11 +1,7 @@
 package io.liquichain.api.torrent;
 
 import javax.persistence.Id;
-
-import org.meveo.commons.utils.ReflectionUtils;
-
 import java.lang.reflect.*;
-import java.math.BigInteger;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
@@ -14,6 +10,7 @@ import java.util.Collections;
 import java.time.Instant;
 import java.time.Duration;
 
+import org.meveo.commons.utils.ReflectionUtils;
 import org.meveo.service.script.Script;
 import org.meveo.admin.exception.BusinessException;
 import org.meveo.api.rest.technicalservice.impl.EndpointRequest;
@@ -30,9 +27,6 @@ import org.meveo.service.storage.RepositoryService;
 import org.meveo.api.persistence.CrossStorageApi;
 import org.meveo.api.persistence.CrossStorageRequest;
 
-import javax.enterprise.context.ApplicationScoped;
-
-@ApplicationScoped
 public class TorrentAnnounceScript extends Script {
 
     private static final Logger log = LoggerFactory.getLogger(TorrentAnnounceScript.class);
@@ -42,8 +36,8 @@ public class TorrentAnnounceScript extends Script {
      * Uses Haversine method as its base.
      * <p>
      * lat1, lon1 Start point lat2, lon2 End point
-     * <p>
-     * returns Distance in Meters
+     *
+     * @returns Distance in Meters
      */
     public static double distance(double lat1, double lon1, double lat2, double lon2) {
 
@@ -60,7 +54,8 @@ public class TorrentAnnounceScript extends Script {
         return distance;
     }
 
-    private static class DistanceComparator implements Comparator<TorrentAnnounce> {
+    private class DistanceComparator implements Comparator<TorrentAnnounce> {
+
         double lat, lon;
 
         public DistanceComparator(double lat, double lon) {
@@ -96,9 +91,9 @@ public class TorrentAnnounceScript extends Script {
 
     private String result;
 
-    private final CrossStorageApi crossStorageApi = getCDIBean(CrossStorageApi.class);
-    private final RepositoryService repositoryService = getCDIBean(RepositoryService.class);
-    private final Repository defaultRepo = repositoryService.findDefaultRepository();
+    private CrossStorageApi crossStorageApi = getCDIBean(CrossStorageApi.class);
+    private RepositoryService repositoryService = getCDIBean(RepositoryService.class);
+    private Repository defaultRepo = repositoryService.findDefaultRepository();
 
     private String projectId;
 
@@ -178,23 +173,31 @@ public class TorrentAnnounceScript extends Script {
                 if (info_hash.length() != 40) {
                     String infoHash = param.substring(10);
                     try {
-                        infoHash = URLDecoder.decode(infoHash, "ISO-8859-1");
-                        info_hash = String.format("%x", new BigInteger(1, infoHash.getBytes()));
+                        char[] chars = URLDecoder.decode(infoHash, "ISO-8859-1").toCharArray();
+                        StringBuilder sb = new StringBuilder("");
+                        for (int i = 0; i < chars.length; i++) {
+                            sb.append(Integer.toHexString(chars[i]));
+                        }
+                        info_hash = sb.toString();
                         log.info("info_hash={}", info_hash);
                     } catch (Exception e) {
-                        e.printStackTrace();
+                        log.error(e.getMessage(), e);
                     }
                 }
             }
             if (param.startsWith("peer_id=")) {
                 if (peer_id.length() != 40) {
-                    String peerId = param.substring(10);
+                    String peerId = param.substring(8);
                     try {
-                        peerId = URLDecoder.decode(peerId, "ISO-8859-1");
-                        peer_id = String.format("%x", new BigInteger(1, peerId.getBytes()));
+                        char[] chars = URLDecoder.decode(peerId, "ISO-8859-1").toCharArray();
+                        StringBuilder sb = new StringBuilder("");
+                        for (int i = 0; i < chars.length; i++) {
+                            sb.append(Integer.toHexString(chars[i]));
+                        }
+                        peer_id = sb.toString();
                         log.info("peer_id={}", peer_id);
                     } catch (Exception e) {
-                        e.printStackTrace();
+                        log.error(e.getMessage(), e);
                     }
                 }
             }
@@ -202,11 +205,15 @@ public class TorrentAnnounceScript extends Script {
                 if (wallet_id.length() != 40) {
                     String walletId = param.substring(10);
                     try {
-                        walletId = URLDecoder.decode(walletId, "ISO-8859-1");
-                        wallet_id = String.format("%x", new BigInteger(1, walletId.getBytes()));
+                        char[] chars = URLDecoder.decode(walletId, "ISO-8859-1").toCharArray();
+                        StringBuilder sb = new StringBuilder("");
+                        for (int i = 0; i < chars.length; i++) {
+                            sb.append(Integer.toHexString(chars[i]));
+                        }
+                        wallet_id = sb.toString();
                         log.info("wallet_id={}", wallet_id);
                     } catch (Exception e) {
-                        e.printStackTrace();
+                        log.error(e.getMessage(), e);
                     }
                 }
             }
@@ -341,7 +348,7 @@ public class TorrentAnnounceScript extends Script {
                 coordinateSet = false;
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error(e.getMessage(), e);
         }
         announce.setUrl(url);
         if ("stopped".equalsIgnoreCase(event)) {
@@ -418,7 +425,7 @@ public class TorrentAnnounceScript extends Script {
                         try {
                             crossStorageApi.remove(defaultRepo, peer.getUuid(), TorrentAnnounce.class);
                         } catch (Exception e) {
-                            e.printStackTrace();
+                            log.error("Failed to remove peer: {}", peer.getUuid(), e);
                         }
                     }
                 }

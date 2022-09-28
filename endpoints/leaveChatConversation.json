@@ -1,0 +1,30 @@
+{
+  "code" : "leaveChatConversation",
+  "description" : "Leave Chat Conversation",
+  "secured" : true,
+  "checkPathParams" : true,
+  "serviceCode" : "io.liquichain.communication.LeaveChatConversation",
+  "synchronous" : true,
+  "method" : "POST",
+  "parameterMappings" : [ {
+    "serviceParameter" : "chatConversationId",
+    "multivalued" : false,
+    "parameterName" : "chatConversationId",
+    "valueRequired" : true
+  }, {
+    "serviceParameter" : "participantWalletId",
+    "multivalued" : false,
+    "parameterName" : "participantWalletId",
+    "valueRequired" : true
+  } ],
+  "pathParameters" : [ ],
+  "roles" : [ ],
+  "returnedVariableName" : "result",
+  "serializeResult" : false,
+  "contentType" : "application/json",
+  "basePath" : "leaveChatConversation",
+  "path" : "/",
+  "pool" : {
+    "usePool" : false
+  }
+}

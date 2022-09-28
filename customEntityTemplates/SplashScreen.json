@@ -1,0 +1,12 @@
+{
+  "code" : "SplashScreen",
+  "name" : "Splash Screen",
+  "description" : "Splash screen content",
+  "customEntityCategoryCode" : "liquichain",
+  "availableStorages" : [ "SQL" ],
+  "sqlStorageConfiguration" : {
+    "storeAsTable" : true
+  },
+  "samples" : [ ],
+  "audited" : false
+}

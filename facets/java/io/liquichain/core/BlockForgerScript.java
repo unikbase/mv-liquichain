@@ -1,16 +1,23 @@
 package io.liquichain.core;
 
-import java.util.*;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Arrays;
+import java.util.ArrayList;
 import java.math.BigInteger;
 import java.time.Instant;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
+import java.io.IOException;
 
 import org.meveo.service.script.Script;
 import org.meveo.admin.exception.BusinessException;
-import org.primefaces.model.SortOrder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.math.BigInteger;
+
 import org.meveo.model.customEntities.Block;
 import org.meveo.model.customEntities.Wallet;
 import org.meveo.model.customEntities.Transaction;
@@ -19,9 +26,12 @@ import org.meveo.service.storage.RepositoryService;
 import org.meveo.api.persistence.CrossStorageApi;
 import org.meveo.persistence.CrossStorageService;
 import org.meveo.cache.CustomFieldsCacheContainerProvider;
+import org.meveo.api.exception.EntityDoesNotExistsException;
 import org.meveo.admin.util.pagination.PaginationConfiguration;
 import org.meveo.model.persistence.CEIUtils;
 import org.meveo.service.custom.CustomTableService;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.primefaces.model.SortOrder;
 
 import org.web3j.crypto.*;
 
@@ -29,15 +39,15 @@ public class BlockForgerScript extends Script {
 
     private static final Logger log = LoggerFactory.getLogger(BlockForgerScript.class);
 
-    private static final long chainId = 76;
+    private static long chainId = 76;
 
-    private final int networkId = 7;
+    private int networkId = 7;
 
     static public long blockHeight = 1;
 
     private Block parentBlock = null;
 
-    private final String exampleBlock = "{" +
+    private String exampleBlock = "{" +
         "\"difficulty\":\"0x5\"," +
         "\"extraData\":\"0xd58301090083626f7286676f312e3133856c696e75780000000000000000000021c9effaf6549e725463c7877ddebe9a2916e03228624e4bfd1e3f811da792772b54d9e4eb793c54afb4a29f014846736755043e4778999046d0577c6e57e72100\","
         + "\"gasLimit\":\"0xe984c2\"," + "\"gasUsed\":\"0x0\","
@@ -59,23 +69,23 @@ public class BlockForgerScript extends Script {
         "\"uncles\":[  " + "]}";
 
 
-    private final CustomFieldsCacheContainerProvider cetCache = getCDIBean(CustomFieldsCacheContainerProvider.class);
-    private final CrossStorageService crossStorageService = getCDIBean(CrossStorageService.class);
-    private final CustomTableService customTableService = getCDIBean(CustomTableService.class);
+    private CustomFieldsCacheContainerProvider cetCache = getCDIBean(CustomFieldsCacheContainerProvider.class);
+    private CrossStorageService crossStorageService = getCDIBean(CrossStorageService.class);
+    private CustomTableService customTableService = getCDIBean(CustomTableService.class);
 
-    private static final PaginationConfiguration lastBlockPC =
+    private static PaginationConfiguration lastBlockPC =
         new PaginationConfiguration("blockNumber", SortOrder.DESCENDING);
 
-    private final CrossStorageApi crossStorageApi = getCDIBean(CrossStorageApi.class);
-    private final RepositoryService repositoryService = getCDIBean(RepositoryService.class);
-    private final Repository defaultRepo = repositoryService.findDefaultRepository();
+    private CrossStorageApi crossStorageApi = getCDIBean(CrossStorageApi.class);
+    private RepositoryService repositoryService = getCDIBean(RepositoryService.class);
+    private Repository defaultRepo = repositoryService.findDefaultRepository();
 
 
     private static List<Transaction> currentTransactions = new ArrayList<>();
     private static List<Transaction> nextTransactions = new ArrayList<>();
 
     private static Instant nextBlockDate;
-    private static final AtomicBoolean isForging = new AtomicBoolean(false);
+    private static AtomicBoolean isForging = new AtomicBoolean(false);
 
     public static void addTransaction(Transaction t) {
         if (isForging.get()) {
@@ -96,7 +106,7 @@ public class BlockForgerScript extends Script {
                 //log.info("lastBlock number:{}",result.getBlockNumber());
             }
         } catch (Exception e) {
-            log.error("getLastBlock", e);
+            log.error("getLastBlock:{}", e);
         }
         return result;
     }
@@ -121,7 +131,7 @@ public class BlockForgerScript extends Script {
             log.info("forging {} transactions", currentTransactions.size());
             Map<String, Wallet> wallets = new HashMap<>();
             List<Transaction> orderedTransactions =
-                currentTransactions.stream().sorted(Comparator.comparing(Transaction::getCreationDate))
+                currentTransactions.stream().sorted((t1, t2) -> (t1.getCreationDate().compareTo(t2.getCreationDate())))
                                    .collect(Collectors.toList());
 
             blockHeight = parentBlock.getBlockNumber() + 1;
@@ -141,7 +151,7 @@ public class BlockForgerScript extends Script {
                         try {
                             crossStorageApi.createOrUpdate(defaultRepo, t);
                         } catch (Exception ex) {
-                            ex.printStackTrace();
+                            log.error("Failed to save transaction.", ex);
                         }
                         invalidTransactions.add(t);
                     }
@@ -170,7 +180,7 @@ public class BlockForgerScript extends Script {
                             try {
                                 crossStorageApi.createOrUpdate(defaultRepo, t);
                             } catch (Exception ex) {
-                                ex.printStackTrace();
+                                log.error("Failed to save transaction", ex);
                             }
                             invalidTransactions.add(t);
                         }
@@ -180,7 +190,7 @@ public class BlockForgerScript extends Script {
                         try {
                             crossStorageApi.createOrUpdate(defaultRepo, t);
                         } catch (Exception ex) {
-                            ex.printStackTrace();
+                            log.error("Failed to save transaction", ex);
                         }
                         invalidTransactions.add(t);
                     }
@@ -215,7 +225,7 @@ public class BlockForgerScript extends Script {
                 currentTransactions = nextTransactions;
                 nextTransactions = new ArrayList<>();
             } catch (Exception ex) {
-                ex.printStackTrace();
+                log.error("Failed to save block and transaction.", ex);
             }
 
             isForging.set(false);

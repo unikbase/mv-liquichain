@@ -1,0 +1,20 @@
+{
+  "code" : "getChatConversation",
+  "description" : "Get Chat Conversation",
+  "secured" : true,
+  "checkPathParams" : true,
+  "serviceCode" : "io.liquichain.communication.GetChatConversation",
+  "synchronous" : true,
+  "method" : "GET",
+  "parameterMappings" : [ ],
+  "pathParameters" : [ "uuId" ],
+  "roles" : [ ],
+  "returnedVariableName" : "result",
+  "serializeResult" : false,
+  "contentType" : "application/json",
+  "basePath" : "getChatConversation",
+  "path" : "/{uuId}",
+  "pool" : {
+    "usePool" : false
+  }
+}

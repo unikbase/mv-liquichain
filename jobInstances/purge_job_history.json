@@ -1,5 +1,5 @@
 {
-  "active" : true,
+  "active" : false,
   "code" : "purge_job_history",
   "customFields" : {
     "customField" : [ {
@@ -12,5 +12,6 @@
   },
   "jobCategory" : "UTILS",
   "jobTemplate" : "PurgeJob",
+  "timerCode" : "Daily-midnight",
   "limitToSingleNode" : true
 }

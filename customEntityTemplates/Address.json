@@ -1,0 +1,12 @@
+{
+  "code" : "Address",
+  "name" : "Address",
+  "description" : "Address linked to Wallet",
+  "customEntityCategoryCode" : "liquichain",
+  "availableStorages" : [ "SQL" ],
+  "sqlStorageConfiguration" : {
+    "storeAsTable" : true
+  },
+  "samples" : [ ],
+  "audited" : false
+}
