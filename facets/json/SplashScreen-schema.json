@@ -16,6 +16,18 @@
             "title": "SplashScreen.image",
             "type": "string"
         },
+        "title": {
+            "storages": ["SQL"],
+            "nullable": false,
+            "minLength": 1,
+            "description": "Title",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_SplashScreen_title",
+            "title": "SplashScreen.title",
+            "type": "string",
+            "maxLength": 255
+        },
         "content": {
             "storages": ["SQL"],
             "nullable": true,
@@ -37,5 +49,8 @@
             "type": "integer"
         }
     },
-    "required": ["order"]
+    "required": [
+        "order",
+        "title"
+    ]
 }
