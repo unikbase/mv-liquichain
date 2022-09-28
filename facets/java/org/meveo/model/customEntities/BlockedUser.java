@@ -4,6 +4,7 @@ import org.meveo.model.CustomEntity;
 import java.util.List;
 import org.meveo.model.persistence.DBStorageType;
 import java.time.Instant;
+import org.meveo.model.customEntities.Wallet;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class BlockedUser implements CustomEntity {
@@ -21,6 +22,8 @@ public class BlockedUser implements CustomEntity {
     private DBStorageType storages;
 
     private Instant blockDate;
+
+    private Wallet targetWallet;
 
     @Override()
     public String getUuid() {
@@ -45,6 +48,14 @@ public class BlockedUser implements CustomEntity {
 
     public void setBlockDate(Instant blockDate) {
         this.blockDate = blockDate;
+    }
+
+    public Wallet getTargetWallet() {
+        return targetWallet;
+    }
+
+    public void setTargetWallet(Wallet targetWallet) {
+        this.targetWallet = targetWallet;
     }
 
     @Override()
