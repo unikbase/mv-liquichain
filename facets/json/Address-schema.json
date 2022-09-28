@@ -26,6 +26,17 @@
             "id": "CE_Address_phoneNumber",
             "title": "Address.phoneNumber",
             "$ref": "#/definitions/VerifiedPhoneNumber"
+        },
+        "state": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "State",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Address_state",
+            "title": "Address.state",
+            "type": "string",
+            "maxLength": 50
         }
     }
 }
