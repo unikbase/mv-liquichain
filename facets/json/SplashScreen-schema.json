@@ -6,6 +6,16 @@
     "title": "Splash Screen",
     "type": "object",
     "properties": {
+        "image": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "Image",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_SplashScreen_image",
+            "title": "SplashScreen.image",
+            "type": "string"
+        },
         "content": {
             "storages": ["SQL"],
             "nullable": true,
