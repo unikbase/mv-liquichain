@@ -25,6 +25,8 @@ public class Transaction implements CustomEntity {
 
     private String initiator;
 
+    private String fromHexHash;
+
     @JsonProperty(required = true)
     private String signedHash;
 
@@ -63,6 +65,14 @@ public class Transaction implements CustomEntity {
 
     public void setInitiator(String initiator) {
         this.initiator = initiator;
+    }
+
+    public String getFromHexHash() {
+        return fromHexHash;
+    }
+
+    public void setFromHexHash(String fromHexHash) {
+        this.fromHexHash = fromHexHash;
     }
 
     public String getSignedHash() {
