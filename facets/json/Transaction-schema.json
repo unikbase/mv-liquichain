@@ -17,6 +17,17 @@
             "type": "string",
             "maxLength": 255
         },
+        "orderId": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "Order ID",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Transaction_orderId",
+            "title": "Transaction.orderId",
+            "type": "string",
+            "maxLength": 255
+        },
         "initiator": {
             "storages": ["SQL"],
             "nullable": true,
