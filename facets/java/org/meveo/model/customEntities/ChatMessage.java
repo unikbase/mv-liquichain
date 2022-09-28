@@ -3,6 +3,7 @@ package org.meveo.model.customEntities;
 import org.meveo.model.CustomEntity;
 import java.util.List;
 import org.meveo.model.persistence.DBStorageType;
+import org.meveo.model.customEntities.Wallet;
 import org.meveo.model.customEntities.ChatConversation;
 import java.time.Instant;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -20,6 +21,8 @@ public class ChatMessage implements CustomEntity {
 
     @JsonIgnore()
     private DBStorageType storages;
+
+    private Wallet sender;
 
     private ChatConversation chatConversation;
 
@@ -42,6 +45,14 @@ public class ChatMessage implements CustomEntity {
 
     public void setStorages(DBStorageType storages) {
         this.storages = storages;
+    }
+
+    public Wallet getSender() {
+        return sender;
+    }
+
+    public void setSender(Wallet sender) {
+        this.sender = sender;
     }
 
     public ChatConversation getChatConversation() {
