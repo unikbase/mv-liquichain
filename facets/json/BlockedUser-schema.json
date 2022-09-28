@@ -17,6 +17,16 @@
             "title": "BlockedUser.blockDate",
             "type": "string"
         },
+        "wallet": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "User",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_BlockedUser_wallet",
+            "title": "BlockedUser.wallet",
+            "$ref": "#/definitions/Wallet"
+        },
         "targetWallet": {
             "storages": ["SQL"],
             "nullable": true,
