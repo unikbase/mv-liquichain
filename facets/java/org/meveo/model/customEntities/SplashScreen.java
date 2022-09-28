@@ -20,6 +20,8 @@ public class SplashScreen implements CustomEntity {
     @JsonIgnore()
     private DBStorageType storages;
 
+    private String content;
+
     @JsonProperty(required = true)
     private Long order;
 
@@ -38,6 +40,14 @@ public class SplashScreen implements CustomEntity {
 
     public void setStorages(DBStorageType storages) {
         this.storages = storages;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public Long getOrder() {
