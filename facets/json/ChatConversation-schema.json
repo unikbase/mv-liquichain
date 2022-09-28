@@ -16,6 +16,17 @@
             "title": "ChatConversation.messageCount",
             "type": "integer"
         },
+        "creationDate": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "format": "date-time",
+            "description": "Creation Date",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_ChatConversation_creationDate",
+            "title": "ChatConversation.creationDate",
+            "type": "string"
+        },
         "title": {
             "storages": ["SQL"],
             "nullable": true,
