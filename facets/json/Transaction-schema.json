@@ -17,6 +17,52 @@
             "type": "string",
             "maxLength": 255
         },
+        "initiator": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "Initiated by",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Transaction_initiator",
+            "title": "Transaction.initiator",
+            "type": "string",
+            "maxLength": 255
+        },
+        "fromHexHash": {
+            "storages": ["SQL"],
+            "indexType": "INDEX_NOT_ANALYZE",
+            "nullable": true,
+            "description": "Origin account",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Transaction_fromHexHash",
+            "title": "Transaction.fromHexHash",
+            "type": "string",
+            "maxLength": 40
+        },
+        "creationDate": {
+            "storages": ["SQL"],
+            "indexType": "INDEX_NOT_ANALYZE",
+            "nullable": true,
+            "format": "date-time",
+            "description": "creation Date",
+            "readOnly": true,
+            "versionable": false,
+            "id": "CE_Transaction_creationDate",
+            "title": "Transaction.creationDate",
+            "type": "string"
+        },
+        "type": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "Type",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Transaction_type",
+            "title": "Transaction.type",
+            "type": "string",
+            "maxLength": 20
+        },
         "toHexHash": {
             "storages": ["SQL"],
             "indexType": "INDEX_NOT_ANALYZE",
@@ -41,28 +87,18 @@
             "type": "string",
             "maxLength": 64
         },
-        "initiator": {
-            "storages": ["SQL"],
-            "nullable": true,
-            "description": "Initiated by",
-            "readOnly": false,
-            "versionable": false,
-            "id": "CE_Transaction_initiator",
-            "title": "Transaction.initiator",
-            "type": "string",
-            "maxLength": 255
-        },
-        "fromHexHash": {
+        "hexHash": {
             "storages": ["SQL"],
             "indexType": "INDEX_NOT_ANALYZE",
-            "nullable": true,
-            "description": "Origin account",
-            "readOnly": false,
+            "nullable": false,
+            "minLength": 1,
+            "description": "Hash in hexa (no \"0x\" prefix)",
+            "readOnly": true,
             "versionable": false,
-            "id": "CE_Transaction_fromHexHash",
-            "title": "Transaction.fromHexHash",
+            "id": "CE_Transaction_hexHash",
+            "title": "Transaction.hexHash",
             "type": "string",
-            "maxLength": 40
+            "maxLength": 500
         },
         "signedHash": {
             "storages": ["SQL"],
@@ -87,29 +123,6 @@
             "title": "Transaction.currency",
             "type": "string",
             "maxLength": 255
-        },
-        "creationDate": {
-            "storages": ["SQL"],
-            "indexType": "INDEX_NOT_ANALYZE",
-            "nullable": true,
-            "format": "date-time",
-            "description": "creation Date",
-            "readOnly": true,
-            "versionable": false,
-            "id": "CE_Transaction_creationDate",
-            "title": "Transaction.creationDate",
-            "type": "string"
-        },
-        "type": {
-            "storages": ["SQL"],
-            "nullable": true,
-            "description": "Type",
-            "readOnly": false,
-            "versionable": false,
-            "id": "CE_Transaction_type",
-            "title": "Transaction.type",
-            "type": "string",
-            "maxLength": 20
         },
         "value": {
             "storages": ["SQL"],
@@ -147,5 +160,8 @@
             "maxLength": 255
         }
     },
-    "required": ["signedHash"]
+    "required": [
+        "hexHash",
+        "signedHash"
+    ]
 }
