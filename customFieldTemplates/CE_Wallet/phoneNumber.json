@@ -11,7 +11,7 @@
   "triggerEndPeriodEvent" : false,
   "entityClazz" : "org.meveo.model.customEntities.CustomEntityTemplate - VerifiedPhoneNumber",
   "allowEdit" : true,
-  "hideOnNew" : true,
+  "hideOnNew" : false,
   "contentTypes" : [ ],
   "fileExtensions" : [ ],
   "saveOnExplorer" : false,
