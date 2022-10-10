@@ -6,7 +6,7 @@
     "type" : "String"
   }, {
     "name" : "configs",
-    "type" : "LinkedHashMap"
+    "type" : "Map<String,Object>"
   } ],
   "outputs" : [ {
     "name" : "result",
