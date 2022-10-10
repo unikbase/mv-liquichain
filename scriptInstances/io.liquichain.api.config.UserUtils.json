@@ -2,7 +2,28 @@
   "code" : "io.liquichain.api.config.UserUtils",
   "description" : "User utils to get configurations",
   "inputs" : [ ],
-  "outputs" : [ ],
+  "outputs" : [ {
+    "name" : "userEmailNotificationsAllowed",
+    "type" : "boolean"
+  }, {
+    "name" : "userOrderUpdatesAllowed",
+    "type" : "boolean"
+  }, {
+    "name" : "userSellerInfoUpdatesAllowed",
+    "type" : "boolean"
+  }, {
+    "name" : "userChatNotificationsAllowed",
+    "type" : "boolean"
+  }, {
+    "name" : "userChatFromProfilePageAllowed",
+    "type" : "boolean"
+  }, {
+    "name" : "userAutoReplyMessageAllowed",
+    "type" : "boolean"
+  }, {
+    "name" : "userAutoReplyMessage",
+    "type" : "String"
+  } ],
   "generateOutputs" : false,
   "type" : "JAVA",
   "transactionType" : "SAME",
