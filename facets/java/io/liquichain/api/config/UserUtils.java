@@ -9,32 +9,28 @@ import org.meveo.model.customEntities.BlockedUser;
 import org.meveo.model.customEntities.Wallet;
 import org.meveo.commons.utils.StringUtils;
 
+import org.meveo.security.MeveoUser;
+import org.meveo.service.crm.impl.CurrentUserProducer;
 import org.meveo.service.script.Script;
 import org.meveo.admin.exception.BusinessException;
+import org.meveo.service.storage.RepositoryService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class UserUtils extends Script {
-
     private static final Logger log = LoggerFactory.getLogger(UserUtils.class);
-    private Wallet user;
 
-    private CrossStorageApi crossStorageApi;
-    private Repository defaultRepo;
+    private final CrossStorageApi crossStorageApi;
+    private final Repository defaultRepo;
+
+    private Wallet userWallet;
+    private UserConfiguration userConfig;
 
     public UserUtils() {
         super();
-    }
-
-    public UserUtils(CrossStorageApi crossStorageApi, Repository defaultRepo) {
-        this.crossStorageApi = crossStorageApi;
-        this.defaultRepo = defaultRepo;
-    }
-
-    public UserUtils(CrossStorageApi crossStorageApi, Repository defaultRepo, Wallet user) {
-        this.crossStorageApi = crossStorageApi;
-        this.defaultRepo = defaultRepo;
-        this.user = user;
+        crossStorageApi = getCDIBean(CrossStorageApi.class);
+        RepositoryService repositoryService = getCDIBean(RepositoryService.class);
+        defaultRepo = repositoryService.findDefaultRepository();
     }
 
 
@@ -43,87 +39,37 @@ public class UserUtils extends Script {
         super.execute(parameters);
     }
 
-    public UserConfiguration getUserConfigurationsByWalletId(String walletId) {
-        return loadUserConfigurationByWalletId(walletId);
+    public boolean isUserEmailNotificationsAllowed() {
+        return loadUserConfig().getIsEmailNotificationsEnabled();
     }
 
-    public boolean isUserEmailNotificationsAllowed(String walletId) {
-        UserConfiguration userConfig = loadUserConfigurationByWalletId(walletId);
-        return userConfig != null && userConfig.getIsEmailNotificationsEnabled();
+    public boolean isUserOrderUpdatesAllowed() {
+        return loadUserConfig().getIsOrderUpdatesEnabled();
     }
 
-    public boolean isUserOrderUpdatesAllowed(String walletId) {
-        UserConfiguration userConfig = loadUserConfigurationByWalletId(walletId);
-        return userConfig != null && userConfig.getIsOrderUpdatesEnabled();
+    public boolean isUserSellerInfoUpdatesAllowed() {
+        return loadUserConfig().getIsSellerInfoUpdatesEnabled();
     }
 
-    public boolean isUserSellerInfoUpdatesAllowed(String walletId) {
-        UserConfiguration userConfig = loadUserConfigurationByWalletId(walletId);
-        return userConfig != null && userConfig.getIsSellerInfoUpdatesEnabled();
+    public boolean isUserChatNotificationsAllowed() {
+        return loadUserConfig().getIsChatNotificationsEnabled();
     }
 
-    public boolean isUserChatNotificationsAllowed(String walletId) {
-        UserConfiguration userConfig = loadUserConfigurationByWalletId(walletId);
-        return userConfig != null && userConfig.getIsChatNotificationsEnabled();
+    public boolean isUserChatFromProfilePageAllowed() {
+        return loadUserConfig().getIsChatEnabledFromProfilePage();
     }
 
-    public boolean isUserChatFromProfilePageAllowed(String walletId) {
-        UserConfiguration userConfig = loadUserConfigurationByWalletId(walletId);
-        return userConfig != null && userConfig.getIsChatEnabledFromProfilePage();
+    public boolean isUserAutoReplyMessageAllowed() {
+        return loadUserConfig().getIsAutoReplyEnabled();
     }
 
-    public boolean isUserAutoReplyMessageAllowed(String walletId) {
-        UserConfiguration userConfig = loadUserConfigurationByWalletId(walletId);
-        return userConfig != null && userConfig.getIsAutoReplyEnabled();
-    }
-
-    public String getUserAutoReplyMessage(String walletId) {
-        UserConfiguration userConfig = loadUserConfigurationByWalletId(walletId);
-        return userConfig != null ? userConfig.getAutoReplyMessage() : "";
-    }
-
-    private UserConfiguration loadUserConfigurationByWalletId(String walletId) {
-        try {
-            if (StringUtils.isBlank(walletId)) {
-                log.error("Failed to retrieve user's configuration. walletId is not provided.");
-                return null;
-            }
-
-            if (user == null) {
-                walletId = (walletId.startsWith("0x") ? walletId.substring(2) : walletId).toLowerCase();
-                user = crossStorageApi.find(defaultRepo, Wallet.class).by("uuid", walletId).getResult();
-                if (user == null) {
-                    log.error("User not found against walletId = {}", walletId);
-                    return null;
-                }
-            }
-
-            UserConfiguration configs = crossStorageApi.find(defaultRepo, UserConfiguration.class)
-                                                       .by("user", user)
-                                                       .getResult();
-            //== loading the default configurations
-            if (configs == null) {
-                configs = new UserConfiguration();
-                configs.setIsEmailNotificationsEnabled(true);
-                configs.setIsOrderUpdatesEnabled(true);
-                configs.setIsSellerInfoUpdatesEnabled(true);
-                configs.setIsChatNotificationsEnabled(true);
-                configs.setIsChatEnabledFromProfilePage(true);
-                configs.setIsAutoReplyEnabled(true);
-            }
-            configs.setUser(user);
-
-            return configs;
-        } catch (Exception ex) {
-            log.error(
-                "Failed to retrieve the user's configurations for wallet id :" + walletId + " errorMessage: " + ex);
-        }
-        return null;
+    public String getUserAutoReplyMessage() {
+        return loadUserConfig().getAutoReplyMessage();
     }
 
     public boolean isUserBlocked(String walletId, String targetWalletId) {
 
-        log.info("checking if - targetWalletId = {} is blocked by wallet = {}", targetWalletId, walletId);
+        log.info("checking if targetWalletId: {} is blocked by wallet: {}", targetWalletId, walletId);
         walletId = (walletId.startsWith("0x") ? walletId.substring(2) : walletId).toLowerCase();
         targetWalletId = (targetWalletId.startsWith("0x") ? targetWalletId.substring(2) : targetWalletId).toLowerCase();
 
@@ -134,4 +80,52 @@ public class UserUtils extends Script {
         return blockedUser != null;
     }
 
+    public UserConfiguration loadUserConfigByWalletId(String walletId) {
+        UserConfiguration config;
+        try {
+            config = crossStorageApi.find(defaultRepo, UserConfiguration.class)
+                                        .by("user", walletId)
+                                        .getResult();
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to retrieve the user's configurations for wallet id :"
+                + walletId + " errorMessage: " + e.getMessage());
+        }
+        return loadDefaultsIfNull(config);
+    }
+
+    private UserConfiguration loadUserConfig() {
+        if (userConfig == null) {
+            try {
+                CurrentUserProducer userProducer = getCDIBean(CurrentUserProducer.class);
+                MeveoUser user = userProducer.getCurrentUser();
+                String username = user.getUserName();
+                userWallet = crossStorageApi.find(defaultRepo, Wallet.class)
+                                            .by("likeCriterias publicInfo privateInfo", "*" + username + "*")
+                                            .getResult();
+                userConfig = crossStorageApi.find(defaultRepo, UserConfiguration.class)
+                                            .by("user", userWallet.getUuid())
+                                            .getResult();
+            } catch (Exception e) {
+                throw new RuntimeException("Failed to retrieve the user's configurations for wallet id :"
+                    + userWallet.getUuid() + " errorMessage: " + e.getMessage());
+            }
+        }
+        userConfig = loadDefaultsIfNull(userConfig);
+        return userConfig;
+    }
+
+    private UserConfiguration loadDefaultsIfNull(UserConfiguration configuration) {
+        if (configuration == null) {
+            configuration = new UserConfiguration();
+            configuration.setIsEmailNotificationsEnabled(true);
+            configuration.setIsOrderUpdatesEnabled(true);
+            configuration.setIsSellerInfoUpdatesEnabled(true);
+            configuration.setIsChatNotificationsEnabled(true);
+            configuration.setIsChatEnabledFromProfilePage(true);
+            configuration.setIsAutoReplyEnabled(true);
+            configuration.setAutoReplyMessage("");
+            configuration.setUser(userWallet);
+        }
+        return configuration;
+    }
 }
