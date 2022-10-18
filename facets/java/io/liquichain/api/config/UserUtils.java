@@ -83,9 +83,13 @@ public class UserUtils extends Script {
     public UserConfiguration loadUserConfigByWalletId(String walletId) {
         UserConfiguration config;
         try {
+            Wallet wallet = crossStorageApi.find(defaultRepo, walletId, Wallet.class);
+            if (wallet == null) {
+                throw new RuntimeException("Wallet with id: " + walletId + ", does not exist.");
+            }
             config = crossStorageApi.find(defaultRepo, UserConfiguration.class)
-                                        .by("user", walletId)
-                                        .getResult();
+                                    .by("user", walletId)
+                                    .getResult();
         } catch (Exception e) {
             throw new RuntimeException("Failed to retrieve the user's configurations for wallet id :"
                 + walletId + " errorMessage: " + e.getMessage());
