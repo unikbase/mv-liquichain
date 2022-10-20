@@ -35,6 +35,8 @@ public class Address implements CustomEntity {
 
     private String externalId;
 
+    private String type;
+
     private VerifiedPhoneNumber phoneNumber;
 
     private String streetAddress;
@@ -118,6 +120,14 @@ public class Address implements CustomEntity {
 
     public void setExternalId(String externalId) {
         this.externalId = externalId;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public VerifiedPhoneNumber getPhoneNumber() {
