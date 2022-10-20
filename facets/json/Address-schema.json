@@ -81,6 +81,17 @@
             "type": "string",
             "maxLength": 255
         },
+        "type": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "Type",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Address_type",
+            "title": "Address.type",
+            "type": "string",
+            "maxLength": 255
+        },
         "phoneNumber": {
             "storages": ["SQL"],
             "nullable": true,
