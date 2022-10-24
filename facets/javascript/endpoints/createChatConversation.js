@@ -1,70 +1,53 @@
-import EndpointInterface from "#{API_BASE_URL}/api/rest/endpoint/EndpointInterface.js";
-
-// the request schema, this should be updated
-// whenever changes to the endpoint parameters are made
-// this is important because this is used to validate and parse the request parameters
-const requestSchema = {
-  "title" : "createChatConversationRequest",
-  "id" : "createChatConversationRequest",
-  "default" : "Schema definition for createChatConversation",
-  "$schema" : "http://json-schema.org/draft-07/schema",
-  "type" : "object",
-  "properties" : {
-    "groupId" : {
-      "title" : "groupId",
-      "type" : "string",
-      "minLength" : 1
-    },
-    "createrWalletId" : {
-      "title" : "createrWalletId",
-      "type" : "string",
-      "minLength" : 1
-    },
-    "title" : {
-      "title" : "title",
-      "type" : "string",
-      "minLength" : 1
-    }
-  }
+const createChatConversation = async (parameters) =>  {
+	const baseUrl = window.location.origin;
+	const url = new URL(`${window.location.pathname.split('/')[1]}/rest/createChatConversation/`, baseUrl);
+	return fetch(url.toString(), {
+		method: 'POST', 
+		headers : new Headers({
+ 			'Content-Type': 'application/json'
+		}),
+		body: JSON.stringify({
+			createrWalletId : parameters.createrWalletId,
+			title : parameters.title,
+			groupId : parameters.groupId
+		})
+	});
 }
 
-// the response schema, this should be updated
-// whenever changes to the endpoint parameters are made
-// this is important because this could be used to parse the result
-const responseSchema = {
-  "title" : "createChatConversationResponse",
-  "id" : "createChatConversationResponse",
-  "default" : "Schema definition for createChatConversation",
-  "$schema" : "http://json-schema.org/draft-07/schema",
-  "type" : "object",
-  "properties" : {
-    "result" : {
-      "title" : "result",
-      "type" : "string",
-      "minLength" : 1
-    }
-  }
+const createChatConversationForm = (container) => {
+	const html = `<form id='createChatConversation-form'>
+		<div id='createChatConversation-createrWalletId-form-field'>
+			<label for='createrWalletId'>createrWalletId</label>
+			<input type='text' id='createChatConversation-createrWalletId-param' name='createrWalletId'/>
+		</div>
+		<div id='createChatConversation-title-form-field'>
+			<label for='title'>title</label>
+			<input type='text' id='createChatConversation-title-param' name='title'/>
+		</div>
+		<div id='createChatConversation-groupId-form-field'>
+			<label for='groupId'>groupId</label>
+			<input type='text' id='createChatConversation-groupId-param' name='groupId'/>
+		</div>
+		<button type='button'>Test</button>
+	</form>`;
+
+	container.insertAdjacentHTML('beforeend', html)
+
+	const createrWalletId = container.querySelector('#createChatConversation-createrWalletId-param');
+	const title = container.querySelector('#createChatConversation-title-param');
+	const groupId = container.querySelector('#createChatConversation-groupId-param');
+
+	container.querySelector('#createChatConversation-form button').onclick = () => {
+		const params = {
+			createrWalletId : createrWalletId.value !== "" ? createrWalletId.value : undefined,
+			title : title.value !== "" ? title.value : undefined,
+			groupId : groupId.value !== "" ? groupId.value : undefined
+		};
+
+		createChatConversation(params).then(r => r.text().then(
+				t => alert(t)
+			));
+	};
 }
 
-// should contain offline mock data, make sure it adheres to the response schema
-const mockResult = {};
-
-class createChatConversation extends EndpointInterface {
-	constructor() {
-		// name and http method, these are inserted when code is generated
-		super("createChatConversation", "POST");
-		this.requestSchema = requestSchema;
-		this.responseSchema = responseSchema;
-		this.mockResult = mockResult;
-	}
-
-	getRequestSchema() {
-		return this.requestSchema;
-	}
-
-	getResponseSchema() {
-		return this.responseSchema;
-	}
-}
-
-export default new createChatConversation();
+export { createChatConversation, createChatConversationForm };
