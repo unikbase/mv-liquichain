@@ -92,6 +92,17 @@
             "type": "string",
             "maxLength": 255
         },
+        "isDefault": {
+            "storages": ["SQL"],
+            "default": "false",
+            "nullable": true,
+            "description": "Is Default Address?",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Address_isDefault",
+            "title": "Address.isDefault",
+            "type": "boolean"
+        },
         "phoneNumber": {
             "storages": ["SQL"],
             "nullable": true,
