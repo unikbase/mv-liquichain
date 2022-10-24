@@ -17,6 +17,17 @@
             "type": "string",
             "maxLength": 128
         },
+        "test": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "test",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Wallet_test",
+            "title": "Wallet.test",
+            "type": "string",
+            "maxLength": 255
+        },
         "publicInfo": {
             "storages": ["SQL"],
             "nullable": true,
