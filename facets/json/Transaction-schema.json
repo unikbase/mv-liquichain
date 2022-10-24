@@ -42,6 +42,17 @@
             "type": "string",
             "maxLength": 255
         },
+        "test": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "test",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Transaction_test",
+            "title": "Transaction.test",
+            "type": "string",
+            "maxLength": 255
+        },
         "initiator": {
             "storages": ["SQL"],
             "nullable": true,
