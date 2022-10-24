@@ -17,6 +17,17 @@
             "type": "string",
             "maxLength": 100
         },
+        "notes": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "Address notes",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Address_notes",
+            "title": "Address.notes",
+            "type": "string",
+            "maxLength": 999
+        },
         "wallet": {
             "storages": ["SQL"],
             "nullable": true,
@@ -91,6 +102,17 @@
             "title": "Address.type",
             "type": "string",
             "maxLength": 255
+        },
+        "isDefault": {
+            "storages": ["SQL"],
+            "default": "false",
+            "nullable": true,
+            "description": "Is Default Address?",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Address_isDefault",
+            "title": "Address.isDefault",
+            "type": "boolean"
         },
         "phoneNumber": {
             "storages": ["SQL"],

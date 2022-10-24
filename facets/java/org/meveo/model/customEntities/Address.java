@@ -23,6 +23,8 @@ public class Address implements CustomEntity {
 
     private String country;
 
+    private String notes;
+
     private Wallet wallet;
 
     private String city;
@@ -36,6 +38,8 @@ public class Address implements CustomEntity {
     private String externalId;
 
     private String type;
+
+    private Boolean isDefault;
 
     private VerifiedPhoneNumber phoneNumber;
 
@@ -72,6 +76,14 @@ public class Address implements CustomEntity {
 
     public void setCountry(String country) {
         this.country = country;
+    }
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
     }
 
     public Wallet getWallet() {
@@ -128,6 +140,14 @@ public class Address implements CustomEntity {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public Boolean getIsDefault() {
+        return isDefault;
+    }
+
+    public void setIsDefault(Boolean isDefault) {
+        this.isDefault = isDefault;
     }
 
     public VerifiedPhoneNumber getPhoneNumber() {
