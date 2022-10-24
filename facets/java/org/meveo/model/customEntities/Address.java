@@ -23,6 +23,8 @@ public class Address implements CustomEntity {
 
     private String country;
 
+    private String notes;
+
     private Wallet wallet;
 
     private String city;
@@ -74,6 +76,14 @@ public class Address implements CustomEntity {
 
     public void setCountry(String country) {
         this.country = country;
+    }
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
     }
 
     public Wallet getWallet() {
