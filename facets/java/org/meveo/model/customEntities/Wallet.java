@@ -25,6 +25,8 @@ public class Wallet implements CustomEntity {
 
     private String accountHash;
 
+    private String test;
+
     private String publicInfo;
 
     private Boolean verified;
@@ -78,6 +80,14 @@ public class Wallet implements CustomEntity {
 
     public void setAccountHash(String accountHash) {
         this.accountHash = accountHash;
+    }
+
+    public String getTest() {
+        return test;
+    }
+
+    public void setTest(String test) {
+        this.test = test;
     }
 
     public String getPublicInfo() {
