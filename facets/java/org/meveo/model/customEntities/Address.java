@@ -37,6 +37,8 @@ public class Address implements CustomEntity {
 
     private String type;
 
+    private Boolean isDefault;
+
     private VerifiedPhoneNumber phoneNumber;
 
     private String streetAddress;
@@ -128,6 +130,14 @@ public class Address implements CustomEntity {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public Boolean getIsDefault() {
+        return isDefault;
+    }
+
+    public void setIsDefault(Boolean isDefault) {
+        this.isDefault = isDefault;
     }
 
     public VerifiedPhoneNumber getPhoneNumber() {
