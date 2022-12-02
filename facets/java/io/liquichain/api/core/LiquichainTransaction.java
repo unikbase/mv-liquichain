@@ -89,6 +89,10 @@ public class LiquichainTransaction extends Script {
 
     public LiquichainTransaction() {
         super();
+        this.crossStorageApi = getCDIBean(CrossStorageApi.class);
+        this.repositoryService = getCDIBean(RepositoryService.class);
+        this.paramBeanFactory = getCDIBean(ParamBeanFactory.class);
+        this.init();
     }
 
     public LiquichainTransaction(CrossStorageApi crossStorageApi, ParamBeanFactory paramBeanFactory,
@@ -428,7 +432,7 @@ public class LiquichainTransaction extends Script {
         String sender = normalizeHash(from);
         String recipient = normalizeHash(to);
 
-        LOG.info("transfer amount:{} to:{}", amount, toHexHash(to));
+        LOG.info("transfer amount: {} to: {} from: {}", amount, recipient, sender);
 
         Wallet fromWallet = crossStorageApi.find(defaultRepo, sender, Wallet.class);
         Wallet toWallet = crossStorageApi.find(defaultRepo, recipient, Wallet.class);
