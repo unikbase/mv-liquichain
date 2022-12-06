@@ -2,10 +2,15 @@ package io.liquichain.api.config;
 
 import java.util.List;
 import java.util.Map;
+import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 import org.meveo.api.persistence.CrossStorageApi;
 import org.meveo.model.customEntities.Wallet;
 import org.meveo.model.customEntities.BlockedUser;
+import org.meveo.model.customEntities.VerifiedPhoneNumber;
+
 import org.meveo.commons.utils.StringUtils;
 
 import org.meveo.model.storage.Repository;
@@ -19,11 +24,13 @@ import com.google.gson.*;
 
 
 public class GetBlockUser extends Script {
-    private static final Logger log = LoggerFactory.getLogger(GetBlockUser.class);
+    private static final Logger LOG = LoggerFactory.getLogger(GetBlockUser.class);
     private final CrossStorageApi crossStorageApi = getCDIBean(CrossStorageApi.class);
     private final RepositoryService repositoryService = getCDIBean(RepositoryService.class);
     private final Repository defaultRepo = repositoryService.findDefaultRepository();
 
+	private Gson gson = new Gson();
+  
     private String walletId;
   
     private String result;
@@ -47,7 +54,7 @@ public class GetBlockUser extends Script {
     public void execute(Map<String, Object> parameters) throws BusinessException {
         super.execute(parameters);
       
-      	log.info("get blocked users of - walletId = {}",walletId);
+      	LOG.info("get blocked users of - walletId = {}",walletId);
 		walletId = (walletId.startsWith("0x") ? walletId.substring(2) : walletId).toLowerCase();
         Wallet user = crossStorageApi.find(defaultRepo, Wallet.class).by("uuid", walletId).getResult(); 
         if(user == null){
@@ -61,14 +68,33 @@ public class GetBlockUser extends Script {
           	return;
         }
       
-      	Gson gson = new Gson();
       	JsonArray responseObj = new JsonArray();
+      	List<String> targetWalletIds = blockedUsers.stream().map(b -> b.getTargetWallet().getUuid()).collect(Collectors.toList());
+      	LOG.info("total target walletIds = {}",targetWalletIds.size());
+      	targetWalletIds.forEach( u -> LOG.info("walletId = {}",u));
+		//== loading the target wallet data
+      	Map<String, Wallet> walletMap = new HashMap<>();
+      	List<Wallet> walletList = crossStorageApi.find(defaultRepo, Wallet.class)
+                .by("inList uuid", new ArrayList<String>(targetWalletIds))
+                .getResults();
+		walletList.stream().forEach(w-> walletMap.put(w.getUuid(), w)); 
+      	//== preparing the response
       	for(BlockedUser blockedUser : blockedUsers){
       		JsonObject userObj = gson.toJsonTree(blockedUser).getAsJsonObject();
           	userObj.remove("wallet");
+          	String targetWalletId = userObj.get("targetWallet").getAsJsonObject().get("uuid").getAsString();
+          	Wallet targetWallet = (Wallet)walletMap.get(targetWalletId);
+          	
+          	userObj.addProperty("name",targetWallet.getName());
+          	if (targetWallet.getPhoneNumber() != null) {
+            	VerifiedPhoneNumber phoneNumber = crossStorageApi.find(defaultRepo, VerifiedPhoneNumber.class)
+                                                                     .by("uuid", targetWallet.getPhoneNumber())
+                                                                     .getResult();
+                userObj.addProperty("phoneNumber",phoneNumber.getPhoneNumber());
+            }          	
           	responseObj.add(userObj);
         }
-      	
+      	      
       	result = "{\"status\" : \"success\", \"result\" : " + responseObj.toString() + "}";
     }
 
