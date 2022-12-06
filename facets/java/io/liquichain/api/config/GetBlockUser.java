@@ -98,10 +98,10 @@ public class GetBlockUser extends Script {
           	if(StringUtils.isNotBlank(targetWallet.getPublicInfo())){
 				JsonObject publicInfoObj = ((JsonElement)gson.fromJson(targetWallet.getPublicInfo(),JsonElement.class)).getAsJsonObject();
               	if(publicInfoObj != null){
-                	if(publicInfoObj.get("avatar").getAsInt()!=0){
+                	if(publicInfoObj.get("avatar")!=null && publicInfoObj.get("avatar").getAsInt()!=0){
                     	userObj.addProperty("avatar",publicInfoObj.get("avatar").getAsInt());  
                     }
-                	if(StringUtils.isNotBlank(publicInfoObj.get("base64Avatar").getAsString())){
+                	if(publicInfoObj.get("base64Avatar")!=null && StringUtils.isNotBlank(publicInfoObj.get("base64Avatar").getAsString())){
                     	userObj.addProperty("base64Avatar",publicInfoObj.get("base64Avatar").getAsString());  
                     }                  
                 }
