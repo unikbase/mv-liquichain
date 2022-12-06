@@ -86,12 +86,27 @@ public class GetBlockUser extends Script {
           	Wallet targetWallet = (Wallet)walletMap.get(targetWalletId);
           	
           	userObj.addProperty("name",targetWallet.getName());
+          	//== loading blocked user's phone number
           	if (targetWallet.getPhoneNumber() != null) {
             	VerifiedPhoneNumber phoneNumber = crossStorageApi.find(defaultRepo, VerifiedPhoneNumber.class)
                                                                      .by("uuid", targetWallet.getPhoneNumber())
                                                                      .getResult();
-                userObj.addProperty("phoneNumber",phoneNumber.getPhoneNumber());
-            }          	
+              	if(phoneNumber!=null)
+                	userObj.addProperty("phoneNumber",phoneNumber.getPhoneNumber());
+            }
+          	//== loading blocked user's avatar info from publicInfo
+          	if(StringUtils.isNotBlank(targetWallet.getPublicInfo())){
+				JsonObject publicInfoObj = ((JsonElement)gson.fromJson(targetWallet.getPublicInfo(),JsonElement.class)).getAsJsonObject();
+              	if(publicInfoObj != null){
+                	if(publicInfoObj.get("avatar").getAsInt()!=0){
+                    	userObj.addProperty("avatar",publicInfoObj.get("avatar").getAsInt());  
+                    }
+                	if(StringUtils.isNotBlank(publicInfoObj.get("base64Avatar").getAsString())){
+                    	userObj.addProperty("base64Avatar",publicInfoObj.get("base64Avatar").getAsString());  
+                    }                  
+                }
+            }
+          
           	responseObj.add(userObj);
         }
       	      
