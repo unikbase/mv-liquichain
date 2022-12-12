@@ -316,7 +316,7 @@ public class LiquichainTransaction extends Script {
         String completedTransactionHash = transactionReceipt.getTransactionHash();
         LOG.debug("completed transactionHash: {}", completedTransactionHash);
 
-//        updateWalletBalances(from, to);
+        //        updateWalletBalances(from, to);
 
         return completedTransactionHash;
     }
@@ -412,9 +412,6 @@ public class LiquichainTransaction extends Script {
         crossStorageApi.createOrUpdate(defaultRepo, transaction);
 
         // updateWalletBalances(from, to);
-
-        LOG.info("sending transaction notification");
-        CloudMessaging.sendNotification(crossStorageApi, defaultRepo, recipient, "Telecel Play", description);
         return transactionHash;
     }
 
@@ -518,7 +515,11 @@ public class LiquichainTransaction extends Script {
         // updateWalletBalances(sender, recipient);
 
         LOG.info("sending transaction notification");
-        CloudMessaging.sendNotification(crossStorageApi, defaultRepo, recipient, "Telecel Play", message);
+        Map<String, String> notificationData = new HashMap<>() {{
+            put("type", type);
+        }};
+        CloudMessaging.sendNotification(crossStorageApi, defaultRepo, recipient, "Telecel Play", message,
+            notificationData);
         return transactionHash;
     }
 
@@ -577,7 +578,11 @@ public class LiquichainTransaction extends Script {
         }
 
         if (!transactionHash.isEmpty()) {
-            CloudMessaging.sendNotification(crossStorageApi, defaultRepo, recipientAddress, "Telecel Play", message);
+            Map<String, String> notificationData = new HashMap<>() {{
+                put("type", type);
+            }};
+            CloudMessaging.sendNotification(crossStorageApi, defaultRepo, recipientAddress, "Telecel Play", message,
+                notificationData);
         }
 
         return transactionHash;
