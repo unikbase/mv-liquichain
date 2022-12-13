@@ -518,6 +518,7 @@ public class LiquichainTransaction extends Script {
         Map<String, String> notificationData = new HashMap<>() {{
             put("type", CloudMessaging.formatType(type));
         }};
+
         CloudMessaging.sendNotification(crossStorageApi, defaultRepo, recipient, "Telecel Play", message,
             notificationData);
         return transactionHash;
@@ -581,6 +582,7 @@ public class LiquichainTransaction extends Script {
             Map<String, String> notificationData = new HashMap<>() {{
                 put("type", CloudMessaging.formatType(type));
             }};
+
             CloudMessaging.sendNotification(crossStorageApi, defaultRepo, recipientAddress, "Telecel Play", message,
                 notificationData);
         }
