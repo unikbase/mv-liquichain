@@ -31,6 +31,8 @@ public class Wallet implements CustomEntity {
 
     private Boolean verified;
 
+    private String applicationInstanceUUID;
+
     private String publicKey;
 
     private String privateInfo;
@@ -100,6 +102,14 @@ public class Wallet implements CustomEntity {
 
     public void setVerified(Boolean verified) {
         this.verified = verified;
+    }
+
+    public String getApplicationInstanceUUID() {
+        return applicationInstanceUUID;
+    }
+
+    public void setApplicationInstanceUUID(String applicationInstanceUUID) {
+        this.applicationInstanceUUID = applicationInstanceUUID;
     }
 
     public String getPublicKey() {
