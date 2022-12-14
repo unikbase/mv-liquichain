@@ -23,6 +23,8 @@ public class VerifiedEmail implements CustomEntity {
     @JsonProperty(required = true)
     private String walletId;
 
+    private Boolean verified;
+
     @JsonProperty(required = true)
     private String email;
 
@@ -49,6 +51,14 @@ public class VerifiedEmail implements CustomEntity {
 
     public void setWalletId(String walletId) {
         this.walletId = walletId;
+    }
+
+    public Boolean getVerified() {
+        return verified;
+    }
+
+    public void setVerified(Boolean verified) {
+        this.verified = verified;
     }
 
     public String getEmail() {
