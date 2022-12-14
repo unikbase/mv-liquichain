@@ -38,6 +38,8 @@ public class Transaction implements CustomEntity {
 
     private String value;
 
+    private String gasPrice;
+
     @Override()
     public String getUuid() {
         return uuid;
@@ -117,6 +119,14 @@ public class Transaction implements CustomEntity {
 
     public void setValue(String value) {
         this.value = value;
+    }
+
+    public String getGasPrice() {
+        return gasPrice;
+    }
+
+    public void setGasPrice(String gasPrice) {
+        this.gasPrice = gasPrice;
     }
 
     @Override()
