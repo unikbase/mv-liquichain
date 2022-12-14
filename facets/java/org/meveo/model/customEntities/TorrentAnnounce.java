@@ -20,6 +20,8 @@ public class TorrentAnnounce implements CustomEntity {
     @JsonIgnore()
     private DBStorageType storages;
 
+    private String peerId;
+
     private Instant anounceDate;
 
     private Instant lastAnnounceDate;
@@ -51,6 +53,14 @@ public class TorrentAnnounce implements CustomEntity {
 
     public void setStorages(DBStorageType storages) {
         this.storages = storages;
+    }
+
+    public String getPeerId() {
+        return peerId;
+    }
+
+    public void setPeerId(String peerId) {
+        this.peerId = peerId;
     }
 
     public Instant getAnounceDate() {
