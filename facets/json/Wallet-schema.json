@@ -26,6 +26,17 @@
             "title": "Wallet.application",
             "$ref": "#/definitions/LiquichainApp"
         },
+        "balance": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "balance",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Wallet_balance",
+            "title": "Wallet.balance",
+            "type": "string",
+            "maxLength": 255
+        },
         "test": {
             "storages": ["SQL"],
             "nullable": true,
