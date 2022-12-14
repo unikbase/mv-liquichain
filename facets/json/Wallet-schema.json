@@ -60,6 +60,16 @@
             "type": "string",
             "maxLength": 255
         },
+        "publicInfo": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "public Info json",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Wallet_publicInfo",
+            "title": "Wallet.publicInfo",
+            "type": "string"
+        },
         "publicKey": {
             "storages": ["SQL"],
             "nullable": true,
