@@ -25,6 +25,17 @@
             "id": "CE_SplashScreen_content",
             "title": "SplashScreen.content",
             "type": "string"
+        },
+        "order": {
+            "storages": ["SQL"],
+            "nullable": false,
+            "description": "Order",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_SplashScreen_order",
+            "title": "SplashScreen.order",
+            "type": "integer"
         }
-    }
+    },
+    "required": ["order"]
 }
