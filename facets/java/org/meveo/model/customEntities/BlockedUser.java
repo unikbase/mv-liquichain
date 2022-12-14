@@ -23,6 +23,8 @@ public class BlockedUser implements CustomEntity {
 
     private Instant blockDate;
 
+    private Wallet wallet;
+
     private Wallet targetWallet;
 
     @Override()
@@ -48,6 +50,14 @@ public class BlockedUser implements CustomEntity {
 
     public void setBlockDate(Instant blockDate) {
         this.blockDate = blockDate;
+    }
+
+    public Wallet getWallet() {
+        return wallet;
+    }
+
+    public void setWallet(Wallet wallet) {
+        this.wallet = wallet;
     }
 
     public Wallet getTargetWallet() {
