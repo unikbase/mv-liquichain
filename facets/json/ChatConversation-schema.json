@@ -5,14 +5,27 @@
     "id": "ChatConversation",
     "title": "Chat Conversation",
     "type": "object",
-    "properties": {"messageCount": {
-        "storages": ["SQL"],
-        "nullable": true,
-        "description": "Message Count",
-        "readOnly": false,
-        "versionable": false,
-        "id": "CE_ChatConversation_messageCount",
-        "title": "ChatConversation.messageCount",
-        "type": "integer"
-    }}
+    "properties": {
+        "messageCount": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "Message Count",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_ChatConversation_messageCount",
+            "title": "ChatConversation.messageCount",
+            "type": "integer"
+        },
+        "creationDate": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "format": "date-time",
+            "description": "Creation Date",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_ChatConversation_creationDate",
+            "title": "ChatConversation.creationDate",
+            "type": "string"
+        }
+    }
 }
