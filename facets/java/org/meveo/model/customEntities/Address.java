@@ -36,6 +36,8 @@ public class Address implements CustomEntity {
 
     private String state;
 
+    private String type;
+
     private Double longitude;
 
     @Override()
@@ -117,6 +119,14 @@ public class Address implements CustomEntity {
 
     public void setState(String state) {
         this.state = state;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public Double getLongitude() {
