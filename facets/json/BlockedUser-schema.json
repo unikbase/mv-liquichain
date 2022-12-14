@@ -5,14 +5,27 @@
     "id": "BlockedUser",
     "title": "Blocked Users",
     "type": "object",
-    "properties": {"targetWallet": {
-        "storages": ["SQL"],
-        "nullable": true,
-        "description": "Blocked User",
-        "readOnly": false,
-        "versionable": false,
-        "id": "CE_BlockedUser_targetWallet",
-        "title": "BlockedUser.targetWallet",
-        "$ref": "#/definitions/Wallet"
-    }}
+    "properties": {
+        "blockDate": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "format": "date-time",
+            "description": "Blocked At",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_BlockedUser_blockDate",
+            "title": "BlockedUser.blockDate",
+            "type": "string"
+        },
+        "targetWallet": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "Blocked User",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_BlockedUser_targetWallet",
+            "title": "BlockedUser.targetWallet",
+            "$ref": "#/definitions/Wallet"
+        }
+    }
 }
