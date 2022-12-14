@@ -28,6 +28,17 @@
             "title": "UserConfiguration.isOrderUpdatesEnabled",
             "type": "boolean"
         },
+        "isSellerInfoUpdatesEnabled": {
+            "storages": ["SQL"],
+            "default": "false",
+            "nullable": true,
+            "description": "Seller info updates enabled",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_UserConfiguration_isSellerInfoUpdatesEnabled",
+            "title": "UserConfiguration.isSellerInfoUpdatesEnabled",
+            "type": "boolean"
+        },
         "user": {
             "storages": ["SQL"],
             "nullable": true,
