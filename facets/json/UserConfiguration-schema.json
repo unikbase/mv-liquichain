@@ -4,5 +4,16 @@
     "$schema": "http://json-schema.org/draft-07/schema",
     "id": "UserConfiguration",
     "title": "User Configurations",
-    "type": "object"
+    "type": "object",
+    "properties": {"isChatNotificationsEnabled": {
+        "storages": ["SQL"],
+        "default": "true",
+        "nullable": true,
+        "description": "Chat notifications settings",
+        "readOnly": false,
+        "versionable": false,
+        "id": "CE_UserConfiguration_isChatNotificationsEnabled",
+        "title": "UserConfiguration.isChatNotificationsEnabled",
+        "type": "boolean"
+    }}
 }
