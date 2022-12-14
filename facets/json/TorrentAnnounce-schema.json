@@ -17,6 +17,17 @@
             "title": "TorrentAnnounce.lastAnnounceDate",
             "type": "string"
         },
+        "url": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "url of the server (when peer is a server)",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_TorrentAnnounce_url",
+            "title": "TorrentAnnounce.url",
+            "type": "string",
+            "maxLength": 1000
+        },
         "longitude": {
             "storages": ["SQL"],
             "nullable": true,
