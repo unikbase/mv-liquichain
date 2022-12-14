@@ -26,6 +26,8 @@ public class LiquichainApp implements CustomEntity {
     @JsonProperty(required = true)
     private String name;
 
+    private String iconUrl;
+
     private Instant creationDate;
 
     @Override()
@@ -59,6 +61,14 @@ public class LiquichainApp implements CustomEntity {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getIconUrl() {
+        return iconUrl;
+    }
+
+    public void setIconUrl(String iconUrl) {
+        this.iconUrl = iconUrl;
     }
 
     public Instant getCreationDate() {
