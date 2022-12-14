@@ -30,6 +30,9 @@ public class LiquichainApp implements CustomEntity {
 
     private Instant creationDate;
 
+    @JsonProperty(required = true)
+    private String shortCode;
+
     @Override()
     public String getUuid() {
         return uuid;
@@ -77,6 +80,14 @@ public class LiquichainApp implements CustomEntity {
 
     public void setCreationDate(Instant creationDate) {
         this.creationDate = creationDate;
+    }
+
+    public String getShortCode() {
+        return shortCode;
+    }
+
+    public void setShortCode(String shortCode) {
+        this.shortCode = shortCode;
     }
 
     @Override()
