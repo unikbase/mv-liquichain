@@ -23,6 +23,8 @@ public class Wallet implements CustomEntity {
     @JsonIgnore()
     private DBStorageType storages;
 
+    private String accountHash;
+
     private String test;
 
     private String publicInfo;
@@ -66,6 +68,14 @@ public class Wallet implements CustomEntity {
 
     public void setStorages(DBStorageType storages) {
         this.storages = storages;
+    }
+
+    public String getAccountHash() {
+        return accountHash;
+    }
+
+    public void setAccountHash(String accountHash) {
+        this.accountHash = accountHash;
     }
 
     public String getTest() {
