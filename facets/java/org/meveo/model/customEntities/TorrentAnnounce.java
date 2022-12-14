@@ -25,6 +25,8 @@ public class TorrentAnnounce implements CustomEntity {
 
     private String ip;
 
+    private Double latitude;
+
     private String infoHash;
 
     private Long downloaded;
@@ -78,6 +80,14 @@ public class TorrentAnnounce implements CustomEntity {
 
     public void setIp(String ip) {
         this.ip = ip;
+    }
+
+    public Double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
     }
 
     public String getInfoHash() {
