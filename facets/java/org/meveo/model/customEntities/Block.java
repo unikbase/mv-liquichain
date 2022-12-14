@@ -19,6 +19,8 @@ public class Block implements CustomEntity {
     @JsonIgnore()
     private DBStorageType storages;
 
+    private String parentHash;
+
     @Override()
     public String getUuid() {
         return uuid;
@@ -34,6 +36,14 @@ public class Block implements CustomEntity {
 
     public void setStorages(DBStorageType storages) {
         this.storages = storages;
+    }
+
+    public String getParentHash() {
+        return parentHash;
+    }
+
+    public void setParentHash(String parentHash) {
+        this.parentHash = parentHash;
     }
 
     @Override()
