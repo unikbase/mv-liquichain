@@ -28,6 +28,17 @@
             "title": "UserConfiguration.isChatNotificationsEnabled",
             "type": "boolean"
         },
+        "isEmailNotificationsEnabled": {
+            "storages": ["SQL"],
+            "default": "true",
+            "nullable": true,
+            "description": "Email's notification settings",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_UserConfiguration_isEmailNotificationsEnabled",
+            "title": "UserConfiguration.isEmailNotificationsEnabled",
+            "type": "boolean"
+        },
         "isOrderUpdatesEnabled": {
             "storages": ["SQL"],
             "default": "true",
