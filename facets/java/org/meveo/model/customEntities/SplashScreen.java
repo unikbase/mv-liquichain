@@ -3,6 +3,7 @@ package org.meveo.model.customEntities;
 import org.meveo.model.CustomEntity;
 import java.util.List;
 import org.meveo.model.persistence.DBStorageType;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class SplashScreen implements CustomEntity {
@@ -22,6 +23,9 @@ public class SplashScreen implements CustomEntity {
     private String image;
 
     private String content;
+
+    @JsonProperty(required = true)
+    private Long order;
 
     @Override()
     public String getUuid() {
@@ -54,6 +58,14 @@ public class SplashScreen implements CustomEntity {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public Long getOrder() {
+        return order;
+    }
+
+    public void setOrder(Long order) {
+        this.order = order;
     }
 
     @Override()
