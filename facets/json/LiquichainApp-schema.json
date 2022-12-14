@@ -84,6 +84,17 @@
             "title": "LiquichainApp.creationDate",
             "type": "string"
         },
+        "version": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "version",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_LiquichainApp_version",
+            "title": "LiquichainApp.version",
+            "type": "string",
+            "maxLength": 50
+        },
         "shortCode": {
             "storages": ["SQL"],
             "nullable": false,
