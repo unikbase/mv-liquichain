@@ -6,6 +6,18 @@
     "title": "Transaction",
     "type": "object",
     "properties": {
+        "blockHash": {
+            "storages": ["SQL"],
+            "indexType": "INDEX_NOT_ANALYZE",
+            "nullable": true,
+            "description": "block hash",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Transaction_blockHash",
+            "title": "Transaction.blockHash",
+            "type": "string",
+            "maxLength": 64
+        },
         "toHexHash": {
             "storages": ["SQL"],
             "indexType": "INDEX_NOT_ANALYZE",
