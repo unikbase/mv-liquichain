@@ -82,6 +82,17 @@
             "type": "string",
             "maxLength": 100
         },
+        "externalId": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "External Id",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Address_externalId",
+            "title": "Address.externalId",
+            "type": "string",
+            "maxLength": 255
+        },
         "state": {
             "storages": ["SQL"],
             "nullable": true,
