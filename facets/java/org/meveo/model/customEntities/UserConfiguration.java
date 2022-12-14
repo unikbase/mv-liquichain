@@ -24,6 +24,8 @@ public class UserConfiguration implements CustomEntity {
 
     private Boolean isOrderUpdatesEnabled;
 
+    private Boolean isSellerInfoUpdatesEnabled;
+
     private Wallet user;
 
     @Override()
@@ -57,6 +59,14 @@ public class UserConfiguration implements CustomEntity {
 
     public void setIsOrderUpdatesEnabled(Boolean isOrderUpdatesEnabled) {
         this.isOrderUpdatesEnabled = isOrderUpdatesEnabled;
+    }
+
+    public Boolean getIsSellerInfoUpdatesEnabled() {
+        return isSellerInfoUpdatesEnabled;
+    }
+
+    public void setIsSellerInfoUpdatesEnabled(Boolean isSellerInfoUpdatesEnabled) {
+        this.isSellerInfoUpdatesEnabled = isSellerInfoUpdatesEnabled;
     }
 
     public Wallet getUser() {
