@@ -26,6 +26,8 @@ public class Address implements CustomEntity {
 
     private VerifiedPhoneNumber phoneNumber;
 
+    private String streetAddress;
+
     private String dialCode;
 
     private String name;
@@ -73,6 +75,14 @@ public class Address implements CustomEntity {
 
     public void setPhoneNumber(VerifiedPhoneNumber phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public String getStreetAddress() {
+        return streetAddress;
+    }
+
+    public void setStreetAddress(String streetAddress) {
+        this.streetAddress = streetAddress;
     }
 
     public String getDialCode() {
