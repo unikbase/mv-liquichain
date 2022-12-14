@@ -30,6 +30,8 @@ public class TorrentAnnounce implements CustomEntity {
 
     private Double latitude;
 
+    private Double liveness;
+
     private String infoHash;
 
     private Long downloaded;
@@ -99,6 +101,14 @@ public class TorrentAnnounce implements CustomEntity {
 
     public void setLatitude(Double latitude) {
         this.latitude = latitude;
+    }
+
+    public Double getLiveness() {
+        return liveness;
+    }
+
+    public void setLiveness(Double liveness) {
+        this.liveness = liveness;
     }
 
     public String getInfoHash() {
