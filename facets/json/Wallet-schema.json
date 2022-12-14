@@ -17,6 +17,16 @@
             "type": "string",
             "maxLength": 100
         },
+        "emailAddress": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "Email Address",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Wallet_emailAddress",
+            "title": "Wallet.emailAddress",
+            "$ref": "#/definitions/VerifiedEmail"
+        },
         "phoneNumber": {
             "storages": ["SQL"],
             "nullable": true,
