@@ -17,17 +17,6 @@
             "type": "string",
             "maxLength": 100
         },
-        "isDefault": {
-            "storages": ["SQL"],
-            "default": "false",
-            "nullable": true,
-            "description": "Is Default Address?",
-            "readOnly": false,
-            "versionable": false,
-            "id": "CE_Address_isDefault",
-            "title": "Address.isDefault",
-            "type": "boolean"
-        },
         "notes": {
             "storages": ["SQL"],
             "nullable": true,
@@ -38,16 +27,6 @@
             "title": "Address.notes",
             "type": "string",
             "maxLength": 999
-        },
-        "phoneNumber": {
-            "storages": ["SQL"],
-            "nullable": true,
-            "description": "Phone number",
-            "readOnly": false,
-            "versionable": false,
-            "id": "CE_Address_phoneNumber",
-            "title": "Address.phoneNumber",
-            "$ref": "#/definitions/VerifiedPhoneNumber"
         },
         "city": {
             "storages": ["SQL"],
@@ -60,17 +39,6 @@
             "type": "string",
             "maxLength": 50
         },
-        "streetAddress": {
-            "storages": ["SQL"],
-            "nullable": true,
-            "description": "Street Address",
-            "readOnly": false,
-            "versionable": false,
-            "id": "CE_Address_streetAddress",
-            "title": "Address.streetAddress",
-            "type": "string",
-            "maxLength": 200
-        },
         "dialCode": {
             "storages": ["SQL"],
             "nullable": true,
@@ -82,16 +50,16 @@
             "type": "string",
             "maxLength": 10
         },
-        "name": {
+        "postalCode": {
             "storages": ["SQL"],
             "nullable": true,
-            "description": "Name",
+            "description": "Postal code",
             "readOnly": false,
             "versionable": false,
-            "id": "CE_Address_name",
-            "title": "Address.name",
+            "id": "CE_Address_postalCode",
+            "title": "Address.postalCode",
             "type": "string",
-            "maxLength": 100
+            "maxLength": 10
         },
         "externalId": {
             "storages": ["SQL"],
@@ -104,17 +72,6 @@
             "type": "string",
             "maxLength": 255
         },
-        "state": {
-            "storages": ["SQL"],
-            "nullable": true,
-            "description": "State",
-            "readOnly": false,
-            "versionable": false,
-            "id": "CE_Address_state",
-            "title": "Address.state",
-            "type": "string",
-            "maxLength": 50
-        },
         "type": {
             "storages": ["SQL"],
             "nullable": true,
@@ -125,6 +82,60 @@
             "title": "Address.type",
             "type": "string",
             "maxLength": 255
+        },
+        "isDefault": {
+            "storages": ["SQL"],
+            "default": "false",
+            "nullable": true,
+            "description": "Is Default Address?",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Address_isDefault",
+            "title": "Address.isDefault",
+            "type": "boolean"
+        },
+        "phoneNumber": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "Phone number",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Address_phoneNumber",
+            "title": "Address.phoneNumber",
+            "$ref": "#/definitions/VerifiedPhoneNumber"
+        },
+        "streetAddress": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "Street Address",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Address_streetAddress",
+            "title": "Address.streetAddress",
+            "type": "string",
+            "maxLength": 200
+        },
+        "name": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "Name",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Address_name",
+            "title": "Address.name",
+            "type": "string",
+            "maxLength": 100
+        },
+        "state": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "State",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Address_state",
+            "title": "Address.state",
+            "type": "string",
+            "maxLength": 50
         },
         "longitude": {
             "storages": ["SQL"],
