@@ -6,6 +6,16 @@
     "title": "Block",
     "type": "object",
     "properties": {
+        "size": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "size",
+            "readOnly": true,
+            "versionable": false,
+            "id": "CE_Block_size",
+            "title": "Block.size",
+            "type": "integer"
+        },
         "blockNumber": {
             "storages": ["SQL"],
             "nullable": true,
