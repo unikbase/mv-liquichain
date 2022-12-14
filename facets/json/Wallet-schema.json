@@ -26,6 +26,17 @@
             "title": "Wallet.test",
             "type": "string",
             "maxLength": 255
+        },
+        "publicKey": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "public key",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Wallet_publicKey",
+            "title": "Wallet.publicKey",
+            "type": "string",
+            "maxLength": 255
         }
     }
 }
