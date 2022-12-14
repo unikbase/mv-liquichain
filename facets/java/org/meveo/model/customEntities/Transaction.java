@@ -27,6 +27,9 @@ public class Transaction implements CustomEntity {
 
     private String test;
 
+    @JsonProperty(required = true)
+    private String hexHash;
+
     private String fromHexHash;
 
     @JsonProperty(required = true)
@@ -79,6 +82,14 @@ public class Transaction implements CustomEntity {
 
     public void setTest(String test) {
         this.test = test;
+    }
+
+    public String getHexHash() {
+        return hexHash;
+    }
+
+    public void setHexHash(String hexHash) {
+        this.hexHash = hexHash;
     }
 
     public String getFromHexHash() {
