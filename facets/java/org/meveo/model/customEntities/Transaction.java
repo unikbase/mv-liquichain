@@ -22,6 +22,8 @@ public class Transaction implements CustomEntity {
 
     private String test;
 
+    private String fromHexHash;
+
     @JsonProperty(required = true)
     private String signedHash;
 
@@ -50,6 +52,14 @@ public class Transaction implements CustomEntity {
 
     public void setTest(String test) {
         this.test = test;
+    }
+
+    public String getFromHexHash() {
+        return fromHexHash;
+    }
+
+    public void setFromHexHash(String fromHexHash) {
+        this.fromHexHash = fromHexHash;
     }
 
     public String getSignedHash() {
