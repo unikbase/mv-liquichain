@@ -4,5 +4,18 @@
     "$schema": "http://json-schema.org/draft-07/schema",
     "id": "VerifiedEmail",
     "title": "Verified Email",
-    "type": "object"
+    "type": "object",
+    "properties": {"walletId": {
+        "storages": ["SQL"],
+        "nullable": false,
+        "minLength": 1,
+        "description": "Associated Wallet ID",
+        "readOnly": false,
+        "versionable": false,
+        "id": "CE_VerifiedEmail_walletId",
+        "title": "VerifiedEmail.walletId",
+        "type": "string",
+        "maxLength": 255
+    }},
+    "required": ["walletId"]
 }
