@@ -28,6 +28,17 @@
             "title": "Address.isDefault",
             "type": "boolean"
         },
+        "notes": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "Address notes",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Address_notes",
+            "title": "Address.notes",
+            "type": "string",
+            "maxLength": 999
+        },
         "phoneNumber": {
             "storages": ["SQL"],
             "nullable": true,
