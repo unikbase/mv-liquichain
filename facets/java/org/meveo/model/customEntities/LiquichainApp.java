@@ -25,6 +25,8 @@ public class LiquichainApp implements CustomEntity {
 
     private String hexCode;
 
+    private String previousHash;
+
     @JsonProperty(required = true)
     private String name;
 
@@ -72,6 +74,14 @@ public class LiquichainApp implements CustomEntity {
 
     public void setHexCode(String hexCode) {
         this.hexCode = hexCode;
+    }
+
+    public String getPreviousHash() {
+        return previousHash;
+    }
+
+    public void setPreviousHash(String previousHash) {
+        this.previousHash = previousHash;
     }
 
     public String getName() {
