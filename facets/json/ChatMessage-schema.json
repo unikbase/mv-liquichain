@@ -4,5 +4,16 @@
     "$schema": "http://json-schema.org/draft-07/schema",
     "id": "ChatMessage",
     "title": "Chat Message",
-    "type": "object"
+    "type": "object",
+    "properties": {"message": {
+        "storages": ["SQL"],
+        "nullable": true,
+        "description": "Message",
+        "readOnly": false,
+        "versionable": false,
+        "id": "CE_ChatMessage_message",
+        "title": "ChatMessage.message",
+        "type": "string",
+        "maxLength": 255
+    }}
 }
