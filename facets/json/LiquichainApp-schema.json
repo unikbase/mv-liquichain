@@ -6,6 +6,17 @@
     "title": "Application",
     "type": "object",
     "properties": {
+        "upgradeRules": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "Upgrade script code",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_LiquichainApp_upgradeRules",
+            "title": "LiquichainApp.upgradeRules",
+            "type": "string",
+            "maxLength": 255
+        },
         "hexCode": {
             "storages": ["SQL"],
             "nullable": true,
