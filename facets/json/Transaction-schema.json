@@ -100,6 +100,18 @@
             "title": "Transaction.value",
             "type": "string",
             "maxLength": 255
+        },
+        "gasPrice": {
+            "storages": ["SQL"],
+            "indexType": "INDEX_NOT_ANALYZE",
+            "nullable": true,
+            "description": "gas price",
+            "readOnly": true,
+            "versionable": false,
+            "id": "CE_Transaction_gasPrice",
+            "title": "Transaction.gasPrice",
+            "type": "string",
+            "maxLength": 255
         }
     },
     "required": ["signedHash"]
