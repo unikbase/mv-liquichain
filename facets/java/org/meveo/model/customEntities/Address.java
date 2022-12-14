@@ -22,6 +22,8 @@ public class Address implements CustomEntity {
 
     private String country;
 
+    private Boolean isDefault;
+
     private VerifiedPhoneNumber phoneNumber;
 
     private String dialCode;
@@ -51,6 +53,14 @@ public class Address implements CustomEntity {
 
     public void setCountry(String country) {
         this.country = country;
+    }
+
+    public Boolean getIsDefault() {
+        return isDefault;
+    }
+
+    public void setIsDefault(Boolean isDefault) {
+        this.isDefault = isDefault;
     }
 
     public VerifiedPhoneNumber getPhoneNumber() {
