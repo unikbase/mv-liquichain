@@ -5,17 +5,30 @@
     "id": "TorrentAnnounce",
     "title": "Announce",
     "type": "object",
-    "properties": {"status": {
-        "storages": ["SQL"],
-        "nullable": true,
-        "description": "status (ONGOING,CLOSED)",
-        "readOnly": false,
-        "versionable": false,
-        "id": "CE_TorrentAnnounce_status",
-        "title": "TorrentAnnounce.status",
-        "enum": [
-            "CLOSED",
-            "ONGOING"
-        ]
-    }}
+    "properties": {
+        "lastAnnounceDate": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "format": "date-time",
+            "description": "last announce date",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_TorrentAnnounce_lastAnnounceDate",
+            "title": "TorrentAnnounce.lastAnnounceDate",
+            "type": "string"
+        },
+        "status": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "status (ONGOING,CLOSED)",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_TorrentAnnounce_status",
+            "title": "TorrentAnnounce.status",
+            "enum": [
+                "CLOSED",
+                "ONGOING"
+            ]
+        }
+    }
 }
