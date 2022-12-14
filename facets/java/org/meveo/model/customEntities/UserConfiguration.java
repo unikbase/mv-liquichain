@@ -24,6 +24,8 @@ public class UserConfiguration implements CustomEntity {
 
     private Boolean isChatNotificationsEnabled;
 
+    private Boolean isEmailNotificationsEnabled;
+
     private Boolean isOrderUpdatesEnabled;
 
     private Boolean isSellerInfoUpdatesEnabled;
@@ -61,6 +63,14 @@ public class UserConfiguration implements CustomEntity {
 
     public void setIsChatNotificationsEnabled(Boolean isChatNotificationsEnabled) {
         this.isChatNotificationsEnabled = isChatNotificationsEnabled;
+    }
+
+    public Boolean getIsEmailNotificationsEnabled() {
+        return isEmailNotificationsEnabled;
+    }
+
+    public void setIsEmailNotificationsEnabled(Boolean isEmailNotificationsEnabled) {
+        this.isEmailNotificationsEnabled = isEmailNotificationsEnabled;
     }
 
     public Boolean getIsOrderUpdatesEnabled() {
