@@ -4,5 +4,15 @@
     "$schema": "http://json-schema.org/draft-07/schema",
     "id": "ChatConversation",
     "title": "Chat Conversation",
-    "type": "object"
+    "type": "object",
+    "properties": {"messageCount": {
+        "storages": ["SQL"],
+        "nullable": true,
+        "description": "Message Count",
+        "readOnly": false,
+        "versionable": false,
+        "id": "CE_ChatConversation_messageCount",
+        "title": "ChatConversation.messageCount",
+        "type": "integer"
+    }}
 }
