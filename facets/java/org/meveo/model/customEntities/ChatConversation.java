@@ -23,6 +23,8 @@ public class ChatConversation implements CustomEntity {
 
     private Long messageCount;
 
+    private String conversationGroupId;
+
     private Instant creationDate;
 
     private List<String> participants = new ArrayList<>();
@@ -50,6 +52,14 @@ public class ChatConversation implements CustomEntity {
 
     public void setMessageCount(Long messageCount) {
         this.messageCount = messageCount;
+    }
+
+    public String getConversationGroupId() {
+        return conversationGroupId;
+    }
+
+    public void setConversationGroupId(String conversationGroupId) {
+        this.conversationGroupId = conversationGroupId;
     }
 
     public Instant getCreationDate() {
