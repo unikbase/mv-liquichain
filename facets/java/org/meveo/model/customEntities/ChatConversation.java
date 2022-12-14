@@ -27,6 +27,8 @@ public class ChatConversation implements CustomEntity {
 
     private Instant creationDate;
 
+    private String title;
+
     private List<String> participants = new ArrayList<>();
 
     @Override()
@@ -68,6 +70,14 @@ public class ChatConversation implements CustomEntity {
 
     public void setCreationDate(Instant creationDate) {
         this.creationDate = creationDate;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public List<String> getParticipants() {
