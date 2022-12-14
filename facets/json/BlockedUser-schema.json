@@ -4,5 +4,15 @@
     "$schema": "http://json-schema.org/draft-07/schema",
     "id": "BlockedUser",
     "title": "Blocked Users",
-    "type": "object"
+    "type": "object",
+    "properties": {"targetWallet": {
+        "storages": ["SQL"],
+        "nullable": true,
+        "description": "Blocked User",
+        "readOnly": false,
+        "versionable": false,
+        "id": "CE_BlockedUser_targetWallet",
+        "title": "BlockedUser.targetWallet",
+        "$ref": "#/definitions/Wallet"
+    }}
 }
