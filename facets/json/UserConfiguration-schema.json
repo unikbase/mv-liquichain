@@ -6,6 +6,17 @@
     "title": "User Configurations",
     "type": "object",
     "properties": {
+        "autoReplyMessage": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "Chat auto reply message",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_UserConfiguration_autoReplyMessage",
+            "title": "UserConfiguration.autoReplyMessage",
+            "type": "string",
+            "maxLength": 500
+        },
         "isChatNotificationsEnabled": {
             "storages": ["SQL"],
             "default": "true",
