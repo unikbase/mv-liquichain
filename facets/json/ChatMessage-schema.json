@@ -4,49 +4,5 @@
     "$schema": "http://json-schema.org/draft-07/schema",
     "id": "ChatMessage",
     "title": "Chat Message",
-    "type": "object",
-    "properties": {
-        "sender": {
-            "storages": ["SQL"],
-            "nullable": true,
-            "description": "Wallet Reference",
-            "readOnly": false,
-            "versionable": false,
-            "id": "CE_ChatMessage_sender",
-            "title": "ChatMessage.sender",
-            "$ref": "#/definitions/Wallet"
-        },
-        "chatConversation": {
-            "storages": ["SQL"],
-            "nullable": true,
-            "description": "ChatConversation Reference",
-            "readOnly": false,
-            "versionable": false,
-            "id": "CE_ChatMessage_chatConversation",
-            "title": "ChatMessage.chatConversation",
-            "$ref": "#/definitions/ChatConversation"
-        },
-        "creationDate": {
-            "storages": ["SQL"],
-            "nullable": true,
-            "format": "date-time",
-            "description": "Creation Date",
-            "readOnly": false,
-            "versionable": false,
-            "id": "CE_ChatMessage_creationDate",
-            "title": "ChatMessage.creationDate",
-            "type": "string"
-        },
-        "message": {
-            "storages": ["SQL"],
-            "nullable": true,
-            "description": "Message",
-            "readOnly": false,
-            "versionable": false,
-            "id": "CE_ChatMessage_message",
-            "title": "ChatMessage.message",
-            "type": "string",
-            "maxLength": 255
-        }
-    }
+    "type": "object"
 }
