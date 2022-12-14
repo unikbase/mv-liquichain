@@ -6,6 +6,16 @@
     "title": "Chat Message",
     "type": "object",
     "properties": {
+        "sender": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "Wallet Reference",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_ChatMessage_sender",
+            "title": "ChatMessage.sender",
+            "$ref": "#/definitions/Wallet"
+        },
         "creationDate": {
             "storages": ["SQL"],
             "nullable": true,
