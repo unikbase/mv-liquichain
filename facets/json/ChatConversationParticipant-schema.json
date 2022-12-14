@@ -4,5 +4,15 @@
     "$schema": "http://json-schema.org/draft-07/schema",
     "id": "ChatConversationParticipant",
     "title": "Chat Conversation Participant",
-    "type": "object"
+    "type": "object",
+    "properties": {"participant": {
+        "storages": ["SQL"],
+        "nullable": true,
+        "description": "Reference of Wallet",
+        "readOnly": false,
+        "versionable": false,
+        "id": "CE_ChatConversationParticipant_participant",
+        "title": "ChatConversationParticipant.participant",
+        "$ref": "#/definitions/Wallet"
+    }}
 }
