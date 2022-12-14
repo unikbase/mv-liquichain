@@ -24,6 +24,8 @@ public class Address implements CustomEntity {
 
     private Boolean isDefault;
 
+    private String notes;
+
     private VerifiedPhoneNumber phoneNumber;
 
     private String city;
@@ -73,6 +75,14 @@ public class Address implements CustomEntity {
 
     public void setIsDefault(Boolean isDefault) {
         this.isDefault = isDefault;
+    }
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
     }
 
     public VerifiedPhoneNumber getPhoneNumber() {
