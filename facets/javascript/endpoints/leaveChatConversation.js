@@ -1,46 +1,65 @@
-const leaveChatConversation = async (parameters) =>  {
-	const baseUrl = window.location.origin;
-	const url = new URL(`${window.location.pathname.split('/')[1]}/rest/leaveChatConversation/`, baseUrl);
-	return fetch(url.toString(), {
-		method: 'POST', 
-		headers : new Headers({
- 			'Content-Type': 'application/json'
-		}),
-		body: JSON.stringify({
-			chatConversationId : parameters.chatConversationId,
-			participantWalletId : parameters.participantWalletId
-		})
-	});
+import EndpointInterface from "#{API_BASE_URL}/api/rest/endpoint/EndpointInterface.js";
+
+// the request schema, this should be updated
+// whenever changes to the endpoint parameters are made
+// this is important because this is used to validate and parse the request parameters
+const requestSchema = {
+  "title" : "leaveChatConversationRequest",
+  "id" : "leaveChatConversationRequest",
+  "default" : "Schema definition for leaveChatConversation",
+  "$schema" : "http://json-schema.org/draft-07/schema",
+  "type" : "object",
+  "properties" : {
+    "participantWalletId" : {
+      "title" : "participantWalletId",
+      "type" : "string",
+      "minLength" : 1
+    },
+    "chatConversationId" : {
+      "title" : "chatConversationId",
+      "type" : "string",
+      "minLength" : 1
+    }
+  }
 }
 
-const leaveChatConversationForm = (container) => {
-	const html = `<form id='leaveChatConversation-form'>
-		<div id='leaveChatConversation-chatConversationId-form-field'>
-			<label for='chatConversationId'>chatConversationId</label>
-			<input type='text' id='leaveChatConversation-chatConversationId-param' name='chatConversationId'/>
-		</div>
-		<div id='leaveChatConversation-participantWalletId-form-field'>
-			<label for='participantWalletId'>participantWalletId</label>
-			<input type='text' id='leaveChatConversation-participantWalletId-param' name='participantWalletId'/>
-		</div>
-		<button type='button'>Test</button>
-	</form>`;
-
-	container.insertAdjacentHTML('beforeend', html)
-
-	const chatConversationId = container.querySelector('#leaveChatConversation-chatConversationId-param');
-	const participantWalletId = container.querySelector('#leaveChatConversation-participantWalletId-param');
-
-	container.querySelector('#leaveChatConversation-form button').onclick = () => {
-		const params = {
-			chatConversationId : chatConversationId.value !== "" ? chatConversationId.value : undefined,
-			participantWalletId : participantWalletId.value !== "" ? participantWalletId.value : undefined
-		};
-
-		leaveChatConversation(params).then(r => r.text().then(
-				t => alert(t)
-			));
-	};
+// the response schema, this should be updated
+// whenever changes to the endpoint parameters are made
+// this is important because this could be used to parse the result
+const responseSchema = {
+  "title" : "leaveChatConversationResponse",
+  "id" : "leaveChatConversationResponse",
+  "default" : "Schema definition for leaveChatConversation",
+  "$schema" : "http://json-schema.org/draft-07/schema",
+  "type" : "object",
+  "properties" : {
+    "result" : {
+      "title" : "result",
+      "type" : "string",
+      "minLength" : 1
+    }
+  }
 }
 
-export { leaveChatConversation, leaveChatConversationForm };
+// should contain offline mock data, make sure it adheres to the response schema
+const mockResult = {};
+
+class leaveChatConversation extends EndpointInterface {
+	constructor() {
+		// name and http method, these are inserted when code is generated
+		super("leaveChatConversation", "POST");
+		this.requestSchema = requestSchema;
+		this.responseSchema = responseSchema;
+		this.mockResult = mockResult;
+	}
+
+	getRequestSchema() {
+		return this.requestSchema;
+	}
+
+	getResponseSchema() {
+		return this.responseSchema;
+	}
+}
+
+export default new leaveChatConversation();
