@@ -22,25 +22,27 @@ public class Address implements CustomEntity {
 
     private String country;
 
-    private Boolean isDefault;
-
     private String notes;
-
-    private VerifiedPhoneNumber phoneNumber;
 
     private String city;
 
-    private String streetAddress;
-
     private String dialCode;
 
-    private String name;
+    private String postalCode;
 
     private String externalId;
 
-    private String state;
-
     private String type;
+
+    private Boolean isDefault;
+
+    private VerifiedPhoneNumber phoneNumber;
+
+    private String streetAddress;
+
+    private String name;
+
+    private String state;
 
     private Double longitude;
 
@@ -69,28 +71,12 @@ public class Address implements CustomEntity {
         this.country = country;
     }
 
-    public Boolean getIsDefault() {
-        return isDefault;
-    }
-
-    public void setIsDefault(Boolean isDefault) {
-        this.isDefault = isDefault;
-    }
-
     public String getNotes() {
         return notes;
     }
 
     public void setNotes(String notes) {
         this.notes = notes;
-    }
-
-    public VerifiedPhoneNumber getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(VerifiedPhoneNumber phoneNumber) {
-        this.phoneNumber = phoneNumber;
     }
 
     public String getCity() {
@@ -101,14 +87,6 @@ public class Address implements CustomEntity {
         this.city = city;
     }
 
-    public String getStreetAddress() {
-        return streetAddress;
-    }
-
-    public void setStreetAddress(String streetAddress) {
-        this.streetAddress = streetAddress;
-    }
-
     public String getDialCode() {
         return dialCode;
     }
@@ -117,12 +95,12 @@ public class Address implements CustomEntity {
         this.dialCode = dialCode;
     }
 
-    public String getName() {
-        return name;
+    public String getPostalCode() {
+        return postalCode;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
     }
 
     public String getExternalId() {
@@ -133,20 +111,52 @@ public class Address implements CustomEntity {
         this.externalId = externalId;
     }
 
-    public String getState() {
-        return state;
-    }
-
-    public void setState(String state) {
-        this.state = state;
-    }
-
     public String getType() {
         return type;
     }
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public Boolean getIsDefault() {
+        return isDefault;
+    }
+
+    public void setIsDefault(Boolean isDefault) {
+        this.isDefault = isDefault;
+    }
+
+    public VerifiedPhoneNumber getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(VerifiedPhoneNumber phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getStreetAddress() {
+        return streetAddress;
+    }
+
+    public void setStreetAddress(String streetAddress) {
+        this.streetAddress = streetAddress;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
     }
 
     public Double getLongitude() {
