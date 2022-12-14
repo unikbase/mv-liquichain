@@ -4,46 +4,5 @@
     "$schema": "http://json-schema.org/draft-07/schema",
     "id": "VerifiedPhoneNumber",
     "title": "Verified Phone Number",
-    "type": "object",
-    "properties": {
-        "walletId": {
-            "storages": ["SQL"],
-            "nullable": false,
-            "minLength": 1,
-            "description": "Associated Wallet ID",
-            "readOnly": false,
-            "versionable": false,
-            "id": "CE_VerifiedPhoneNumber_walletId",
-            "title": "VerifiedPhoneNumber.walletId",
-            "type": "string",
-            "maxLength": 255
-        },
-        "phoneNumber": {
-            "storages": ["SQL"],
-            "nullable": false,
-            "minLength": 1,
-            "description": "Phone Number",
-            "readOnly": false,
-            "versionable": false,
-            "id": "CE_VerifiedPhoneNumber_phoneNumber",
-            "title": "VerifiedPhoneNumber.phoneNumber",
-            "type": "string",
-            "maxLength": 255
-        },
-        "verified": {
-            "storages": ["SQL"],
-            "default": "false",
-            "nullable": true,
-            "description": "Verified",
-            "readOnly": false,
-            "versionable": false,
-            "id": "CE_VerifiedPhoneNumber_verified",
-            "title": "VerifiedPhoneNumber.verified",
-            "type": "boolean"
-        }
-    },
-    "required": [
-        "phoneNumber",
-        "walletId"
-    ]
+    "type": "object"
 }
