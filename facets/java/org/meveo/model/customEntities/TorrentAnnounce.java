@@ -22,6 +22,8 @@ public class TorrentAnnounce implements CustomEntity {
 
     private Instant lastAnnounceDate;
 
+    private Double longitude;
+
     private String status;
 
     @Override()
@@ -47,6 +49,14 @@ public class TorrentAnnounce implements CustomEntity {
 
     public void setLastAnnounceDate(Instant lastAnnounceDate) {
         this.lastAnnounceDate = lastAnnounceDate;
+    }
+
+    public Double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
     }
 
     public String getStatus() {
