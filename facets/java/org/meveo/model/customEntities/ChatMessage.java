@@ -19,6 +19,8 @@ public class ChatMessage implements CustomEntity {
     @JsonIgnore()
     private DBStorageType storages;
 
+    private String message;
+
     @Override()
     public String getUuid() {
         return uuid;
@@ -34,6 +36,14 @@ public class ChatMessage implements CustomEntity {
 
     public void setStorages(DBStorageType storages) {
         this.storages = storages;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     @Override()
