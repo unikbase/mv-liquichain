@@ -16,6 +16,16 @@
             "title": "ChatMessage.sender",
             "$ref": "#/definitions/Wallet"
         },
+        "chatConversation": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "ChatConversation Reference",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_ChatMessage_chatConversation",
+            "title": "ChatMessage.chatConversation",
+            "$ref": "#/definitions/ChatConversation"
+        },
         "creationDate": {
             "storages": ["SQL"],
             "nullable": true,
