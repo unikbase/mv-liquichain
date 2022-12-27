@@ -1,46 +1,65 @@
-const updateUserConfigurations = async (parameters) =>  {
-	const baseUrl = window.location.origin;
-	const url = new URL(`${window.location.pathname.split('/')[1]}/rest/updateUserConfigurations/`, baseUrl);
-	return fetch(url.toString(), {
-		method: 'POST', 
-		headers : new Headers({
- 			'Content-Type': 'application/json'
-		}),
-		body: JSON.stringify({
-			walletId : parameters.walletId,
-			configs : parameters.configs
-		})
-	});
+import EndpointInterface from "#{API_BASE_URL}/api/rest/endpoint/EndpointInterface.js";
+
+// the request schema, this should be updated
+// whenever changes to the endpoint parameters are made
+// this is important because this is used to validate and parse the request parameters
+const requestSchema = {
+  "title" : "updateUserConfigurationsRequest",
+  "id" : "updateUserConfigurationsRequest",
+  "default" : "Schema definition for updateUserConfigurations",
+  "$schema" : "http://json-schema.org/draft-07/schema",
+  "type" : "object",
+  "properties" : {
+    "walletId" : {
+      "title" : "walletId",
+      "type" : "string",
+      "minLength" : 1
+    },
+    "configs" : {
+      "title" : "configs",
+      "type" : "string",
+      "minLength" : 1
+    }
+  }
 }
 
-const updateUserConfigurationsForm = (container) => {
-	const html = `<form id='updateUserConfigurations-form'>
-		<div id='updateUserConfigurations-walletId-form-field'>
-			<label for='walletId'>walletId</label>
-			<input type='text' id='updateUserConfigurations-walletId-param' name='walletId'/>
-		</div>
-		<div id='updateUserConfigurations-configs-form-field'>
-			<label for='configs'>configs</label>
-			<input type='text' id='updateUserConfigurations-configs-param' name='configs'/>
-		</div>
-		<button type='button'>Test</button>
-	</form>`;
-
-	container.insertAdjacentHTML('beforeend', html)
-
-	const walletId = container.querySelector('#updateUserConfigurations-walletId-param');
-	const configs = container.querySelector('#updateUserConfigurations-configs-param');
-
-	container.querySelector('#updateUserConfigurations-form button').onclick = () => {
-		const params = {
-			walletId : walletId.value !== "" ? walletId.value : undefined,
-			configs : configs.value !== "" ? configs.value : undefined
-		};
-
-		updateUserConfigurations(params).then(r => r.text().then(
-				t => alert(t)
-			));
-	};
+// the response schema, this should be updated
+// whenever changes to the endpoint parameters are made
+// this is important because this could be used to parse the result
+const responseSchema = {
+  "title" : "updateUserConfigurationsResponse",
+  "id" : "updateUserConfigurationsResponse",
+  "default" : "Schema definition for updateUserConfigurations",
+  "$schema" : "http://json-schema.org/draft-07/schema",
+  "type" : "object",
+  "properties" : {
+    "result" : {
+      "title" : "result",
+      "type" : "string",
+      "minLength" : 1
+    }
+  }
 }
 
-export { updateUserConfigurations, updateUserConfigurationsForm };
+// should contain offline mock data, make sure it adheres to the response schema
+const mockResult = {};
+
+class updateUserConfigurations extends EndpointInterface {
+	constructor() {
+		// name and http method, these are inserted when code is generated
+		super("updateUserConfigurations", "POST");
+		this.requestSchema = requestSchema;
+		this.responseSchema = responseSchema;
+		this.mockResult = mockResult;
+	}
+
+	getRequestSchema() {
+		return this.requestSchema;
+	}
+
+	getResponseSchema() {
+		return this.responseSchema;
+	}
+}
+
+export default new updateUserConfigurations();
