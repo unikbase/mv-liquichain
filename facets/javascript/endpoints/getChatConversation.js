@@ -1,33 +1,53 @@
-const getChatConversation = async (parameters) =>  {
-	const baseUrl = window.location.origin;
-	const url = new URL(`${window.location.pathname.split('/')[1]}/rest/getChatConversation/${parameters.uuId}`, baseUrl);
-	return fetch(url.toString(), {
-		method: 'GET'
-	});
+import EndpointInterface from "#{API_BASE_URL}/api/rest/endpoint/EndpointInterface.js";
+
+// the request schema, this should be updated
+// whenever changes to the endpoint parameters are made
+// this is important because this is used to validate and parse the request parameters
+const requestSchema = {
+  "title" : "getChatConversationRequest",
+  "id" : "getChatConversationRequest",
+  "default" : "Schema definition for getChatConversation",
+  "$schema" : "http://json-schema.org/draft-07/schema",
+  "type" : "object"
 }
 
-const getChatConversationForm = (container) => {
-	const html = `<form id='getChatConversation-form'>
-		<div id='getChatConversation-uuId-form-field'>
-			<label for='uuId'>uuId</label>
-			<input type='text' id='getChatConversation-uuId-param' name='uuId'/>
-		</div>
-		<button type='button'>Test</button>
-	</form>`;
-
-	container.insertAdjacentHTML('beforeend', html)
-
-	const uuId = container.querySelector('#getChatConversation-uuId-param');
-
-	container.querySelector('#getChatConversation-form button').onclick = () => {
-		const params = {
-			uuId : uuId.value !== "" ? uuId.value : undefined
-		};
-
-		getChatConversation(params).then(r => r.text().then(
-				t => alert(t)
-			));
-	};
+// the response schema, this should be updated
+// whenever changes to the endpoint parameters are made
+// this is important because this could be used to parse the result
+const responseSchema = {
+  "title" : "getChatConversationResponse",
+  "id" : "getChatConversationResponse",
+  "default" : "Schema definition for getChatConversation",
+  "$schema" : "http://json-schema.org/draft-07/schema",
+  "type" : "object",
+  "properties" : {
+    "result" : {
+      "title" : "result",
+      "type" : "string",
+      "minLength" : 1
+    }
+  }
 }
 
-export { getChatConversation, getChatConversationForm };
+// should contain offline mock data, make sure it adheres to the response schema
+const mockResult = {};
+
+class getChatConversation extends EndpointInterface {
+	constructor() {
+		// name and http method, these are inserted when code is generated
+		super("getChatConversation", "GET");
+		this.requestSchema = requestSchema;
+		this.responseSchema = responseSchema;
+		this.mockResult = mockResult;
+	}
+
+	getRequestSchema() {
+		return this.requestSchema;
+	}
+
+	getResponseSchema() {
+		return this.responseSchema;
+	}
+}
+
+export default new getChatConversation();
