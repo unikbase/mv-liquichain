@@ -101,7 +101,8 @@ public class GetBlockUser extends Script {
                 	if(publicInfoObj.get("avatar")!=null && publicInfoObj.get("avatar").getAsInt()!=0){
                     	userObj.addProperty("avatar",publicInfoObj.get("avatar").getAsInt());  
                     }
-                	if(publicInfoObj.get("base64Avatar")!=null && StringUtils.isNotBlank(publicInfoObj.get("base64Avatar").getAsString())){
+                	if(publicInfoObj.get("base64Avatar")!=null && !publicInfoObj.get("base64Avatar").isJsonNull()
+                    	&& StringUtils.isNotBlank(publicInfoObj.get("base64Avatar").getAsString())){
                     	userObj.addProperty("base64Avatar",publicInfoObj.get("base64Avatar").getAsString());  
                     }                  
                 }
