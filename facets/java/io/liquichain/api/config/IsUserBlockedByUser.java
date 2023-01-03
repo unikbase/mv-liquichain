@@ -99,7 +99,7 @@ public class IsUserBlockedByUser extends Script {
       		JsonObject userObj = new JsonObject();
           	
           	userObj.addProperty("blockerWalletId",blockerWalletId);
-          	userObj.addProperty("isBlocked",blockedUsers.stream().anyMatch(u -> u.getWallet().getUuid().equals(blockerWalletId)));
+          	userObj.addProperty("blocked",blockedUsers.stream().anyMatch(u -> u.getWallet().getUuid().equals(blockerWalletId)));
           
           	responseObj.add(userObj);
         }
