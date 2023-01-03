@@ -1,0 +1,22 @@
+{
+  "code" : "io.liquichain.api.config.IsUserBlockedByUser",
+  "description" : "Is User Blocked By Users",
+  "inputs" : [ {
+    "name" : "walletId",
+    "type" : "String"
+  }, {
+    "name" : "blockerWalletIds",
+    "type" : "List<String>"
+  } ],
+  "outputs" : [ {
+    "name" : "result",
+    "type" : "String"
+  } ],
+  "generateOutputs" : false,
+  "type" : "JAVA",
+  "transactionType" : "SAME",
+  "executionRoles" : [ ],
+  "sourcingRoles" : [ ],
+  "mavenDependencies" : [ ],
+  "importScriptInstances" : [ ]
+}
