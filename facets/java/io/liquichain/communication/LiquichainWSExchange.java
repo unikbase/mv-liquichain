@@ -73,8 +73,20 @@ public class LiquichainWSExchange extends Script {
         String account = (String) message.get("account");
         session.getUserProperties().put("username", account);
         websocketServerEndpoint.consumeUserMessages(session, "liquichain_" + account);
+      	
+        //== send confirmation message back
+      	log.info("sending registration confirmation message");
+      	sendConfirmationMessage(message,parameters);
     }
-
+  
+  	private void sendConfirmationMessage(Map<String, Object> message, Map<String, Object> parameters) throws BusinessException {
+        String account = (String) message.get("account");      
+  	  	String confirmationMsg = "{ \"status\" : \"success\" , \"action\" : \"register\"}";
+      	message.put("message",confirmationMsg);
+      	message.put("to",account);
+      	message.put("persistMessage",false);
+      	sendMessage(message,parameters);      
+    }
 
     public void sendMessage(Map<String, Object> message, Map<String, Object> parameters) throws BusinessException {
         String destination = (String) message.get("to");
