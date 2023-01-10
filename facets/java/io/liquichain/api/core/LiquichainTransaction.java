@@ -156,8 +156,7 @@ public class LiquichainTransaction extends Script {
     }
 
     private Optional<TransactionReceipt> getTransactionReceipt(String transactionHash) throws Exception {
-        Optional<TransactionReceipt> receiptOptional =
-            sendTransactionReceiptRequest(transactionHash);
+        Optional<TransactionReceipt> receiptOptional = sendTransactionReceiptRequest(transactionHash);
         for (int i = 0; i < ATTEMPTS; i++) {
             if (!receiptOptional.isPresent()) {
                 Thread.sleep(SLEEP_DURATION);
@@ -170,9 +169,7 @@ public class LiquichainTransaction extends Script {
     }
 
     private TransactionReceipt waitForTransactionReceipt(String transactionHash) throws Exception {
-        Optional<TransactionReceipt> transactionReceiptOptional =
-            getTransactionReceipt(transactionHash);
-
+        Optional<TransactionReceipt> transactionReceiptOptional = getTransactionReceipt(transactionHash);
         if (!transactionReceiptOptional.isPresent()) {
             throw new BusinessException(
                 "Transaction receipt not generated after " + ATTEMPTS + " attempts");
@@ -422,10 +419,16 @@ public class LiquichainTransaction extends Script {
 
     public String transferSmartContract(String from, String to, BigInteger amount, String type, String description,
         String message, String initiator) throws Exception {
+        return this.transferSmartContract(0, from, to, amount, type, description, message, initiator);
+    }
+
+    public String transferSmartContract(int tokenId, String from, String to, BigInteger amount, String type,
+        String description,
+        String message, String initiator) throws Exception {
         String sender = normalizeHash(from);
         String recipient = normalizeHash(to);
 
-        LOG.info("transfer amount:{} to:{}", amount, toHexHash(to));
+        LOG.info("transfer amount: {} to: {}", amount, toHexHash(to));
 
         Wallet fromWallet = crossStorageApi.find(defaultRepo, sender, Wallet.class);
         Wallet toWallet = crossStorageApi.find(defaultRepo, recipient, Wallet.class);
@@ -434,15 +437,18 @@ public class LiquichainTransaction extends Script {
 
         String privateKey = fromWallet.getPrivateKey();
         Credentials credentials = Credentials.create(privateKey);
-        BigInteger balance = BigInteger.ZERO;
-
         RawTransactionManager manager = new RawTransactionManager(web3j, credentials);
-
         LOG.info("raw transaction manager created");
+
+        BigInteger balance = BigInteger.ZERO;
 
         Function function = new Function(
             "transfer",
-            Arrays.asList(new Address(toHexHash(to)), new Uint256(amount)),
+            Arrays.asList(
+                new Address(toHexHash(to)),
+                new Uint256(tokenId),
+                new Uint256(amount)
+            ),
             List.of(new TypeReference<Bool>() {
             }));
         String data = FunctionEncoder.encode(function);
