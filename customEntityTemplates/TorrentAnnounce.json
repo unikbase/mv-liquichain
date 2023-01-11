@@ -1,0 +1,12 @@
+{
+  "code" : "TorrentAnnounce",
+  "name" : "Announce",
+  "description" : "A peer announce",
+  "customEntityCategoryCode" : "liquichain",
+  "availableStorages" : [ "SQL" ],
+  "sqlStorageConfiguration" : {
+    "storeAsTable" : true
+  },
+  "samples" : [ ],
+  "audited" : false
+}

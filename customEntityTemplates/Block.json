@@ -1,0 +1,12 @@
+{
+  "code" : "Block",
+  "name" : "Block",
+  "description" : "block",
+  "customEntityCategoryCode" : "liquichain",
+  "availableStorages" : [ "SQL" ],
+  "sqlStorageConfiguration" : {
+    "storeAsTable" : true
+  },
+  "samples" : [ ],
+  "audited" : false
+}

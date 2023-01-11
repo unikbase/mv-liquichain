@@ -1,0 +1,12 @@
+{
+  "code" : "VerifiedEmail",
+  "name" : "Verified Email",
+  "description" : "Verified Email for Wallet",
+  "customEntityCategoryCode" : "liquichain",
+  "availableStorages" : [ "SQL" ],
+  "sqlStorageConfiguration" : {
+    "storeAsTable" : true
+  },
+  "samples" : [ ],
+  "audited" : false
+}

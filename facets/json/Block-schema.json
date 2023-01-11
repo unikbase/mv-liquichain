@@ -1,0 +1,65 @@
+{
+    "storages": ["SQL"],
+    "default": "block",
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "id": "Block",
+    "title": "Block",
+    "type": "object",
+    "properties": {
+        "size": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "size",
+            "readOnly": true,
+            "versionable": false,
+            "id": "CE_Block_size",
+            "title": "Block.size",
+            "type": "integer"
+        },
+        "blockNumber": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "block number",
+            "maximum": 10000000,
+            "readOnly": true,
+            "versionable": false,
+            "id": "CE_Block_blockNumber",
+            "title": "Block.blockNumber",
+            "type": "integer",
+            "minimum": 0
+        },
+        "creationDate": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "format": "date-time",
+            "description": "creation Date",
+            "readOnly": true,
+            "versionable": false,
+            "id": "CE_Block_creationDate",
+            "title": "Block.creationDate",
+            "type": "string"
+        },
+        "parentHash": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "parent hash",
+            "readOnly": true,
+            "versionable": false,
+            "id": "CE_Block_parentHash",
+            "title": "Block.parentHash",
+            "type": "string",
+            "maxLength": 64
+        },
+        "hash": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "hash",
+            "readOnly": true,
+            "versionable": false,
+            "id": "CE_Block_hash",
+            "title": "Block.hash",
+            "type": "string",
+            "maxLength": 64
+        }
+    }
+}

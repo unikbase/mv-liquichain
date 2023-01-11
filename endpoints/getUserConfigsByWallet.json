@@ -1,0 +1,25 @@
+{
+  "code" : "getUserConfigsByWallet",
+  "description" : "Get User's Configurations by Wallet Id",
+  "secured" : true,
+  "checkPathParams" : true,
+  "serviceCode" : "io.liquichain.api.config.GetUserConfigsByWalletId",
+  "synchronous" : true,
+  "method" : "GET",
+  "parameterMappings" : [ {
+    "serviceParameter" : "walletId",
+    "multivalued" : false,
+    "parameterName" : "walletId",
+    "valueRequired" : false
+  } ],
+  "pathParameters" : [ ],
+  "roles" : [ ],
+  "returnedVariableName" : "result",
+  "serializeResult" : false,
+  "contentType" : "application/json",
+  "basePath" : "user",
+  "path" : "/config",
+  "pool" : {
+    "usePool" : false
+  }
+}

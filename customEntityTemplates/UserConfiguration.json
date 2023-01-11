@@ -1,0 +1,12 @@
+{
+  "code" : "UserConfiguration",
+  "name" : "User Configurations",
+  "description" : "User's Configurations",
+  "customEntityCategoryCode" : "liquichain",
+  "availableStorages" : [ "SQL" ],
+  "sqlStorageConfiguration" : {
+    "storeAsTable" : true
+  },
+  "samples" : [ ],
+  "audited" : false
+}

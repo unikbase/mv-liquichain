@@ -1,0 +1,19 @@
+{
+  "code" : "io.liquichain.api.notification.GetNotificationsByWallet",
+  "description" : "Get notifications by wallet",
+  "inputs" : [ {
+    "name" : "walletId",
+    "type" : "String"
+  } ],
+  "outputs" : [ {
+    "name" : "result",
+    "type" : "Map<String,Object>"
+  } ],
+  "generateOutputs" : false,
+  "type" : "JAVA",
+  "transactionType" : "SAME",
+  "executionRoles" : [ ],
+  "sourcingRoles" : [ ],
+  "mavenDependencies" : [ ],
+  "importScriptInstances" : [ ]
+}

@@ -1,0 +1,13 @@
+{
+  "code" : "io.liquichain.communication.LiquichainWSExchange",
+  "description" : "Liquichain Websocket exchange",
+  "inputs" : [ ],
+  "outputs" : [ ],
+  "generateOutputs" : false,
+  "type" : "JAVA",
+  "transactionType" : "SAME",
+  "executionRoles" : [ ],
+  "sourcingRoles" : [ ],
+  "mavenDependencies" : [ ],
+  "importScriptInstances" : [ ]
+}

@@ -1,0 +1,12 @@
+{
+  "code" : "ChatConversation",
+  "name" : "Chat Conversation",
+  "description" : "Chat Conversation",
+  "customEntityCategoryCode" : "liquichain",
+  "availableStorages" : [ "SQL" ],
+  "sqlStorageConfiguration" : {
+    "storeAsTable" : true
+  },
+  "samples" : [ ],
+  "audited" : false
+}

@@ -1,0 +1,12 @@
+{
+  "code" : "LiquichainApp",
+  "name" : "Application",
+  "description" : "Application",
+  "customEntityCategoryCode" : "liquichain",
+  "availableStorages" : [ "SQL" ],
+  "sqlStorageConfiguration" : {
+    "storeAsTable" : true
+  },
+  "samples" : [ ],
+  "audited" : false
+}

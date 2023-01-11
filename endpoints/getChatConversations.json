@@ -1,0 +1,20 @@
+{
+  "code" : "getChatConversations",
+  "description" : "Get Chat Conversations by Wallet",
+  "secured" : true,
+  "checkPathParams" : true,
+  "serviceCode" : "io.liquichain.communication.GetChatConversations",
+  "synchronous" : true,
+  "method" : "GET",
+  "parameterMappings" : [ ],
+  "pathParameters" : [ "walletId" ],
+  "roles" : [ ],
+  "returnedVariableName" : "result",
+  "serializeResult" : false,
+  "contentType" : "application/json",
+  "basePath" : "getChatConversations",
+  "path" : "/{walletId}",
+  "pool" : {
+    "usePool" : false
+  }
+}

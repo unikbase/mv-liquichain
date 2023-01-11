@@ -1,0 +1,25 @@
+{
+  "code" : "io.liquichain.api.config.BlockUser",
+  "description" : "Block User Script",
+  "inputs" : [ {
+    "name" : "walletId",
+    "type" : "String"
+  }, {
+    "name" : "targetWalletId",
+    "type" : "String"
+  }, {
+    "name" : "blocked",
+    "type" : "Boolean"
+  } ],
+  "outputs" : [ {
+    "name" : "result",
+    "type" : "String"
+  } ],
+  "generateOutputs" : false,
+  "type" : "JAVA",
+  "transactionType" : "SAME",
+  "executionRoles" : [ ],
+  "sourcingRoles" : [ ],
+  "mavenDependencies" : [ ],
+  "importScriptInstances" : [ ]
+}

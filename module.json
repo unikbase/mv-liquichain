@@ -1,0 +1,10 @@
+{
+  "code" : "mv-liquichain",
+  "description" : "Liquichain accounts",
+  "license" : "GPL",
+  "currentVersion" : "0.22",
+  "isInDraft" : true,
+  "autoCommit" : false,
+  "moduleDependencies" : [ ],
+  "moduleFiles" : [ ]
+}
