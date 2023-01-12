@@ -11,7 +11,6 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "033626ad-c9e4-46b0-8db2-4580f9764dc0",
 						"exec": [
 							"pm.test(\"response is ok\", function () {",
 							"    pm.response.to.have.status(200);",
@@ -100,7 +99,6 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "b9ae3ec7-fe62-4f3b-8d52-c4a39631cbf7",
 						"exec": [
 							"pm.test(\"response is ok\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -166,7 +164,6 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "b9ae3ec7-fe62-4f3b-8d52-c4a39631cbf7",
 						"exec": [
 							"pm.test(\"response is ok\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
@@ -241,10 +238,6 @@
 				},
 				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
 				"url": {
 					"raw": "{{protocol}}://{{hostname}}:{{port}}/{{webContext}}/rest/user/config?walletId=232ksdfdsf22",
 					"protocol": "{{protocol}}",
@@ -377,10 +370,6 @@
 				},
 				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
 				"url": {
 					"raw": "{{protocol}}://{{hostname}}:{{port}}/{{webContext}}/rest/user/contact-info",
 					"protocol": "{{protocol}}",
@@ -507,10 +496,6 @@
 				},
 				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
 				"url": {
 					"raw": "{{protocol}}://{{hostname}}:{{port}}/{{webContext}}/rest/user/block?walletId=7eccfe0285d41e0f9dcac901a0c2a191036839d2",
 					"protocol": "{{protocol}}",
@@ -641,14 +626,19 @@
 						}
 					]
 				},
-				"method": "GET",
+				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": ""
+					"raw": "{\r\n    \"walletId\":\"d2d8d851c15c3427cc7debf2038bbce0706903b6\",\r\n    \"blockers\":[\r\n        {\r\n            \"walletId\":\"0xd2d8d851c15c3427cc7debf2038bbce0706903b6\"\r\n        },{\r\n            \"walletId\":\"3890ee5b3cf5c7a4d483be4e1beef2e72d5732b4\"\r\n        }       \r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
 				},
 				"url": {
-					"raw": "{{protocol}}://{{hostname}}:{{port}}/{{webContext}}/rest/user/blocker/verify?walletId=0x58663a779353665bd46763f694bbb1b07cbfbd9f&blockerWalletIds=0xd2d8d851c15c3427cc7debf2038bbce0706903b6&blockerWalletIds=111",
+					"raw": "{{protocol}}://{{hostname}}:{{port}}/{{webContext}}/rest/user/blocker/verify",
 					"protocol": "{{protocol}}",
 					"host": [
 						"{{hostname}}"
@@ -664,15 +654,18 @@
 					"query": [
 						{
 							"key": "walletId",
-							"value": "0x58663a779353665bd46763f694bbb1b07cbfbd9f"
+							"value": "3890ee5b3cf5c7a4d483be4e1beef2e72d5732b4",
+							"disabled": true
 						},
 						{
 							"key": "blockerWalletIds",
-							"value": "0xd2d8d851c15c3427cc7debf2038bbce0706903b6"
+							"value": "d2d8d851c15c3427cc7debf2038bbce0706903b6",
+							"disabled": true
 						},
 						{
 							"key": "blockerWalletIds",
-							"value": "111"
+							"value": "111",
+							"disabled": true
 						}
 					]
 				}
