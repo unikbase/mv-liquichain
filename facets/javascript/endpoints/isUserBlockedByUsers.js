@@ -1,65 +1,46 @@
-import EndpointInterface from "#{API_BASE_URL}/api/rest/endpoint/EndpointInterface.js";
-
-// the request schema, this should be updated
-// whenever changes to the endpoint parameters are made
-// this is important because this is used to validate and parse the request parameters
-const requestSchema = {
-  "title" : "isUserBlockedByUsersRequest",
-  "id" : "isUserBlockedByUsersRequest",
-  "default" : "Schema definition for isUserBlockedByUsers",
-  "$schema" : "http://json-schema.org/draft-07/schema",
-  "type" : "object",
-  "properties" : {
-    "walletId" : {
-      "title" : "walletId",
-      "type" : "string",
-      "minLength" : 1
-    },
-    "blockers" : {
-      "title" : "blockers",
-      "type" : "string",
-      "minLength" : 1
-    }
-  }
+const isUserBlockedByUsers = async (parameters) =>  {
+	const baseUrl = window.location.origin;
+	const url = new URL(`${window.location.pathname.split('/')[1]}/rest/isUserBlockedByUsers/`, baseUrl);
+	return fetch(url.toString(), {
+		method: 'POST', 
+		headers : new Headers({
+ 			'Content-Type': 'application/json'
+		}),
+		body: JSON.stringify({
+			walletId : parameters.walletId,
+			blockers : parameters.blockers
+		})
+	});
 }
 
-// the response schema, this should be updated
-// whenever changes to the endpoint parameters are made
-// this is important because this could be used to parse the result
-const responseSchema = {
-  "title" : "isUserBlockedByUsersResponse",
-  "id" : "isUserBlockedByUsersResponse",
-  "default" : "Schema definition for isUserBlockedByUsers",
-  "$schema" : "http://json-schema.org/draft-07/schema",
-  "type" : "object",
-  "properties" : {
-    "result" : {
-      "title" : "result",
-      "type" : "string",
-      "minLength" : 1
-    }
-  }
+const isUserBlockedByUsersForm = (container) => {
+	const html = `<form id='isUserBlockedByUsers-form'>
+		<div id='isUserBlockedByUsers-walletId-form-field'>
+			<label for='walletId'>walletId</label>
+			<input type='text' id='isUserBlockedByUsers-walletId-param' name='walletId'/>
+		</div>
+		<div id='isUserBlockedByUsers-blockers-form-field'>
+			<label for='blockers'>blockers</label>
+			<input type='text' id='isUserBlockedByUsers-blockers-param' name='blockers'/>
+		</div>
+		<button type='button'>Test</button>
+	</form>`;
+
+	container.insertAdjacentHTML('beforeend', html)
+
+	const walletId = container.querySelector('#isUserBlockedByUsers-walletId-param');
+	const blockers = container.querySelector('#isUserBlockedByUsers-blockers-param');
+
+	container.querySelector('#isUserBlockedByUsers-form button').onclick = () => {
+		const params = {
+			walletId : walletId.value !== "" ? walletId.value : undefined,
+			blockers : blockers.value !== "" ? blockers.value : undefined
+		};
+
+		isUserBlockedByUsers(params).then(r => r.text().then(
+				t => alert(t)
+			));
+	};
 }
 
-// should contain offline mock data, make sure it adheres to the response schema
-const mockResult = {};
-
-class isUserBlockedByUsers extends EndpointInterface {
-	constructor() {
-		// name and http method, these are inserted when code is generated
-		super("isUserBlockedByUsers", "POST");
-		this.requestSchema = requestSchema;
-		this.responseSchema = responseSchema;
-		this.mockResult = mockResult;
-	}
-
-	getRequestSchema() {
-		return this.requestSchema;
-	}
-
-	getResponseSchema() {
-		return this.responseSchema;
-	}
-}
-
-export default new isUserBlockedByUsers();
+export { isUserBlockedByUsers, isUserBlockedByUsersForm };
