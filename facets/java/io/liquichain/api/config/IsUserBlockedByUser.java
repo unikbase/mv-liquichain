@@ -3,6 +3,7 @@ package io.liquichain.api.config;
 import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
@@ -19,8 +20,6 @@ import org.meveo.service.storage.RepositoryService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.google.gson.*;
-
 
 public class IsUserBlockedByUser extends Script {
     private static final Logger LOG = LoggerFactory.getLogger(IsUserBlockedByUser.class);
@@ -28,83 +27,84 @@ public class IsUserBlockedByUser extends Script {
     private final RepositoryService repositoryService = getCDIBean(RepositoryService.class);
     private final Repository defaultRepo = repositoryService.findDefaultRepository();
 
-	private Gson gson = new Gson();
-  
     private String walletId;
-  	private List<String> blockerWalletIds;
+  	private List<LinkedHashMap> blockers;  
+    private final Map<String, Object> result = new HashMap<>();
   
-    private String result;
 
-    public String getResult() {
+    public Map<String, Object> getResult() {
         return result;
     }
 
     public void setWalletId(String walletId) {
         this.walletId = walletId;
     }
-    public void setBlockerWalletIds(List<String> blockerWalletIds) {
-        this.blockerWalletIds = blockerWalletIds;
+    public void setBlockers(List<LinkedHashMap> blockers) {
+        this.blockers = blockers;
     }  
   
-  	private String returnError(String errorCode, String message) {
-        String res = "{\n";
-        res += "  \"error\": { \"code\" : \"" + errorCode + "\" , \"message\" : \"" + message + "\"}\n";
-        res += "}";
-        return res;
+    private void mapError(String errorCode, String message) {
+        LOG.error(message);
+        Map<String, String> errorMap = new HashMap<>() {{
+            put("code", errorCode);
+            put("message", message);
+        }};
+        result.put("error", errorMap);
     }
-
+  
+  
     @Override
     public void execute(Map<String, Object> parameters) throws BusinessException {
         super.execute(parameters);
       	
       	LOG.info("verify blockers of user - walletId = {}",walletId);
       	if(StringUtils.isBlank(walletId)){
-        	result = returnError("WALLET_ID_NOT_FOUND", "walletId not found.");
+        	mapError("WALLET_ID_NOT_FOUND", "walletId not found.");
 			return;        	
         }
       
-      	if(blockerWalletIds==null || blockerWalletIds.isEmpty()){
-        	result = returnError("BLOCKER_WALLET_IDS_NOT_FOUND", "blocker walletIds not found.");
+      	if(blockers==null || blockers.isEmpty()){
+        	mapError("BLOCKER_WALLET_IDS_NOT_FOUND", "blocker walletIds not found.");
 			return;          
         }
-      
-		walletId = (walletId.startsWith("0x") ? walletId.substring(2) : walletId).toLowerCase();
-        Wallet user = crossStorageApi.find(defaultRepo, Wallet.class).by("uuid", walletId).getResult(); 
-        if(user == null){
-        	result = returnError("USER_NOT_FOUND", "user not found against provided walletId.");
-			return;
-        }
-         
-      	for(int i=0; i<blockerWalletIds.size();i++){
-          	String blockerWalletId = blockerWalletIds.get(i);
-			blockerWalletIds.set(i,(blockerWalletId.startsWith("0x") ? blockerWalletId.substring(2) : blockerWalletId).toLowerCase());          
-        }
-    	  
-        /*List<Wallet> blockers = crossStorageApi.find(defaultRepo, Wallet.class).by("inList uuid", blockerWalletIds).getResults(); 
-        if(blockers == null || blockers.size()==0){
-        	result = returnError("BLOCKERS_NOT_FOUND", "blockers not found against provided blockerWalletIds.");
-			return;
-        }
-      	LOG.info("total valid blocker needs to verify = {}",blockers.size());
-      	*/
-      	List<BlockedUser> blockedUsers = crossStorageApi.find(defaultRepo, BlockedUser.class)
-          .by("inList wallet", blockerWalletIds)
-          .by("targetWallet", user)
-          .getResults();
-
-      
-      	JsonArray responseObj = new JsonArray();
-      	//== preparing the response
-      	for(String blockerWalletId : blockerWalletIds){
-      		JsonObject userObj = new JsonObject();
-          	
-          	userObj.addProperty("blockerWalletId",blockerWalletId);
-          	userObj.addProperty("blocked",blockedUsers.stream().anyMatch(u -> u.getWallet().getUuid().equals(blockerWalletId)));
-          
-          	responseObj.add(userObj);
-        }
-      	      
-      	result = "{\"status\" : \"success\", \"result\" : " + responseObj.toString() + "}";
+      	//== mapping blocked users data
+      	mapBlockersData();
     }
-
+  
+  	private void mapBlockersData(){
+    	try{
+			walletId = (walletId.startsWith("0x") ? walletId.substring(2) : walletId).toLowerCase();
+        	Wallet user = crossStorageApi.find(defaultRepo, Wallet.class).by("uuid", walletId).getResult(); 
+        	if(user == null){
+        		mapError("USER_NOT_FOUND", "user not found against provided walletId.");
+				return;
+        	}
+        	List blockerWalletIds = new ArrayList<String>(); 
+      		for(LinkedHashMap blocker : blockers){
+          		String blockerWalletId = (String)blocker.get("walletId");
+          		if(StringUtils.isNotBlank(blockerWalletId)){
+              		blockerWalletId = (blockerWalletId.startsWith("0x") ? blockerWalletId.substring(2) : blockerWalletId).toLowerCase();
+					blocker.put("walletId",blockerWalletId);
+              		blockerWalletIds.add(blockerWalletId);
+           	 	}
+        	}
+    	  
+      		List<BlockedUser> blockedUsers = crossStorageApi.find(defaultRepo, BlockedUser.class)
+          	.by("inList wallet", blockerWalletIds)
+          	.by("targetWallet", user)
+          	.getResults();
+      
+      		//== preparing the response
+      		for(LinkedHashMap blocker: blockers){
+        		blocker.put("blocked",blockedUsers.stream().anyMatch(u -> u.getWallet().getUuid().equals((String)blocker.get("walletId"))));  
+        	}
+      	      
+      		result.put("status","success");
+      		result.put("result",blockers);        
+      	} catch(Exception e){
+            String errorMessage = "Error when creating the state [" + e.getMessage() + "]";
+            LOG.error(errorMessage, e);
+            mapError("STATE_CREATION_ERROR", errorMessage);          
+      	}
+    }
 }
