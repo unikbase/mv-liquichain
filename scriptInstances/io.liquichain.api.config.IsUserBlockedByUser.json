@@ -5,12 +5,12 @@
     "name" : "walletId",
     "type" : "String"
   }, {
-    "name" : "blockerWalletIds",
-    "type" : "List<String>"
+    "name" : "blockers",
+    "type" : "List<LinkedHashMap>"
   } ],
   "outputs" : [ {
     "name" : "result",
-    "type" : "String"
+    "type" : "Map<String,Object>"
   } ],
   "generateOutputs" : false,
   "type" : "JAVA",

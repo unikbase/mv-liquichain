@@ -8,7 +8,19 @@ const requestSchema = {
   "id" : "isUserBlockedByUsersRequest",
   "default" : "Schema definition for isUserBlockedByUsers",
   "$schema" : "http://json-schema.org/draft-07/schema",
-  "type" : "object"
+  "type" : "object",
+  "properties" : {
+    "walletId" : {
+      "title" : "walletId",
+      "type" : "string",
+      "minLength" : 1
+    },
+    "blockers" : {
+      "title" : "blockers",
+      "type" : "string",
+      "minLength" : 1
+    }
+  }
 }
 
 // the response schema, this should be updated
@@ -35,7 +47,7 @@ const mockResult = {};
 class isUserBlockedByUsers extends EndpointInterface {
 	constructor() {
 		// name and http method, these are inserted when code is generated
-		super("isUserBlockedByUsers", "GET");
+		super("isUserBlockedByUsers", "POST");
 		this.requestSchema = requestSchema;
 		this.responseSchema = responseSchema;
 		this.mockResult = mockResult;

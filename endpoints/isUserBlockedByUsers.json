@@ -5,20 +5,22 @@
   "checkPathParams" : true,
   "serviceCode" : "io.liquichain.api.config.IsUserBlockedByUser",
   "synchronous" : true,
-  "method" : "GET",
+  "method" : "POST",
   "parameterMappings" : [ {
     "serviceParameter" : "walletId",
     "multivalued" : false,
+    "parameterName" : "walletId",
     "valueRequired" : false
   }, {
-    "serviceParameter" : "blockerWalletIds",
+    "serviceParameter" : "blockers",
     "multivalued" : true,
+    "parameterName" : "blockers",
     "valueRequired" : false
   } ],
   "pathParameters" : [ ],
   "roles" : [ ],
   "returnedVariableName" : "result",
-  "serializeResult" : false,
+  "serializeResult" : true,
   "contentType" : "application/json",
   "basePath" : "user",
   "path" : "/blocker/verify",

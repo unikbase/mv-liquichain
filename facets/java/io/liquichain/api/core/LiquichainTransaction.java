@@ -80,7 +80,7 @@ public class LiquichainTransaction extends Script {
     private enum BLOCKCHAIN_TYPE {DATABASE, BESU_ONLY, FABRIC, BESU}
 
 
-    private BLOCKCHAIN_TYPE BLOCKCHAIN_BACKEND;
+    private BLOCKCHAIN_TYPE blockchainBackend;
 
     private String fromAddress;
     private String toAddress;
@@ -112,7 +112,7 @@ public class LiquichainTransaction extends Script {
         String besuApiUrl = config.getProperty("besu.api.url", "https://testnet.liquichain.io/rpc");
         this.web3j = Web3j.build(new HttpService(besuApiUrl));
         String blockchainType = config.getProperty("txn.blockchain.type", "BESU");
-        this.BLOCKCHAIN_BACKEND = BLOCKCHAIN_TYPE.valueOf(blockchainType);
+        this.blockchainBackend = BLOCKCHAIN_TYPE.valueOf(blockchainType);
     }
 
     public void setFromAddress(String fromAddress) {
@@ -156,7 +156,8 @@ public class LiquichainTransaction extends Script {
     }
 
     private Optional<TransactionReceipt> getTransactionReceipt(String transactionHash) throws Exception {
-        Optional<TransactionReceipt> receiptOptional = sendTransactionReceiptRequest(transactionHash);
+        Optional<TransactionReceipt> receiptOptional =
+            sendTransactionReceiptRequest(transactionHash);
         for (int i = 0; i < ATTEMPTS; i++) {
             if (!receiptOptional.isPresent()) {
                 Thread.sleep(SLEEP_DURATION);
@@ -169,7 +170,9 @@ public class LiquichainTransaction extends Script {
     }
 
     private TransactionReceipt waitForTransactionReceipt(String transactionHash) throws Exception {
-        Optional<TransactionReceipt> transactionReceiptOptional = getTransactionReceipt(transactionHash);
+        Optional<TransactionReceipt> transactionReceiptOptional =
+            getTransactionReceipt(transactionHash);
+
         if (!transactionReceiptOptional.isPresent()) {
             throw new BusinessException(
                 "Transaction receipt not generated after " + ATTEMPTS + " attempts");
@@ -412,18 +415,17 @@ public class LiquichainTransaction extends Script {
         return transactionHash;
     }
 
-    public String transferSmartContract(String from, String to, BigInteger amount, String type, String description,
-        String message, String initiator) throws Exception {
-        return this.transferSmartContract(0, from, to, amount, type, description, message, initiator);
+    public String transferSmartContract(String from, String to, BigInteger amount,
+        String type, String description, String message) throws Exception {
+        return this.transferSmartContract(from, to, amount, type, description, message, null);
     }
 
-    public String transferSmartContract(int tokenId, String from, String to, BigInteger amount, String type,
-        String description,
+    public String transferSmartContract(String from, String to, BigInteger amount, String type, String description,
         String message, String initiator) throws Exception {
         String sender = normalizeHash(from);
         String recipient = normalizeHash(to);
 
-        LOG.info("transfer amount: {} to: {}", amount, toHexHash(to));
+        LOG.info("transfer amount:{} to:{}", amount, toHexHash(to));
 
         Wallet fromWallet = crossStorageApi.find(defaultRepo, sender, Wallet.class);
         Wallet toWallet = crossStorageApi.find(defaultRepo, recipient, Wallet.class);
@@ -432,18 +434,15 @@ public class LiquichainTransaction extends Script {
 
         String privateKey = fromWallet.getPrivateKey();
         Credentials credentials = Credentials.create(privateKey);
-        RawTransactionManager manager = new RawTransactionManager(web3j, credentials);
-        LOG.info("raw transaction manager created");
-
         BigInteger balance = BigInteger.ZERO;
+
+        RawTransactionManager manager = new RawTransactionManager(web3j, credentials);
+
+        LOG.info("raw transaction manager created");
 
         Function function = new Function(
             "transfer",
-            Arrays.asList(
-                new Address(toHexHash(to)),
-                new Uint256(tokenId),
-                new Uint256(amount)
-            ),
+            Arrays.asList(new Address(toHexHash(to)), new Uint256(amount)),
             List.of(new TypeReference<Bool>() {
             }));
         String data = FunctionEncoder.encode(function);
@@ -544,7 +543,7 @@ public class LiquichainTransaction extends Script {
         String transactionHash;
         String recipientAddress = normalizeHash(to);
         String senderAddress = normalizeHash(from);
-        switch (BLOCKCHAIN_BACKEND) {
+        switch (blockchainBackend) {
             case BESU_ONLY:
                 transactionHash = transferBesu(
                     senderAddress,
