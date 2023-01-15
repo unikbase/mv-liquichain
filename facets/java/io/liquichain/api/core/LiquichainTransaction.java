@@ -80,7 +80,7 @@ public class LiquichainTransaction extends Script {
     private enum BLOCKCHAIN_TYPE {DATABASE, BESU_ONLY, FABRIC, BESU}
 
 
-    private BLOCKCHAIN_TYPE blockchainBackend;
+    private BLOCKCHAIN_TYPE BLOCKCHAIN_BACKEND;
 
     private String fromAddress;
     private String toAddress;
@@ -112,7 +112,7 @@ public class LiquichainTransaction extends Script {
         String besuApiUrl = config.getProperty("besu.api.url", "https://testnet.liquichain.io/rpc");
         this.web3j = Web3j.build(new HttpService(besuApiUrl));
         String blockchainType = config.getProperty("txn.blockchain.type", "BESU");
-        this.blockchainBackend = BLOCKCHAIN_TYPE.valueOf(blockchainType);
+        this.BLOCKCHAIN_BACKEND = BLOCKCHAIN_TYPE.valueOf(blockchainType);
     }
 
     public void setFromAddress(String fromAddress) {
@@ -412,11 +412,6 @@ public class LiquichainTransaction extends Script {
         return transactionHash;
     }
 
-    public String transferSmartContract(String from, String to, BigInteger amount,
-        String type, String description, String message) throws Exception {
-        return this.transferSmartContract(from, to, amount, type, description, message, null);
-    }
-
     public String transferSmartContract(String from, String to, BigInteger amount, String type, String description,
         String message, String initiator) throws Exception {
         return this.transferSmartContract(0, from, to, amount, type, description, message, initiator);
@@ -549,7 +544,7 @@ public class LiquichainTransaction extends Script {
         String transactionHash;
         String recipientAddress = normalizeHash(to);
         String senderAddress = normalizeHash(from);
-        switch (blockchainBackend) {
+        switch (BLOCKCHAIN_BACKEND) {
             case BESU_ONLY:
                 transactionHash = transferBesu(
                     senderAddress,
