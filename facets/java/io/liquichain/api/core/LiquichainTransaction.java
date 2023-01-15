@@ -418,8 +418,7 @@ public class LiquichainTransaction extends Script {
     }
 
     public String transferSmartContract(int tokenId, String from, String to, BigInteger amount, String type,
-        String description,
-        String message, String initiator) throws Exception {
+        String description, String message, String initiator) throws Exception {
         String sender = normalizeHash(from);
         String recipient = normalizeHash(to);
 
