@@ -4,18 +4,18 @@ import java.util.Map;
 
 import org.meveo.model.security.Role;
 import org.meveo.service.admin.impl.RoleService;
-import org.meveo.service.script.Script;
 import org.meveo.admin.exception.BusinessException;
 
+import org.meveo.service.script.module.ModuleScript;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class AddAppUserRole extends Script {
+public class AddAppUserRole extends ModuleScript {
     private static final Logger LOG = LoggerFactory.getLogger(AddAppUserRole.class);
     private final RoleService roleService = getCDIBean(RoleService.class);
 
     @Override
-    public void execute(Map<String, Object> parameters) throws BusinessException {
+    public void preInstallModule(Map<String, Object> methodContext) throws BusinessException {
         Role role = null;
         try {
             role = roleService.findByName("APP_USER");
