@@ -88,6 +88,16 @@
             "type": "integer",
             "minimum": 0
         },
+        "rawData": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "Raw data",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Transaction_rawData",
+            "title": "Transaction.rawData",
+            "type": "string"
+        },
         "creationDate": {
             "storages": ["SQL"],
             "indexType": "INDEX_NOT_ANALYZE",
