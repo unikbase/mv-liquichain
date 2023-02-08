@@ -35,6 +35,8 @@ public class Transaction implements CustomEntity {
 
     private Long transactionIndex;
 
+    private String rawData;
+
     private Instant creationDate;
 
     private String type;
@@ -134,6 +136,14 @@ public class Transaction implements CustomEntity {
 
     public void setTransactionIndex(Long transactionIndex) {
         this.transactionIndex = transactionIndex;
+    }
+
+    public String getRawData() {
+        return rawData;
+    }
+
+    public void setRawData(String rawData) {
+        this.rawData = rawData;
     }
 
     public Instant getCreationDate() {
