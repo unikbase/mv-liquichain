@@ -67,6 +67,16 @@
             "type": "string",
             "maxLength": 255
         },
+        "abi": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "Application Binary Interface (ABI)",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_LiquichainApp_abi",
+            "title": "LiquichainApp.abi",
+            "type": "string"
+        },
         "description": {
             "storages": ["SQL"],
             "nullable": true,
