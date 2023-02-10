@@ -1,7 +1,7 @@
 {
   "code" : "abi",
   "description" : "Application Binary Interface (ABI)",
-  "fieldType" : "LONG_TEXT",
+  "fieldType" : "TEXT_AREA",
   "accountLevel" : "CE_LiquichainApp",
   "appliesTo" : "CE_LiquichainApp",
   "useInheritedAsDefaultValue" : false,
