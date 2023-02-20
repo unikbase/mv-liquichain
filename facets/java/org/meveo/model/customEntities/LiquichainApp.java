@@ -3,6 +3,8 @@ package org.meveo.model.customEntities;
 import org.meveo.model.CustomEntity;
 import java.util.List;
 import org.meveo.model.persistence.DBStorageType;
+import java.util.Map;
+import java.util.HashMap;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.Instant;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -21,6 +23,8 @@ public class LiquichainApp implements CustomEntity {
     @JsonIgnore()
     private DBStorageType storages;
 
+    private Map<String, String> contractMethodHandlers = new HashMap<>();
+
     private String upgradeRules;
 
     private String hexCode;
@@ -29,6 +33,8 @@ public class LiquichainApp implements CustomEntity {
 
     @JsonProperty(required = true)
     private String name;
+
+    private String abi;
 
     private String description;
 
@@ -58,6 +64,14 @@ public class LiquichainApp implements CustomEntity {
 
     public void setStorages(DBStorageType storages) {
         this.storages = storages;
+    }
+
+    public Map<String, String> getContractMethodHandlers() {
+        return contractMethodHandlers;
+    }
+
+    public void setContractMethodHandlers(Map<String, String> contractMethodHandlers) {
+        this.contractMethodHandlers = contractMethodHandlers;
     }
 
     public String getUpgradeRules() {
@@ -90,6 +104,14 @@ public class LiquichainApp implements CustomEntity {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getAbi() {
+        return abi;
+    }
+
+    public void setAbi(String abi) {
+        this.abi = abi;
     }
 
     public String getDescription() {

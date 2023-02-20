@@ -98,15 +98,6 @@ public class CreateAddress extends Script {
     @Override
     public void execute(Map<String, Object> parameters) throws BusinessException {
         super.execute(parameters);
-        Address address = null;
-        try {
-            address = crossStorageApi.find(defaultRepo, Address.class)
-                                     .by("name", name)
-                                     .by("wallet", walletId)
-                                     .getResult();
-        } catch (Exception e) {
-            // ignore error, we want address to not exist
-        }
 
         Wallet wallet;
         try {
@@ -114,14 +105,6 @@ public class CreateAddress extends Script {
         } catch (Exception e) {
             String errorMessage = String.format("Wallet with id %s not found", walletId);
             LOG.error(errorMessage, e);
-            result.put("status", "fail");
-            result.put("result", errorMessage);
-            return;
-        }
-
-        if (address != null) {
-            String errorMessage = "Address named: " + name + " for wallet: " + walletId + " already exists.";
-            LOG.error(errorMessage);
             result.put("status", "fail");
             result.put("result", errorMessage);
             return;
@@ -156,7 +139,7 @@ public class CreateAddress extends Script {
             }
         }
 
-        address = new Address();
+        Address address = new Address();
         address.setName(name);
         address.setStreetAddress(streetAddress);
         address.setCity(city);
