@@ -49,6 +49,8 @@ public class Transaction implements CustomEntity {
 
     private String s;
 
+    private String assetId;
+
     private String v;
 
     private String blockNumber;
@@ -190,6 +192,14 @@ public class Transaction implements CustomEntity {
 
     public void setS(String s) {
         this.s = s;
+    }
+
+    public String getAssetId() {
+        return assetId;
+    }
+
+    public void setAssetId(String assetId) {
+        this.assetId = assetId;
     }
 
     public String getV() {
