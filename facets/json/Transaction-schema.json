@@ -170,6 +170,17 @@
             "type": "string",
             "maxLength": 64
         },
+        "assetId": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "Asset ID",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Transaction_assetId",
+            "title": "Transaction.assetId",
+            "type": "string",
+            "maxLength": 255
+        },
         "v": {
             "storages": ["SQL"],
             "indexType": "INDEX_NOT_ANALYZE",
