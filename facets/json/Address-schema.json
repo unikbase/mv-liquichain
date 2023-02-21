@@ -81,6 +81,28 @@
             "type": "string",
             "maxLength": 10
         },
+        "externalId": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "External Id",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Address_externalId",
+            "title": "Address.externalId",
+            "type": "string",
+            "maxLength": 255
+        },
+        "type": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "Type",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Address_type",
+            "title": "Address.type",
+            "type": "string",
+            "maxLength": 255
+        },
         "isDefault": {
             "storages": ["SQL"],
             "default": "false",

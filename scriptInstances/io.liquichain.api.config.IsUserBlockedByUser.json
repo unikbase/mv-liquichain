@@ -1,16 +1,16 @@
 {
-  "code" : "io.liquichain.api.config.UserConfigurationScript",
-  "description" : "Create Update user's configurations",
+  "code" : "io.liquichain.api.config.IsUserBlockedByUser",
+  "description" : "Is User Blocked By Users",
   "inputs" : [ {
     "name" : "walletId",
     "type" : "String"
   }, {
-    "name" : "configs",
-    "type" : "Map<String,Object>"
+    "name" : "blockers",
+    "type" : "List<LinkedHashMap>"
   } ],
   "outputs" : [ {
     "name" : "result",
-    "type" : "String"
+    "type" : "Map<String,Object>"
   } ],
   "generateOutputs" : false,
   "type" : "JAVA",

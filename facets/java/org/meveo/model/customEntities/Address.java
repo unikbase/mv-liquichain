@@ -35,6 +35,10 @@ public class Address implements CustomEntity {
 
     private String postalCode;
 
+    private String externalId;
+
+    private String type;
+
     private Boolean isDefault;
 
     private VerifiedPhoneNumber phoneNumber;
@@ -120,6 +124,22 @@ public class Address implements CustomEntity {
 
     public void setPostalCode(String postalCode) {
         this.postalCode = postalCode;
+    }
+
+    public String getExternalId() {
+        return externalId;
+    }
+
+    public void setExternalId(String externalId) {
+        this.externalId = externalId;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public Boolean getIsDefault() {

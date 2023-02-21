@@ -2,9 +2,23 @@
   "code" : "mv-liquichain",
   "description" : "Liquichain accounts",
   "license" : "GPL",
-  "currentVersion" : "0.22",
+  "script" : {
+    "code" : "io.liquichain.api.core.AddAppUserRole",
+    "description" : "Add APP_USER Role",
+    "inputs" : [ ],
+    "outputs" : [ ],
+    "generateOutputs" : false,
+    "type" : "JAVA",
+    "transactionType" : "SAME",
+    "script" : "package io.liquichain.api.core;\r\n\r\nimport java.util.Map;\r\n\r\nimport org.meveo.model.security.Role;\r\nimport org.meveo.service.admin.impl.RoleService;\r\nimport org.meveo.admin.exception.BusinessException;\r\nimport org.meveo.service.script.module.ModuleScript;\r\nimport org.slf4j.Logger;\r\nimport org.slf4j.LoggerFactory;\r\n\r\npublic class AddAppUserRole extends ModuleScript {\r\n    private static final Logger LOG = LoggerFactory.getLogger(AddAppUserRole.class);\r\n    private final RoleService roleService = getCDIBean(RoleService.class);\r\n\r\n    @Override\r\n    public void preInstallModule(Map<String, Object> methodContext) throws BusinessException {\r\n        Role role = null;\r\n        try {\r\n            role = roleService.findByName(\"APP_USER\");\r\n        } catch (Exception e) {\r\n            // do nothing, we will create if it does not exist.\r\n        }\r\n\r\n        if (role == null) {\r\n            role = new Role();\r\n            role.setName(\"APP_USER\");\r\n            role.setDescription(\"Role for Liquichain App secured endpoints \");\r\n\r\n            try {\r\n                roleService.create(role);\r\n            } catch (Exception e) {\r\n                LOG.error(\"Failed to add APP_USER role.\", e);\r\n            }\r\n        } else {\r\n            LOG.info(\"APP_USER role already exists.\");\r\n        }\r\n    }\r\n}\r\n",
+    "executionRoles" : [ ],
+    "sourcingRoles" : [ ],
+    "mavenDependencies" : [ ],
+    "importScriptInstances" : [ ]
+  },
+  "currentVersion" : "0.23",
   "isInDraft" : true,
-  "autoCommit" : false,
+  "autoCommit" : true,
   "moduleDependencies" : [ ],
   "moduleFiles" : [ ]
 }

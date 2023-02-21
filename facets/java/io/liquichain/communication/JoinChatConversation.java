@@ -56,14 +56,36 @@ public class JoinChatConversation extends Script {
             return;
         }
 
+        ChatConversationParticipant participant = null;
+
         try {
-            ChatConversationParticipant participant = new ChatConversationParticipant();
-            participant.setParticipant(participantWallet);
-            participant.setChatConversation(chatConversation);
+            participant = crossStorageApi.find(defaultRepo, ChatConversationParticipant.class)
+                    .by("participant", participantWallet)
+                    .by("chatConversation", chatConversation)
+                    .getResult();
 
-            String uuid = crossStorageApi.createOrUpdate(defaultRepo, participant);
+        } catch (Exception ex) {
+            String errorMessage = "Failed to find Chat Conversation participant";
+            LOG.error(errorMessage, ex);
+        }
 
-            LOG.info("Chat Conversation Participant created with Id: " + uuid);
+
+        try {
+            String uuid = null;
+
+            if (participant != null) {
+                uuid = participant.getUuid();
+                LOG.info("Exisiting Chat Conversation Participant found Id: " + uuid);
+            } else {
+                participant = new ChatConversationParticipant();
+                participant.setParticipant(participantWallet);
+                participant.setChatConversation(chatConversation);
+
+                uuid = crossStorageApi.createOrUpdate(defaultRepo, participant);
+
+                LOG.info("Chat Conversation Participant created with Id: " + uuid);
+            }
+
             result = "{\"status\": \"success\", \"result\": \"" + uuid + "\"}";
 
         } catch (Exception ex) {

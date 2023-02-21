@@ -80,7 +80,7 @@ public class LiquichainTransaction extends Script {
     private enum BLOCKCHAIN_TYPE {DATABASE, BESU_ONLY, FABRIC, BESU}
 
 
-    private BLOCKCHAIN_TYPE blockchainBackend;
+    private BLOCKCHAIN_TYPE BLOCKCHAIN_BACKEND;
 
     private String fromAddress;
     private String toAddress;
@@ -89,10 +89,6 @@ public class LiquichainTransaction extends Script {
 
     public LiquichainTransaction() {
         super();
-        this.crossStorageApi = getCDIBean(CrossStorageApi.class);
-        this.repositoryService = getCDIBean(RepositoryService.class);
-        this.paramBeanFactory = getCDIBean(ParamBeanFactory.class);
-        this.init();
     }
 
     public LiquichainTransaction(CrossStorageApi crossStorageApi, ParamBeanFactory paramBeanFactory,
@@ -116,7 +112,7 @@ public class LiquichainTransaction extends Script {
         String besuApiUrl = config.getProperty("besu.api.url", "https://testnet.liquichain.io/rpc");
         this.web3j = Web3j.build(new HttpService(besuApiUrl));
         String blockchainType = config.getProperty("txn.blockchain.type", "BESU");
-        this.blockchainBackend = BLOCKCHAIN_TYPE.valueOf(blockchainType);
+        this.BLOCKCHAIN_BACKEND = BLOCKCHAIN_TYPE.valueOf(blockchainType);
     }
 
     public void setFromAddress(String fromAddress) {
@@ -160,8 +156,7 @@ public class LiquichainTransaction extends Script {
     }
 
     private Optional<TransactionReceipt> getTransactionReceipt(String transactionHash) throws Exception {
-        Optional<TransactionReceipt> receiptOptional =
-            sendTransactionReceiptRequest(transactionHash);
+        Optional<TransactionReceipt> receiptOptional = sendTransactionReceiptRequest(transactionHash);
         for (int i = 0; i < ATTEMPTS; i++) {
             if (!receiptOptional.isPresent()) {
                 Thread.sleep(SLEEP_DURATION);
@@ -174,9 +169,7 @@ public class LiquichainTransaction extends Script {
     }
 
     private TransactionReceipt waitForTransactionReceipt(String transactionHash) throws Exception {
-        Optional<TransactionReceipt> transactionReceiptOptional =
-            getTransactionReceipt(transactionHash);
-
+        Optional<TransactionReceipt> transactionReceiptOptional = getTransactionReceipt(transactionHash);
         if (!transactionReceiptOptional.isPresent()) {
             throw new BusinessException(
                 "Transaction receipt not generated after " + ATTEMPTS + " attempts");
@@ -320,7 +313,7 @@ public class LiquichainTransaction extends Script {
         String completedTransactionHash = transactionReceipt.getTransactionHash();
         LOG.debug("completed transactionHash: {}", completedTransactionHash);
 
-//        updateWalletBalances(from, to);
+        //        updateWalletBalances(from, to);
 
         return completedTransactionHash;
     }
@@ -416,23 +409,20 @@ public class LiquichainTransaction extends Script {
         crossStorageApi.createOrUpdate(defaultRepo, transaction);
 
         // updateWalletBalances(from, to);
-
-        LOG.info("sending transaction notification");
-        CloudMessaging.sendNotification(crossStorageApi, defaultRepo, recipient, "Telecel Play", description);
         return transactionHash;
-    }
-
-    public String transferSmartContract(String from, String to, BigInteger amount,
-        String type, String description, String message) throws Exception {
-        return this.transferSmartContract(from, to, amount, type, description, message, null);
     }
 
     public String transferSmartContract(String from, String to, BigInteger amount, String type, String description,
         String message, String initiator) throws Exception {
+        return this.transferSmartContract(0, from, to, amount, type, description, message, initiator);
+    }
+
+    public String transferSmartContract(int tokenId, String from, String to, BigInteger amount, String type,
+        String description, String message, String initiator) throws Exception {
         String sender = normalizeHash(from);
         String recipient = normalizeHash(to);
 
-        LOG.info("transfer amount: {} to: {} from: {}", amount, recipient, sender);
+        LOG.info("transfer amount:{} to:{}", amount, toHexHash(to));
 
         Wallet fromWallet = crossStorageApi.find(defaultRepo, sender, Wallet.class);
         Wallet toWallet = crossStorageApi.find(defaultRepo, recipient, Wallet.class);
@@ -441,15 +431,18 @@ public class LiquichainTransaction extends Script {
 
         String privateKey = fromWallet.getPrivateKey();
         Credentials credentials = Credentials.create(privateKey);
-        BigInteger balance = BigInteger.ZERO;
-
         RawTransactionManager manager = new RawTransactionManager(web3j, credentials);
-
         LOG.info("raw transaction manager created");
+
+        BigInteger balance = BigInteger.ZERO;
 
         Function function = new Function(
             "transfer",
-            Arrays.asList(new Address(toHexHash(to)), new Uint256(amount)),
+            Arrays.asList(
+                new Address(toHexHash(to)),
+                new Uint256(tokenId),
+                new Uint256(amount)
+            ),
             List.of(new TypeReference<Bool>() {
             }));
         String data = FunctionEncoder.encode(function);
@@ -522,7 +515,12 @@ public class LiquichainTransaction extends Script {
         // updateWalletBalances(sender, recipient);
 
         LOG.info("sending transaction notification");
-        CloudMessaging.sendNotification(crossStorageApi, defaultRepo, recipient, "Telecel Play", message);
+        Map<String, String> notificationData = new HashMap<>() {{
+            put("type", CloudMessaging.formatType(type));
+        }};
+
+        CloudMessaging.sendNotification(crossStorageApi, defaultRepo, recipient, "Telecel Play", message,
+            notificationData);
         return transactionHash;
     }
 
@@ -545,7 +543,7 @@ public class LiquichainTransaction extends Script {
         String transactionHash;
         String recipientAddress = normalizeHash(to);
         String senderAddress = normalizeHash(from);
-        switch (blockchainBackend) {
+        switch (BLOCKCHAIN_BACKEND) {
             case BESU_ONLY:
                 transactionHash = transferBesu(
                     senderAddress,
@@ -581,7 +579,12 @@ public class LiquichainTransaction extends Script {
         }
 
         if (!transactionHash.isEmpty()) {
-            CloudMessaging.sendNotification(crossStorageApi, defaultRepo, recipientAddress, "Telecel Play", message);
+            Map<String, String> notificationData = new HashMap<>() {{
+                put("type", CloudMessaging.formatType(type));
+            }};
+
+            CloudMessaging.sendNotification(crossStorageApi, defaultRepo, recipientAddress, "Telecel Play", message,
+                notificationData);
         }
 
         return transactionHash;

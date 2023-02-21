@@ -6,6 +6,22 @@
     "title": "Application",
     "type": "object",
     "properties": {
+        "contractMethodHandlers": {
+            "storages": ["SQL"],
+            "patternProperties": {"^.*$": {
+                "id": "CE_LiquichainApp_contractMethodHandlers_item",
+                "title": "LiquichainApp.contractMethodHandlers item",
+                "type": "string",
+                "maxLength": 255
+            }},
+            "nullable": true,
+            "description": "Smart Contract method handlers",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_LiquichainApp_contractMethodHandlers",
+            "title": "LiquichainApp.contractMethodHandlers",
+            "type": "object"
+        },
         "upgradeRules": {
             "storages": ["SQL"],
             "nullable": true,
@@ -50,6 +66,16 @@
             "title": "LiquichainApp.name",
             "type": "string",
             "maxLength": 255
+        },
+        "abi": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "Application Binary Interface (ABI)",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_LiquichainApp_abi",
+            "title": "LiquichainApp.abi",
+            "type": "string"
         },
         "description": {
             "storages": ["SQL"],

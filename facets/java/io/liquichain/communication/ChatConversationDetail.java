@@ -92,8 +92,8 @@ public class ChatConversationDetail extends Script {
                 LocalDateTime.ofInstant(cc.getCreationDate(), ZoneId.systemDefault()).format(formatter), cc.getTitle());
 
         // fillup list to later call out one query and populate nested objects later to reduce overhead
-      	this.allWalletIds.addAll(conversationParticipantsList.stream().map(cp -> cp.getParticipant().getUuid()).collect(Collectors.toSet()));
-      	conversationParticipantsList.stream().forEach(cp -> { LOG.info(cp.getParticipant().getUuid()); } );
+      	this.allWalletIds.addAll(conversationParticipantsList.stream().filter(cp -> cp.getParticipant()!=null).map(cp -> cp.getParticipant().getUuid()).collect(Collectors.toSet()));
+      	conversationParticipantsList.stream().filter(cp -> cp.getParticipant()!=null).forEach(cp -> { LOG.info(cp.getParticipant().getUuid()); } );
       
         return uiChatConversation;
     }
@@ -114,7 +114,7 @@ class UiChatConversation {
         this.conversationGroupId = conversationGroupId;
         this.creationDate = creationDate;
         this.title = title;
-        this.participants = chatParticipants.stream().map(cp -> new UiChatConversationParticipant(cp.getUuid(), cp.getParticipant().getUuid())).collect(Collectors.toList());
+        this.participants = chatParticipants.stream().filter(cp -> cp!=null && cp.getParticipant()!=null).map(cp -> new UiChatConversationParticipant(cp.getUuid(), cp.getParticipant().getUuid())).collect(Collectors.toList());
     }
 
     public List<UiChatConversationParticipant> getParticipants() {

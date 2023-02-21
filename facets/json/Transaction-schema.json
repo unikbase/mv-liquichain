@@ -18,28 +18,6 @@
             "type": "string",
             "maxLength": 64
         },
-        "metadata": {
-            "storages": ["SQL"],
-            "nullable": true,
-            "description": "Metadata",
-            "readOnly": false,
-            "versionable": false,
-            "id": "CE_Transaction_metadata",
-            "title": "Transaction.metadata",
-            "type": "string",
-            "maxLength": 255
-        },
-        "redirectUrl": {
-            "storages": ["SQL"],
-            "nullable": true,
-            "description": "Redirect URL",
-            "readOnly": false,
-            "versionable": false,
-            "id": "CE_Transaction_redirectUrl",
-            "title": "Transaction.redirectUrl",
-            "type": "string",
-            "maxLength": 255
-        },
         "data": {
             "storages": ["SQL"],
             "indexType": "INDEX_NOT_ANALYZE",
@@ -61,17 +39,6 @@
             "versionable": false,
             "id": "CE_Transaction_nodeSignature",
             "title": "Transaction.nodeSignature",
-            "type": "string",
-            "maxLength": 255
-        },
-        "orderId": {
-            "storages": ["SQL"],
-            "nullable": true,
-            "description": "Order ID",
-            "readOnly": false,
-            "versionable": false,
-            "id": "CE_Transaction_orderId",
-            "title": "Transaction.orderId",
             "type": "string",
             "maxLength": 255
         },
@@ -98,17 +65,6 @@
             "type": "string",
             "maxLength": 40
         },
-        "description": {
-            "storages": ["SQL"],
-            "nullable": true,
-            "description": "Description",
-            "readOnly": false,
-            "versionable": false,
-            "id": "CE_Transaction_description",
-            "title": "Transaction.description",
-            "type": "string",
-            "maxLength": 255
-        },
         "transactionIndex": {
             "storages": ["SQL"],
             "indexType": "INDEX_NOT_ANALYZE",
@@ -121,100 +77,15 @@
             "type": "integer",
             "minimum": 0
         },
-        "type": {
+        "rawData": {
             "storages": ["SQL"],
             "nullable": true,
-            "description": "Type",
+            "description": "Raw data",
             "readOnly": false,
             "versionable": false,
-            "id": "CE_Transaction_type",
-            "title": "Transaction.type",
-            "type": "string",
-            "maxLength": 20
-        },
-        "gasLimit": {
-            "storages": ["SQL"],
-            "indexType": "INDEX_NOT_ANALYZE",
-            "nullable": true,
-            "description": "gas limit",
-            "readOnly": true,
-            "versionable": false,
-            "id": "CE_Transaction_gasLimit",
-            "title": "Transaction.gasLimit",
-            "type": "string",
-            "maxLength": 255
-        },
-        "hexHash": {
-            "storages": ["SQL"],
-            "indexType": "INDEX_NOT_ANALYZE",
-            "nullable": false,
-            "minLength": 1,
-            "description": "Hash in hexa (no \"0x\" prefix)",
-            "readOnly": true,
-            "versionable": false,
-            "id": "CE_Transaction_hexHash",
-            "title": "Transaction.hexHash",
-            "type": "string",
-            "maxLength": 500
-        },
-        "signedHash": {
-            "storages": ["SQL"],
-            "indexType": "INDEX_NOT_ANALYZE",
-            "nullable": false,
-            "minLength": 1,
-            "description": "signed hash",
-            "readOnly": true,
-            "versionable": false,
-            "id": "CE_Transaction_signedHash",
-            "title": "Transaction.signedHash",
-            "type": "string",
-            "maxLength": 10000
-        },
-        "currency": {
-            "storages": ["SQL"],
-            "nullable": true,
-            "description": "Currency",
-            "readOnly": false,
-            "versionable": false,
-            "id": "CE_Transaction_currency",
-            "title": "Transaction.currency",
-            "type": "string",
-            "maxLength": 255
-        },
-        "value": {
-            "storages": ["SQL"],
-            "indexType": "INDEX_NOT_ANALYZE",
-            "nullable": true,
-            "description": "value",
-            "readOnly": true,
-            "versionable": false,
-            "id": "CE_Transaction_value",
-            "title": "Transaction.value",
-            "type": "string",
-            "maxLength": 255
-        },
-        "expirationDate": {
-            "storages": ["SQL"],
-            "nullable": true,
-            "format": "date-time",
-            "description": "Expiration date",
-            "readOnly": false,
-            "versionable": false,
-            "id": "CE_Transaction_expirationDate",
-            "title": "Transaction.expirationDate",
+            "id": "CE_Transaction_rawData",
+            "title": "Transaction.rawData",
             "type": "string"
-        },
-        "gasPrice": {
-            "storages": ["SQL"],
-            "indexType": "INDEX_NOT_ANALYZE",
-            "nullable": true,
-            "description": "gas price",
-            "readOnly": true,
-            "versionable": false,
-            "id": "CE_Transaction_gasPrice",
-            "title": "Transaction.gasPrice",
-            "type": "string",
-            "maxLength": 255
         },
         "creationDate": {
             "storages": ["SQL"],
@@ -228,6 +99,17 @@
             "title": "Transaction.creationDate",
             "type": "string"
         },
+        "type": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "Type",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Transaction_type",
+            "title": "Transaction.type",
+            "type": "string",
+            "maxLength": 20
+        },
         "nonce": {
             "storages": ["SQL"],
             "indexType": "INDEX_NOT_ANALYZE",
@@ -240,14 +122,15 @@
             "type": "string",
             "maxLength": 255
         },
-        "webhookUrl": {
+        "gasLimit": {
             "storages": ["SQL"],
+            "indexType": "INDEX_NOT_ANALYZE",
             "nullable": true,
-            "description": "Webhook URL",
-            "readOnly": false,
+            "description": "gas limit",
+            "readOnly": true,
             "versionable": false,
-            "id": "CE_Transaction_webhookUrl",
-            "title": "Transaction.webhookUrl",
+            "id": "CE_Transaction_gasLimit",
+            "title": "Transaction.gasLimit",
             "type": "string",
             "maxLength": 255
         },
@@ -310,6 +193,56 @@
             "title": "Transaction.blockNumber",
             "type": "string",
             "maxLength": 16
+        },
+        "hexHash": {
+            "storages": ["SQL"],
+            "indexType": "INDEX_NOT_ANALYZE",
+            "nullable": false,
+            "minLength": 1,
+            "description": "Hash in hexa (no \"0x\" prefix)",
+            "readOnly": true,
+            "versionable": false,
+            "id": "CE_Transaction_hexHash",
+            "title": "Transaction.hexHash",
+            "type": "string",
+            "maxLength": 500
+        },
+        "signedHash": {
+            "storages": ["SQL"],
+            "indexType": "INDEX_NOT_ANALYZE",
+            "nullable": false,
+            "minLength": 1,
+            "description": "signed hash",
+            "readOnly": true,
+            "versionable": false,
+            "id": "CE_Transaction_signedHash",
+            "title": "Transaction.signedHash",
+            "type": "string",
+            "maxLength": 10000
+        },
+        "value": {
+            "storages": ["SQL"],
+            "indexType": "INDEX_NOT_ANALYZE",
+            "nullable": true,
+            "description": "value",
+            "readOnly": true,
+            "versionable": false,
+            "id": "CE_Transaction_value",
+            "title": "Transaction.value",
+            "type": "string",
+            "maxLength": 255
+        },
+        "gasPrice": {
+            "storages": ["SQL"],
+            "indexType": "INDEX_NOT_ANALYZE",
+            "nullable": true,
+            "description": "gas price",
+            "readOnly": true,
+            "versionable": false,
+            "id": "CE_Transaction_gasPrice",
+            "title": "Transaction.gasPrice",
+            "type": "string",
+            "maxLength": 255
         }
     },
     "required": [
