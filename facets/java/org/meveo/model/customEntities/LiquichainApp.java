@@ -1,6 +1,7 @@
 package org.meveo.model.customEntities;
 
 import org.meveo.model.CustomEntity;
+import java.io.Serializable;
 import java.util.List;
 import org.meveo.model.persistence.DBStorageType;
 import java.util.Map;
@@ -9,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.Instant;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-public class LiquichainApp implements CustomEntity {
+public class LiquichainApp implements CustomEntity, Serializable {
 
     public LiquichainApp() {
     }
