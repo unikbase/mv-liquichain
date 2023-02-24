@@ -1,13 +1,14 @@
 package org.meveo.model.customEntities;
 
 import org.meveo.model.CustomEntity;
+import java.io.Serializable;
 import java.util.List;
 import org.meveo.model.persistence.DBStorageType;
 import java.time.Instant;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-public class Transaction implements CustomEntity {
+public class Transaction implements CustomEntity, Serializable {
 
     public Transaction() {
     }
