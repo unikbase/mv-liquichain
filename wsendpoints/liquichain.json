@@ -1,6 +1,6 @@
 {
   "code" : "liquichain",
-  "description" : "liquichain exchange",
+  "description" : "liquichain exchang",
   "secured" : false,
   "serviceCode" : "io.liquichain.communication.LiquichainWSExchange",
   "roles" : [ ]
