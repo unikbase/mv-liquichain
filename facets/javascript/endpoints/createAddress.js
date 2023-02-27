@@ -66,9 +66,87 @@ const requestSchema = {
       "minLength" : 1
     },
     "state" : {
-      "title" : "state",
-      "type" : "string",
-      "minLength" : 1
+      "title" : "State",
+      "description" : "State",
+      "id" : "State",
+      "storages" : [ "SQL" ],
+      "type" : "object",
+      "properties" : {
+        "country" : {
+          "title" : "State.country",
+          "description" : "Country",
+          "id" : "CE_State_country",
+          "storages" : [ "SQL" ],
+          "nullable" : true,
+          "readOnly" : false,
+          "versionable" : false,
+          "$ref" : "#/definitions/org.meveo.model.billing.Country"
+        },
+        "stateName" : {
+          "title" : "State.stateName",
+          "description" : "StateName",
+          "id" : "CE_State_stateName",
+          "storages" : [ "SQL" ],
+          "nullable" : true,
+          "readOnly" : false,
+          "versionable" : false,
+          "type" : "string",
+          "maxLength" : 90
+        },
+        "active" : {
+          "title" : "State.active",
+          "description" : "Active",
+          "id" : "CE_State_active",
+          "storages" : [ "SQL" ],
+          "default" : "true",
+          "nullable" : true,
+          "readOnly" : false,
+          "versionable" : false,
+          "type" : "boolean"
+        },
+        "stateCode" : {
+          "title" : "State.stateCode",
+          "description" : "StateCode",
+          "id" : "CE_State_stateCode",
+          "storages" : [ "SQL" ],
+          "nullable" : true,
+          "readOnly" : false,
+          "versionable" : false,
+          "type" : "string",
+          "maxLength" : 6
+        },
+        "id" : {
+          "title" : "State.id",
+          "description" : "Id",
+          "id" : "CE_State_id",
+          "storages" : [ "SQL" ],
+          "nullable" : true,
+          "readOnly" : false,
+          "versionable" : false,
+          "type" : "integer"
+        },
+        "odooCountryId" : {
+          "title" : "State.odooCountryId",
+          "description" : "Odoo Country Id",
+          "id" : "CE_State_odooCountryId",
+          "storages" : [ "SQL" ],
+          "nullable" : true,
+          "readOnly" : false,
+          "versionable" : false,
+          "type" : "integer"
+        },
+        "countryStateUniqueHash" : {
+          "title" : "State.countryStateUniqueHash",
+          "description" : "Coutry State Unique Hash",
+          "id" : "CE_State_countryStateUniqueHash",
+          "storages" : [ "SQL" ],
+          "nullable" : true,
+          "readOnly" : false,
+          "versionable" : false,
+          "type" : "string",
+          "maxLength" : 255
+        }
+      }
     },
     "longitude" : {
       "title" : "longitude",
