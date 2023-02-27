@@ -27,7 +27,7 @@ public class IsUserBlockedByUser extends Script {
     private final Repository defaultRepo = repositoryService.findDefaultRepository();
 
     private String walletId;
-    private List<Map<String, Object>> blockers;
+    private List<Map> blockers;
     private final Map<String, Object> result = new HashMap<>();
 
 
@@ -39,7 +39,7 @@ public class IsUserBlockedByUser extends Script {
         this.walletId = walletId;
     }
 
-    public void setBlockers(List<Map<String, Object>> blockers) {
+    public void setBlockers(List<Map> blockers) {
         this.blockers = blockers;
     }
 
@@ -63,7 +63,6 @@ public class IsUserBlockedByUser extends Script {
             return;
         }
 
-        LOG.info("Checking if wallets: {}, have blocked the user", new Gson().toJson(blockers));
         if (blockers == null || blockers.isEmpty()) {
             mapError("BLOCKER_WALLET_IDS_NOT_FOUND", "blocker walletIds not found.");
             return;
@@ -86,7 +85,7 @@ public class IsUserBlockedByUser extends Script {
             }
 
             List<String> blockerWalletIds = new ArrayList<>();
-            for (Map<String, Object> blocker : blockers) {
+            for (Map blocker : blockers) {
                 String blockerId = "" + blocker.get("walletId");
                 if (StringUtils.isNotBlank(blockerId)) {
                     blockerId = normalize(blockerId);
@@ -102,7 +101,7 @@ public class IsUserBlockedByUser extends Script {
                                                             .getResults();
 
             //== preparing the response
-            for (Map<String, Object> blocker : blockers) {
+            for (Map blocker : blockers) {
                 String blockerId = "" + blocker.get("walletId");
                 // set blocked field whether true or false
                 blocker.put("blocked", blockedUsers
