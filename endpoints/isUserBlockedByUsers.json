@@ -13,7 +13,7 @@
     "valueRequired" : false
   }, {
     "serviceParameter" : "blockers",
-    "multivalued" : false,
+    "multivalued" : true,
     "parameterName" : "blockers",
     "valueRequired" : false
   } ],
