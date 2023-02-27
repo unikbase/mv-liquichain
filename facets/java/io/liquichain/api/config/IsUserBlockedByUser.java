@@ -5,7 +5,6 @@ import java.util.Map;
 import java.util.HashMap;
 import java.util.ArrayList;
 
-import com.google.gson.Gson;
 import org.meveo.api.persistence.CrossStorageApi;
 import org.meveo.model.customEntities.Wallet;
 import org.meveo.model.customEntities.BlockedUser;
@@ -67,15 +66,6 @@ public class IsUserBlockedByUser extends Script {
             mapError("BLOCKER_WALLET_IDS_NOT_FOUND", "blocker walletIds not found.");
             return;
         }
-        //== mapping blocked users data
-        mapBlockersData();
-    }
-
-    private String normalize(String data) {
-        return (data.startsWith("0x") ? data.substring(2) : data).toLowerCase();
-    }
-
-    private void mapBlockersData() {
         try {
             walletId = normalize(walletId);
             Wallet wallet = crossStorageApi.find(defaultRepo, Wallet.class).by("uuid", walletId).getResult();
@@ -117,5 +107,9 @@ public class IsUserBlockedByUser extends Script {
             LOG.error(errorMessage, e);
             mapError("STATE_CREATION_ERROR", errorMessage);
         }
+    }
+
+    private String normalize(String data) {
+        return (data.startsWith("0x") ? data.substring(2) : data).toLowerCase();
     }
 }
