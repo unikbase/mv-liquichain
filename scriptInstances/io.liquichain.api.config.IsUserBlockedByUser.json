@@ -6,7 +6,7 @@
     "type" : "String"
   }, {
     "name" : "blockers",
-    "type" : "List<LinkedHashMap>"
+    "type" : "List<Map>"
   } ],
   "outputs" : [ {
     "name" : "result",

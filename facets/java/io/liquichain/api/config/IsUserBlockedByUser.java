@@ -3,9 +3,7 @@ package io.liquichain.api.config;
 import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.ArrayList;
-import java.util.stream.Collectors;
 
 import org.meveo.api.persistence.CrossStorageApi;
 import org.meveo.model.customEntities.Wallet;
@@ -28,9 +26,9 @@ public class IsUserBlockedByUser extends Script {
     private final Repository defaultRepo = repositoryService.findDefaultRepository();
 
     private String walletId;
-  	private List<LinkedHashMap> blockers;  
+    private List<Map> blockers;
     private final Map<String, Object> result = new HashMap<>();
-  
+
 
     public Map<String, Object> getResult() {
         return result;
@@ -39,10 +37,11 @@ public class IsUserBlockedByUser extends Script {
     public void setWalletId(String walletId) {
         this.walletId = walletId;
     }
-    public void setBlockers(List<LinkedHashMap> blockers) {
+
+    public void setBlockers(List<Map> blockers) {
         this.blockers = blockers;
-    }  
-  
+    }
+
     private void mapError(String errorCode, String message) {
         LOG.error(message);
         Map<String, String> errorMap = new HashMap<>() {{
@@ -51,60 +50,66 @@ public class IsUserBlockedByUser extends Script {
         }};
         result.put("error", errorMap);
     }
-  
-  
+
+
     @Override
     public void execute(Map<String, Object> parameters) throws BusinessException {
         super.execute(parameters);
-      	
-      	LOG.info("verify blockers of user - walletId = {}",walletId);
-      	if(StringUtils.isBlank(walletId)){
-        	mapError("WALLET_ID_NOT_FOUND", "walletId not found.");
-			return;        	
+
+        LOG.info("verify blockers of user - walletId = {}", walletId);
+        if (StringUtils.isBlank(walletId)) {
+            mapError("WALLET_ID_NOT_FOUND", "walletId not found.");
+            return;
         }
-      
-      	if(blockers==null || blockers.isEmpty()){
-        	mapError("BLOCKER_WALLET_IDS_NOT_FOUND", "blocker walletIds not found.");
-			return;          
+
+        if (blockers == null || blockers.isEmpty()) {
+            mapError("BLOCKER_WALLET_IDS_NOT_FOUND", "blocker walletIds not found.");
+            return;
         }
-      	//== mapping blocked users data
-      	mapBlockersData();
-    }
-  
-  	private void mapBlockersData(){
-    	try{
-			walletId = (walletId.startsWith("0x") ? walletId.substring(2) : walletId).toLowerCase();
-        	Wallet user = crossStorageApi.find(defaultRepo, Wallet.class).by("uuid", walletId).getResult(); 
-        	if(user == null){
-        		mapError("USER_NOT_FOUND", "user not found against provided walletId.");
-				return;
-        	}
-        	List blockerWalletIds = new ArrayList<String>(); 
-      		for(LinkedHashMap blocker : blockers){
-          		String blockerWalletId = (String)blocker.get("walletId");
-          		if(StringUtils.isNotBlank(blockerWalletId)){
-              		blockerWalletId = (blockerWalletId.startsWith("0x") ? blockerWalletId.substring(2) : blockerWalletId).toLowerCase();
-					blocker.put("walletId",blockerWalletId);
-              		blockerWalletIds.add(blockerWalletId);
-           	 	}
-        	}
-    	  
-      		List<BlockedUser> blockedUsers = crossStorageApi.find(defaultRepo, BlockedUser.class)
-          	.by("inList wallet", blockerWalletIds)
-          	.by("targetWallet", user)
-          	.getResults();
-      
-      		//== preparing the response
-      		for(LinkedHashMap blocker: blockers){
-        		blocker.put("blocked",blockedUsers.stream().anyMatch(u -> u.getWallet().getUuid().equals((String)blocker.get("walletId"))));  
-        	}
-      	      
-      		result.put("status","success");
-      		result.put("result",blockers);        
-      	} catch(Exception e){
+        try {
+            walletId = normalize(walletId);
+            Wallet wallet = crossStorageApi.find(defaultRepo, Wallet.class).by("uuid", walletId).getResult();
+            if (wallet == null) {
+                mapError("USER_NOT_FOUND", "user not found against provided walletId.");
+                return;
+            }
+
+            List<String> blockerWalletIds = new ArrayList<>();
+            for (Map blocker : blockers) {
+                String blockerId = "" + blocker.get("walletId");
+                if (StringUtils.isNotBlank(blockerId)) {
+                    blockerId = normalize(blockerId);
+                    // replace wallet id with normalized wallet id
+                    blocker.put("walletId", blockerId);
+                    blockerWalletIds.add(blockerId);
+                }
+            }
+
+            List<BlockedUser> blockedUsers = crossStorageApi.find(defaultRepo, BlockedUser.class)
+                                                            .by("targetWallet", wallet)
+                                                            .by("inList wallet", blockerWalletIds)
+                                                            .getResults();
+
+            //== preparing the response
+            for (Map blocker : blockers) {
+                String blockerId = "" + blocker.get("walletId");
+                // set blocked field whether true or false
+                blocker.put("blocked", blockedUsers
+                    .stream()
+                    .anyMatch(blockedUser -> blockerId.equals(blockedUser.getWallet().getUuid()))
+                );
+            }
+
+            result.put("status", "success");
+            result.put("result", blockers);
+        } catch (Exception e) {
             String errorMessage = "Error when creating the state [" + e.getMessage() + "]";
             LOG.error(errorMessage, e);
-            mapError("STATE_CREATION_ERROR", errorMessage);          
-      	}
+            mapError("STATE_CREATION_ERROR", errorMessage);
+        }
+    }
+
+    private String normalize(String data) {
+        return (data.startsWith("0x") ? data.substring(2) : data).toLowerCase();
     }
 }
