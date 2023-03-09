@@ -33,7 +33,7 @@ public class AddAppUserRole extends ModuleScript {
                 LOG.error("Failed to add APP_USER role.", e);
             }
         } else {
-            LOG.info("APP_USER role already exists.");
+            LOG.debug("APP_USER role already exists.");
         }
     }
 }

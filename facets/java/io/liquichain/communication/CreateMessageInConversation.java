@@ -85,7 +85,7 @@ public class CreateMessageInConversation extends Script {
             chatMessage.setCreationDate(Instant.now());
 
             String uuid = crossStorageApi.createOrUpdate(defaultRepo, chatMessage);
-            LOG.info("Chat Message created with Id: " + uuid);
+            LOG.debug("Chat Message created with Id: " + uuid);
             result = "{\"status\": \"success\", \"result\": \"" + uuid + "\"}";
 
         } catch (Exception ex) {

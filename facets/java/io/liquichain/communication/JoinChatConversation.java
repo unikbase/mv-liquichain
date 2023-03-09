@@ -75,7 +75,7 @@ public class JoinChatConversation extends Script {
 
             if (participant != null) {
                 uuid = participant.getUuid();
-                LOG.info("Exisiting Chat Conversation Participant found Id: " + uuid);
+                LOG.debug("Exisiting Chat Conversation Participant found Id: " + uuid);
             } else {
                 participant = new ChatConversationParticipant();
                 participant.setParticipant(participantWallet);
@@ -83,7 +83,7 @@ public class JoinChatConversation extends Script {
 
                 uuid = crossStorageApi.createOrUpdate(defaultRepo, participant);
 
-                LOG.info("Chat Conversation Participant created with Id: " + uuid);
+                LOG.debug("Chat Conversation Participant created with Id: " + uuid);
             }
 
             result = "{\"status\": \"success\", \"result\": \"" + uuid + "\"}";

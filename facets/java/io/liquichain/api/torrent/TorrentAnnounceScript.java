@@ -50,7 +50,7 @@ public class TorrentAnnounceScript extends Script {
             * Math.sin(lonDistance / 2) * Math.sin(lonDistance / 2);
         double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
         double distance = R * c * 1000; // convert to meters
-        log.info("dist {},{},{},{}:{}", lat1, lon1, lat2, lon2, distance);
+        log.debug("dist {},{},{},{}:{}", lat1, lon1, lat2, lon2, distance);
         return distance;
     }
 
@@ -68,7 +68,7 @@ public class TorrentAnnounceScript extends Script {
             int distance = (int) Math.round(
                 distance(lat, lon, o1.getLatitude(), o1.getLongitude()) - distance(lat, lon, o2.getLatitude(),
                     o2.getLongitude()));
-            log.info("compare {},{}:{}", o1.getPeerId(), o2.getPeerId(), distance);
+            log.debug("compare {},{}:{}", o1.getPeerId(), o2.getPeerId(), distance);
             return distance;
         }
     }
@@ -179,7 +179,7 @@ public class TorrentAnnounceScript extends Script {
                             sb.append(Integer.toHexString(chars[i]));
                         }
                         info_hash = sb.toString();
-                        log.info("info_hash={}", info_hash);
+                        log.debug("info_hash={}", info_hash);
                     } catch (Exception e) {
                         log.error(e.getMessage(), e);
                     }
@@ -195,7 +195,7 @@ public class TorrentAnnounceScript extends Script {
                             sb.append(Integer.toHexString(chars[i]));
                         }
                         peer_id = sb.toString();
-                        log.info("peer_id={}", peer_id);
+                        log.debug("peer_id={}", peer_id);
                     } catch (Exception e) {
                         log.error(e.getMessage(), e);
                     }
@@ -211,7 +211,7 @@ public class TorrentAnnounceScript extends Script {
                             sb.append(Integer.toHexString(chars[i]));
                         }
                         wallet_id = sb.toString();
-                        log.info("wallet_id={}", wallet_id);
+                        log.debug("wallet_id={}", wallet_id);
                     } catch (Exception e) {
                         log.error(e.getMessage(), e);
                     }
@@ -261,15 +261,15 @@ public class TorrentAnnounceScript extends Script {
     public void execute(Map<String, Object> parameters) throws BusinessException {
         // if wallet_id is set then peer_id is the device id, else the peer_id is the
         // wallet_id
-        log.info(
+        log.debug(
             "Received announce: peer_id:{}, info_hash:{}, port:{}, downloaded:{}, uploaded:{}, left:{}, event:{}, compact:{}, wallet_id:{}, liveness:{},sign:{}",
             peer_id, info_hash, port, downloaded, uploaded, left, event, compact, wallet_id, liveness, sign);
-        log.info("Received announce: {}", parameters);
+        log.debug("Received announce: {}", parameters);
         // fix the decoding of info_hash and peer_id using correct charset in case they
         // where not sent in 40 chars hexa
         EndpointRequest req = (EndpointRequest) parameters.get("request");
         boolean outputJson = "application/json".equals(req.getHeader("Accept"));
-        log.info("announce output json: {}", outputJson);
+        log.debug("announce output json: {}", outputJson);
         if ((info_hash.length() != 40) || (peer_id.length() != 40)) {
             parseQueryString(req.getQueryString());
         }
@@ -286,7 +286,7 @@ public class TorrentAnnounceScript extends Script {
         } catch (Exception e) {
             throw new BusinessException(result);
         }
-        log.info("found wallet {}", wallet);
+        log.debug("found wallet {}", wallet);
 
         // retrieve ongoing announce
         TorrentAnnounce announce = null;
@@ -358,7 +358,7 @@ public class TorrentAnnounceScript extends Script {
         }
         try {
             String uuid = crossStorageApi.createOrUpdate(defaultRepo, announce);
-            log.info("announce instance {} created / updated", uuid);
+            log.debug("announce instance {} created / updated", uuid);
 
             try {
                 if (outputJson) {

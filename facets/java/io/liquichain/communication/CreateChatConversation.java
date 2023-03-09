@@ -66,7 +66,7 @@ public class CreateChatConversation extends Script {
         
         if(existingChatConversation.isPresent()){
             result = "{\"status\": \"success\", \"result\": \"" + existingChatConversation.get().getUuid() + "\"}";
-            LOG.info("Chat Conversation exixts already with Id: " + existingChatConversation.get().getUuid() );
+            LOG.debug("Chat Conversation exixts already with Id: " + existingChatConversation.get().getUuid() );
         }else{
         	
         	try {
@@ -77,7 +77,7 @@ public class CreateChatConversation extends Script {
 
             	String uuid = crossStorageApi.createOrUpdate(defaultRepo, chatConversation);
 
-            	LOG.info("Chat Conversation created with Id: " + uuid);
+            	LOG.debug("Chat Conversation created with Id: " + uuid);
             	result = "{\"status\": \"success\", \"result\": \"" + uuid + "\"}";
 
         	} catch (Exception ex) {

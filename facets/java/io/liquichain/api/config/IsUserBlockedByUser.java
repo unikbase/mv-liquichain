@@ -56,7 +56,7 @@ public class IsUserBlockedByUser extends Script {
     public void execute(Map<String, Object> parameters) throws BusinessException {
         super.execute(parameters);
 
-        LOG.info("verify blockers of user - walletId = {}", walletId);
+        LOG.debug("verify blockers of user - walletId = {}", walletId);
         if (StringUtils.isBlank(walletId)) {
             mapError("WALLET_ID_NOT_FOUND", "walletId not found.");
             return;

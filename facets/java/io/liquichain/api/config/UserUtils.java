@@ -69,7 +69,7 @@ public class UserUtils extends Script {
 
     public boolean isUserBlocked(String walletId, String targetWalletId) {
 
-        log.info("checking if targetWalletId: {} is blocked by wallet: {}", targetWalletId, walletId);
+        log.debug("checking if targetWalletId: {} is blocked by wallet: {}", targetWalletId, walletId);
         walletId = (walletId.startsWith("0x") ? walletId.substring(2) : walletId).toLowerCase();
         targetWalletId = (targetWalletId.startsWith("0x") ? targetWalletId.substring(2) : targetWalletId).toLowerCase();
 

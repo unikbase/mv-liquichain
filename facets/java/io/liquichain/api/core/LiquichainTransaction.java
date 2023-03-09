@@ -329,7 +329,7 @@ public class LiquichainTransaction extends Script {
 
         String privateKey = fromWallet.getPrivateKey();
         BigInteger balance = web3j.ethGetBalance(from, LATEST).sendAsync().get().getBalance();
-        LOG.info("{} balance: {}", from, balance);
+        LOG.debug("{} balance: {}", from, balance);
 
         if (balance.compareTo(amount) < 0) {
             throw new BusinessException(INSUFFICIENT_BALANCE);
@@ -342,8 +342,8 @@ public class LiquichainTransaction extends Script {
         BigInteger nonce = ethGetTransactionCount.getTransactionCount();
 
         BigInteger gasPrice = web3j.ethGasPrice().send().getGasPrice();
-        LOG.info("gasPrice: {}", gasPrice);
-        LOG.info("gasLimit: {}", defaultGasLimit);
+        LOG.debug("gasPrice: {}", gasPrice);
+        LOG.debug("gasLimit: {}", defaultGasLimit);
 
         RawTransaction rawTransaction = RawTransaction
             .createEtherTransaction(nonce, gasPrice, defaultGasLimit, to, amount);
@@ -352,7 +352,7 @@ public class LiquichainTransaction extends Script {
 
         RawTransactionManager manager = new RawTransactionManager(web3j, credentials);
 
-        LOG.info("raw transaction manager created");
+        LOG.debug("raw transaction manager created");
 
         Function function = new Function(
             "transfer",
@@ -361,7 +361,7 @@ public class LiquichainTransaction extends Script {
             }));
         String data = FunctionEncoder.encode(function);
 
-        LOG.info("transfer function encoded");
+        LOG.debug("transfer function encoded");
 
         EthSendTransaction sendTransaction = manager.sendTransaction(
             gasPrice,
@@ -370,11 +370,11 @@ public class LiquichainTransaction extends Script {
             data,
             null);
 
-        LOG.info("sending transaction");
+        LOG.debug("sending transaction");
 
         String transactionHash = sendTransaction.getTransactionHash();
 
-        LOG.info("pending transactionHash: {}", transactionHash);
+        LOG.debug("pending transactionHash: {}", transactionHash);
 
         if (transactionHash == null || transactionHash.isEmpty()) {
             throw new BusinessException(TRANSACTION_FAILED);
@@ -422,17 +422,17 @@ public class LiquichainTransaction extends Script {
         String sender = normalizeHash(from);
         String recipient = normalizeHash(to);
 
-        LOG.info("transfer amount:{} to:{}", amount, toHexHash(to));
+        LOG.debug("transfer amount:{} to:{}", amount, toHexHash(to));
 
         Wallet fromWallet = crossStorageApi.find(defaultRepo, sender, Wallet.class);
         Wallet toWallet = crossStorageApi.find(defaultRepo, recipient, Wallet.class);
 
-        LOG.info("wallets retrieved sender:{} recipient:{}", sender, recipient);
+        LOG.debug("wallets retrieved sender:{} recipient:{}", sender, recipient);
 
         String privateKey = fromWallet.getPrivateKey();
         Credentials credentials = Credentials.create(privateKey);
         RawTransactionManager manager = new RawTransactionManager(web3j, credentials);
-        LOG.info("raw transaction manager created");
+        LOG.debug("raw transaction manager created");
 
         BigInteger balance = BigInteger.ZERO;
 
@@ -447,7 +447,7 @@ public class LiquichainTransaction extends Script {
             }));
         String data = FunctionEncoder.encode(function);
 
-        LOG.info("transfer function encoded");
+        LOG.debug("transfer function encoded");
 
         BigInteger gasPrice = BigInteger.ZERO;
         EthSendTransaction sendTransaction = manager.sendTransaction(
@@ -457,11 +457,11 @@ public class LiquichainTransaction extends Script {
             data,
             null);
 
-        LOG.info("sending transaction");
+        LOG.debug("sending transaction");
 
         String transactionHash = sendTransaction.getTransactionHash();
 
-        LOG.info("pending transactionHash: {}", transactionHash);
+        LOG.debug("pending transactionHash: {}", transactionHash);
 
         if (transactionHash == null || transactionHash.isEmpty()) {
             throw new BusinessException(TRANSACTION_FAILED);
@@ -470,17 +470,17 @@ public class LiquichainTransaction extends Script {
         // TransactionReceipt transactionReceipt = waitForTransactionReceipt(transactionHash);
 
         // String completedTransactionHash = transactionReceipt.getTransactionHash();
-        // LOG.info("completed transactionHash: {}", completedTransactionHash);
-        // LOG.info("transactionReceipt: {}", transactionReceipt.toString());
+        // LOG.debug("completed transactionHash: {}", completedTransactionHash);
+        // LOG.debug("transactionReceipt: {}", transactionReceipt.toString());
 
-        LOG.info("fetching nonce");
+        LOG.debug("fetching nonce");
 
         EthGetTransactionCount ethGetTransactionCount = web3j
             .ethGetTransactionCount(credentials.getAddress(), LATEST)
             .send();
         BigInteger nonce = ethGetTransactionCount.getTransactionCount();
 
-        LOG.info("transaction nonce: {}", nonce);
+        LOG.debug("transaction nonce: {}", nonce);
 
         RawTransaction rawTransaction = RawTransaction
             .createEtherTransaction(nonce, gasPrice, defaultGasLimit, to, amount);
@@ -489,7 +489,7 @@ public class LiquichainTransaction extends Script {
 
         String transactionData = String.format(TRANSACTION_DATA_FORMAT, type, description);
 
-        LOG.info("saving transaction to database");
+        LOG.debug("saving transaction to database");
 
         Transaction transaction = new Transaction();
         transaction.setHexHash(normalizeHash(transactionHash));
@@ -514,7 +514,7 @@ public class LiquichainTransaction extends Script {
 
         // updateWalletBalances(sender, recipient);
 
-        LOG.info("sending transaction notification");
+        LOG.debug("sending transaction notification");
         Map<String, String> notificationData = new HashMap<>() {{
             put("type", CloudMessaging.formatType(type));
         }};

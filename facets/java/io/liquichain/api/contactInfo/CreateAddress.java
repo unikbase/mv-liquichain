@@ -156,7 +156,7 @@ public class CreateAddress extends Script {
 
         try {
             //== need to set existing default address false
-            LOG.info("isDefault: {}", address.getIsDefault());
+            LOG.debug("isDefault: {}", address.getIsDefault());
             if (address.getIsDefault()) {
                 Address defaultAddress = crossStorageApi.find(defaultRepo, Address.class)
                                                         .by("wallet", walletId)

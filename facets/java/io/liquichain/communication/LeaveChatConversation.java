@@ -50,7 +50,7 @@ public class LeaveChatConversation extends Script {
           	try {
             	crossStorageApi.remove(defaultRepo, participant.getUuid(), ChatConversationParticipant.class);
             	String successMessage = "Chat Conversation Participant delete with uuId: " + participant.getUuid();
-            	LOG.info(successMessage);
+            	LOG.debug(successMessage);
            		result = "{\"status\": \"success\", \"result\": \"" + successMessage + "\"}";
             } catch (Exception ex) {
             	String errorMessage = "Failed to delete Chat Conversation Participant with chatConversationId = " + chatConversationId + " participantWalletId = " + participantWalletId;
@@ -59,7 +59,7 @@ public class LeaveChatConversation extends Script {
             }
         } else {
         	String errorMessage = "Failed to find Chat Conversation Participant with chatConversationId = " + chatConversationId + " participantWalletId = " + participantWalletId;
-            LOG.info(errorMessage);
+            LOG.debug(errorMessage);
             result = "{\"status\": \"failed\", \"result\": \"" + errorMessage + "\"}";
         }
     }

@@ -37,7 +37,7 @@ public class GetUserConfigsByWalletId extends Script {
     @Override
     public void execute(Map<String, Object> parameters) throws BusinessException {
         try {
-            log.info("Load user settings by walletId: {}", walletId);
+            log.debug("Load user settings by walletId: {}", walletId);
 
             if (StringUtils.isBlank(walletId)) {
                 result = returnError("REQUIRED_WALLET_ID", "Wallet id is required.");

@@ -93,7 +93,7 @@ public class ChatConversationDetail extends Script {
 
         // fillup list to later call out one query and populate nested objects later to reduce overhead
       	this.allWalletIds.addAll(conversationParticipantsList.stream().filter(cp -> cp.getParticipant()!=null).map(cp -> cp.getParticipant().getUuid()).collect(Collectors.toSet()));
-      	conversationParticipantsList.stream().filter(cp -> cp.getParticipant()!=null).forEach(cp -> { LOG.info(cp.getParticipant().getUuid()); } );
+      	conversationParticipantsList.stream().filter(cp -> cp.getParticipant()!=null).forEach(cp -> { LOG.debug(cp.getParticipant().getUuid()); } );
       
         return uiChatConversation;
     }

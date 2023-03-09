@@ -56,7 +56,7 @@ public class BlockUser extends Script {
     public void execute(Map<String, Object> parameters) throws BusinessException {
         super.execute(parameters);
       
-      	log.info("block user - walletId = {} , targetWalletId= {}, blocked={}",walletId,targetWalletId,blocked);
+      	log.debug("block user - walletId = {} , targetWalletId= {}, blocked={}",walletId,targetWalletId,blocked);
 		walletId = (walletId.startsWith("0x") ? walletId.substring(2) : walletId).toLowerCase();
         Wallet user = crossStorageApi.find(defaultRepo, Wallet.class).by("uuid", walletId).getResult(); 
         if(user == null){
