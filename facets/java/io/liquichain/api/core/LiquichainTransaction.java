@@ -23,7 +23,6 @@ import org.meveo.service.storage.RepositoryService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.inject.Inject;
 import javax.ws.rs.client.*;
 import javax.ws.rs.core.*;
 
@@ -63,7 +62,7 @@ public class LiquichainTransaction extends Script {
 	private CrossStorageApi crossStorageApi = getCDIBean(CrossStorageApi.class);
 	private ParamBeanFactory paramBeanFactory = getCDIBean(ParamBeanFactory.class);
 	private RepositoryService repositoryService = getCDIBean(RepositoryService.class);
-	private CloudMessaging cloudMessaging = new CloudMessaging();
+	private final CloudMessaging cloudMessaging = new CloudMessaging();
 
 	private Repository defaultRepo;
 	private BigInteger defaultGasLimit;
@@ -82,6 +81,7 @@ public class LiquichainTransaction extends Script {
 
 	public LiquichainTransaction() {
 		super();
+		init();
 	}
 
 	public LiquichainTransaction(CrossStorageApi crossStorageApi, ParamBeanFactory paramBeanFactory,
