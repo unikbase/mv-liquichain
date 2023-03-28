@@ -1,33 +1,32 @@
 package io.liquichain.core;
 
-import java.util.Map;
-import java.util.HashMap;
-import java.util.List;
-import java.util.ArrayList;
 import java.math.BigInteger;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
 
-import org.meveo.service.script.Script;
 import org.meveo.admin.exception.BusinessException;
+import org.meveo.admin.util.pagination.PaginationConfiguration;
+import org.meveo.api.persistence.CrossStorageApi;
+import org.meveo.cache.CustomFieldsCacheContainerProvider;
+import org.meveo.model.customEntities.Block;
+import org.meveo.model.customEntities.Transaction;
+import org.meveo.model.customEntities.Wallet;
+import org.meveo.model.persistence.CEIUtils;
+import org.meveo.model.storage.Repository;
+import org.meveo.persistence.CrossStorageService;
+import org.meveo.service.custom.CustomTableService;
+import org.meveo.service.script.Script;
+import org.meveo.service.storage.RepositoryService;
+
+import org.primefaces.model.SortOrder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import org.meveo.model.customEntities.Block;
-import org.meveo.model.customEntities.Wallet;
-import org.meveo.model.customEntities.Transaction;
-import org.meveo.model.storage.Repository;
-import org.meveo.service.storage.RepositoryService;
-import org.meveo.api.persistence.CrossStorageApi;
-import org.meveo.persistence.CrossStorageService;
-import org.meveo.cache.CustomFieldsCacheContainerProvider;
-import org.meveo.admin.util.pagination.PaginationConfiguration;
-import org.meveo.model.persistence.CEIUtils;
-import org.meveo.service.custom.CustomTableService;
-import org.primefaces.model.SortOrder;
-
-import org.web3j.crypto.*;
+import org.web3j.crypto.Hash;
 
 public class BlockForgerScript extends Script {
 

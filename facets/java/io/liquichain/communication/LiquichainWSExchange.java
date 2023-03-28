@@ -1,18 +1,17 @@
 package io.liquichain.communication;
 
-import java.util.Map;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Pattern;
-
-import org.meveo.service.script.Script;
-import org.meveo.admin.exception.BusinessException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import javax.websocket.Session;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import org.meveo.admin.exception.BusinessException;
+import org.meveo.service.script.Script;
 import org.meveo.service.technicalservice.wsendpoint.WebsocketServerEndpoint;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class LiquichainWSExchange extends Script {
     private static final Logger log = LoggerFactory.getLogger(LiquichainWSExchange.class);

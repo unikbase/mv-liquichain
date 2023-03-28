@@ -1,20 +1,19 @@
 package io.liquichain.api.config;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.HashMap;
-import java.util.ArrayList;
 
+import org.meveo.admin.exception.BusinessException;
 import org.meveo.api.persistence.CrossStorageApi;
-import org.meveo.model.customEntities.Wallet;
-import org.meveo.model.customEntities.BlockedUser;
-
 import org.meveo.commons.utils.StringUtils;
-
+import org.meveo.model.customEntities.BlockedUser;
+import org.meveo.model.customEntities.Wallet;
 import org.meveo.model.storage.Repository;
 import org.meveo.service.script.Script;
-import org.meveo.admin.exception.BusinessException;
 import org.meveo.service.storage.RepositoryService;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

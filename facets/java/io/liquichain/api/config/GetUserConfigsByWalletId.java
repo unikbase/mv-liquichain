@@ -1,18 +1,15 @@
 package io.liquichain.api.config;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.util.Map;
 
-import org.meveo.model.customEntities.UserConfiguration;
-
-import org.meveo.commons.utils.StringUtils;
-
-import org.meveo.service.script.Script;
 import org.meveo.admin.exception.BusinessException;
+import org.meveo.commons.utils.StringUtils;
+import org.meveo.model.customEntities.UserConfiguration;
+import org.meveo.service.script.Script;
 
 import com.google.gson.Gson;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class GetUserConfigsByWalletId extends Script {
     private String walletId;

@@ -1,30 +1,19 @@
 package io.liquichain.communication;
 
-import java.util.Set;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.stream.Stream;
-import java.util.stream.Collectors;
-import java.time.format.DateTimeFormatter;
-import java.time.ZoneId;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
+import java.util.stream.Collectors;
 
+import org.meveo.admin.exception.BusinessException;
+import org.meveo.api.persistence.CrossStorageApi;
 import org.meveo.model.customEntities.ChatConversation;
 import org.meveo.model.customEntities.ChatConversationParticipant;
 import org.meveo.model.customEntities.Wallet;
-
-import org.meveo.service.script.Script;
-import org.meveo.admin.exception.BusinessException;
-
-import org.meveo.api.persistence.CrossStorageApi;
 import org.meveo.model.storage.Repository;
-import org.meveo.service.storage.RepositoryService;
 import org.meveo.service.script.Script;
-import org.meveo.admin.exception.BusinessException;
-import org.meveo.api.exception.EntityDoesNotExistsException;
+import org.meveo.service.storage.RepositoryService;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

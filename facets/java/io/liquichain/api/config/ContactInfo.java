@@ -2,8 +2,8 @@ package io.liquichain.api.config;
 
 import java.util.Map;
 
-import org.meveo.service.script.Script;
 import org.meveo.admin.exception.BusinessException;
+import org.meveo.service.script.Script;
 
 public class ContactInfo extends Script {
 	

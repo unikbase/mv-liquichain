@@ -2,14 +2,12 @@ package io.liquichain.communication;
 
 import java.util.Map;
 
-import org.meveo.service.script.Script;
 import org.meveo.admin.exception.BusinessException;
-
 import org.meveo.api.persistence.CrossStorageApi;
-import org.meveo.model.storage.Repository;
-import org.meveo.service.storage.RepositoryService;
-
 import org.meveo.model.customEntities.ChatConversationParticipant;
+import org.meveo.model.storage.Repository;
+import org.meveo.service.script.Script;
+import org.meveo.service.storage.RepositoryService;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
