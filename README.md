@@ -5,7 +5,7 @@
 A [websocket endpoint](https://github.com/meveo-org/meveo/tree/master/meveo-admin/ejbs/src/main/java/org/meveo/service/technicalservice/wsendpoint) allow clients to
 register themself and send messages to other users.
 
-Its address is `ws://dev.telecelplay.io/meveo/ws/liquichain`
+Its address is `ws://dev.jips.io/meveo/ws/liquichain`
 
 ### Registration
 
