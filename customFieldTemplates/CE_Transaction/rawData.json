@@ -14,13 +14,13 @@
   "contentTypes" : [ ],
   "fileExtensions" : [ ],
   "saveOnExplorer" : false,
-  "guiPosition" : "tab:Transaction:0;field:20",
+  "guiPosition" : "tab:Transaction:0;field:19",
   "identifier" : false,
   "storages" : [ "SQL" ],
   "samples" : [ ],
   "summary" : false,
   "audited" : false,
   "persisted" : true,
-  "filter" : true,
-  "unique" : false
+  "unique" : false,
+  "filter" : true
 }
