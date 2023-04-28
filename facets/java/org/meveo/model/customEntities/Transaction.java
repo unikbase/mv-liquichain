@@ -64,6 +64,8 @@ public class Transaction implements CustomEntity, Serializable {
     @JsonProperty(required = true)
     private String signedHash;
 
+    private String assetName;
+
     private String value;
 
     private String fromUsername;
@@ -245,6 +247,14 @@ public class Transaction implements CustomEntity, Serializable {
 
     public void setSignedHash(String signedHash) {
         this.signedHash = signedHash;
+    }
+
+    public String getAssetName() {
+        return assetName;
+    }
+
+    public void setAssetName(String assetName) {
+        this.assetName = assetName;
     }
 
     public String getValue() {
