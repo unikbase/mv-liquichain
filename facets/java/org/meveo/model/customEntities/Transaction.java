@@ -36,6 +36,8 @@ public class Transaction implements CustomEntity, Serializable {
 
     private Long transactionIndex;
 
+    private Long filesize;
+
     private String rawData;
 
     private String type;
@@ -145,6 +147,14 @@ public class Transaction implements CustomEntity, Serializable {
 
     public void setTransactionIndex(Long transactionIndex) {
         this.transactionIndex = transactionIndex;
+    }
+
+    public Long getFilesize() {
+        return filesize;
+    }
+
+    public void setFilesize(Long filesize) {
+        this.filesize = filesize;
     }
 
     public String getRawData() {
