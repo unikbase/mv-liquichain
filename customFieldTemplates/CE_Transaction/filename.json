@@ -1,6 +1,6 @@
 {
   "code" : "filename",
-  "description" : "Filename",
+  "description" : "File name",
   "fieldType" : "STRING",
   "accountLevel" : "CE_Transaction",
   "appliesTo" : "CE_Transaction",
