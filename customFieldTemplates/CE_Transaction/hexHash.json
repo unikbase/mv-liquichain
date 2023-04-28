@@ -6,7 +6,7 @@
   "appliesTo" : "CE_Transaction",
   "useInheritedAsDefaultValue" : false,
   "storageType" : "SINGLE",
-  "valueRequired" : true,
+  "valueRequired" : false,
   "versionable" : false,
   "triggerEndPeriodEvent" : false,
   "allowEdit" : false,
