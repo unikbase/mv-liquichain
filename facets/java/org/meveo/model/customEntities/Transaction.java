@@ -48,7 +48,6 @@ public class Transaction implements CustomEntity, Serializable {
 
     private String assetId;
 
-    @JsonProperty(required = true)
     private String hexHash;
 
     @JsonProperty(required = true)
