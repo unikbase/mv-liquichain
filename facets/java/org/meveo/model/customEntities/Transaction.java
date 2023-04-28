@@ -28,6 +28,8 @@ public class Transaction implements CustomEntity, Serializable {
 
     private String nodeSignature;
 
+    private String toUsername;
+
     private String initiator;
 
     private String fromHexHash;
@@ -107,6 +109,14 @@ public class Transaction implements CustomEntity, Serializable {
 
     public void setNodeSignature(String nodeSignature) {
         this.nodeSignature = nodeSignature;
+    }
+
+    public String getToUsername() {
+        return toUsername;
+    }
+
+    public void setToUsername(String toUsername) {
+        this.toUsername = toUsername;
     }
 
     public String getInitiator() {
