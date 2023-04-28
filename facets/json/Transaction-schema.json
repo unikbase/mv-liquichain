@@ -242,6 +242,17 @@
             "type": "string",
             "maxLength": 10000
         },
+        "assetName": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "Asset name",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Transaction_assetName",
+            "title": "Transaction.assetName",
+            "type": "string",
+            "maxLength": 100
+        },
         "value": {
             "storages": ["SQL"],
             "indexType": "INDEX_NOT_ANALYZE",
