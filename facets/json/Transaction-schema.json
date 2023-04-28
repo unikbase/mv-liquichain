@@ -42,6 +42,17 @@
             "type": "string",
             "maxLength": 255
         },
+        "toUsername": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "To username",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Transaction_toUsername",
+            "title": "Transaction.toUsername",
+            "type": "string",
+            "maxLength": 100
+        },
         "initiator": {
             "storages": ["SQL"],
             "nullable": true,
