@@ -4,8 +4,8 @@ import org.meveo.model.CustomEntity;
 import java.io.Serializable;
 import java.util.List;
 import org.meveo.model.persistence.DBStorageType;
-import java.time.Instant;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.time.Instant;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class Transaction implements CustomEntity, Serializable {
@@ -38,25 +38,11 @@ public class Transaction implements CustomEntity, Serializable {
 
     private String rawData;
 
-    private Instant creationDate;
-
     private String type;
-
-    private String nonce;
 
     private String gasLimit;
 
-    private String r;
-
-    private String toHexHash;
-
-    private String s;
-
     private String assetId;
-
-    private String v;
-
-    private String blockNumber;
 
     @JsonProperty(required = true)
     private String hexHash;
@@ -64,13 +50,29 @@ public class Transaction implements CustomEntity, Serializable {
     @JsonProperty(required = true)
     private String signedHash;
 
-    private String assetName;
-
     private String value;
 
-    private String fromUsername;
-
     private String gasPrice;
+
+    private Instant creationDate;
+
+    private String nonce;
+
+    private String r;
+
+    private String toHexHash;
+
+    private String filename;
+
+    private String s;
+
+    private String v;
+
+    private String blockNumber;
+
+    private String assetName;
+
+    private String fromUsername;
 
     @Override()
     public String getUuid() {
@@ -153,28 +155,12 @@ public class Transaction implements CustomEntity, Serializable {
         this.rawData = rawData;
     }
 
-    public Instant getCreationDate() {
-        return creationDate;
-    }
-
-    public void setCreationDate(Instant creationDate) {
-        this.creationDate = creationDate;
-    }
-
     public String getType() {
         return type;
     }
 
     public void setType(String type) {
         this.type = type;
-    }
-
-    public String getNonce() {
-        return nonce;
-    }
-
-    public void setNonce(String nonce) {
-        this.nonce = nonce;
     }
 
     public String getGasLimit() {
@@ -185,52 +171,12 @@ public class Transaction implements CustomEntity, Serializable {
         this.gasLimit = gasLimit;
     }
 
-    public String getR() {
-        return r;
-    }
-
-    public void setR(String r) {
-        this.r = r;
-    }
-
-    public String getToHexHash() {
-        return toHexHash;
-    }
-
-    public void setToHexHash(String toHexHash) {
-        this.toHexHash = toHexHash;
-    }
-
-    public String getS() {
-        return s;
-    }
-
-    public void setS(String s) {
-        this.s = s;
-    }
-
     public String getAssetId() {
         return assetId;
     }
 
     public void setAssetId(String assetId) {
         this.assetId = assetId;
-    }
-
-    public String getV() {
-        return v;
-    }
-
-    public void setV(String v) {
-        this.v = v;
-    }
-
-    public String getBlockNumber() {
-        return blockNumber;
-    }
-
-    public void setBlockNumber(String blockNumber) {
-        this.blockNumber = blockNumber;
     }
 
     public String getHexHash() {
@@ -249,14 +195,6 @@ public class Transaction implements CustomEntity, Serializable {
         this.signedHash = signedHash;
     }
 
-    public String getAssetName() {
-        return assetName;
-    }
-
-    public void setAssetName(String assetName) {
-        this.assetName = assetName;
-    }
-
     public String getValue() {
         return value;
     }
@@ -265,20 +203,92 @@ public class Transaction implements CustomEntity, Serializable {
         this.value = value;
     }
 
-    public String getFromUsername() {
-        return fromUsername;
-    }
-
-    public void setFromUsername(String fromUsername) {
-        this.fromUsername = fromUsername;
-    }
-
     public String getGasPrice() {
         return gasPrice;
     }
 
     public void setGasPrice(String gasPrice) {
         this.gasPrice = gasPrice;
+    }
+
+    public Instant getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(Instant creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    public String getNonce() {
+        return nonce;
+    }
+
+    public void setNonce(String nonce) {
+        this.nonce = nonce;
+    }
+
+    public String getR() {
+        return r;
+    }
+
+    public void setR(String r) {
+        this.r = r;
+    }
+
+    public String getToHexHash() {
+        return toHexHash;
+    }
+
+    public void setToHexHash(String toHexHash) {
+        this.toHexHash = toHexHash;
+    }
+
+    public String getFilename() {
+        return filename;
+    }
+
+    public void setFilename(String filename) {
+        this.filename = filename;
+    }
+
+    public String getS() {
+        return s;
+    }
+
+    public void setS(String s) {
+        this.s = s;
+    }
+
+    public String getV() {
+        return v;
+    }
+
+    public void setV(String v) {
+        this.v = v;
+    }
+
+    public String getBlockNumber() {
+        return blockNumber;
+    }
+
+    public void setBlockNumber(String blockNumber) {
+        this.blockNumber = blockNumber;
+    }
+
+    public String getAssetName() {
+        return assetName;
+    }
+
+    public void setAssetName(String assetName) {
+        this.assetName = assetName;
+    }
+
+    public String getFromUsername() {
+        return fromUsername;
+    }
+
+    public void setFromUsername(String fromUsername) {
+        this.fromUsername = fromUsername;
     }
 
     @Override()
