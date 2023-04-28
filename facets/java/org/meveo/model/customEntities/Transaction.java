@@ -42,6 +42,8 @@ public class Transaction implements CustomEntity, Serializable {
 
     private String type;
 
+    private String result;
+
     private String gasLimit;
 
     private String assetId;
@@ -171,6 +173,14 @@ public class Transaction implements CustomEntity, Serializable {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getResult() {
+        return result;
+    }
+
+    public void setResult(String result) {
+        this.result = result;
     }
 
     public String getGasLimit() {
