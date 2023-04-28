@@ -4,8 +4,8 @@ import org.meveo.model.CustomEntity;
 import java.io.Serializable;
 import java.util.List;
 import org.meveo.model.persistence.DBStorageType;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.Instant;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class Transaction implements CustomEntity, Serializable {
@@ -63,6 +63,8 @@ public class Transaction implements CustomEntity, Serializable {
     private String signedHash;
 
     private String value;
+
+    private String fromUsername;
 
     private String gasPrice;
 
@@ -241,6 +243,14 @@ public class Transaction implements CustomEntity, Serializable {
 
     public void setValue(String value) {
         this.value = value;
+    }
+
+    public String getFromUsername() {
+        return fromUsername;
+    }
+
+    public void setFromUsername(String fromUsername) {
+        this.fromUsername = fromUsername;
     }
 
     public String getGasPrice() {
