@@ -88,6 +88,16 @@
             "type": "integer",
             "minimum": 0
         },
+        "filesize": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "File size (bytes)",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Transaction_filesize",
+            "title": "Transaction.filesize",
+            "type": "integer"
+        },
         "rawData": {
             "storages": ["SQL"],
             "nullable": true,
