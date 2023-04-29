@@ -117,7 +117,7 @@
             "id": "CE_Transaction_type",
             "title": "Transaction.type",
             "type": "string",
-            "maxLength": 20
+            "maxLength": 50
         },
         "result": {
             "storages": ["SQL"],
