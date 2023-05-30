@@ -2,6 +2,11 @@
 <project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.meveo</groupId>
+    <artifactId>facets</artifactId>
+    <version>0.23</version>
+  </parent>
   <groupId>org.meveo</groupId>
   <artifactId>mv-liquichain</artifactId>
   <version>0.23</version>
@@ -47,6 +52,14 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
+  <dependencies>
+    <dependency>
+      <groupId>org.web3j</groupId>
+      <artifactId>core</artifactId>
+      <version>4.8.9</version>
+      <scope>provided</scope>
+    </dependency>
+  </dependencies>
   <repositories>
     <repository>
       <id>maven central</id>
@@ -68,5 +81,7 @@
       <url>https://maven.pkg.github.com/meveo-org/meveo</url>
     </repository>
   </repositories>
-  <build />
+  <build>
+    <sourceDirectory>../java</sourceDirectory>
+  </build>
 </project>
