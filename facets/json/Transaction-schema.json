@@ -108,6 +108,17 @@
             "title": "Transaction.rawData",
             "type": "string"
         },
+        "operatorCode": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "Operator code",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Transaction_operatorCode",
+            "title": "Transaction.operatorCode",
+            "type": "string",
+            "maxLength": 255
+        },
         "type": {
             "storages": ["SQL"],
             "nullable": true,
