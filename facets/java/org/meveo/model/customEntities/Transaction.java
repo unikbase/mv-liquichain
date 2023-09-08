@@ -39,6 +39,8 @@ public class Transaction implements CustomEntity, Serializable {
 
     private String rawData;
 
+    private String operatorCode;
+
     private String type;
 
     private String result;
@@ -162,6 +164,14 @@ public class Transaction implements CustomEntity, Serializable {
 
     public void setRawData(String rawData) {
         this.rawData = rawData;
+    }
+
+    public String getOperatorCode() {
+        return operatorCode;
+    }
+
+    public void setOperatorCode(String operatorCode) {
+        this.operatorCode = operatorCode;
     }
 
     public String getType() {
