@@ -55,8 +55,8 @@
             </snapshots>
         </repository>
         <repository>
-            <id>liquichain</id>
-            <url>https://maven.pkg.github.com/liquichain</url>
+            <id>firebase-messaging</id>
+            <url>https://maven.pkg.github.com/liquichain/mv-firebase-messaging</url>
             <snapshots>
                 <enabled>true</enabled>
             </snapshots>
