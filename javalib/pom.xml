@@ -2,7 +2,7 @@
 <project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>org.meveo</groupId>
+    <groupId>com.unikbase</groupId>
     <artifactId>mv-liquichain</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <properties>
@@ -37,7 +37,7 @@
             <optional>true</optional>
         </dependency>
         <dependency>
-            <groupId>org.meveo</groupId>
+            <groupId>io.liquichain</groupId>
             <artifactId>mv-firebase-messaging</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
@@ -56,7 +56,7 @@
         </repository>
         <repository>
             <id>liquichain</id>
-            <url>https://maven.pkg.github.com/liquichain/mv-liquichain</url>
+            <url>https://maven.pkg.github.com/liquichain</url>
             <snapshots>
                 <enabled>true</enabled>
             </snapshots>
@@ -81,9 +81,9 @@
 
     <distributionManagement>
         <repository>
-            <id>liquichain</id>
-            <name>Liquichain repo</name>
-            <url>https://maven.pkg.github.com/liquichain/mv-liquichain</url>
+            <id>unikbase</id>
+            <name>Unikbase repo</name>
+            <url>https://maven.pkg.github.com/unikbase/mv-liquichain</url>
         </repository>
     </distributionManagement>
 </project>

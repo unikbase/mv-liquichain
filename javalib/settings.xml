@@ -19,11 +19,18 @@
                   </repository>
                   <repository>
                     <id>liquichain</id>
-                    <url>https://maven.pkg.github.com/liquichain/mv-liquichain</url>
+                    <url>https://maven.pkg.github.com/liquichain</url>
                     <snapshots>
                       <enabled>true</enabled>
                     </snapshots>
                   </repository>
+                <repository>
+                    <id>unikbase</id>
+                    <url>https://maven.pkg.github.com/unikbase</url>
+                    <snapshots>
+                        <enabled>true</enabled>
+                    </snapshots>
+                </repository>
             </repositories>
         </profile>
     </profiles>
@@ -36,6 +43,11 @@
         </server>
         <server>
             <id>liquichain</id>
+            <username>${env.BUILD_USER}</username>
+            <password>${env.BUILD_TOKEN}</password>
+        </server>
+        <server>
+            <id>unikbase</id>
             <username>${env.BUILD_USER}</username>
             <password>${env.BUILD_TOKEN}</password>
         </server>
