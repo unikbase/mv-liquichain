@@ -71,6 +71,7 @@
                 <version>3.2.0</version>
                 <configuration>
                     <includes>
+                        <include>io/liquichain/**</include>
                         <include>org/meveo/**</include>
                     </includes>
                 </configuration>
