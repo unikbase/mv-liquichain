@@ -42,26 +42,6 @@
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
     </dependencies>
-    <repositories>
-        <repository>
-            <id>maven central</id>
-            <url>https://repo1.maven.org/maven2/</url>
-        </repository>
-        <repository>
-            <id>meveo</id>
-            <url>https://maven.pkg.github.com/meveo-org/meveo</url>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>liquichain</id>
-            <url>https://maven.pkg.github.com/liquichain</url>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
     <build>
         <sourceDirectory>../facets/java</sourceDirectory>
         <plugins>

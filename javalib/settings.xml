@@ -18,8 +18,8 @@
                     </snapshots>
                   </repository>
                   <repository>
-                    <id>liquichain</id>
-                    <url>https://maven.pkg.github.com/liquichain</url>
+                    <id>mv-firebase-messaging</id>
+                    <url>https://maven.pkg.github.com/liquichain/mv-firebase-messaging</url>
                     <snapshots>
                       <enabled>true</enabled>
                     </snapshots>
@@ -41,7 +41,7 @@
             <password>${env.BUILD_TOKEN}</password>
         </server>
         <server>
-            <id>liquichain</id>
+            <id>mv-firebase-messaging</id>
             <username>${env.BUILD_USER}</username>
             <password>${env.BUILD_TOKEN}</password>
         </server>
