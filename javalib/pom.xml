@@ -81,9 +81,9 @@
 
     <distributionManagement>
         <repository>
-            <id>liquichain</id>
-            <name>Liquichain repo</name>
-            <url>https://maven.pkg.github.com/liquichain/mv-liquichain</url>
+            <id>unikbase</id>
+            <name>Unikbase repo</name>
+            <url>https://maven.pkg.github.com/unikbase/mv-liquichain</url>
         </repository>
     </distributionManagement>
 </project>
