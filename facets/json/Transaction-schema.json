@@ -353,7 +353,7 @@
         "zipHash": {
             "storages": ["SQL"],
             "nullable": true,
-            "description": "Zip hash",
+            "description": "Ziphash",
             "readOnly": false,
             "versionable": false,
             "id": "CE_Transaction_zipHash",
