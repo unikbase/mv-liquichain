@@ -349,17 +349,6 @@
             "title": "Transaction.fromUsername",
             "type": "string",
             "maxLength": 100
-        },
-        "zipHash": {
-            "storages": ["SQL"],
-            "nullable": true,
-            "description": "Zip hash",
-            "readOnly": false,
-            "versionable": false,
-            "id": "CE_Transaction_zipHash",
-            "title": "Transaction.zipHash",
-            "type": "string",
-            "maxLength": 512
         }
     }
 }
