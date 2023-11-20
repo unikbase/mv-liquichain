@@ -47,6 +47,8 @@ public class Transaction implements CustomEntity, Serializable {
 
     private String gasLimit;
 
+    private String jsonHash;
+
     private String assetId;
 
     private String hexHash;
@@ -69,6 +71,8 @@ public class Transaction implements CustomEntity, Serializable {
 
     private String s;
 
+    private String lastUpdateTransactionId;
+
     private String v;
 
     private String blockNumber;
@@ -76,6 +80,8 @@ public class Transaction implements CustomEntity, Serializable {
     private String assetName;
 
     private String fromUsername;
+
+    private String zipHash;
 
     @Override()
     public String getUuid() {
@@ -198,6 +204,14 @@ public class Transaction implements CustomEntity, Serializable {
         this.gasLimit = gasLimit;
     }
 
+    public String getJsonHash() {
+        return jsonHash;
+    }
+
+    public void setJsonHash(String jsonHash) {
+        this.jsonHash = jsonHash;
+    }
+
     public String getAssetId() {
         return assetId;
     }
@@ -286,6 +300,14 @@ public class Transaction implements CustomEntity, Serializable {
         this.s = s;
     }
 
+    public String getLastUpdateTransactionId() {
+        return lastUpdateTransactionId;
+    }
+
+    public void setLastUpdateTransactionId(String lastUpdateTransactionId) {
+        this.lastUpdateTransactionId = lastUpdateTransactionId;
+    }
+
     public String getV() {
         return v;
     }
@@ -316,6 +338,14 @@ public class Transaction implements CustomEntity, Serializable {
 
     public void setFromUsername(String fromUsername) {
         this.fromUsername = fromUsername;
+    }
+
+    public String getZipHash() {
+        return zipHash;
+    }
+
+    public void setZipHash(String zipHash) {
+        this.zipHash = zipHash;
     }
 
     @Override()
