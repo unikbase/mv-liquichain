@@ -47,8 +47,6 @@ public class Transaction implements CustomEntity, Serializable {
 
     private String gasLimit;
 
-    private String jsonHash;
-
     private String assetId;
 
     private String hexHash;
@@ -200,14 +198,6 @@ public class Transaction implements CustomEntity, Serializable {
 
     public void setGasLimit(String gasLimit) {
         this.gasLimit = gasLimit;
-    }
-
-    public String getJsonHash() {
-        return jsonHash;
-    }
-
-    public void setJsonHash(String jsonHash) {
-        this.jsonHash = jsonHash;
     }
 
     public String getAssetId() {
