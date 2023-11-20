@@ -282,17 +282,6 @@
             "type": "string",
             "maxLength": 64
         },
-        "lastUpdateTransactionId": {
-            "storages": ["SQL"],
-            "nullable": true,
-            "description": "Last update transaction ID",
-            "readOnly": false,
-            "versionable": false,
-            "id": "CE_Transaction_lastUpdateTransactionId",
-            "title": "Transaction.lastUpdateTransactionId",
-            "type": "string",
-            "maxLength": 512
-        },
         "v": {
             "storages": ["SQL"],
             "indexType": "INDEX_NOT_ANALYZE",
