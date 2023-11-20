@@ -155,7 +155,7 @@
         "jsonHash": {
             "storages": ["SQL"],
             "nullable": true,
-            "description": "JSON Hash",
+            "description": "JSON hash",
             "readOnly": false,
             "versionable": false,
             "id": "CE_Transaction_jsonHash",
