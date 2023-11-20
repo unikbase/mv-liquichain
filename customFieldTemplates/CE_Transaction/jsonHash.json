@@ -1,6 +1,6 @@
 {
   "code" : "jsonHash",
-  "description" : "JSONHash",
+  "description" : "JSON Hash",
   "fieldType" : "STRING",
   "accountLevel" : "CE_Transaction",
   "appliesTo" : "CE_Transaction",
