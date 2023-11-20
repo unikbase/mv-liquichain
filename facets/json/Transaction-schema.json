@@ -152,17 +152,6 @@
             "type": "string",
             "maxLength": 255
         },
-        "jsonHash": {
-            "storages": ["SQL"],
-            "nullable": true,
-            "description": "JSON hash",
-            "readOnly": false,
-            "versionable": false,
-            "id": "CE_Transaction_jsonHash",
-            "title": "Transaction.jsonHash",
-            "type": "string",
-            "maxLength": 512
-        },
         "assetId": {
             "storages": ["SQL"],
             "nullable": true,
