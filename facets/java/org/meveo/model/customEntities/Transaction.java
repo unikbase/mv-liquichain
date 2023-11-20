@@ -69,8 +69,6 @@ public class Transaction implements CustomEntity, Serializable {
 
     private String s;
 
-    private String lastUpdateTransactionId;
-
     private String v;
 
     private String blockNumber;
@@ -286,14 +284,6 @@ public class Transaction implements CustomEntity, Serializable {
 
     public void setS(String s) {
         this.s = s;
-    }
-
-    public String getLastUpdateTransactionId() {
-        return lastUpdateTransactionId;
-    }
-
-    public void setLastUpdateTransactionId(String lastUpdateTransactionId) {
-        this.lastUpdateTransactionId = lastUpdateTransactionId;
     }
 
     public String getV() {
