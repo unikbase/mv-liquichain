@@ -1,6 +1,6 @@
 {
   "code" : "zipHash",
-  "description" : "Ziphash",
+  "description" : "Zip hash",
   "fieldType" : "STRING",
   "accountLevel" : "CE_Transaction",
   "appliesTo" : "CE_Transaction",
