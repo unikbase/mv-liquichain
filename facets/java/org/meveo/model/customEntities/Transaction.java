@@ -81,8 +81,6 @@ public class Transaction implements CustomEntity, Serializable {
 
     private String fromUsername;
 
-    private String zipHash;
-
     @Override()
     public String getUuid() {
         return uuid;
@@ -338,14 +336,6 @@ public class Transaction implements CustomEntity, Serializable {
 
     public void setFromUsername(String fromUsername) {
         this.fromUsername = fromUsername;
-    }
-
-    public String getZipHash() {
-        return zipHash;
-    }
-
-    public void setZipHash(String zipHash) {
-        this.zipHash = zipHash;
     }
 
     @Override()
