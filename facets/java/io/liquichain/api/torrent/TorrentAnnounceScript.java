@@ -24,12 +24,10 @@ import org.slf4j.LoggerFactory;
 import org.web3j.utils.Strings;
 
 public class TorrentAnnounceScript extends Script {
-
-    private static final Logger log = LoggerFactory.getLogger(TorrentAnnounceScript.class);
+    private static final Logger LOG = LoggerFactory.getLogger(TorrentAnnounceScript.class);
 
     /**
-     * Calculate distance between two points in latitude and longitude.
-     * Uses Haversine method as its base.
+     * Calculate distance between two points in latitude and longitude. Uses Haversine method as its base.
      * <p>
      * lat1, lon1 Start point lat2, lon2 End point
      *
@@ -42,11 +40,11 @@ public class TorrentAnnounceScript extends Script {
         double latDistance = Math.toRadians(lat2 - lat1);
         double lonDistance = Math.toRadians(lon2 - lon1);
         double a = Math.sin(latDistance / 2) * Math.sin(latDistance / 2)
-            + Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2))
-            * Math.sin(lonDistance / 2) * Math.sin(lonDistance / 2);
+                + Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2))
+                * Math.sin(lonDistance / 2) * Math.sin(lonDistance / 2);
         double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
         double distance = R * c * 1000; // convert to meters
-        log.debug("dist {},{},{},{}:{}", lat1, lon1, lat2, lon2, distance);
+        LOG.debug("dist {},{},{},{}:{}", lat1, lon1, lat2, lon2, distance);
         return distance;
     }
 
@@ -62,13 +60,12 @@ public class TorrentAnnounceScript extends Script {
         @Override
         public int compare(TorrentAnnounce o1, TorrentAnnounce o2) {
             int distance = (int) Math.round(
-                distance(lat, lon, o1.getLatitude(), o1.getLongitude()) - distance(lat, lon, o2.getLatitude(),
-                    o2.getLongitude()));
-            log.debug("compare {},{}:{}", o1.getPeerId(), o2.getPeerId(), distance);
+                    distance(lat, lon, o1.getLatitude(), o1.getLongitude()) - distance(lat, lon, o2.getLatitude(),
+                            o2.getLongitude()));
+            LOG.debug("compare {},{}:{}", o1.getPeerId(), o2.getPeerId(), distance);
             return distance;
         }
     }
-
 
     private String peer_id;
     private String info_hash;
@@ -175,9 +172,9 @@ public class TorrentAnnounceScript extends Script {
                             sb.append(Integer.toHexString(chars[i]));
                         }
                         info_hash = sb.toString();
-                        log.debug("info_hash={}", info_hash);
+                        LOG.debug("info_hash={}", info_hash);
                     } catch (Exception e) {
-                        log.error(e.getMessage(), e);
+                        LOG.error(e.getMessage(), e);
                     }
                 }
             }
@@ -191,9 +188,9 @@ public class TorrentAnnounceScript extends Script {
                             sb.append(Integer.toHexString(chars[i]));
                         }
                         peer_id = sb.toString();
-                        log.debug("peer_id={}", peer_id);
+                        LOG.debug("peer_id={}", peer_id);
                     } catch (Exception e) {
-                        log.error(e.getMessage(), e);
+                        LOG.error(e.getMessage(), e);
                     }
                 }
             }
@@ -207,9 +204,9 @@ public class TorrentAnnounceScript extends Script {
                             sb.append(Integer.toHexString(chars[i]));
                         }
                         wallet_id = sb.toString();
-                        log.debug("wallet_id={}", wallet_id);
+                        LOG.debug("wallet_id={}", wallet_id);
                     } catch (Exception e) {
-                        log.error(e.getMessage(), e);
+                        LOG.error(e.getMessage(), e);
                     }
                 }
             }
@@ -230,13 +227,13 @@ public class TorrentAnnounceScript extends Script {
     private static Object getIdValue(Object object) {
         return ReflectionUtils.getAllFields(new ArrayList<>(), object.getClass()).stream()
                               .filter(f -> f.getAnnotation(Id.class) != null).findFirst().map(f -> {
-                try {
-                    f.setAccessible(true);
-                    return f.get(object);
-                } catch (IllegalArgumentException | IllegalAccessException e) {
-                    throw new RuntimeException(e);
-                }
-            }).orElse(null);
+                    try {
+                        f.setAccessible(true);
+                        return f.get(object);
+                    } catch (IllegalArgumentException | IllegalAccessException e) {
+                        throw new RuntimeException(e);
+                    }
+                }).orElse(null);
     }
 
     private static String getFieldForGetter(Class<?> clazz, Method getter) {
@@ -257,15 +254,16 @@ public class TorrentAnnounceScript extends Script {
     public void execute(Map<String, Object> parameters) throws BusinessException {
         // if wallet_id is set then peer_id is the device id, else the peer_id is the
         // wallet_id
-        log.debug(
-            "Received announce: peer_id:{}, info_hash:{}, port:{}, downloaded:{}, uploaded:{}, left:{}, event:{}, compact:{}, wallet_id:{}, liveness:{},sign:{}",
-            peer_id, info_hash, port, downloaded, uploaded, left, event, compact, wallet_id, liveness, sign);
-        log.debug("Received announce: {}", parameters);
+        LOG.debug(
+                "Received announce: peer_id:{}, info_hash:{}, port:{}, downloaded:{}, uploaded:{}, left:{}, event:{}," +
+                        " compact:{}, wallet_id:{}, liveness:{},sign:{}",
+                peer_id, info_hash, port, downloaded, uploaded, left, event, compact, wallet_id, liveness, sign);
+        LOG.debug("Received announce: {}", parameters);
         // fix the decoding of info_hash and peer_id using correct charset in case they
         // where not sent in 40 chars hexa
         EndpointRequest req = (EndpointRequest) parameters.get("request");
         boolean outputJson = "application/json".equals(req.getHeader("Accept"));
-        log.debug("announce output json: {}", outputJson);
+        LOG.debug("announce output json: {}", outputJson);
         if ((info_hash.length() != 40) || (peer_id.length() != 40)) {
             parseQueryString(req.getQueryString());
         }
@@ -282,12 +280,12 @@ public class TorrentAnnounceScript extends Script {
         } catch (Exception e) {
             throw new BusinessException(result);
         }
-        log.debug("found wallet {}", wallet);
+        LOG.debug("found wallet {}", wallet);
 
         // retrieve ongoing announce
         TorrentAnnounce announce = null;
         List<TorrentAnnounce> announces = crossStorageApi.find(defaultRepo, TorrentAnnounce.class).by("peerId",
-            peer_id).by("infoHash", info_hash).by("status", "ONGOING").getResults();
+                peer_id).by("infoHash", info_hash).by("status", "ONGOING").getResults();
 
         // events can be started,update,stopped,completed
         // TODO: if announce is too old then it should be closed and a new on created
@@ -344,7 +342,7 @@ public class TorrentAnnounceScript extends Script {
                 coordinateSet = false;
             }
         } catch (Exception e) {
-            log.error(e.getMessage(), e);
+            LOG.error(e.getMessage(), e);
         }
         announce.setUrl(url);
         if ("stopped".equalsIgnoreCase(event)) {
@@ -354,7 +352,7 @@ public class TorrentAnnounceScript extends Script {
         }
         try {
             String uuid = crossStorageApi.createOrUpdate(defaultRepo, announce);
-            log.debug("announce instance {} created / updated", uuid);
+            LOG.debug("announce instance {} created / updated", uuid);
 
             try {
                 if (outputJson) {
@@ -363,8 +361,8 @@ public class TorrentAnnounceScript extends Script {
                     result = "d14:failure reason18:cannot find peers.e";
                 }
                 CrossStorageRequest<TorrentAnnounce> csreqlist =
-                    crossStorageApi.find(defaultRepo, TorrentAnnounce.class).by("status", "ONGOING")
-                                   .by("infoHash", info_hash);
+                        crossStorageApi.find(defaultRepo, TorrentAnnounce.class).by("status", "ONGOING")
+                                       .by("infoHash", info_hash);
                 List<TorrentAnnounce> peers = csreqlist.getResults();
                 List<TorrentAnnounce> peersToDelete = new ArrayList<>();
                 for (TorrentAnnounce peer : peers) {
@@ -421,7 +419,7 @@ public class TorrentAnnounceScript extends Script {
                         try {
                             crossStorageApi.remove(defaultRepo, peer.getUuid(), TorrentAnnounce.class);
                         } catch (Exception e) {
-                            log.error("Failed to remove peer: {}", peer.getUuid(), e);
+                            LOG.error("Failed to remove peer: {}", peer.getUuid(), e);
                         }
                     }
                 }

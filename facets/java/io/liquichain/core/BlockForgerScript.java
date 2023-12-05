@@ -29,8 +29,7 @@ import org.slf4j.LoggerFactory;
 import org.web3j.crypto.Hash;
 
 public class BlockForgerScript extends Script {
-
-    private static final Logger log = LoggerFactory.getLogger(BlockForgerScript.class);
+    private static final Logger LOG = LoggerFactory.getLogger(BlockForgerScript.class);
 
     private static long chainId = 76;
 
@@ -99,7 +98,7 @@ public class BlockForgerScript extends Script {
                 //log.debug("lastBlock number:{}",result.getBlockNumber());
             }
         } catch (Exception e) {
-            log.error("getLastBlock:{}", e);
+            LOG.error("getLastBlock:{}", e);
         }
         return result;
     }
@@ -112,7 +111,7 @@ public class BlockForgerScript extends Script {
             parentBlock = getLastBlock();
         }
         if (isForging.getAndSet(true)) {
-            log.error("we are already forging");
+            LOG.error("we are already forging");
             return;
         }
         if (currentTransactions.size() == 0) {
@@ -121,7 +120,7 @@ public class BlockForgerScript extends Script {
             isForging.set(false);
             return;
         } else {
-            log.debug("forging {} transactions", currentTransactions.size());
+            LOG.debug("forging {} transactions", currentTransactions.size());
             Map<String, Wallet> wallets = new HashMap<>();
             List<Transaction> orderedTransactions =
                 currentTransactions.stream().sorted((t1, t2) -> (t1.getCreationDate().compareTo(t2.getCreationDate())))
@@ -132,26 +131,26 @@ public class BlockForgerScript extends Script {
             String transactionHashes = "";
             List<Transaction> invalidTransactions = new ArrayList<>();
             for (Transaction t : currentTransactions) {
-                log.debug(" transaction date : {}", t.getCreationDate());
+                LOG.debug(" transaction date : {}", t.getCreationDate());
                 if (!wallets.containsKey(t.getFromHexHash())) {
                     try {
                         Wallet originWallet = crossStorageApi.find(defaultRepo, t.getFromHexHash(), Wallet.class);
-                        log.debug("add originWallet:{} {} to map", originWallet.getUuid(), originWallet.getBalance());
+                        LOG.debug("add originWallet:{} {} to map", originWallet.getUuid(), originWallet.getBalance());
                         wallets.put(t.getFromHexHash(), originWallet);
                     } catch (Exception e) {
-                        log.debug(" cannot find origin wallet, set blockNumber to INVALID");
+                        LOG.debug(" cannot find origin wallet, set blockNumber to INVALID");
                         t.setBlockNumber("INVALID");
                         try {
                             crossStorageApi.createOrUpdate(defaultRepo, t);
                         } catch (Exception ex) {
-                            log.error("Failed to save transaction.", ex);
+                            LOG.error("Failed to save transaction.", ex);
                         }
                         invalidTransactions.add(t);
                     }
                 }
                 if (t.getBlockNumber() == null) {
                     Wallet originWallet = wallets.get(t.getFromHexHash());
-                    log.debug("originWallet 0x{} old balance:{}", t.getFromHexHash(), originWallet.getBalance());
+                    LOG.debug("originWallet 0x{} old balance:{}", t.getFromHexHash(), originWallet.getBalance());
                     BigInteger transacValue = new BigInteger(t.getValue());
                     if (new BigInteger(originWallet.getBalance()).compareTo(transacValue) >= 0) {
                         originWallet.setBalance(
@@ -159,31 +158,31 @@ public class BlockForgerScript extends Script {
                         try {
                             Wallet destinationWallet =
                                 crossStorageApi.find(defaultRepo, t.getToHexHash(), Wallet.class);
-                            log.debug("destinationWallet 0x{} old balance:{}", t.getToHexHash(),
+                            LOG.debug("destinationWallet 0x{} old balance:{}", t.getToHexHash(),
                                 destinationWallet.getBalance());
                             destinationWallet.setBalance(
                                 "" + new BigInteger(destinationWallet.getBalance()).add(transacValue));
                             crossStorageApi.createOrUpdate(defaultRepo, destinationWallet);
-                            log.debug("destinationWallet 0x{} new balance:{}", t.getToHexHash(),
+                            LOG.debug("destinationWallet 0x{} new balance:{}", t.getToHexHash(),
                                 destinationWallet.getBalance());
                             transactionHashes += t.getHexHash();
                         } catch (Exception e) {
-                            log.debug(" cannot find destination wallet, set blockNumber to INVALID");
+                            LOG.debug(" cannot find destination wallet, set blockNumber to INVALID");
                             t.setBlockNumber("INVALID");
                             try {
                                 crossStorageApi.createOrUpdate(defaultRepo, t);
                             } catch (Exception ex) {
-                                log.error("Failed to save transaction", ex);
+                                LOG.error("Failed to save transaction", ex);
                             }
                             invalidTransactions.add(t);
                         }
                     } else {
-                        log.debug("insufficient balance, set blockNumber to INVALID");
+                        LOG.debug("insufficient balance, set blockNumber to INVALID");
                         t.setBlockNumber("INVALID");
                         try {
                             crossStorageApi.createOrUpdate(defaultRepo, t);
                         } catch (Exception ex) {
-                            log.error("Failed to save transaction", ex);
+                            LOG.error("Failed to save transaction", ex);
                         }
                         invalidTransactions.add(t);
                     }
@@ -206,7 +205,7 @@ public class BlockForgerScript extends Script {
                 long i = 0;
                 for (Transaction t : currentTransactions) {
                     Wallet originWallet = wallets.get(t.getFromHexHash());
-                    log.debug("originWallet 0x{} new balance:{}", t.getFromHexHash(), originWallet.getBalance());
+                    LOG.debug("originWallet 0x{} new balance:{}", t.getFromHexHash(), originWallet.getBalance());
                     crossStorageApi.createOrUpdate(defaultRepo, originWallet);
                     t.setBlockHash(block.getHash());
                     t.setBlockNumber("" + block.getBlockNumber());
@@ -218,7 +217,7 @@ public class BlockForgerScript extends Script {
                 currentTransactions = nextTransactions;
                 nextTransactions = new ArrayList<>();
             } catch (Exception ex) {
-                log.error("Failed to save block and transaction.", ex);
+                LOG.error("Failed to save block and transaction.", ex);
             }
 
             isForging.set(false);

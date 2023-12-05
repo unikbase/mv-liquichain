@@ -19,8 +19,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class ChatConversationDetail extends Script {
-
     private static final Logger LOG = LoggerFactory.getLogger(GetChatConversations.class);
+
     private final CrossStorageApi crossStorageApi = getCDIBean(CrossStorageApi.class);
     private final RepositoryService repositoryService = getCDIBean(RepositoryService.class);
     private final Repository defaultRepo = repositoryService.findDefaultRepository();
@@ -32,58 +32,62 @@ public class ChatConversationDetail extends Script {
     }
 
     public UiChatConversation getChatConversationById(ChatConversation chatConversation) {
-      	Map<String, Wallet> walletMap = new HashMap<>();  
+        Map<String, Wallet> walletMap = new HashMap<>();
         this.allWalletIds = new HashSet<String>();
-      	UiChatConversation conversation = this.getOutputChatConversation(chatConversation);
-      
-      	List<Wallet> walletList = crossStorageApi.find(defaultRepo, Wallet.class)
-                .by("inList uuid", new ArrayList<String>(this.allWalletIds))
-                .getResults();
-		walletList.stream().forEach(w-> walletMap.put(w.getUuid(), w));
-      	
-      	if(conversation.getParticipants() != null && !conversation.getParticipants().isEmpty()){
-        	conversation.getParticipants().forEach(cp->cp.setName(walletMap.get(cp.getWallet()).getName() ));
-        }        
-        
+        UiChatConversation conversation = this.getOutputChatConversation(chatConversation);
+
+        List<Wallet> walletList = crossStorageApi.find(defaultRepo, Wallet.class)
+                                                 .by("inList uuid", new ArrayList<String>(this.allWalletIds))
+                                                 .getResults();
+        walletList.stream().forEach(w -> walletMap.put(w.getUuid(), w));
+
+        if (conversation.getParticipants() != null && !conversation.getParticipants().isEmpty()) {
+            conversation.getParticipants().forEach(cp -> cp.setName(walletMap.get(cp.getWallet()).getName()));
+        }
+
         return conversation;
     }
 
     public List<UiChatConversation> getOutputChatConversationList(List<ChatConversation> chatConversations) {
         List<UiChatConversation> conversations = new ArrayList<>();
-      	this.allWalletIds = new HashSet<String>();
-        Map<String, Wallet> walletMap = new HashMap<>();  
-      
-        chatConversations.forEach(cc -> { 
-          	UiChatConversation conversation = getOutputChatConversation(cc);          	
-          	conversations.add(conversation);
+        this.allWalletIds = new HashSet<String>();
+        Map<String, Wallet> walletMap = new HashMap<>();
+
+        chatConversations.forEach(cc -> {
+            UiChatConversation conversation = getOutputChatConversation(cc);
+            conversations.add(conversation);
         });
-      
-      	List<Wallet> walletList = crossStorageApi.find(defaultRepo, Wallet.class)
-                .by("inList uuid", new ArrayList<String>(this.allWalletIds))
-                .getResults();
-     	 
-      	walletList.stream().forEach(w-> walletMap.put(w.getUuid(), w));      
-      
-      	conversations.forEach(c->c.getParticipants().forEach(cp->cp.setName(walletMap.get(cp.getWallet()).getName() ) ));      	
-      
+
+        List<Wallet> walletList = crossStorageApi.find(defaultRepo, Wallet.class)
+                                                 .by("inList uuid", new ArrayList<String>(this.allWalletIds))
+                                                 .getResults();
+
+        walletList.stream().forEach(w -> walletMap.put(w.getUuid(), w));
+
+        conversations.forEach(
+                c -> c.getParticipants().forEach(cp -> cp.setName(walletMap.get(cp.getWallet()).getName())));
+
         return conversations;
     }
 
-   
-
     private UiChatConversation getOutputChatConversation(ChatConversation cc) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        List<ChatConversationParticipant> conversationParticipantsList = crossStorageApi.find(defaultRepo, ChatConversationParticipant.class)
-                .by("chatConversation", cc)
-                .getResults();
+        List<ChatConversationParticipant> conversationParticipantsList = crossStorageApi.find(defaultRepo,
+                                                                                                ChatConversationParticipant.class)
+                                                                                        .by("chatConversation", cc)
+                                                                                        .getResults();
 
-        UiChatConversation uiChatConversation = new UiChatConversation(cc.getUuid(), cc.getMessageCount(), cc.getConversationGroupId(), conversationParticipantsList,
+        UiChatConversation uiChatConversation = new UiChatConversation(cc.getUuid(), cc.getMessageCount(),
+                cc.getConversationGroupId(), conversationParticipantsList,
                 LocalDateTime.ofInstant(cc.getCreationDate(), ZoneId.systemDefault()).format(formatter), cc.getTitle());
 
         // fillup list to later call out one query and populate nested objects later to reduce overhead
-      	this.allWalletIds.addAll(conversationParticipantsList.stream().filter(cp -> cp.getParticipant()!=null).map(cp -> cp.getParticipant().getUuid()).collect(Collectors.toSet()));
-      	conversationParticipantsList.stream().filter(cp -> cp.getParticipant()!=null).forEach(cp -> { LOG.debug(cp.getParticipant().getUuid()); } );
-      
+        this.allWalletIds.addAll(conversationParticipantsList.stream().filter(cp -> cp.getParticipant() != null)
+                                                             .map(cp -> cp.getParticipant().getUuid())
+                                                             .collect(Collectors.toSet()));
+        conversationParticipantsList.stream().filter(cp -> cp.getParticipant() != null)
+                                    .forEach(cp -> {LOG.debug(cp.getParticipant().getUuid());});
+
         return uiChatConversation;
     }
 
@@ -97,13 +101,16 @@ class UiChatConversation {
     private String title;
     private List<UiChatConversationParticipant> participants;
 
-    public UiChatConversation(String uuid, Long messageCount, String conversationGroupId, List<ChatConversationParticipant> chatParticipants, String creationDate, String title) {
+    public UiChatConversation(String uuid, Long messageCount, String conversationGroupId,
+            List<ChatConversationParticipant> chatParticipants, String creationDate, String title) {
         this.uuid = uuid;
         this.messageCount = messageCount;
         this.conversationGroupId = conversationGroupId;
         this.creationDate = creationDate;
         this.title = title;
-        this.participants = chatParticipants.stream().filter(cp -> cp!=null && cp.getParticipant()!=null).map(cp -> new UiChatConversationParticipant(cp.getUuid(), cp.getParticipant().getUuid())).collect(Collectors.toList());
+        this.participants = chatParticipants.stream().filter(cp -> cp != null && cp.getParticipant() != null)
+                                            .map(cp -> new UiChatConversationParticipant(cp.getUuid(),
+                                                    cp.getParticipant().getUuid())).collect(Collectors.toList());
     }
 
     public List<UiChatConversationParticipant> getParticipants() {
@@ -113,7 +120,6 @@ class UiChatConversation {
     public void setParticipants(List<UiChatConversationParticipant> participants) {
         this.participants = participants;
     }
-
 
     public String getUuid() {
         return uuid;
@@ -159,7 +165,7 @@ class UiChatConversation {
 class UiChatConversationParticipant {
     private String participantUuid;
     private String wallet;
-    private String name;    
+    private String name;
 
     public UiChatConversationParticipant(String participantUuid, String walletId) {
         this.participantUuid = participantUuid;
@@ -188,5 +194,5 @@ class UiChatConversationParticipant {
 
     public void setName(String name) {
         this.name = name;
-    }    
+    }
 }   

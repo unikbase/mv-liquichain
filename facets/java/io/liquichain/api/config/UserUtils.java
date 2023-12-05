@@ -17,21 +17,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class UserUtils extends Script {
-    private static final Logger log = LoggerFactory.getLogger(UserUtils.class);
+    private static final Logger LOG = LoggerFactory.getLogger(UserUtils.class);
 
-    private final CrossStorageApi crossStorageApi;
-    private final Repository defaultRepo;
+    private final CrossStorageApi crossStorageApi = getCDIBean(CrossStorageApi.class);
+    private final RepositoryService repositoryService = getCDIBean(RepositoryService.class);
+    private final Repository defaultRepo = repositoryService.findDefaultRepository();
 
     private Wallet userWallet;
     private UserConfiguration userConfig;
-
-    public UserUtils() {
-        super();
-        crossStorageApi = getCDIBean(CrossStorageApi.class);
-        RepositoryService repositoryService = getCDIBean(RepositoryService.class);
-        defaultRepo = repositoryService.findDefaultRepository();
-    }
-
 
     @Override
     public void execute(Map<String, Object> parameters) throws BusinessException {
@@ -68,7 +61,7 @@ public class UserUtils extends Script {
 
     public boolean isUserBlocked(String walletId, String targetWalletId) {
 
-        log.debug("checking if targetWalletId: {} is blocked by wallet: {}", targetWalletId, walletId);
+        LOG.debug("checking if targetWalletId: {} is blocked by wallet: {}", targetWalletId, walletId);
         walletId = (walletId.startsWith("0x") ? walletId.substring(2) : walletId).toLowerCase();
         targetWalletId = (targetWalletId.startsWith("0x") ? targetWalletId.substring(2) : targetWalletId).toLowerCase();
 
@@ -91,7 +84,7 @@ public class UserUtils extends Script {
                                     .getResult();
         } catch (Exception e) {
             throw new RuntimeException("Failed to retrieve the user's configurations for wallet id :"
-                + walletId + " errorMessage: " + e.getMessage());
+                    + walletId + " errorMessage: " + e.getMessage());
         }
         return loadDefaultsIfNull(config);
     }
@@ -110,7 +103,7 @@ public class UserUtils extends Script {
                                             .getResult();
             } catch (Exception e) {
                 throw new RuntimeException("Failed to retrieve the user's configurations for wallet id :"
-                    + userWallet.getUuid() + " errorMessage: " + e.getMessage());
+                        + userWallet.getUuid() + " errorMessage: " + e.getMessage());
             }
         }
         userConfig = loadDefaultsIfNull(userConfig);

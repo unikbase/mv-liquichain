@@ -7,6 +7,7 @@ import javax.websocket.Session;
 
 import org.meveo.admin.exception.BusinessException;
 import org.meveo.service.script.Script;
+import org.meveo.service.script.ScriptInstanceService;
 import org.meveo.service.technicalservice.wsendpoint.WebsocketServerEndpoint;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -18,7 +19,10 @@ public class LiquichainWSExchange extends Script {
 
     private final ObjectMapper mapper = new ObjectMapper();
     private final WebsocketServerEndpoint websocketServerEndpoint = getCDIBean(WebsocketServerEndpoint.class);
-    private final CreateMessageInConversation createMessageScript = new CreateMessageInConversation();
+    private final ScriptInstanceService scriptInstanceService = getCDIBean(ScriptInstanceService.class);
+    private final CreateMessageInConversation createMessageScript =
+            (CreateMessageInConversation) scriptInstanceService.getExecutionEngine(
+            "CreateMessageInConversation", null);
 
     private Session session;
 
@@ -29,12 +33,12 @@ public class LiquichainWSExchange extends Script {
         String wsEvent = (String) parameters.get("WS_EVENT");
         log.debug("wsEvent:{}", wsEvent);
         switch (wsEvent) {
-            case "open":
-                onOpen(parameters);
-                break;
-            case "message":
-                onMessage(parameters);
-                break;
+        case "open":
+            onOpen(parameters);
+            break;
+        case "message":
+            onMessage(parameters);
+            break;
         }
     }
 
@@ -56,12 +60,12 @@ public class LiquichainWSExchange extends Script {
         String action = (String) map.get("action");
         log.debug("action: {}", action);
         switch (action) {
-            case ("register"):
-                register(map, parameters);
-                break;
-            case ("message"):
-                sendMessage(map, parameters);
-                break;
+        case ("register"):
+            register(map, parameters);
+            break;
+        case ("message"):
+            sendMessage(map, parameters);
+            break;
         }
     }
 
@@ -76,7 +80,7 @@ public class LiquichainWSExchange extends Script {
     }
 
     private void sendConfirmationMessage(Map<String, Object> message, Map<String, Object> parameters)
-        throws BusinessException {
+            throws BusinessException {
         String account = (String) message.get("account");
         String confirmationMsg = "{ \"status\" : \"success\" , \"action\" : \"register\"}";
         message.put("message", confirmationMsg);
@@ -93,7 +97,7 @@ public class LiquichainWSExchange extends Script {
         boolean persistMessage = shouldPersist == null || shouldPersist;
         if (persistMessage) {
             Pattern nonTextMsgRegex =
-                Pattern.compile("(\\{\\s*\"webrtc\"\\s*:\\s*true|\\{\\s*\"action\"\\s*:\\s*\"\\s*chat\\s*\")");
+                    Pattern.compile("(\\{\\s*\"webrtc\"\\s*:\\s*true|\\{\\s*\"action\"\\s*:\\s*\"\\s*chat\\s*\")");
             persistMessage = !nonTextMsgRegex.matcher(txtMessage).lookingAt();
         }
         log.debug("sendMessage {} {}", destination, txtMessage);

@@ -16,6 +16,7 @@ import org.slf4j.LoggerFactory;
 
 public class UserConfigurationScript extends Script {
     private static final Logger log = LoggerFactory.getLogger(UserConfigurationScript.class);
+
     private final CrossStorageApi crossStorageApi = getCDIBean(CrossStorageApi.class);
     private final RepositoryService repositoryService = getCDIBean(RepositoryService.class);
     private final Repository defaultRepo = repositoryService.findDefaultRepository();
@@ -53,7 +54,7 @@ public class UserConfigurationScript extends Script {
         }
 
         UserConfiguration userConfigs =
-            crossStorageApi.find(defaultRepo, UserConfiguration.class).by("user", user).getResult();
+                crossStorageApi.find(defaultRepo, UserConfiguration.class).by("user", user).getResult();
         if (userConfigs == null) {
             userConfigs = new UserConfiguration();
             userConfigs.setUser(user);
@@ -97,9 +98,9 @@ public class UserConfigurationScript extends Script {
         try {
             crossStorageApi.createOrUpdate(defaultRepo, userConfigs);
             result = "{" +
-                "\"status\" : \"success\" ," +
-                "\"message\": \"User configuration updated successfully.\"" +
-                "}";
+                    "\"status\" : \"success\" ," +
+                    "\"message\": \"User configuration updated successfully.\"" +
+                    "}";
         } catch (Exception e) {
             log.error("Encountered error while updating user configuration.", e);
             result = returnError("UPDATE_FAILED", "Unable to update user settings.");

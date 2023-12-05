@@ -17,9 +17,9 @@ import org.meveo.service.storage.RepositoryService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-
 public class IsUserBlockedByUser extends Script {
     private static final Logger LOG = LoggerFactory.getLogger(IsUserBlockedByUser.class);
+
     private final CrossStorageApi crossStorageApi = getCDIBean(CrossStorageApi.class);
     private final RepositoryService repositoryService = getCDIBean(RepositoryService.class);
     private final Repository defaultRepo = repositoryService.findDefaultRepository();
@@ -27,7 +27,6 @@ public class IsUserBlockedByUser extends Script {
     private String walletId;
     private List<Map> blockers;
     private final Map<String, Object> result = new HashMap<>();
-
 
     public Map<String, Object> getResult() {
         return result;
@@ -49,7 +48,6 @@ public class IsUserBlockedByUser extends Script {
         }};
         result.put("error", errorMap);
     }
-
 
     @Override
     public void execute(Map<String, Object> parameters) throws BusinessException {
@@ -94,8 +92,8 @@ public class IsUserBlockedByUser extends Script {
                 String blockerId = "" + blocker.get("walletId");
                 // set blocked field whether true or false
                 blocker.put("blocked", blockedUsers
-                    .stream()
-                    .anyMatch(blockedUser -> blockerId.equals(blockedUser.getWallet().getUuid()))
+                        .stream()
+                        .anyMatch(blockedUser -> blockerId.equals(blockedUser.getWallet().getUuid()))
                 );
             }
 

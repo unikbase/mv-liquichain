@@ -6,17 +6,20 @@ import org.meveo.admin.exception.BusinessException;
 import org.meveo.commons.utils.StringUtils;
 import org.meveo.model.customEntities.UserConfiguration;
 import org.meveo.service.script.Script;
+import org.meveo.service.script.ScriptInstanceService;
 
 import com.google.gson.Gson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class GetUserConfigsByWalletId extends Script {
+    private static final Logger LOG = LoggerFactory.getLogger(GetUserConfigsByWalletId.class);
+
+    private final ScriptInstanceService scriptInstanceService = getCDIBean(ScriptInstanceService.class);
+    private final UserUtils userUtils = (UserUtils) scriptInstanceService.getExecutionEngine("UserUtils", null);
+
     private String walletId;
     private String result;
-
-    private static final Logger log = LoggerFactory.getLogger(GetUserConfigsByWalletId.class);
-    private final UserUtils userUtils = new UserUtils();
 
     public void setWalletId(String walletId) {
         this.walletId = walletId;
@@ -30,11 +33,10 @@ public class GetUserConfigsByWalletId extends Script {
         return this.result;
     }
 
-
     @Override
     public void execute(Map<String, Object> parameters) throws BusinessException {
         try {
-            log.debug("Load user settings by walletId: {}", walletId);
+            LOG.debug("Load user settings by walletId: {}", walletId);
 
             if (StringUtils.isBlank(walletId)) {
                 result = returnError("REQUIRED_WALLET_ID", "Wallet id is required.");
@@ -47,7 +49,7 @@ public class GetUserConfigsByWalletId extends Script {
             result = new Gson().toJson(configs);
         } catch (Exception e) {
             String errorMessage = "Encountered error while retrieving user configuration.";
-            log.error(errorMessage, e);
+            LOG.error(errorMessage, e);
             result = returnError("USER_CONFIG_NOT_FOUND", errorMessage);
         }
     }
