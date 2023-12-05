@@ -490,7 +490,6 @@ public class LiquichainTransaction extends Script {
 
     public synchronized String transfer(String from, String to, BigInteger amount, String type, String description,
             String message) throws Exception {
-        this.init();
         String transactionHash;
         String recipientAddress = normalizeHash(to);
         String senderAddress = normalizeHash(from);
