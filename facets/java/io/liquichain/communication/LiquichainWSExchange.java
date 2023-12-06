@@ -22,7 +22,7 @@ public class LiquichainWSExchange extends Script {
     private final ScriptInstanceService scriptInstanceService = getCDIBean(ScriptInstanceService.class);
     private final CreateMessageInConversation createMessageScript =
             (CreateMessageInConversation) scriptInstanceService.getExecutionEngine(
-            "CreateMessageInConversation", null);
+                    CreateMessageInConversation.class.getName(), null);
 
     private Session session;
 

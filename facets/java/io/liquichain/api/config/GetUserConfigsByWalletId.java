@@ -16,7 +16,8 @@ public class GetUserConfigsByWalletId extends Script {
     private static final Logger LOG = LoggerFactory.getLogger(GetUserConfigsByWalletId.class);
 
     private final ScriptInstanceService scriptInstanceService = getCDIBean(ScriptInstanceService.class);
-    private final UserUtils userUtils = (UserUtils) scriptInstanceService.getExecutionEngine("UserUtils", null);
+    private final UserUtils userUtils = (UserUtils) scriptInstanceService.getExecutionEngine(UserUtils.class.getName(),
+            null);
 
     private String walletId;
     private String result;

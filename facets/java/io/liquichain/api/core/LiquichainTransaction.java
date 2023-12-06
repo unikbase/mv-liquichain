@@ -66,7 +66,7 @@ public class LiquichainTransaction extends Script {
     private final RepositoryService repositoryService = getCDIBean(RepositoryService.class);
     private final ScriptInstanceService scriptInstanceService = getCDIBean(ScriptInstanceService.class);
     private final CloudMessaging cloudMessaging = (CloudMessaging) scriptInstanceService.getExecutionEngine(
-            "CloudMessaging", null);
+            CloudMessaging.class.getName(), null);
 
     private final Repository defaultRepo = repositoryService.findDefaultRepository();
     private final ParamBean config = paramBeanFactory.getInstance();
