@@ -43,9 +43,13 @@ public class Transaction implements CustomEntity, Serializable {
 
     private String type;
 
+    private String latestVerifiableCredential;
+
     private String result;
 
     private String gasLimit;
+
+    private String jsonHash;
 
     private String assetId;
 
@@ -69,6 +73,8 @@ public class Transaction implements CustomEntity, Serializable {
 
     private String s;
 
+    private String lastUpdateTransactionId;
+
     private String v;
 
     private String blockNumber;
@@ -76,6 +82,8 @@ public class Transaction implements CustomEntity, Serializable {
     private String assetName;
 
     private String fromUsername;
+
+    private String zipHash;
 
     @Override()
     public String getUuid() {
@@ -182,6 +190,14 @@ public class Transaction implements CustomEntity, Serializable {
         this.type = type;
     }
 
+    public String getLatestVerifiableCredential() {
+        return latestVerifiableCredential;
+    }
+
+    public void setLatestVerifiableCredential(String latestVerifiableCredential) {
+        this.latestVerifiableCredential = latestVerifiableCredential;
+    }
+
     public String getResult() {
         return result;
     }
@@ -196,6 +212,14 @@ public class Transaction implements CustomEntity, Serializable {
 
     public void setGasLimit(String gasLimit) {
         this.gasLimit = gasLimit;
+    }
+
+    public String getJsonHash() {
+        return jsonHash;
+    }
+
+    public void setJsonHash(String jsonHash) {
+        this.jsonHash = jsonHash;
     }
 
     public String getAssetId() {
@@ -286,6 +310,14 @@ public class Transaction implements CustomEntity, Serializable {
         this.s = s;
     }
 
+    public String getLastUpdateTransactionId() {
+        return lastUpdateTransactionId;
+    }
+
+    public void setLastUpdateTransactionId(String lastUpdateTransactionId) {
+        this.lastUpdateTransactionId = lastUpdateTransactionId;
+    }
+
     public String getV() {
         return v;
     }
@@ -316,6 +348,14 @@ public class Transaction implements CustomEntity, Serializable {
 
     public void setFromUsername(String fromUsername) {
         this.fromUsername = fromUsername;
+    }
+
+    public String getZipHash() {
+        return zipHash;
+    }
+
+    public void setZipHash(String zipHash) {
+        this.zipHash = zipHash;
     }
 
     @Override()
