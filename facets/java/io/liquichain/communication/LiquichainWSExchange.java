@@ -8,6 +8,7 @@ import javax.websocket.Session;
 import org.meveo.admin.exception.BusinessException;
 import org.meveo.service.script.Script;
 import org.meveo.service.script.ScriptInstanceService;
+import org.meveo.service.script.ScriptInterface;
 import org.meveo.service.technicalservice.wsendpoint.WebsocketServerEndpoint;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -20,9 +21,9 @@ public class LiquichainWSExchange extends Script {
     private final ObjectMapper mapper = new ObjectMapper();
     private final WebsocketServerEndpoint websocketServerEndpoint = getCDIBean(WebsocketServerEndpoint.class);
     private final ScriptInstanceService scriptInstanceService = getCDIBean(ScriptInstanceService.class);
-    private final CreateMessageInConversation createMessageScript =
-            (CreateMessageInConversation) scriptInstanceService.getExecutionEngine(
-                    CreateMessageInConversation.class.getName(), null);
+    private final ScriptInterface messageCreatorScript = scriptInstanceService.getExecutionEngine(
+            CreateMessageInConversation.class.getName(), null);
+    private final CreateMessageInConversation messageCreator = (CreateMessageInConversation) messageCreatorScript;
 
     private Session session;
 
@@ -104,10 +105,10 @@ public class LiquichainWSExchange extends Script {
         websocketServerEndpoint.sendMessage("liquichain", destination, txtMessage, persistMessage);
 
         if (message.get("conversationId") != null) {
-            createMessageScript.setSenderWalletId(session.getUserProperties().get("username").toString());
-            createMessageScript.setChatConversationId(message.get("conversationId").toString());
-            createMessageScript.setMessage(message.get("message").toString());
-            createMessageScript.execute(new HashMap<>());
+            messageCreator.setSenderWalletId(session.getUserProperties().get("username").toString());
+            messageCreator.setChatConversationId(message.get("conversationId").toString());
+            messageCreator.setMessage(message.get("message").toString());
+            messageCreator.execute(new HashMap<>());
         }
 
     }
