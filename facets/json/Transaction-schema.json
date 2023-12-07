@@ -130,6 +130,16 @@
             "type": "string",
             "maxLength": 50
         },
+        "latestVerifiableCredential": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "Latest verifiable credential",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Transaction_latestVerifiableCredential",
+            "title": "Transaction.latestVerifiableCredential",
+            "type": "string"
+        },
         "result": {
             "storages": ["SQL"],
             "nullable": true,
@@ -151,6 +161,17 @@
             "title": "Transaction.gasLimit",
             "type": "string",
             "maxLength": 255
+        },
+        "jsonHash": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "JSON hash",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Transaction_jsonHash",
+            "title": "Transaction.jsonHash",
+            "type": "string",
+            "maxLength": 512
         },
         "assetId": {
             "storages": ["SQL"],
@@ -282,6 +303,17 @@
             "type": "string",
             "maxLength": 64
         },
+        "lastUpdateTransactionId": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "Last update transaction ID",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Transaction_lastUpdateTransactionId",
+            "title": "Transaction.lastUpdateTransactionId",
+            "type": "string",
+            "maxLength": 512
+        },
         "v": {
             "storages": ["SQL"],
             "indexType": "INDEX_NOT_ANALYZE",
@@ -327,6 +359,17 @@
             "title": "Transaction.fromUsername",
             "type": "string",
             "maxLength": 100
+        },
+        "zipHash": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "Zip hash",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Transaction_zipHash",
+            "title": "Transaction.zipHash",
+            "type": "string",
+            "maxLength": 512
         }
     }
 }
