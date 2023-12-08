@@ -26,8 +26,6 @@ import org.meveo.model.customEntities.Transaction;
 import org.meveo.model.customEntities.Wallet;
 import org.meveo.model.storage.Repository;
 import org.meveo.service.script.Script;
-import org.meveo.service.script.ScriptInstanceService;
-import org.meveo.service.script.ScriptInterface;
 import org.meveo.service.storage.RepositoryService;
 
 import io.liquichain.core.BlockForgerScript;
@@ -65,10 +63,10 @@ public class LiquichainTransaction extends Script {
     private final CrossStorageApi crossStorageApi = getCDIBean(CrossStorageApi.class);
     private final ParamBeanFactory paramBeanFactory = getCDIBean(ParamBeanFactory.class);
     private final RepositoryService repositoryService = getCDIBean(RepositoryService.class);
-    private final ScriptInstanceService scriptInstanceService = getCDIBean(ScriptInstanceService.class);
-    private final ScriptInterface cloudMessagingScript = scriptInstanceService.getExecutionEngine(
-            CloudMessaging.class.getName(), null);
-    private final CloudMessaging cloudMessaging = (CloudMessaging) cloudMessagingScript;
+    //    private final ScriptInstanceService scriptInstanceService = getCDIBean(ScriptInstanceService.class);
+    //    private final ScriptInterface cloudMessagingScript = scriptInstanceService.getExecutionEngine(
+    //            CloudMessaging.class.getName(), null);
+    private final CloudMessaging cloudMessaging = new CloudMessaging();
 
     private final Repository defaultRepo = repositoryService.findDefaultRepository();
     private final ParamBean config = paramBeanFactory.getInstance();

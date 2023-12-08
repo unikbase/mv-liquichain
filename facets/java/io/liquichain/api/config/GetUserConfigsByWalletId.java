@@ -6,8 +6,6 @@ import org.meveo.admin.exception.BusinessException;
 import org.meveo.commons.utils.StringUtils;
 import org.meveo.model.customEntities.UserConfiguration;
 import org.meveo.service.script.Script;
-import org.meveo.service.script.ScriptInstanceService;
-import org.meveo.service.script.ScriptInterface;
 
 import com.google.gson.Gson;
 import org.slf4j.Logger;
@@ -16,10 +14,11 @@ import org.slf4j.LoggerFactory;
 public class GetUserConfigsByWalletId extends Script {
     private static final Logger LOG = LoggerFactory.getLogger(GetUserConfigsByWalletId.class);
 
-    private final ScriptInstanceService scriptInstanceService = getCDIBean(ScriptInstanceService.class);
-    private final ScriptInterface userUtilsScript = scriptInstanceService.getExecutionEngine(UserUtils.class.getName(),
-            null);
-    private final UserUtils userUtils = (UserUtils) userUtilsScript;
+    //    private final ScriptInstanceService scriptInstanceService = getCDIBean(ScriptInstanceService.class);
+    //    private final ScriptInterface userUtilsScript = scriptInstanceService.getExecutionEngine(UserUtils.class
+    //    .getName(),
+    //            null);
+    private final UserUtils userUtils = new UserUtils();
 
     private String walletId;
     private String result;

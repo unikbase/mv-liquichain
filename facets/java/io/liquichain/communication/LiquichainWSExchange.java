@@ -7,8 +7,6 @@ import javax.websocket.Session;
 
 import org.meveo.admin.exception.BusinessException;
 import org.meveo.service.script.Script;
-import org.meveo.service.script.ScriptInstanceService;
-import org.meveo.service.script.ScriptInterface;
 import org.meveo.service.technicalservice.wsendpoint.WebsocketServerEndpoint;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -20,10 +18,10 @@ public class LiquichainWSExchange extends Script {
 
     private final ObjectMapper mapper = new ObjectMapper();
     private final WebsocketServerEndpoint websocketServerEndpoint = getCDIBean(WebsocketServerEndpoint.class);
-    private final ScriptInstanceService scriptInstanceService = getCDIBean(ScriptInstanceService.class);
-    private final ScriptInterface messageCreatorScript = scriptInstanceService.getExecutionEngine(
-            CreateMessageInConversation.class.getName(), null);
-    private final CreateMessageInConversation messageCreator = (CreateMessageInConversation) messageCreatorScript;
+    //    private final ScriptInstanceService scriptInstanceService = getCDIBean(ScriptInstanceService.class);
+    //    private final ScriptInterface messageCreatorScript = scriptInstanceService.getExecutionEngine(
+    //            CreateMessageInConversation.class.getName(), null);
+    private final CreateMessageInConversation messageCreator = new CreateMessageInConversation();
 
     private Session session;
 
