@@ -57,6 +57,10 @@
       <id>github</id>
       <url>https://maven.pkg.github.com/meveo-org/meveo</url>
     </repository>
+    <repository>
+      <id>jitpack</id>
+      <url>https://jitpack.io</url>
+    </repository>
   </repositories>
   <build>
     <sourceDirectory>../java</sourceDirectory>
