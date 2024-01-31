@@ -4,10 +4,10 @@ import org.meveo.model.CustomEntity;
 import java.io.Serializable;
 import java.util.List;
 import org.meveo.model.persistence.DBStorageType;
-import java.time.Instant;
 import java.util.Map;
 import java.util.HashMap;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.time.Instant;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class LiquichainApp implements CustomEntity, Serializable {
@@ -24,9 +24,16 @@ public class LiquichainApp implements CustomEntity, Serializable {
     @JsonIgnore()
     private DBStorageType storages;
 
+    private Map<String, String> contractMethodHandlers = new HashMap<>();
+
     private String upgradeRules;
 
+    private String hexCode;
+
     private String previousHash;
+
+    @JsonProperty(required = true)
+    private String name;
 
     private String abi;
 
@@ -34,20 +41,11 @@ public class LiquichainApp implements CustomEntity, Serializable {
 
     private String registrationRules;
 
+    private String iconUrl;
+
     private Instant creationDate;
 
     private String version;
-
-    private Map<String, String> contractMethodHandlers = new HashMap<>();
-
-    private String privateKey;
-
-    private String hexCode;
-
-    @JsonProperty(required = true)
-    private String name;
-
-    private String iconUrl;
 
     @JsonProperty(required = true)
     private String shortCode;
@@ -69,6 +67,14 @@ public class LiquichainApp implements CustomEntity, Serializable {
         this.storages = storages;
     }
 
+    public Map<String, String> getContractMethodHandlers() {
+        return contractMethodHandlers;
+    }
+
+    public void setContractMethodHandlers(Map<String, String> contractMethodHandlers) {
+        this.contractMethodHandlers = contractMethodHandlers;
+    }
+
     public String getUpgradeRules() {
         return upgradeRules;
     }
@@ -77,12 +83,28 @@ public class LiquichainApp implements CustomEntity, Serializable {
         this.upgradeRules = upgradeRules;
     }
 
+    public String getHexCode() {
+        return hexCode;
+    }
+
+    public void setHexCode(String hexCode) {
+        this.hexCode = hexCode;
+    }
+
     public String getPreviousHash() {
         return previousHash;
     }
 
     public void setPreviousHash(String previousHash) {
         this.previousHash = previousHash;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getAbi() {
@@ -109,6 +131,14 @@ public class LiquichainApp implements CustomEntity, Serializable {
         this.registrationRules = registrationRules;
     }
 
+    public String getIconUrl() {
+        return iconUrl;
+    }
+
+    public void setIconUrl(String iconUrl) {
+        this.iconUrl = iconUrl;
+    }
+
     public Instant getCreationDate() {
         return creationDate;
     }
@@ -123,46 +153,6 @@ public class LiquichainApp implements CustomEntity, Serializable {
 
     public void setVersion(String version) {
         this.version = version;
-    }
-
-    public Map<String, String> getContractMethodHandlers() {
-        return contractMethodHandlers;
-    }
-
-    public void setContractMethodHandlers(Map<String, String> contractMethodHandlers) {
-        this.contractMethodHandlers = contractMethodHandlers;
-    }
-
-    public String getPrivateKey() {
-        return privateKey;
-    }
-
-    public void setPrivateKey(String privateKey) {
-        this.privateKey = privateKey;
-    }
-
-    public String getHexCode() {
-        return hexCode;
-    }
-
-    public void setHexCode(String hexCode) {
-        this.hexCode = hexCode;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getIconUrl() {
-        return iconUrl;
-    }
-
-    public void setIconUrl(String iconUrl) {
-        this.iconUrl = iconUrl;
     }
 
     public String getShortCode() {
