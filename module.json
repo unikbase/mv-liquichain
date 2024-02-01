@@ -19,6 +19,12 @@
   "currentVersion" : "0.23",
   "isInDraft" : true,
   "autoCommit" : true,
-  "moduleDependencies" : [ ],
+  "moduleDependencies" : [ {
+    "code" : "mv-firebase-messaging",
+    "description" : "app/web notification using firebase messaging",
+    "currentVersion" : "0.1",
+    "gitUrl" : "https://github.com/liquichain/mv-firebase-messaging.git",
+    "gitBranch" : "master"
+  } ],
   "moduleFiles" : [ ]
 }
