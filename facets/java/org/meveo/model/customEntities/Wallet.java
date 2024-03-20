@@ -1,6 +1,7 @@
 package org.meveo.model.customEntities;
 
 import org.meveo.model.CustomEntity;
+import java.io.Serializable;
 import java.util.List;
 import org.meveo.model.persistence.DBStorageType;
 import org.meveo.model.customEntities.VerifiedEmail;
@@ -9,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import org.meveo.model.customEntities.LiquichainApp;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-public class Wallet implements CustomEntity {
+public class Wallet implements CustomEntity, Serializable {
 
     public Wallet() {
     }
@@ -32,6 +33,8 @@ public class Wallet implements CustomEntity {
     private String applicationInstanceUUID;
 
     private String publicKey;
+
+    private Long nonce;
 
     private String privateInfo;
 
@@ -110,6 +113,14 @@ public class Wallet implements CustomEntity {
 
     public void setPublicKey(String publicKey) {
         this.publicKey = publicKey;
+    }
+
+    public Long getNonce() {
+        return nonce;
+    }
+
+    public void setNonce(Long nonce) {
+        this.nonce = nonce;
     }
 
     public String getPrivateInfo() {
