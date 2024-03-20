@@ -60,6 +60,16 @@
             "type": "string",
             "maxLength": 255
         },
+        "nonce": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "Nonce",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Wallet_nonce",
+            "title": "Wallet.nonce",
+            "type": "integer"
+        },
         "privateInfo": {
             "storages": ["SQL"],
             "nullable": true,
