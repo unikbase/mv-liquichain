@@ -37,12 +37,6 @@
       <optional>true</optional>
     </dependency>
     <dependency>
-      <groupId>org.meveo</groupId>
-      <artifactId>mv-firebase-messaging</artifactId>
-      <version>0.1</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
       <groupId>org.web3j</groupId>
       <artifactId>core</artifactId>
       <version>5.0.0</version>
