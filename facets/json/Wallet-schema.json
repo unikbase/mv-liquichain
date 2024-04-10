@@ -175,6 +175,17 @@
             "title": "Wallet.keyPair",
             "type": "string",
             "maxLength": 1000
+        },
+        "nonceReservedDate": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "format": "date-time",
+            "description": "Nonce reserved until",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Wallet_nonceReservedDate",
+            "title": "Wallet.nonceReservedDate",
+            "type": "string"
         }
     },
     "required": [
