@@ -8,6 +8,7 @@ import org.meveo.model.customEntities.VerifiedEmail;
 import org.meveo.model.customEntities.VerifiedPhoneNumber;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.meveo.model.customEntities.LiquichainApp;
+import java.time.Instant;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class Wallet implements CustomEntity, Serializable {
@@ -57,6 +58,8 @@ public class Wallet implements CustomEntity, Serializable {
     private String name;
 
     private String keyPair;
+
+    private Instant nonceReservedDate;
 
     @Override()
     public String getUuid() {
@@ -201,6 +204,14 @@ public class Wallet implements CustomEntity, Serializable {
 
     public void setKeyPair(String keyPair) {
         this.keyPair = keyPair;
+    }
+
+    public Instant getNonceReservedDate() {
+        return nonceReservedDate;
+    }
+
+    public void setNonceReservedDate(Instant nonceReservedDate) {
+        this.nonceReservedDate = nonceReservedDate;
     }
 
     @Override()
