@@ -6,21 +6,16 @@
     "title": "Application",
     "type": "object",
     "properties": {
-        "contractMethodHandlers": {
+        "smartContractClass": {
             "storages": ["SQL"],
-            "patternProperties": {"^.*$": {
-                "id": "CE_LiquichainApp_contractMethodHandlers_item",
-                "title": "LiquichainApp.contractMethodHandlers item",
-                "type": "string",
-                "maxLength": 255
-            }},
             "nullable": true,
-            "description": "Smart Contract method handlers",
+            "description": "Smart contract class",
             "readOnly": false,
             "versionable": false,
-            "id": "CE_LiquichainApp_contractMethodHandlers",
-            "title": "LiquichainApp.contractMethodHandlers",
-            "type": "object"
+            "id": "CE_LiquichainApp_smartContractClass",
+            "title": "LiquichainApp.smartContractClass",
+            "type": "string",
+            "maxLength": 255
         },
         "upgradeRules": {
             "storages": ["SQL"],
@@ -30,17 +25,6 @@
             "versionable": false,
             "id": "CE_LiquichainApp_upgradeRules",
             "title": "LiquichainApp.upgradeRules",
-            "type": "string",
-            "maxLength": 255
-        },
-        "hexCode": {
-            "storages": ["SQL"],
-            "nullable": true,
-            "description": "code in hexa as returned by get code (no \"0x\")",
-            "readOnly": false,
-            "versionable": false,
-            "id": "CE_LiquichainApp_hexCode",
-            "title": "LiquichainApp.hexCode",
             "type": "string",
             "maxLength": 255
         },
@@ -54,18 +38,6 @@
             "title": "LiquichainApp.previousHash",
             "type": "string",
             "maxLength": 40
-        },
-        "name": {
-            "storages": ["SQL"],
-            "nullable": false,
-            "minLength": 1,
-            "description": "Name",
-            "readOnly": false,
-            "versionable": false,
-            "id": "CE_LiquichainApp_name",
-            "title": "LiquichainApp.name",
-            "type": "string",
-            "maxLength": 255
         },
         "abi": {
             "storages": ["SQL"],
@@ -99,17 +71,6 @@
             "type": "string",
             "maxLength": 255
         },
-        "iconUrl": {
-            "storages": ["SQL"],
-            "nullable": true,
-            "description": "Icon url",
-            "readOnly": false,
-            "versionable": false,
-            "id": "CE_LiquichainApp_iconUrl",
-            "title": "LiquichainApp.iconUrl",
-            "type": "string",
-            "maxLength": 1000
-        },
         "creationDate": {
             "storages": ["SQL"],
             "nullable": true,
@@ -131,6 +92,56 @@
             "title": "LiquichainApp.version",
             "type": "string",
             "maxLength": 50
+        },
+        "contractMethodHandlers": {
+            "storages": ["SQL"],
+            "patternProperties": {"^.*$": {
+                "id": "CE_LiquichainApp_contractMethodHandlers_item",
+                "title": "LiquichainApp.contractMethodHandlers item",
+                "type": "string",
+                "maxLength": 255
+            }},
+            "nullable": true,
+            "description": "Smart Contract method handlers",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_LiquichainApp_contractMethodHandlers",
+            "title": "LiquichainApp.contractMethodHandlers",
+            "type": "object"
+        },
+        "hexCode": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "code in hexa as returned by get code (no \"0x\")",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_LiquichainApp_hexCode",
+            "title": "LiquichainApp.hexCode",
+            "type": "string",
+            "maxLength": 255
+        },
+        "name": {
+            "storages": ["SQL"],
+            "nullable": false,
+            "minLength": 1,
+            "description": "Name",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_LiquichainApp_name",
+            "title": "LiquichainApp.name",
+            "type": "string",
+            "maxLength": 255
+        },
+        "iconUrl": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "Icon url",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_LiquichainApp_iconUrl",
+            "title": "LiquichainApp.iconUrl",
+            "type": "string",
+            "maxLength": 1000
         },
         "shortCode": {
             "storages": ["SQL"],
