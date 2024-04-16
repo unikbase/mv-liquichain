@@ -43,8 +43,6 @@ public class Transaction implements CustomEntity, Serializable {
 
     private String type;
 
-    private String latestVerifiableCredential;
-
     private String result;
 
     private String gasLimit;
@@ -188,14 +186,6 @@ public class Transaction implements CustomEntity, Serializable {
 
     public void setType(String type) {
         this.type = type;
-    }
-
-    public String getLatestVerifiableCredential() {
-        return latestVerifiableCredential;
-    }
-
-    public void setLatestVerifiableCredential(String latestVerifiableCredential) {
-        this.latestVerifiableCredential = latestVerifiableCredential;
     }
 
     public String getResult() {
