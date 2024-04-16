@@ -11,7 +11,7 @@
   "triggerEndPeriodEvent" : false,
   "allowEdit" : false,
   "hideOnNew" : false,
-  "maxValue" : 4,
+  "maxValue" : 6,
   "contentTypes" : [ ],
   "fileExtensions" : [ ],
   "saveOnExplorer" : false,
