@@ -130,16 +130,6 @@
             "type": "string",
             "maxLength": 50
         },
-        "latestVerifiableCredential": {
-            "storages": ["SQL"],
-            "nullable": true,
-            "description": "Latest verifiable credential",
-            "readOnly": false,
-            "versionable": false,
-            "id": "CE_Transaction_latestVerifiableCredential",
-            "title": "Transaction.latestVerifiableCredential",
-            "type": "string"
-        },
         "result": {
             "storages": ["SQL"],
             "nullable": true,
@@ -324,7 +314,7 @@
             "id": "CE_Transaction_v",
             "title": "Transaction.v",
             "type": "string",
-            "maxLength": 4
+            "maxLength": 6
         },
         "blockNumber": {
             "storages": ["SQL"],
