@@ -49,6 +49,16 @@
             "type": "string",
             "maxLength": 50
         },
+        "emailHashes": {
+            "storages": ["SQL"],
+            "nullable": true,
+            "description": "Email hashes",
+            "readOnly": false,
+            "versionable": false,
+            "id": "CE_Wallet_emailHashes",
+            "title": "Wallet.emailHashes",
+            "type": "string"
+        },
         "publicKey": {
             "storages": ["SQL"],
             "nullable": true,
