@@ -33,6 +33,8 @@ public class Wallet implements CustomEntity, Serializable {
 
     private String applicationInstanceUUID;
 
+    private String emailHashes;
+
     private String publicKey;
 
     private Long nonce;
@@ -108,6 +110,14 @@ public class Wallet implements CustomEntity, Serializable {
 
     public void setApplicationInstanceUUID(String applicationInstanceUUID) {
         this.applicationInstanceUUID = applicationInstanceUUID;
+    }
+
+    public String getEmailHashes() {
+        return emailHashes;
+    }
+
+    public void setEmailHashes(String emailHashes) {
+        this.emailHashes = emailHashes;
     }
 
     public String getPublicKey() {
